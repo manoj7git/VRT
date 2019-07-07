@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="VRTAPPTest" parallel="false">
+	<test name="VRTLogin">
+		<classes>
+			<class name="com.vrt.testcases.LoginTest" />
+			<class name="com.vrt.testcases.assetCreationTest" />
+		</classes>
+	</test>
+</suite>

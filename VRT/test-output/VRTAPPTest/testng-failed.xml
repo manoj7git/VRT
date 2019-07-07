@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [VRTAPPTest]">
+  <test thread-count="5" name="VRTLogin(failed)">
+    <classes>
+      <class name="com.vrt.testcases.LoginTest">
+        <methods>
+          <include name="LOGIN_010"/>
+          <include name="Teardown"/>
+          <include name="Setup"/>
+          <include name="LOGIN_006"/>
+        </methods>
+      </class> <!-- com.vrt.testcases.LoginTest -->
+      <class name="com.vrt.testcases.assetCreationTest">
+        <methods>
+          <include name="ASST108"/>
+          <include name="ASST130a"/>
+          <include name="ASST102"/>
+          <include name="ASST130b"/>
+          <include name="ASST105"/>
+          <include name="ASST122b"/>
+          <include name="ASST127"/>
+          <include name="ASST100"/>
+          <include name="ASST134a"/>
+          <include name="ASST106"/>
+          <include name="ASST122a"/>
+          <include name="ASST128"/>
+          <include name="ASST134b"/>
+          <include name="ASST109"/>
+          <include name="ASST104"/>
+          <include name="ASST129"/>
+          <include name="Teardown"/>
+          <include name="ASST107a"/>
+          <include name="ASST107b"/>
+          <include name="ASST117a"/>
+          <include name="ASST131"/>
+          <include name="ASST112"/>
+          <include name="ASST110"/>
+          <include name="ASST132"/>
+          <include name="Setup"/>
+          <include name="ASST119"/>
+          <include name="ASST113"/>
+          <include name="ASST135"/>
+          <include name="ASST111b"/>
+          <include name="ASST116"/>
+          <include name="ASST133"/>
+          <include name="ASST114"/>
+          <include name="ASST136"/>
+          <include name="ASST101b"/>
+          <include name="ASST111a"/>
+          <include name="ASST103a"/>
+          <include name="ASST103b"/>
+          <include name="ASST115"/>
+          <include name="ASST117b"/>
+          <include name="ASST118"/>
+          <include name="ASST120"/>
+          <include name="ASST101"/>
+          <include name="ASST123"/>
+          <include name="ASST121"/>
+          <include name="ASST143"/>
+          <include name="AssetCreationSetup"/>
+        </methods>
+      </class> <!-- com.vrt.testcases.assetCreationTest -->
+    </classes>
+  </test> <!-- VRTLogin(failed) -->
+</suite> <!-- Failed suite [VRTAPPTest] -->
