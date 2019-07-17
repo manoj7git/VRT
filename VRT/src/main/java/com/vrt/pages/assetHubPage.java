@@ -14,6 +14,11 @@ public class assetHubPage extends BaseClass{
 	WebElement AddAssetBtn = driver.findElementByAccessibilityId("AddedAssetsButton");
 	
 	
+	//Verify the presence of Add Asset Button
+	public boolean addAst() {
+		return IsElementVisibleStatus(AddAssetBtn);
+	}
+	
 	//Click the Add Asset Button
 	public assetCreationPage ClickAddAssetBtn() throws InterruptedException {
 		clickOn(AddAssetBtn);

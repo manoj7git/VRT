@@ -32,14 +32,13 @@ public class assetCreationTest extends BaseClass{
 	assetCreationPage assetCreationPage;
 	
 	
-	@BeforeClass
+	/*@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		MainLoginPage = new LoginPage();
 
-		// Verify if Asset Edit creation privilege is enabled for the respective User or
-		// not
+		// Verify if Asset Edit creation privilege is enabled for the respective User or not
 		MainHubPage = MainLoginPage.Login("5", "Welcome2@AM");
 
 		UserManagementPage = MainHubPage.ClickAdminTile();
@@ -57,7 +56,7 @@ public class assetCreationTest extends BaseClass{
 		AppClose();
 		Thread.sleep(1000);
 	}
-	
+*/	
 	
 	@BeforeMethod
 	public void Setup() throws InterruptedException {
@@ -77,7 +76,7 @@ public class assetCreationTest extends BaseClass{
 	}
 
 	
-	//ASST100 - Verify if the asset name text box accepts input only up to 25 characters
+	/*//ASST100 - Verify if the asset name text box accepts input only up to 25 characters
 	@Test(groups = "Verify if the asset name text box accepts input only up to 25 characters")
 	public void ASST100() throws InterruptedException {
 		SoftAssert sa1 = new SoftAssert();
@@ -736,9 +735,10 @@ public class assetCreationTest extends BaseClass{
 		sa40.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);
 		sa40.assertAll();
 	}
+*/	
 	
 	
-	// ASST143 - Verify the cancel button will discard the entries made at the current screen
+	/*// ASST143 - Verify the cancel button will discard the entries made at the current screen
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, 
 			groups = "Verify the cancel button will discard the entries made at the current screen")
 	public void ASST143(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
@@ -748,7 +748,7 @@ public class assetCreationTest extends BaseClass{
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, 
 				Model, Size, SizeUnit, Frequency, FrequencyInterval, Description);
 		
-		//Closing the User Pop if its visible
+		//Closing the User credential Pop if its visible
 		if (assetCreationPage.UserLoginPopupVisible()) {
 			assetCreationPage.UserLoginPopupClose();
 		}
@@ -763,7 +763,7 @@ public class assetCreationTest extends BaseClass{
 				"FAIL: Asset ID didn't Clear on clicking the Clear button");
 		sa41.assertEquals(assetCreationPage.getAssetTypetext(), "Select", 
 				"FAIL: Asset Type didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetManufacturertext(), "Seilect", 
+		sa41.assertEquals(assetCreationPage.getAssetManufacturertext(), "Select", 
 				"FAIL: Asset Manufacturer didn't Clear on clicking the Clear button");
 		sa41.assertEquals(assetCreationPage.getAssetLocationtext(), "Select", 
 				"FAIL: Asset Location didn't Clear on clicking the Clear button");
@@ -782,5 +782,80 @@ public class assetCreationTest extends BaseClass{
 		
 		sa41.assertAll();
 	}
+	*/
+
 	
+	/*// ASST144 - Verify if the back button will -prompt as discard the changes- with Yes or No option
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Verify if the back button will -prompt as discard the changes- with Yes or No option")
+	public void ASST144(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException {
+		SoftAssert sa42 = new SoftAssert();
+
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				Frequency, FrequencyInterval, Description);
+
+		// Closing the User credential Pop if its visible
+		if (assetCreationPage.UserLoginPopupVisible()) {
+			assetCreationPage.UserLoginPopupClose();
+		}
+
+		// Click the Back button in the Asset creation/details page
+		assetCreationPage.clickBackBtn();
+
+		sa42.assertEquals(assetCreationPage.discardAlert(), true);
+		sa42.assertAll();
+	}
+*/
+	
+	
+	/*// ASST145 - Verify if No Option is selected and verify if the application allows the user to stay in the same page
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Verify if No Option is selected and verify if the application allows the user to stay in the same page")
+	public void ASST145(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException {
+		SoftAssert sa43 = new SoftAssert();
+
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				Frequency, FrequencyInterval, Description);
+
+		// Closing the User credential Pop if its visible
+		if (assetCreationPage.UserLoginPopupVisible()) {
+			assetCreationPage.UserLoginPopupClose();
+		}
+
+		// Click the Back button in the Asset creation/details page
+		assetCreationPage.clickBackBtn();
+		//Click the No buttin in the Discard alert message
+		assetCreationPage.discardAlertNoBtn();		
+
+		sa43.assertEquals(assetCreationPage.SaveBtn(), true);
+		sa43.assertAll();
+	}
+	*/
+
+	
+	// ASST146 - Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page")
+	public void ASST146(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException {
+		SoftAssert sa44 = new SoftAssert();
+
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				Frequency, FrequencyInterval, Description);
+
+		// Closing the User credential Pop if its visible
+		if (assetCreationPage.UserLoginPopupVisible()) {
+			assetCreationPage.UserLoginPopupClose();
+		}
+
+		// Click the Back button in the Asset creation/details page
+		assetCreationPage.clickBackBtn();
+		//Click the No buttin in the Discard alert message
+		assetHubPage = assetCreationPage.discardAlertYesBtn();			
+
+		sa44.assertEquals(assetHubPage.addAst(), true);
+		sa44.assertAll();
+	}
 }

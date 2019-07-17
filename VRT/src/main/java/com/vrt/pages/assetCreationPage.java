@@ -302,6 +302,11 @@ public class assetCreationPage extends BaseClass{
 		return FetchText(AssetDescTextField);		
 	}
 	
+	//verify Save button presence
+	public boolean SaveBtn() {
+		return IsElementVisibleStatus(AssetSaveBtn);
+	}
+	
 	//Click Save button
 	public void clickSaveBtn() throws InterruptedException {
 		clickOn(AssetSaveBtn);
@@ -327,10 +332,34 @@ public class assetCreationPage extends BaseClass{
 	}
 	
 	//click Back button
-	public assetHubPage clickBackBtn() throws InterruptedException {
+	public void clickBackBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);		
 		Thread.sleep(1000);
-		
+	}	
+	
+	//Discard alert message
+	public boolean discardAlert() throws InterruptedException {
+		clickOn(AssetBackBtn);		
+		Thread.sleep(1000);	
+		return IsElementVisibleStatus(driver.findElementByAccessibilityId("Popup Window"));		
+	}
+	
+	//Discard alert message- No option
+	public void discardAlertNoBtn() throws InterruptedException {
+		clickOn(AssetBackBtn);		
+		Thread.sleep(1000);	
+		if (IsElementVisibleStatus(driver.findElementByAccessibilityId("Popup Window"))) {
+			clickOn(driver.findElementByName("No"));
+		} 	
+	}
+	
+	//Move to AssetHub page by Discarding the changes made to Asset creationpage
+	public assetHubPage discardAlertYesBtn() throws InterruptedException {
+		clickOn(AssetBackBtn);		
+		Thread.sleep(1000);	
+		if (IsElementVisibleStatus(driver.findElementByAccessibilityId("Popup Window"))) {
+			clickOn(driver.findElementByName("Yes"));
+		} 			
 		return new assetHubPage();
 	}
 	
