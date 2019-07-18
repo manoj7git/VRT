@@ -32,7 +32,7 @@ public class assetCreationTest extends BaseClass{
 	assetCreationPage assetCreationPage;
 	
 	
-	/*@BeforeClass
+	@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -56,7 +56,7 @@ public class assetCreationTest extends BaseClass{
 		AppClose();
 		Thread.sleep(1000);
 	}
-*/	
+	
 	
 	@BeforeMethod
 	public void Setup() throws InterruptedException {

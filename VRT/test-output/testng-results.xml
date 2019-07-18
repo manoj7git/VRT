@@ -2,84 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="30898" started-at="2019-07-16T18:57:28Z" finished-at="2019-07-16T18:57:59Z">
+  <suite name="Default suite" duration-ms="10216" started-at="2019-07-17T17:51:58Z" finished-at="2019-07-17T17:52:08Z">
     <groups>
-      <group name="Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page">
-        <method signature="assetCreationTest.ASST146(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@60c6f5b]" name="ASST146" class="com.vrt.testcases.assetCreationTest"/>
-      </group> <!-- Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page -->
     </groups>
-    <test name="Default test" duration-ms="30898" started-at="2019-07-16T18:57:28Z" finished-at="2019-07-16T18:57:59Z">
-      <class name="com.vrt.testcases.assetCreationTest">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.assetCreationTest@60c6f5b]" name="Setup" is-config="true" duration-ms="11216" started-at="2019-07-16T18:57:29Z" finished-at="2019-07-16T18:57:40Z">
+    <test name="Default test" duration-ms="10216" started-at="2019-07-17T17:51:58Z" finished-at="2019-07-17T17:52:08Z">
+      <class name="com.vrt.testcases.HitNTrialTests">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="Setup" is-config="true" duration-ms="8877" started-at="2019-07-17T17:51:58Z" finished-at="2019-07-17T17:52:07Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="ASST146(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@60c6f5b]" name="ASST146" duration-ms="18708" started-at="2019-07-16T18:57:40Z" data-provider="getAstALLData" finished-at="2019-07-16T18:57:59Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[TestAsset]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[TestID]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[HeatBath]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[TestManufacturer]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[TestLocation]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[TestModel]]>
-              </value>
-            </param>
-            <param index="6">
-              <value>
-                <![CDATA[5]]>
-              </value>
-            </param>
-            <param index="7">
-              <value>
-                <![CDATA[testUnit]]>
-              </value>
-            </param>
-            <param index="8">
-              <value>
-                <![CDATA[3]]>
-              </value>
-            </param>
-            <param index="9">
-              <value>
-                <![CDATA[Years]]>
-              </value>
-            </param>
-            <param index="10">
-              <value>
-                <![CDATA[Test Description]]>
-              </value>
-            </param>
-          </params>
+        <test-method status="PASS" signature="fetchAssetlist()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="fetchAssetlist" duration-ms="1320" started-at="2019-07-17T17:52:07Z" finished-at="2019-07-17T17:52:08Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ASST146 -->
-        <test-method status="PASS" signature="Teardown()[pri:0, instance:com.vrt.testcases.assetCreationTest@60c6f5b]" name="Teardown" is-config="true" duration-ms="25" started-at="2019-07-16T18:57:59Z" finished-at="2019-07-16T18:57:59Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Teardown -->
-      </class> <!-- com.vrt.testcases.assetCreationTest -->
+        </test-method> <!-- fetchAssetlist -->
+      </class> <!-- com.vrt.testcases.HitNTrialTests -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

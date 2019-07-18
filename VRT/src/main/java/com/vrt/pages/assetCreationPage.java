@@ -313,7 +313,13 @@ public class assetCreationPage extends BaseClass{
 		Thread.sleep(1000);
 	}
 	
-	//Verify the Save Alert message method
+	//Verify the Save Alert message displayed
+	public boolean saveAlertMsg() {
+		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return IsElementVisibleStatus(Msg);
+	}
+	
+	//Fetch the Save Alert message
 	public String AlertMsg() {
 		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(Msg);
@@ -335,7 +341,13 @@ public class assetCreationPage extends BaseClass{
 	public void clickBackBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);		
 		Thread.sleep(1000);
-	}	
+	}
+	
+	//click Back button on Save Asset operation
+	public assetHubPage clickBackBtnOnAssetSave() {
+		clickOn(AssetBackBtn);		
+		return new assetHubPage();
+	}
 	
 	//Discard alert message
 	public boolean discardAlert() throws InterruptedException {

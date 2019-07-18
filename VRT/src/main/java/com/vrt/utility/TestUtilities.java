@@ -21,7 +21,7 @@ import com.vrt.base.BaseClass;
 
 public class TestUtilities extends BaseClass{
 	
-	public static String TestData_sheetPath = "D:\\me\\Study\\Selenium\\Practice\\VRT\\TestData\\AssetNameTestData.xlsx";	
+	public static String TestData_sheetPath = "C:\\Users\\manoj.ghadei\\git\\VRT\\VRT\\TestData\\AssetNameTestData.xlsx";	
 	static Workbook book;
 	static Sheet sheet;
 
@@ -169,6 +169,13 @@ public class TestUtilities extends BaseClass{
 	@DataProvider(name="getAstALLData")
 	public static Object[][] getAstALLData() {				
 		String sheetName = "AllAssetDetails";    
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name="tc147")
+	public static Object[][] tc147() {				
+		String sheetName = "tc147";    
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}

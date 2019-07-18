@@ -26,5 +26,12 @@ public class assetHubPage extends BaseClass{
 		return new assetCreationPage();
 	}
 	
+	//Get the Asset tile info in the Asset hub page
+	public void assetTile(String AssetName) throws InterruptedException {
+		clickOn(AddAssetBtn);
+		Thread.sleep(1000);
+		//return new assetCreationPage();
+	}
+	
 
 }
