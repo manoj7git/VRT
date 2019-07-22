@@ -51,7 +51,7 @@ public class assetCreationTest extends BaseClass{
 			UserLoginPopup("5", "Welcome2@AM");
 			MainHubPage = UserManagementPage.ClickBackButn();
 			MainLoginPage = MainHubPage.UserSignOut();
-			MainLoginPage.ChangeNewPWwithoutPWCheckBox("5", "Welcome2@AM", "Welcome5@AM");
+			MainLoginPage.ChangeNewPWwithoutPWCheckBox("5", "Welcome2@AM", getPW("adminFull"));
 		}
 		AppClose();
 		Thread.sleep(1000);
@@ -63,7 +63,7 @@ public class assetCreationTest extends BaseClass{
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		MainLoginPage= new LoginPage();
-		MainHubPage=MainLoginPage.Login("5", "Welcome5@AM");
+		MainHubPage=MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		assetHubPage=MainHubPage.ClickAssetTile();
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
@@ -234,25 +234,25 @@ public class assetCreationTest extends BaseClass{
 		SoftAssert sa11 = new SoftAssert();
 		
 		assetCreationPage.assetCreationWithType("3", "3", "Freezer", "DAS", "AGR");
-		assetCreationPage.UserLoginPopup("5", "Welcome5@AM");
+		assetCreationPage.UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
 		
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();
 		assetCreationPage.assetCreationWithType("4", "4", "Bath", "AAS", "MOM");
-		assetCreationPage.UserLoginPopup("5", "Welcome5@AM");
+		assetCreationPage.UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
 		
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();		
 		assetCreationPage.assetCreationWithType("5", "5", "ColdChamber", "BAS", "DEL");
-		assetCreationPage.UserLoginPopup("5", "Welcome5@AM");
+		assetCreationPage.UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
 		
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();		
 		assetCreationPage.assetCreationWithType("6", "6", "DeepFreezer", "CAS", "BBS");
-		assetCreationPage.UserLoginPopup("5", "Welcome5@AM");
+		assetCreationPage.UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
 		
@@ -426,7 +426,7 @@ public class assetCreationTest extends BaseClass{
 		try {
 			//
 			assetCreationPage.assetCreationWithSizeUnit("7", "1", "Freezer", "GAS", "HYB", "10", "Meter Cube");
-			assetCreationPage.UserLoginPopup("5", "Welcome5@AM");
+			assetCreationPage.UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 			assetCreationPage.CloseAlertMsg();
 			assetHubPage = assetCreationPage.clickBackBtn();
 			

@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -162,6 +163,33 @@ public class BaseClass {
 			}
 			// Create a copy of stringarray[]
 			return Arrays.copyOf(stringarray, index); 		
+	}
+	
+	//Defining a User list with Credentials using HashMap
+	//HashMap is basically used in App where there is a 
+	//Different Users/Roles : Permission Based User Management System 
+	//with Unique UN:PW (kay Value) comibination with no duplicates to be used
+	public static HashMap<String, String> getUNCredentials() {
+		HashMap<String, String> UserMap = new HashMap<String, String>();
+		
+		UserMap.put("adminFull", "5:Welcome5@AM");
+		UserMap.put("SysAdmin", "5:Welcome5@AM");
+		UserMap.put("SysSupervisor", "5:Welcome5@AM");
+		UserMap.put("SysOperator", "5:Welcome5@AM");	
+		
+		return UserMap;
+	}
+	
+	//Fetch the UserName credentials from the above GetUNCredentials HashMap method
+	public static String getUN(String role) {
+		String UN = getUNCredentials().get(role).split(":")[0];
+		return UN;
+	}
+	
+	//Fetch the Password credentials from the above GetUNCredentials HashMap method
+	public static String getPW(String role) {
+		String PW = getUNCredentials().get(role).split(":")[1];
+		return PW;
 	}
 	
 }

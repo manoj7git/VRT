@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="10216" started-at="2019-07-17T17:51:58Z" finished-at="2019-07-17T17:52:08Z">
+  <suite name="Default suite" duration-ms="13339" started-at="2019-07-22T14:32:08Z" finished-at="2019-07-22T14:32:21Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="10216" started-at="2019-07-17T17:51:58Z" finished-at="2019-07-17T17:52:08Z">
+    <test name="Default test" duration-ms="13339" started-at="2019-07-22T14:32:08Z" finished-at="2019-07-22T14:32:21Z">
       <class name="com.vrt.testcases.HitNTrialTests">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="Setup" is-config="true" duration-ms="8877" started-at="2019-07-17T17:51:58Z" finished-at="2019-07-17T17:52:07Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="Setup" is-config="true" duration-ms="11230" started-at="2019-07-22T14:32:08Z" finished-at="2019-07-22T14:32:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="fetchAssetlist()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="fetchAssetlist" duration-ms="1320" started-at="2019-07-17T17:52:07Z" finished-at="2019-07-17T17:52:08Z">
+        <test-method status="PASS" signature="fetchAssetlist()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="fetchAssetlist" duration-ms="2084" started-at="2019-07-22T14:32:19Z" finished-at="2019-07-22T14:32:21Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- fetchAssetlist -->

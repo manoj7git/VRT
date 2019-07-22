@@ -28,7 +28,7 @@ public class HitNTrialTests extends BaseClass {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		MainLoginPage = new LoginPage();
-		MainHubPage = MainLoginPage.Login("5", "Welcome5@AM");
+		MainHubPage = MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
 		// assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
