@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="13339" started-at="2019-07-22T14:32:08Z" finished-at="2019-07-22T14:32:21Z">
+  <suite name="VRTAPPTest" duration-ms="14020" started-at="2019-07-22T19:30:43Z" finished-at="2019-07-22T19:30:57Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="13339" started-at="2019-07-22T14:32:08Z" finished-at="2019-07-22T14:32:21Z">
+    <test name="VRTLogin" duration-ms="14020" started-at="2019-07-22T19:30:43Z" finished-at="2019-07-22T19:30:57Z">
       <class name="com.vrt.testcases.HitNTrialTests">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="Setup" is-config="true" duration-ms="11230" started-at="2019-07-22T14:32:08Z" finished-at="2019-07-22T14:32:19Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@31610302]" name="Setup" is-config="true" duration-ms="12221" started-at="2019-07-22T19:30:43Z" finished-at="2019-07-22T19:30:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="fetchAssetlist()[pri:0, instance:com.vrt.testcases.HitNTrialTests@617faa95]" name="fetchAssetlist" duration-ms="2084" started-at="2019-07-22T14:32:19Z" finished-at="2019-07-22T14:32:21Z">
+        <test-method status="PASS" signature="fetchAssetlist()[pri:0, instance:com.vrt.testcases.HitNTrialTests@31610302]" name="fetchAssetlist" duration-ms="1779" started-at="2019-07-22T19:30:55Z" finished-at="2019-07-22T19:30:57Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- fetchAssetlist -->
       </class> <!-- com.vrt.testcases.HitNTrialTests -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- VRTLogin -->
+  </suite> <!-- VRTAPPTest -->
 </testng-results>

@@ -1,10 +1,18 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="VRTAPPTest" parallel="false">
+
+	<listeners>
+		<listener
+			class-name="com.vrt.ExtenetReporterListner.ExtentReporterNG" />
+	</listeners>
+	
+
 	<test name="VRTLogin">
 		<classes>
-			<class name="com.vrt.testcases.LoginTest" />
-			<class name="com.vrt.testcases.assetCreationTest" />
+			<!-- class name="com.vrt.testcases.LoginTest" -->
+			<!-- class name="com.vrt.testcases.assetCreationTest" / -->
+			<class name="com.vrt.testcases.HitNTrialTests" />
 		</classes>
 	</test>
 </suite>
