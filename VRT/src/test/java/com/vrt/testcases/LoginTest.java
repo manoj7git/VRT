@@ -46,8 +46,7 @@ public class LoginTest extends BaseClass{
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user can log into "
 			+ "the Kaye Application after installation with default Kaye/411 credentials")
-	@Story("Verify if user can log into "
-			+ "the Kaye Application")
+	@Story("LOGIN_001")
 	public void LOGIN_001() throws InterruptedException {
 		//String result = "";
 		//String exception = null;

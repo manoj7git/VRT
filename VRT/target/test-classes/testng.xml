@@ -10,8 +10,8 @@
 
 	<test name="VRTLogin">
 		<classes>
-			<class name="com.vrt.testcases.LoginTest" />
-			<!-- class name="com.vrt.testcases.assetCreationTest" / -->
+<!-- 			<class name="com.vrt.testcases.LoginTest" /> -->
+			<class name="com.vrt.testcases.assetCreationTest" />
 <!-- 			<class name="com.vrt.testcases.HitNTrialTests" /> -->
 		</classes>
 	</test>
