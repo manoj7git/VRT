@@ -338,9 +338,10 @@ public class assetCreationPage extends BaseClass{
 	}
 	
 	//click Back button
-	public void clickBackBtn() throws InterruptedException {
+	public assetHubPage clickBackBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);		
 		Thread.sleep(1000);
+		return new assetHubPage();
 	}
 	
 	//click Back button on Save Asset operation

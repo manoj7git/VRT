@@ -76,7 +76,7 @@ public class assetCreationTest extends BaseClass{
 	}
 
 	
-	/*//ASST100 - Verify if the asset name text box accepts input only up to 25 characters
+	//ASST100 - Verify if the asset name text box accepts input only up to 25 characters
 	@Test(groups = "Verify if the asset name text box accepts input only up to 25 characters")
 	public void ASST100() throws InterruptedException {
 		SoftAssert sa1 = new SoftAssert();
@@ -428,7 +428,7 @@ public class assetCreationTest extends BaseClass{
 			assetCreationPage.assetCreationWithSizeUnit("7", "1", "Freezer", "GAS", "HYB", "10", "Meter Cube");
 			assetCreationPage.UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 			assetCreationPage.CloseAlertMsg();
-			assetHubPage = assetCreationPage.clickBackBtn();
+			assetHubPage = assetCreationPage.clickBackBtnOnAssetSave();
 			
 			assetCreationPage=assetHubPage.ClickAddAssetBtn();			
 
@@ -735,10 +735,10 @@ public class assetCreationTest extends BaseClass{
 		sa40.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);
 		sa40.assertAll();
 	}
-*/	
 	
 	
-	/*// ASST143 - Verify the cancel button will discard the entries made at the current screen
+	
+	// ASST143 - Verify the cancel button will discard the entries made at the current screen
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, 
 			groups = "Verify the cancel button will discard the entries made at the current screen")
 	public void ASST143(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
@@ -782,10 +782,10 @@ public class assetCreationTest extends BaseClass{
 		
 		sa41.assertAll();
 	}
-	*/
+	
 
 	
-	/*// ASST144 - Verify if the back button will -prompt as discard the changes- with Yes or No option
+	// ASST144 - Verify if the back button will -prompt as discard the changes- with Yes or No option
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Verify if the back button will -prompt as discard the changes- with Yes or No option")
 	public void ASST144(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
@@ -806,10 +806,10 @@ public class assetCreationTest extends BaseClass{
 		sa42.assertEquals(assetCreationPage.discardAlert(), true);
 		sa42.assertAll();
 	}
-*/
+
 	
 	
-	/*// ASST145 - Verify if No Option is selected and verify if the application allows the user to stay in the same page
+	// ASST145 - Verify if No Option is selected and verify if the application allows the user to stay in the same page
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Verify if No Option is selected and verify if the application allows the user to stay in the same page")
 	public void ASST145(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
@@ -832,11 +832,11 @@ public class assetCreationTest extends BaseClass{
 		sa43.assertEquals(assetCreationPage.SaveBtn(), true);
 		sa43.assertAll();
 	}
-	*/
+	
 
 	
-	// ASST146 - Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page")
+	// ASST146 - Verify if optionï¿½Yes is selected, app discard the changes made and goes back to the Asset Page
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Verify if optionï¿½Yes is selected, app discard the changes made and goes back to the Asset Page")
 	public void ASST146(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {

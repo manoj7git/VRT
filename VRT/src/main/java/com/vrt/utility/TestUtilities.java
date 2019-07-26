@@ -186,7 +186,7 @@ public class TestUtilities extends BaseClass{
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
 		FileUtils.copyFile(scrFile, new File("C:\\Users\\manoj.ghadei\\git\\VRT\\VRT\\Screenshots"
-				+"_"+timestamp+".jpg"));		
+				+"_"+timestamp+".png"));		
 		//FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
 	}
 	

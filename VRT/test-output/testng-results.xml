@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="VRTAPPTest" duration-ms="14020" started-at="2019-07-22T19:30:43Z" finished-at="2019-07-22T19:30:57Z">
+  <suite name="VRTAPPTest" duration-ms="12666" started-at="2019-07-23T15:10:52Z" finished-at="2019-07-23T15:11:05Z">
     <groups>
     </groups>
-    <test name="VRTLogin" duration-ms="14020" started-at="2019-07-22T19:30:43Z" finished-at="2019-07-22T19:30:57Z">
+    <test name="VRTLogin" duration-ms="12666" started-at="2019-07-23T15:10:52Z" finished-at="2019-07-23T15:11:05Z">
       <class name="com.vrt.testcases.HitNTrialTests">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@31610302]" name="Setup" is-config="true" duration-ms="12221" started-at="2019-07-22T19:30:43Z" finished-at="2019-07-22T19:30:55Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@31610302]" name="Setup" is-config="true" duration-ms="11233" started-at="2019-07-23T15:10:52Z" finished-at="2019-07-23T15:11:03Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="fetchAssetlist()[pri:0, instance:com.vrt.testcases.HitNTrialTests@31610302]" name="fetchAssetlist" duration-ms="1779" started-at="2019-07-22T19:30:55Z" finished-at="2019-07-22T19:30:57Z">
+        <test-method status="PASS" signature="fetchAssetlist()[pri:0, instance:com.vrt.testcases.HitNTrialTests@31610302]" name="fetchAssetlist" duration-ms="1416" started-at="2019-07-23T15:11:03Z" finished-at="2019-07-23T15:11:05Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- fetchAssetlist -->

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,8 +23,10 @@ public class BaseClass {
 	
 	//Declare the Windows Driver and make it Public/Static to be used throughout the classes
 	public static WindowsDriver driver;
+	public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<WebDriver>();
 
 	// Launch App/Setup Configuration Function
+	//Initialize Windows Driver
 	public static void LaunchApp(String Url) {
 		try {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -32,11 +35,18 @@ public class BaseClass {
 			driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			tdriver.set(driver);
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}		
 	}
+	
+	
+	public static synchronized WebDriver getDriver() {
+		return tdriver.get();
+	}
+	
 
 	// Check if Element is present to be able to click or not
 	public WebElement checkingElementClickable(WebElement element, long WaitTime) {
