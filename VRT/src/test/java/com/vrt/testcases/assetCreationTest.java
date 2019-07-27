@@ -41,6 +41,7 @@ public class assetCreationTest extends BaseClass{
 	assetCreationPage assetCreationPage;
 	
 	
+	//Ensure the User has got rights to create Assets
 	@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
@@ -86,6 +87,7 @@ public class assetCreationTest extends BaseClass{
 
 	
 	
+	 //ASST100
 	@Test(groups = "Sanity", 
 			description="Verify if the asset name text box accepts input only up to 25 characters")
 	@Severity(SeverityLevel.NORMAL)
@@ -278,7 +280,7 @@ public class assetCreationTest extends BaseClass{
 		sa10.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);		
 		sa10.assertAll();
 	}
-
+	
 	
 	//ASST108 - Verify if the Asset types are sorted in alphabetic order
 	@Test(groups = "Sanity",
@@ -395,7 +397,7 @@ public class assetCreationTest extends BaseClass{
 		sa15.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);			
 		sa15.assertAll();
 	}
-
+	
 	
 	//ASST112 - Verify Asset Size field should accept upper case, lower case, numeric 
 	// and special characters such as point or comma
@@ -532,7 +534,7 @@ public class assetCreationTest extends BaseClass{
 			assetCreationPage.assetCreationWithSizeUnit("7", "1", "Freezer", "GAS", "HYB", "10", "Meter Cube");
 			assetCreationPage.UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 			assetCreationPage.CloseAlertMsg();
-			assetHubPage = assetCreationPage.clickBackBtnOnAssetSave();
+			assetHubPage = assetCreationPage.clickBackBtn();
 			
 			assetCreationPage=assetHubPage.ClickAddAssetBtn();			
 
@@ -917,7 +919,6 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	
 	// ASST143 - Verify the cancel button will discard the entries made at the current screen
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Sanity", 
 			description="Verify the cancel button will discard the entries made at the current screen")
@@ -966,7 +967,6 @@ public class assetCreationTest extends BaseClass{
 		sa41.assertAll();
 	}
 	
-
 	
 	// ASST144 - Verify if the back button will -prompt as discard the changes- with Yes or No option
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Sanity", 
@@ -988,12 +988,12 @@ public class assetCreationTest extends BaseClass{
 		}
 
 		// Click the Back button in the Asset creation/details page
-		assetCreationPage.clickBackBtn();
+		assetCreationPage.clickBkBtn();
 
 		sa42.assertEquals(assetCreationPage.discardAlert(), true);
 		sa42.assertAll();
 	}
-
+	
 	
 	
 	// ASST145 - Verify if No Option is selected and verify if the application allows the user to stay in the same page
@@ -1016,7 +1016,7 @@ public class assetCreationTest extends BaseClass{
 		}
 
 		// Click the Back button in the Asset creation/details page
-		assetCreationPage.clickBackBtn();
+		assetCreationPage.clickBkBtn();
 		//Click the No buttin in the Discard alert message
 		assetCreationPage.discardAlertNoBtn();		
 
@@ -1026,7 +1026,7 @@ public class assetCreationTest extends BaseClass{
 	
 
 	
-	// ASST146 - Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page
+	// ASST146 - Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Sanity",
 			description="Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
 	@Severity(SeverityLevel.NORMAL)
@@ -1046,8 +1046,8 @@ public class assetCreationTest extends BaseClass{
 		}
 
 		// Click the Back button in the Asset creation/details page
-		assetCreationPage.clickBackBtn();
-		//Click the No buttin in the Discard alert message
+		assetCreationPage.clickBkBtn();
+		//Click the No button in the Discard alert message
 		assetHubPage = assetCreationPage.discardAlertYesBtn();			
 
 		sa44.assertEquals(assetHubPage.addAst(), true);

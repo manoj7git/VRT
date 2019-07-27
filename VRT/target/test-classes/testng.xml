@@ -8,7 +8,7 @@
 	</listeners>
 	
 
-	<test name="VRTLogin">
+	<test name="VRTAssetCreationTest">
 		<classes>
 <!-- 			<class name="com.vrt.testcases.LoginTest" /> -->
 			<class name="com.vrt.testcases.assetCreationTest" />

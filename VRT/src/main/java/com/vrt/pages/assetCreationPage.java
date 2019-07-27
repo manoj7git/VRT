@@ -202,6 +202,7 @@ public class assetCreationPage extends BaseClass{
 	
 	//Enter Asset Size Unit data
 	public void enterAssetSizeUnit(String ASizeUnit) {
+		clickOn(AssetEditBox.get(2));
 		ClearText(AssetEditBox.get(2));
 		AssetEditBox.get(2).sendKeys(ASizeUnit);		
 	}	
@@ -337,17 +338,17 @@ public class assetCreationPage extends BaseClass{
 		Thread.sleep(1000);
 	}
 	
-	//click Back button
+	//click Back button to move to assetHub Page
 	public assetHubPage clickBackBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);		
 		Thread.sleep(1000);
 		return new assetHubPage();
 	}
 	
-	//click Back button on Save Asset operation
-	public assetHubPage clickBackBtnOnAssetSave() {
+	//click Back button to get the Discard message
+	public void clickBkBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);		
-		return new assetHubPage();
+		Thread.sleep(1000);		
 	}
 	
 	//Discard alert message

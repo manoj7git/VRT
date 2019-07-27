@@ -86,7 +86,7 @@ public class assetHubTest extends BaseClass {
 		// Click the Back button in the Asset creation/details page if the Save message is
 		// displayed in order to move to Asset Hub Page
 		if (assetCreationPage.saveAlertMsg()) {
-			assetHubPage = assetCreationPage.clickBackBtnOnAssetSave();
+			assetHubPage = assetCreationPage.clickBackBtn();
 		}
 
 		// Click the No button in the Discard alert message
