@@ -110,7 +110,7 @@ public class LoginPage extends BaseClass {
 	public boolean InvalidLoginAlertmsgPresence() 
 	{
 		WebElement InvalidLoginMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
-		return IsElementEnabledStatus(InvalidLoginMsg);
+		return IsElementVisibleStatus(InvalidLoginMsg);
 	}
 	
 	@Step("Verify the NewPWFieldPresence...")
@@ -199,6 +199,15 @@ public class LoginPage extends BaseClass {
 		Thread.sleep(1000);	
 		
 		return new MainHubPage();
+	}
+	
+	@Step("Login method for User OTHER THAN Kaye/411... to verify authentication failures")
+	public void AlertLogin(String UID, String PW) throws InterruptedException 
+	{		
+		EnterUserID(UID);
+		EnterUserPW(PW);
+		ClickLoginBtn();
+		//Thread.sleep(1000);		
 	}
 	
 	
