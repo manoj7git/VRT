@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/2/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sat Jul 27 20:14:36 IST 2019</td>
+<td>Started on:</td><td>Thu Aug 01 21:04:22 IST 2019</td>
 </tr>
-<tr><td>Total time:</td><td>23 seconds (23483 ms)</td>
+<tr><td>Total time:</td><td>33 seconds (33474 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,41 +75,11 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.vrt.testcases.assetCreationTest.ASST108()'><b>ASST108</b><br>Test class: com.vrt.testcases.assetCreationTest<br>Test method: Verify if the Asset types are sorted in alphabetic order</td>
-<td><div><pre>org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
-System info: host: &apos;INAS-LP024&apos;, ip: &apos;192.168.47.1&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_181&apos;
-Driver info: io.appium.java_client.windows.WindowsDriver
-Capabilities {app: Kaye.ValProbeRT_racmveb2qnw..., javascriptEnabled: true, platform: WINDOWS, platformName: WINDOWS}
-Session ID: AD695961-926C-4472-8498-0AC9B66CE517
-*** Element info: {Using=name, value=Enter User Credentials}
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
-	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:239)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:42)
-	at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
-	at io.appium.java_client.windows.WindowsDriver.execute(WindowsDriver.java:1)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-	at io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:62)
-	at io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
-	at io.appium.java_client.windows.WindowsDriver.findElement(WindowsDriver.java:1)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByName(RemoteWebDriver.java:404)
-	at io.appium.java_client.DefaultGenericMobileDriver.findElementByName(DefaultGenericMobileDriver.java:118)
-	at io.appium.java_client.AppiumDriver.findElementByName(AppiumDriver.java:1)
-	at io.appium.java_client.windows.WindowsDriver.findElementByName(WindowsDriver.java:1)
-	at com.vrt.base.BaseClass.UserLoginPopup(BaseClass.java:146)
-	at com.vrt.testcases.assetCreationTest.ASST108(assetCreationTest.java:295)
+<td title='com.vrt.testcases.assetHubTest.ASST147()'><b>ASST147</b><br>Test class: com.vrt.testcases.assetHubTest<br>Test method: Verify all the changes made to the asset are displayed correctly at Asset Hub Page<br>Parameters: Asset147b, 147b, HeatBath, testManufacturer147, testLocation147, Model147, 5, volume, 3, Years, Test for successful creation of Asset147b with correct details reflecting in the corresponding Asset tile of Asset Hub page</td>
+<td><div><pre>java.lang.AssertionError: The following asserts failed:
+	Lists differ at element [1]: 147 != 147b expected [147] but found [147b]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
+	at com.vrt.testcases.assetHubTest.ASST147(assetHubTest.java:125)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -135,41 +105,11 @@ Session ID: AD695961-926C-4472-8498-0AC9B66CE517
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace270261532", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace270261532'><pre>org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
-System info: host: &apos;INAS-LP024&apos;, ip: &apos;192.168.47.1&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_181&apos;
-Driver info: io.appium.java_client.windows.WindowsDriver
-Capabilities {app: Kaye.ValProbeRT_racmveb2qnw..., javascriptEnabled: true, platform: WINDOWS, platformName: WINDOWS}
-Session ID: AD695961-926C-4472-8498-0AC9B66CE517
-*** Element info: {Using=name, value=Enter User Credentials}
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
-	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
-	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:239)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:42)
-	at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
-	at io.appium.java_client.windows.WindowsDriver.execute(WindowsDriver.java:1)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-	at io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:62)
-	at io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
-	at io.appium.java_client.windows.WindowsDriver.findElement(WindowsDriver.java:1)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByName(RemoteWebDriver.java:404)
-	at io.appium.java_client.DefaultGenericMobileDriver.findElementByName(DefaultGenericMobileDriver.java:118)
-	at io.appium.java_client.AppiumDriver.findElementByName(AppiumDriver.java:1)
-	at io.appium.java_client.windows.WindowsDriver.findElementByName(WindowsDriver.java:1)
-	at com.vrt.base.BaseClass.UserLoginPopup(BaseClass.java:146)
-	at com.vrt.testcases.assetCreationTest.ASST108(assetCreationTest.java:295)
+</pre></div><a href='#' onClick='toggleBox("stack-trace2032752946", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2032752946'><pre>java.lang.AssertionError: The following asserts failed:
+	Lists differ at element [1]: 147 != 147b expected [147] but found [147b]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
+	at com.vrt.testcases.assetHubTest.ASST147(assetHubTest.java:125)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -196,8 +136,8 @@ Session ID: AD695961-926C-4472-8498-0AC9B66CE517
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>10</td>
-<td>com.vrt.testcases.assetCreationTest@7e094740</td></tr>
+<td>23</td>
+<td>com.vrt.testcases.assetHubTest@7e094740</td></tr>
 </table><p>
 </body>
 </html>

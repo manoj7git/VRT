@@ -61,8 +61,9 @@ public class HitNTrialTests extends BaseClass {
 			List<WebElement> AssetTileInfo = AssetList.get(i).findElements(By.className("TextBlock"));
 			//System.out.println(AssetTileInfo.size());
 			for (int j = 0; j < AssetTileInfo.size(); j++) {
-				System.out.println("AssetTileInfo: "+AssetTileInfo.get(j).getText());
-				if (AssetTileInfo.get(j).getText().equals("Asset7")) {
+				//System.out.println("AssetTileInfo: "+AssetTileInfo.get(j).getText());
+				if (AssetTileInfo.get(j).getText().equals("7")) {
+					System.out.println("AssetTileInfo (AssetName): "+AssetTileInfo.get(j).getText());
 					AssetTileInfo.get(j).click();
 				}
 			}

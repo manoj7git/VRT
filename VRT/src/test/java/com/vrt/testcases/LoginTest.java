@@ -41,7 +41,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if user can log into "
+	@Test(groups = "Regression", description="Verify if user can log into "
 			+ "the Kaye Application after installation with default Kaye/411 credentials")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user can log into "
@@ -60,7 +60,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 
-	@Test(groups = "Login_Screen",description="Verify if clicking on the "
+	@Test(groups = "Regression, Sanity",description="Verify if clicking on the "
 			+ "Kaye application tab opens the Login Screen of the application")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if clicking on the "
@@ -78,7 +78,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify  the contents of the Kaye application Login Screen ")
+	@Test(groups = "Regression", description="Verify  the contents of the Kaye application Login Screen ")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify  the contents of the Kaye application Login Screen")
 	@Story("LOGIN_003")
@@ -105,7 +105,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if the input data in the "
+	@Test(groups = "Regression", description="Verify if the input data in the "
 			+ "Password field is displayed as astrisk")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the input data in the " + 
@@ -123,7 +123,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if user can login into "
+	@Test(groups = "Regression, Sanity", description="Verify if user can login into "
 			+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user can login into "
@@ -135,9 +135,9 @@ public class LoginTest extends BaseClass{
 		//Login using Default Kaye/411
 		UserManagementPage=MainLoginPage.DefaultLogin();
 		//Create the 1st User
-		MainLoginPage = UserManagementPage.FirstUserCreation("User5", "5", "aaaaaa", "aaaaaa", "System Admin Manager", "123456789", "abc@gmail.com");
+		MainLoginPage = UserManagementPage.FirstUserCreation("User5", "5", "Welcome1@AM", "Welcome1@AM", "System Admin Manager", "123456789", "abc@gmail.com");
 		//Login with new User Credentials
-		MainHubPage=MainLoginPage.Login("5", "aaaaaa");
+		MainHubPage=MainLoginPage.Login("5", "Welcome1@AM");
 				
 		//Verify if New User is logged in correctly
 		sa5.assertEquals(MainHubPage.LoggedinUserName(), "User5", "FAIL: Incorrect User "
@@ -147,7 +147,7 @@ public class LoginTest extends BaseClass{
 	}
 
 	/*
-	@Test(groups = "Login_Screen", description="Verify if the Cancel button resets "
+	@Test(groups = "Regression", description="Verify if the Cancel button resets "
 			+ "the UserId and Password fields to Null")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Cancel button resets "
@@ -171,7 +171,7 @@ public class LoginTest extends BaseClass{
 	}
 	*/
 	
-	@Test(groups = "Login_Screen", description="Verify if user is not allowed to login with invalid credentials")
+	@Test(groups = "Regression", description="Verify if user is not allowed to login with invalid credentials")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user is not allowed to login with invalid credentials")
 	@Story("LOGIN_007")
@@ -189,7 +189,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if user is not allowed to "
+	@Test(groups = "Regression", description="Verify if user is not allowed to "
 			+ "login if the UserId or Password field is left blank")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user is not allowed to "
@@ -205,7 +205,7 @@ public class LoginTest extends BaseClass{
 	}
 		
 	
-	@Test(groups = "Login_Screen", description="Verify if the application closes on three unsuccessful login attempts")
+	@Test(groups = "Regression", description="Verify if the application closes on three unsuccessful login attempts")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the application closes on three unsuccessful login attempts")
 	@Story("LOGIN_009")
@@ -228,7 +228,7 @@ public class LoginTest extends BaseClass{
 	}
 
 	
-	@Test(groups = "Login_Screen", description="Verify if the first created admin user "
+	@Test(groups = "Regression", description="Verify if the first created admin user "
 			+ "is not allowed to change his password during first login instance after user creation")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the first created admin user "
@@ -238,7 +238,7 @@ public class LoginTest extends BaseClass{
 		SoftAssert sa10 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("5");
-		MainLoginPage.EnterUserPW("aaaaaa");
+		MainLoginPage.EnterUserPW("Welcome1@AM");
 		
 		sa10.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: The 1st User is "
 		+"allowed to Change its PW on 1st time Login");
@@ -246,7 +246,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if the Change Password tickbox "
+	@Test(groups = "Regression", description="Verify if the Change Password tickbox "
 			+ "is in enabled state during consecutive logins by the first admin user")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Change Password tickbox "
@@ -255,10 +255,10 @@ public class LoginTest extends BaseClass{
 	public void LOGIN_012() throws InterruptedException {
 		SoftAssert sa11 = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login("5", "aaaaaa");
+		MainHubPage=MainLoginPage.Login("5", "Welcome1@AM");
 		MainLoginPage=MainHubPage.UserSignOut();
 		MainLoginPage.EnterUserID("5");
-		MainLoginPage.EnterUserPW("aaaaaa");
+		MainLoginPage.EnterUserPW("Welcome1@AM");
 		
 		sa11.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: The 1st User is "
 		+"NOT allowed to Change its PW with Change PW option in disbaled state");
@@ -266,7 +266,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if checking the "
+	@Test(groups = "Regression", description="Verify if checking the "
 			+ "Change Password tickbox allows the user to change his password")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if checking the "
@@ -276,7 +276,7 @@ public class LoginTest extends BaseClass{
 		SoftAssert sa12 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("5");
-		MainLoginPage.EnterUserPW("aaaaaa");
+		MainLoginPage.EnterUserPW("Welcome1@AM");
 		MainLoginPage.ClickChangePWCheckbox();
 		MainLoginPage.ClickLoginBtn();
 
@@ -286,7 +286,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if unchecking the "
+	@Test(groups = "Regression", description="Verify if unchecking the "
 			+ "Change Password tickbox restricts the user from changing his password")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if unchecking the "
@@ -314,7 +314,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if user can change "
+	@Test(groups = "Regression", description="Verify if user can change "
 			+ "the password by entering new password and clicking on the OK button")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user can change "
@@ -323,14 +323,14 @@ public class LoginTest extends BaseClass{
 	public void LOGIN_015() throws InterruptedException {
 		SoftAssert sa14 = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.ChangeNewPW("5", "aaaaaa", "Welcome2@AM");
+		MainHubPage=MainLoginPage.ChangeNewPW("5", "Welcome1@AM", "Welcome2@AM");
 		
 		sa14.assertEquals(MainHubPage.LoggedinUserName(), "User5", "FAIL: Password did not change for the User");
 		sa14.assertAll();
 	}
 		
 	
-	@Test(groups = "Login_Screen", description="Verify if clicking on the Cancel button"
+	@Test(groups = "Regression", description="Verify if clicking on the Cancel button"
 			+ " in the Change password field restores the previous password")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if clicking on the Cancel button"
@@ -342,8 +342,8 @@ public class LoginTest extends BaseClass{
 		MainLoginPage.LoginEntry("5", "Welcome2@AM");
 		MainLoginPage.ClickChangePWCheckbox();
 		MainLoginPage.ClickLoginBtn();
-		MainLoginPage.enterNewPW("Welcome1@AM");
-		MainLoginPage.enterConfNewPW("Welcome1@AM");
+		MainLoginPage.enterNewPW("Welcome3@AM");
+		MainLoginPage.enterConfNewPW("Welcome3@AM");
 		MainLoginPage.ClickCancelBtn();
 		Thread.sleep(1000);
 		
@@ -359,7 +359,8 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Login_Screen", description="Verify if subsequent users created "
+	//A Sys Admin User created
+	@Test(groups = "Regression, Sanity", description="Verify if subsequent users created "
 			+ "are forced to change their password during first login instance")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verify if subsequent users created "
@@ -371,11 +372,11 @@ public class LoginTest extends BaseClass{
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile();
 		
-		UserManagementPage.CreateAdminUser("5", "Welcome2@AM", "User1", "1", "aaaaaa", "SysAdmin", "123456789", "user1@aas.com");
+		UserManagementPage.CreateAdminUser("5", "Welcome2@AM", "User1", "1", "Welcome2@AM", "SysAdmin", "123456789", "user1@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("1", "aaaaaa");
+		MainLoginPage.LoginEntry("1", "Welcome2@AM");
 		MainLoginPage.ClickLoginBtn();
 		
 		sa16.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: A New User created"
@@ -388,8 +389,8 @@ public class LoginTest extends BaseClass{
 		sa16.assertAll();
 	}
 	
-		
-	@Test(groups = "Login_Screen", description="Verify if the Change Password tickbox"
+	//A Sys Supervisor User created	
+	@Test(groups = "Regression", description="Verify if the Change Password tickbox"
 			+ " is in enabled state during furthur login attempts by the subsequent users")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Change Password tickbox"
@@ -401,11 +402,11 @@ public class LoginTest extends BaseClass{
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile();
 		
-		UserManagementPage.CreateSupervisorUser("5", "Welcome2@AM", "User2", "2", "aaaaaa", "SysSupervisor", "123456789", "user2@aas.com");
+		UserManagementPage.CreateSupervisorUser("5", "Welcome2@AM", "User2", "2", "Welcome1@AM", "SysSupervisor", "123456789", "user2@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("2", "aaaaaa");
+		MainLoginPage.LoginEntry("2", "Welcome1@AM");
 		MainLoginPage.ClickLoginBtn();
 		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome2@AM");
 		MainLoginPage=MainHubPage.UserSignOut();
@@ -416,8 +417,8 @@ public class LoginTest extends BaseClass{
 		sa17.assertAll();	
 	}
 	
-		
-	@Test(groups = "Login_Screen", description="Verify if a user"
+	//A Sys Operator User created	
+	@Test(groups = "Regression", description="Verify if a user"
 			+ " is forced to change his password while login, if his password has been changed by the admin user")
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("Verify if a user"
@@ -429,28 +430,28 @@ public class LoginTest extends BaseClass{
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile();
 		
-		UserManagementPage.CreateOperatorUser("5", "Welcome2@AM", "User8", "8", "aaaaaa", "SysOperator", "123456789", "user8@aas.com");
+		UserManagementPage.CreateOperatorUser("5", "Welcome2@AM", "User8", "8", "Welcome1@AM", "SysOperator", "123456789", "user8@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("8", "aaaaaa");
+		MainLoginPage.LoginEntry("8", "Welcome1@AM");
 		MainLoginPage.ClickLoginBtn();
-		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome2@AM");
+		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome2@AM"); //User8 forced to Rest PW
 		MainLoginPage=MainHubPage.UserSignOut();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile();
 		
 		UserManagementPage.clickAnyUserinUserList("User8");
-		UserManagementPage.enterNewUserPW("Welcome1@AM");
-		UserManagementPage.enterNewUserConfPW("Welcome1@AM");
+		UserManagementPage.enterNewUserPW("Welcome3@AM");
+		UserManagementPage.enterNewUserConfPW("Welcome3@AM");
 		UserManagementPage.ClickTitlefield();
 		UserManagementPage.ClickNewUserSaveButton();
 		UserLoginPopup("5", "Welcome2@AM");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("8", "Welcome1@AM");
+		MainLoginPage.LoginEntry("8", "Welcome3@AM");
 		MainLoginPage.ClickLoginBtn();
 
 		sa18.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: User is NOT "

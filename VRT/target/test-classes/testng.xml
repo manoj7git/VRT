@@ -8,11 +8,12 @@
 	</listeners>
 	
 
-	<test name="VRTAssetCreationTest">
+	<test name="VRTAssetHubPageTest">
 		<classes>
 <!-- 			<class name="com.vrt.testcases.LoginTest" /> -->
-			<class name="com.vrt.testcases.assetCreationTest" />
+<!-- 			<class name="com.vrt.testcases.assetCreationTest" /> -->
 <!-- 			<class name="com.vrt.testcases.HitNTrialTests" /> -->
+			<class name="com.vrt.testcases.assetHubTest" />
 		</classes>
 	</test>
 </suite>

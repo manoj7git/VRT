@@ -47,24 +47,33 @@ public class assetCreationTest extends BaseClass{
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		MainLoginPage = new LoginPage();
+		
+		try {
+			MainLoginPage.AlertLogin("5", "Welcome2@AM");
 
-		// Verify if Asset Edit creation privilege is enabled for the respective User or not
-		MainHubPage = MainLoginPage.Login("5", "Welcome2@AM");
+			if ((MainLoginPage.InvalidLoginAlertmsgPresence())) {
+				System.out.println("User 5 got full Admin privilege");
+				AppClose();
+				Thread.sleep(1000);
+			}
+		} catch (Exception e) {
+			MainHubPage = new MainHubPage();
+			UserManagementPage = MainHubPage.ClickAdminTile();
+			UserManagementPage.clickAnyUserinUserList("User5");
 
-		UserManagementPage = MainHubPage.ClickAdminTile();
-		UserManagementPage.clickAnyUserinUserList("User5");
+			boolean stat = UserManagementPage.PrivCreateEditAssetgstatus();
+			if (!stat) {
+				UserManagementPage.clickPrivCreateEditAsset();
+				UserManagementPage.ClickNewUserSaveButton();
+				UserLoginPopup("5", "Welcome2@AM");
+				MainHubPage = UserManagementPage.ClickBackButn();
+				MainLoginPage = MainHubPage.UserSignOut();
+				MainLoginPage.ChangeNewPWwithoutPWCheckBox("5", "Welcome2@AM", getPW("adminFull"));
 
-		boolean stat = UserManagementPage.PrivCreateEditAssetgstatus();
-		if (!stat) {
-			UserManagementPage.clickPrivCreateEditAsset();
-			UserManagementPage.ClickNewUserSaveButton();
-			UserLoginPopup("5", "Welcome2@AM");
-			MainHubPage = UserManagementPage.ClickBackButn();
-			MainLoginPage = MainHubPage.UserSignOut();
-			MainLoginPage.ChangeNewPWwithoutPWCheckBox("5", "Welcome2@AM", getPW("adminFull"));
-		}
-		AppClose();
-		Thread.sleep(1000);
+				AppClose();
+				Thread.sleep(1000);
+			}
+		}		
 	}
 	
 	
@@ -708,9 +717,9 @@ public class assetCreationTest extends BaseClass{
 		
 		String[] expectedFrequencyList = {"1","2","3","4","5","6","7","8","9","10",
 				"11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
-		System.out.println(Arrays.toString(expectedFrequencyList));
+		//System.out.println(Arrays.toString(expectedFrequencyList));
 		String[] FrequencyList = assetCreationPage.getAssetFreqlist();
-		System.out.println(Arrays.toString(FrequencyList));
+		//System.out.println(Arrays.toString(FrequencyList));
 
 		sa30.assertEquals(FrequencyList, expectedFrequencyList);
 

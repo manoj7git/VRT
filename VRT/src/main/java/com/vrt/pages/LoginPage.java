@@ -164,9 +164,7 @@ public class LoginPage extends BaseClass {
 		ClickChangePWCheckbox();
 		ClickLoginBtn();
 		Thread.sleep(1000);
-		
-		//WebElement MainLoginNewPWfield = driver.findElementByAccessibilityId("NewPasswordTextBox");
-		//WebElement MainLoginConfNewPW = driver.findElementByAccessibilityId("ConfirmPasswordTextBox");
+
 		enterNewPW(NPW);
 		enterConfNewPW(NPW);
 		ClickNewPWSaveBtn();

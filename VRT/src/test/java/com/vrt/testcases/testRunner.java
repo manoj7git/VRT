@@ -14,11 +14,12 @@ public class testRunner {
 		AllureReportListner ar = new AllureReportListner();
 
 		testng = new TestNG();
-		testng.setTestClasses(new Class[] {assetCreationTest.class});
+		//testng.setTestClasses(new Class[] {assetCreationTest.class});
+		//testng.setTestClasses(new Class[] {LoginTest.class});
+		testng.setTestClasses(new Class[] {assetHubTest.class});
 		testng.addListener(ar);
-		testng.run();
+		testng.run();	
 		
-
 	}
 
 }
