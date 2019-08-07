@@ -30,7 +30,7 @@ public class HitNTrialTests extends BaseClass {
 		MainLoginPage = new LoginPage();
 		MainHubPage = MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
-		// assetCreationPage=assetHubPage.ClickAddAssetBtn();
+		assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
 
 /*	// TearDown of the App
@@ -49,7 +49,7 @@ public class HitNTrialTests extends BaseClass {
 	 * System.out.println(UserManagementPage.PrivCreateEditAssetgstatus()); }
 	 */
 
-	@Test
+/*	@Test
 	public void fetchAssetlist() {
 		List<WebElement> AssetList = driver.findElementByAccessibilityId("ItemGridView")
 				.findElements(By.className("GridViewItem"));
@@ -71,5 +71,11 @@ public class HitNTrialTests extends BaseClass {
 		
 		
 	}
-
+	*/
+	
+	@Test
+	public void fetchAssetUnit() {
+		assetCreationPage.selectAssetSizeUnit("cu ft");		
+	}
+	
 }

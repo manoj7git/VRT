@@ -13,8 +13,9 @@ import com.vrt.base.BaseClass;
 public class assetCreationPage extends BaseClass{
 	
 	// Asset Details Page Element definition
+	WebElement CreateAssetPageTitle = driver.findElementByAccessibilityId("pageTitle");
 	WebElement AssetNameTxtBox = driver.findElementByAccessibilityId("NameTextBox");
-	WebElement AssetIDTxtBox = driver.findElementByAccessibilityId("EqidTextBox");
+	WebElement AssetIDTxtBox = driver.findElementByAccessibilityId("EqidTextBox");	
 	List <WebElement> Combobx = driver.findElementsByAccessibilityId("EditableCombo");
 	List <WebElement> AssetEditBox = driver.findElementsByAccessibilityId("EditableTextBox");
 	WebElement AssetModelTxtBox = driver.findElementByAccessibilityId("ModelTextBox");
@@ -26,6 +27,11 @@ public class assetCreationPage extends BaseClass{
 	WebElement AssetClearBtn = driver.findElementByName("Clear");
 	WebElement AssetBackBtn = driver.findElementByAccessibilityId("BackButton");
 	
+	
+	//Verify the presence of New Asset Creation text 
+	public boolean newAssetCreatePagetitle() {
+		return IsElementVisibleStatus(CreateAssetPageTitle);
+	}
 	
 	//Enter Asset Name
 	public void enterAssetName(String AN) {
@@ -187,7 +193,14 @@ public class assetCreationPage extends BaseClass{
 		ClearText(AssetSizeTxtBox);
 		enterText(AssetSizeTxtBox, ASize);
 		enterAssetSizeUnit(ASUnit);
-
+	}
+	
+	//Enter Asset Size
+	public void enterSize_Unit1(String ASize, String ASUnit) {
+		//System.out.println("~~~"+ASize);
+		ClearText(AssetSizeTxtBox);
+		enterText(AssetSizeTxtBox, ASize);
+		selectAssetSizeUnit(ASUnit);
 	}
 	
 	//Fetch default Asset Size  data
@@ -205,7 +218,19 @@ public class assetCreationPage extends BaseClass{
 		clickOn(AssetEditBox.get(2));
 		ClearText(AssetEditBox.get(2));
 		AssetEditBox.get(2).sendKeys(ASizeUnit);		
-	}	
+	}
+
+	//Select Asset Size Unit data from CuM/Ft/in
+	public void selectAssetSizeUnit(String ASizeUnit) {
+		clickOn(Combobx.get(2));
+		List<WebElement> CombobxItemList = driver.findElementsByClassName("ComboBoxItem");
+		for (WebElement unit : CombobxItemList) {
+			if (unit.getText().equals(ASizeUnit)) {
+				unit.click();
+			}
+		}
+	}
+	
 
 	// Fetch list of raw Asset Frequency data as is viewed
 	public String[] getAssetFreqlist() {
@@ -398,7 +423,7 @@ public class assetCreationPage extends BaseClass{
 		enterManufacturerName(AManufaturer);
 		enterLocation(ALocation);
 		enterModelName(AModel);
-		enterSize_Unit(ASize, AUnit);
+		enterSize_Unit1(ASize, AUnit);
 		selectAssetFreq(AFreq);
 		selectAssetFreqIntrvl(AFreqInt);
 		enterAstDescription(ADesc);

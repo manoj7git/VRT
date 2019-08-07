@@ -25,6 +25,7 @@ public class BaseClass {
 	public static WindowsDriver driver;
 	public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<WebDriver>();
 
+
 	// Launch App/Setup Configuration Function
 	//Initialize Windows Driver
 	public static void LaunchApp(String Url) {

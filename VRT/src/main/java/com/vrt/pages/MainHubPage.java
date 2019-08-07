@@ -1,5 +1,6 @@
 package com.vrt.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.vrt.base.BaseClass;
@@ -11,7 +12,14 @@ public class MainHubPage extends BaseClass {
 	WebElement MainUILoggedinUserName = driver.findElementByAccessibilityId("UserNameTextBlock");
 	WebElement MainUIAdminTile = driver.findElementByName("Admin");
 	WebElement MainUIAssetTile = driver.findElementByName("Assets");
+	WebElement AssetCountInfoInAsstTile = driver.findElementByAccessibilityId("TitleCountTextBlock");
+	WebElement MainUIPageTitle= driver.findElementByName("ValProbe RT System");
 	
+	
+	//Verify the Main Hub Page title name
+	public boolean mainPageTitle() {
+		return IsElementVisibleStatus(MainUIPageTitle);
+	}
 	
 	
 	//Verify the Logged in User credentials
@@ -41,6 +49,13 @@ public class MainHubPage extends BaseClass {
 		clickOn(MainUIAssetTile);
 		Thread.sleep(1000);
 		return new assetHubPage();
+	}
+	
+	//Fetch the Asset count data in the Asset Tile
+	public String AssetCountInAssetTileOfMainHubPage() throws InterruptedException {
+		String AstCnt = FetchText(AssetCountInfoInAsstTile);
+		System.out.println("AstCnt in Main Hub Page: "+AstCnt);
+		return AstCnt;
 	}
 	
 }

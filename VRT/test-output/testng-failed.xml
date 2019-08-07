@@ -6,8 +6,9 @@
       <class name="com.vrt.testcases.assetHubTest">
         <methods>
           <include name="Teardown"/>
+          <include name="ASST007"/>
           <include name="Setup"/>
-          <include name="ASST147" invocation-numbers="0"/>
+          <include name="email"/>
         </methods>
       </class> <!-- com.vrt.testcases.assetHubTest -->
     </classes>
