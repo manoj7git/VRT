@@ -21,7 +21,7 @@ import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetCreationPage;
 import com.vrt.pages.assetHubPage;
 import com.vrt.utility.TestUtilities;
-import com.vrt.utility.emailUtility;
+//import com.vrt.utility.emailUtility;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
