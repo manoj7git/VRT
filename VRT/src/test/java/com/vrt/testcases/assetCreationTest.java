@@ -124,8 +124,17 @@ public class assetCreationTest extends BaseClass{
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Name do not accept In-Valid Data parameters")
 	@Story("ASST101a")
-	public void ASST101a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg, String UserName, String Password) throws InterruptedException {
+	public void ASST101a(Object ...dataProvider) throws InterruptedException {
 		SoftAssert sa2 = new SoftAssert();
+		String Name = (String) dataProvider[0]; 
+		String ID = (String) dataProvider[1];
+		String Type = (String) dataProvider[2]; 
+		String Manufacturer = (String) dataProvider[3];
+		String Location = (String) dataProvider[4];
+		String ExpAlrtMsg = (String) dataProvider[5]; 
+		String UserName = (String) dataProvider[6]; 
+		String Password = (String) dataProvider[7];
+		
 		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);		
 		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
 		
