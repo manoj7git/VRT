@@ -25,7 +25,7 @@
 				<configuration>
 					<suiteXmlFiles>
 						<!-- <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile> -->
-						<suiteXmlFile>src/test/resources/testngAssetHubSanity.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/AssetHubSanityTest.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<argLine>
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
