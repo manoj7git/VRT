@@ -77,7 +77,7 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	@BeforeMethod
+	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -89,7 +89,7 @@ public class assetCreationTest extends BaseClass{
 
 	
 	// TearDown of the App
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void Teardown() {
 		driver.quit();
 	}
@@ -97,7 +97,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	 //ASST100
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset name text box accepts input only up to 25 characters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the asset name text box accepts input only up to 25 characters")
@@ -119,7 +119,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST101a - Verify if the asset name text box do not accept invalid data parameters except 
 	//input as upper case, lower case, numeric and special character like, hyphen, underscore, Slash -Forward and backward- and space
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Name field.
-	@Test(dataProvider="getAstNameInvalidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getAstNameInvalidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Name do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Name do not accept In-Valid Data parameters")
@@ -146,7 +146,7 @@ public class assetCreationTest extends BaseClass{
 	
 	//ASST101b - Verify if the asset name text box accept input as upper case, lower case, 
 	//numeric and special character like, hyphen, underscore, Slash -Forward and backward- and space
-	@Test(dataProvider="getAstNameValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity", 
+	@Test(dataProvider="getAstNameValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Name accepts Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Name accepts Valid Data parameters")
@@ -161,7 +161,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST102 - Verify if the equipment id text box should accepts input only up to 15 characters
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the equipment id text box should accepts input only up to 15 characterss")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the equipment id text box should accepts input only up to 15 characters")
@@ -182,7 +182,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST103a - Verify if the equipment id text field do not accept invalid data parameters except 
 	//input as upper case, lower case, numeric and special character like, hyphen, underscore, Slash -Forward and backward-, comma and Period
 	//Verify all the validation alert message observed with invalid Data parameters input to the Eqip field.
-	@Test(dataProvider="getEqpIDinValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getEqpIDinValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Equipment field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Equipment field do not accept In-Valid Data parameters")
@@ -199,7 +199,7 @@ public class assetCreationTest extends BaseClass{
 	
 	//ASST103b - Verify if the Equipment ID text box accept input as upper case, lower case, 
 	//numeric and special character like, hyphen, underscore, Slash -Forward and backward, comma and Period
-	@Test(dataProvider="getEqpIDValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity", description="Verify if the Equipment field accepts Valid Data parameters")
+	@Test(dataProvider="getEqpIDValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, description="Verify if the Equipment field accepts Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Equipment field accepts Valid Data parameters")
 	@Story("ASST103b")
@@ -213,7 +213,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST104 - Verify if the asset type combo box by default displays the option as Select
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset type combo box by default displays the option as Select")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the asset type combo box by default displays the option as Select")
@@ -228,7 +228,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST105-- Verify if the user can type in the desired asset type name
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the user can type in the desired asset type name")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the user can type in the desired asset type name")
@@ -246,7 +246,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST106 - Verify if the asset type combo box allows only 50 character input
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset type combo box allows only 50 character input")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the asset type combo box allows only 50 character input")
@@ -269,7 +269,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST107a - Verify if Asset type text box accepts upper case, lower case, numeric and 
 	//special characters like Hyphen, Period, slash (Forward and backward),Comma, Underscore and space as input
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Type field.
-	@Test(dataProvider="getAstTypeInValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getAstTypeInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Type field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Type field do not accept In-Valid Data parameters")
@@ -286,7 +286,7 @@ public class assetCreationTest extends BaseClass{
 	
 	//ASST107b - Verify if the Asset type text box accept input as upper case, lower case, 
 	//numeric and special character like, hyphen, underscore, Slash -Forward and backward, comma and Period
-	@Test(dataProvider="getAstTypeValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity", 
+	@Test(dataProvider="getAstTypeValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Type field accepts Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Type field accepts Valid Data parameters")
@@ -301,7 +301,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST108 - Verify if the Asset types are sorted in alphabetic order
-	@Test(groups = "Sanity",
+	@Test(groups = {"Sanity"},
 			description="Verify if the Asset types are sorted in alphabetic order")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset types are sorted in alphabetic order")
@@ -346,7 +346,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST109 - Verify if the values in the Asset type combo box are selectable by touching the screen
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the values in the Asset type combo box are selectable by touching the screen")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the values in the Asset type combo box are selectable by touching the screen")
@@ -363,7 +363,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST110 - Verify if the asset model field accepts input only up to 50 characters
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset model field accepts input only up to 50 characters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the asset model field accepts input only up to 50 characters")
@@ -386,7 +386,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST111a - Verify Asset Model field should accept upper case, lower case, numeric 
 	//and special characters like Hyphen, Period, Forward slash, Comma, Underscore and space as input
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Model field.
-	@Test(dataProvider="getAstMdlInValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity", 
+	@Test(dataProvider="getAstMdlInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Model field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Model field do not accept In-Valid Data parameters")
@@ -403,7 +403,7 @@ public class assetCreationTest extends BaseClass{
 	
 	//ASST111b - Verify Asset Model field should accept upper case, lower case, numeric 
 	//and special characters like Hyphen, Period, Forward slash, Comma, Underscore and space as input
-	@Test(dataProvider="getAstMdlValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getAstMdlValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Model field accept Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Model field accept Valid Data parameters")
@@ -419,7 +419,7 @@ public class assetCreationTest extends BaseClass{
 	
 	//ASST112 - Verify Asset Size field should accept upper case, lower case, numeric 
 	// and special characters such as point or comma
-	@Test(dataProvider="getAstSizeValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getAstSizeValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size field accept Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Size field accept Valid Data parameters")
@@ -436,7 +436,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST113 - Verify if the Asset Size text box accepts inputs as numeric
 	//and special characters such as point or comma.
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Size field.
-	@Test(dataProvider="getAstSizeInValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getAstSizeInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Size field do not accept In-Valid Data parameters")
@@ -452,7 +452,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST114 - Verify if by default the units drop down display as Select
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if by default the units drop down display as Select")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if by default the units drop down display as Select")
@@ -467,7 +467,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST115 - Verify if the user is able to type in the desired units
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the user is able to type in the desired units")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the user is able to type in the desired units")
@@ -483,7 +483,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST116 - Verify if the unit combo box allows only up to 50 character input
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the unit combo box allows only up to 50 character input")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the unit combo box allows only up to 50 character input")
@@ -506,7 +506,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST117a - Verify if unit text box accepts upper case, lower case, numeric and 
 	//special characters like Hyphen, Period, slash -Forward and backward- ,Comma, Underscore and space as input
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Size unit field.
-	@Test(dataProvider="getAstSizeUnitInValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getAstSizeUnitInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size Unit field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Size Unit field do not accept In-Valid Data parameters")
@@ -523,7 +523,7 @@ public class assetCreationTest extends BaseClass{
 	
 	//ASST117b - Verify if unit text box accepts upper case, lower case, numeric and 
 	//special characters like Hyphen, Period, slash -Forward and backward- ,Comma, Underscore and space as input
-	@Test(dataProvider="getAstSizeUnitValidTestData", dataProviderClass=TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider="getAstSizeUnitValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size Unit field accept Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Size Unit field accept Valid Data parameters")
@@ -539,7 +539,7 @@ public class assetCreationTest extends BaseClass{
 	
 	//ASST118 - Verify if the drop down box list outs the units used for volumes like cubic feet cu ft,
 	// cubic meter-cu m-, cubic inches-cu in- etc,in abbreviated form along with the user defined units
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the drop down box list outs the units used for volumes")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the drop down box list outs the units used for volumes")
@@ -583,7 +583,7 @@ public class assetCreationTest extends BaseClass{
 	
 		
 	//ASST119 - Verify if the Manufacturer combo box by default displays the option as Select
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the Manufacturer combo box by default displays the option as Select")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Manufacturer combo box by default displays the option as Select")
@@ -598,7 +598,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST120-- Verify if the user is able to type in the manufacturer name
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the user is able to type in the manufacturer name")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the user is able to type in the manufacturer name")
@@ -616,7 +616,7 @@ public class assetCreationTest extends BaseClass{
 		
 	
 	//ASST121 - Verify if the Manufacturer name accepts up to 100 characters
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the Manufacturer name accepts up to 100 characters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Manufacturer name accepts up to 100 characters")
@@ -640,7 +640,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST122a - Verify if Manufacturer text box accepts upper case, lower case, numeric and 
 	//special characters like Hyphen, slash -Forward and backward- Underscore and space as input
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Manufacturer field.
-	@Test(dataProvider = "getAstMakerInValidTestData", dataProviderClass = TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider = "getAstMakerInValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Manufacturer field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Manufacturer field do not accept In-Valid Data parameters")
@@ -658,7 +658,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST122b - Verify if Manufacturer text box accepts upper case, lower case, numeric and
 	// special characters like Hyphen, slash -Forward and backward- Underscore and space as input
-	@Test(dataProvider = "getAstMakerValidTestData", dataProviderClass = TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider = "getAstMakerValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Manufacturer field accept Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Manufacturer field accept Valid Data parameters")
@@ -674,7 +674,7 @@ public class assetCreationTest extends BaseClass{
 		
 		
 	// ASST123 - Verify if the Manufacturers names are sorted in alphabetic order
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the Manufacturers names are sorted in alphabetic order")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Manufacturers names are sorted in alphabetic order")
@@ -693,7 +693,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST127 - Verify if the Validation Frequency has 2 combo boxes that display default option as Select
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the Validation Frequency has 2 combo boxes that display default option as Select")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Validation Frequency has 2 combo boxes that display default option as Select")
@@ -714,7 +714,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST128 - Verify if the First combo box of Validation frequency contains numbers 
 	//from 1 to 24 sorted in ascending order
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the First combo box of Validation frequency contains "
 			+ "numbers from 1 to 24 sorted in ascending order")
 	@Severity(SeverityLevel.NORMAL)
@@ -739,7 +739,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST129 - Verify if the second combo box against the Validation 
 	//Frequency field lists weeks, months and years
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the second combo box against the Validation Frequency "
 			+ "field lists weeks, months and years")
 	@Severity(SeverityLevel.NORMAL)
@@ -762,7 +762,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST130a - Verify if Validation frequency can be selected by touching
 	//the available choices on both combo boxes
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if Validation frequency should be selectable "
 			+ "by touching the available choices")
 	@Severity(SeverityLevel.NORMAL)
@@ -783,7 +783,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST130b - Verify if Validation frequency Interval combobox can be selected by touching
 	//the available choices
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if Validation frequency Interval combobox should be selectable "
 			+ "by touching the available choices")
 	@Severity(SeverityLevel.NORMAL)
@@ -803,7 +803,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST131 - Verify if the Location combo box by default displays the option as Select
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the Location combo box by default displays the option as Select")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Location combo box by default displays the option as Select")
@@ -818,7 +818,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST132 - Verify if the user should is able to type in the Location name
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the user should is able to type in the Location name")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the user should is able to type in the Location name")
@@ -834,7 +834,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST133 - Verify if the Location name accepts a character input up to 100
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the Location name accepts a character input up to 100")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Location name accepts a character input up to 100")
@@ -860,7 +860,7 @@ public class assetCreationTest extends BaseClass{
 	// ASST134a - Verify if Location text box do not accept invalid Data parameters
 	// Verify all the validation alert message observed with invalid Data parameters
 	// input to the Asset Location field.
-	@Test(dataProvider = "getAstLocationInValidTestData", dataProviderClass = TestUtilities.class, groups = "Sanity", 
+	@Test(dataProvider = "getAstLocationInValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Location field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Location field do not accept In-Valid Data parameters")
@@ -879,7 +879,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST134b - Verify if Location text box accepts upper case, lower case, numeric and
 	// special characters like Hyphen, slash -Forward and backward- Underscore and space as input
-	@Test(dataProvider = "getAstLocationValidTestData", dataProviderClass = TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider = "getAstLocationValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Location field accept Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset Location field accept Valid Data parameters")
@@ -896,7 +896,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST135 - Verify if the description text box accepts input up to 250 characters
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the description text box accepts input up to 250 characters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the description text box accepts input up to 250 characters")
@@ -920,7 +920,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST136 - Verify if the description text box should accept upper case, lower case, numeric, 
 	//spaces and special characters
-	@Test(groups = "Sanity", 
+	@Test(groups = {"Sanity"}, 
 			description="Verify if the description text box should accept upper case, lower case, numeric, spaces and special characters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the description text box should accept upper case, lower case, numeric, spaces and special characters")
@@ -938,7 +938,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST143 - Verify the cancel button will discard the entries made at the current screen
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Sanity", 
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify the cancel button will discard the entries made at the current screen")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify the cancel button will discard the entries made at the current screen")
@@ -987,7 +987,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST144 - Verify if the back button will -prompt as discard the changes- with Yes or No option
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Sanity", 
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the back button will -prompt as discard the changes- with Yes or No option")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the back button will -prompt as discard the changes- with Yes or No option")
@@ -1015,7 +1015,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST145 - Verify if No Option is selected and verify if the application allows the user to stay in the same page
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Sanity", 
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if No Option is selected and verify if the application allows the user to stay in the same page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if No Option is selected and verify if the application allows the user to stay in the same page")
@@ -1045,7 +1045,7 @@ public class assetCreationTest extends BaseClass{
 
 	
 	// ASST146 - Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = "Sanity",
+	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")

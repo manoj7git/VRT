@@ -82,7 +82,7 @@ public class assetHubTest extends BaseClass {
 	}*/
 	
 	
-	@BeforeMethod
+	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -92,7 +92,7 @@ public class assetHubTest extends BaseClass {
 	}
 
 	// TearDown of the App
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void Teardown() {
 		driver.quit();
 	}
@@ -100,7 +100,7 @@ public class assetHubTest extends BaseClass {
 	
 	// ASST001-Verify if selecting the Assets tile from the main hub page,
 	// user is navigated to the Asset Details screen
-	@Test(groups = "Sanity, Regression", description = "Verify if selecting the Assets tile from the main "
+	@Test(groups = {"Sanity", "Regression"}, description = "Verify if selecting the Assets tile from the main "
 			+ "hub page , user is navigated to the Asset Details screen")
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("Verify if selecting the Assets tile from the main hub page,"
@@ -116,7 +116,7 @@ public class assetHubTest extends BaseClass {
 	
 	
 	// ASST002-Verify if with  fresh installation, no assets should be displayed
-	@Test(groups = "Regression", description = "Verify if with  fresh installation,"
+	@Test(groups = {"Regression"}, description = "Verify if with  fresh installation,"
 			+ " no assets should be displayed")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if with  fresh installation, no assets should be displayed")
@@ -131,7 +131,7 @@ public class assetHubTest extends BaseClass {
 	}
 	
 	//ASST004-Verify if Predefined Sort Options namely -Type, Model, Size, Manufacturer and Location are present
-	@Test(groups = "Regression", description = "ASST004-Verify if Predefined Sort Options namely -Type,"
+	@Test(groups = {"Regression"}, description = "ASST004-Verify if Predefined Sort Options namely -Type,"
 			+ "Manufacturer and Location are present")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST004-Verify if Predefined Sort Options namely -Type, Manufacturer and Location are present")
@@ -147,7 +147,7 @@ public class assetHubTest extends BaseClass {
 	
 	
 	//ASST005-Verify  if Add New and Search -magnifier Icons are present at the right top corner of the assets page
-	@Test(groups = "Regression", description = "ASST005-Verify  if Add New and Search -magnifier Icons"
+	@Test(groups = {"Regression"}, description = "ASST005-Verify  if Add New and Search -magnifier Icons"
 	 +"are present at the right top corner of the assets page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST005-Verify if Add New and Search Icons are present at the right top corner of the assets page")
@@ -163,7 +163,7 @@ public class assetHubTest extends BaseClass {
 	
 	
 	//ASST006-Verify  if clicking on New icon opens a New Asset creation page
-	@Test(groups = "Regression", description = "ASST006-Verify  if clicking on New icon opens a New Asset creation page")
+	@Test(groups = {"Regression"}, description = "ASST006-Verify  if clicking on New icon opens a New Asset creation page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST006-Verify  if clicking on New icon opens a New Asset creation page")
 	@Story("ASST006")
@@ -179,7 +179,7 @@ public class assetHubTest extends BaseClass {
 	
 	
 	//ASST007-Verify if clicking on Back Button at the left top to return to main Hub page
-	@Test(groups = "Regression", description = "ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
+	@Test(groups = {"Regression"}, description = "ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
 	@Story("ASST007")
@@ -196,7 +196,7 @@ public class assetHubTest extends BaseClass {
 	
 	/*//ASST008-Verify if the help section in the Asset hub page by clicking Help icon displays  context sensitive
 	//information related to creating, filtering and searching of assets
-	@Test(groups = "Regression, Sanity", description = "ASST008-Verify if the help section in the "
+	@Test(groups = {"Sanity", "Regression"}, description = "ASST008-Verify if the help section in the "
 			+ "Asset hub page is displayed by clicking Help icon")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST008-Verify if the help section in the Asset hub page is displayed by clicking Help icon")
@@ -213,7 +213,7 @@ public class assetHubTest extends BaseClass {
 	
 	/*// ASST147 - Verify all the changes made to the asset are displayed correctly at Asset Hub Page
 	//Enter a set of Unique Asset details info in the corresponding excel data sheet "tc147"
-	@Test(dataProvider = "tc147", dataProviderClass = TestUtilities.class, groups = "Sanity", 
+	@Test({"Sanity", "Regression"}, dataProvider = "tc147", dataProviderClass = TestUtilities.class, groups = "Sanity", 
 			description = "Verify all the changes made to the asset are displayed correctly at Asset Hub Page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify all the changes made to the asset are displayed correctly at Asset Hub Page")
@@ -252,7 +252,7 @@ public class assetHubTest extends BaseClass {
 	/*// ASST149_ASST003 - Verify if the number of assets present in the Asset Hub page
 	// is equal to the count displayed in the Asset tile of the Main Hub page	
 	// Enter a set of Unique Asset details info in the corresponding excel data sheet "tc149"
-	@Test(dataProvider = "tc149", dataProviderClass = TestUtilities.class, groups = "Sanity", description = "Verify "
+	@Test({"Sanity", "Regression"}, dataProvider = "tc149", dataProviderClass = TestUtilities.class, groups = "Sanity", description = "Verify "
 			+ "if the Asset count info is equal to the assets created in the Asset Hub page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset count info is equal to the assets created in the Asset Hub page")

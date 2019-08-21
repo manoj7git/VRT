@@ -23,7 +23,7 @@ public class HitNTrialTests extends BaseClass {
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);

@@ -27,7 +27,7 @@ public class LoginTest extends BaseClass{
 	
 	
 	
-	@BeforeMethod
+	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -35,13 +35,13 @@ public class LoginTest extends BaseClass{
 	}
 
 	// TearDown of the App
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void Teardown() {
 		driver.quit();
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify if user can log into "
+	@Test(groups = {"Regression"}, description="Verify if user can log into "
 			+ "the Kaye Application after installation with default Kaye/411 credentials")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user can log into "
@@ -60,7 +60,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 
-	@Test(groups = "Regression, Sanity",description="Verify if clicking on the "
+	@Test(groups = {"Regression", "Sanity"},description="Verify if clicking on the "
 			+ "Kaye application tab opens the Login Screen of the application")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if clicking on the "
@@ -78,7 +78,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify  the contents of the Kaye application Login Screen ")
+	@Test(groups = {"Regression"}, description="Verify  the contents of the Kaye application Login Screen ")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify  the contents of the Kaye application Login Screen")
 	@Story("LOGIN_003")
@@ -105,7 +105,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify if the input data in the "
+	@Test(groups = {"Regression"}, description="Verify if the input data in the "
 			+ "Password field is displayed as astrisk")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the input data in the " + 
@@ -123,7 +123,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression, Sanity", description="Verify if user can login into "
+	@Test(groups = {"Regression", "Sanity"}, description="Verify if user can login into "
 			+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user can login into "
@@ -171,7 +171,7 @@ public class LoginTest extends BaseClass{
 	}
 	*/
 	
-	@Test(groups = "Regression", description="Verify if user is not allowed to login with invalid credentials")
+	@Test(groups = {"Regression"}, description="Verify if user is not allowed to login with invalid credentials")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user is not allowed to login with invalid credentials")
 	@Story("LOGIN_007")
@@ -189,7 +189,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify if user is not allowed to "
+	@Test(groups = {"Regression"}, description="Verify if user is not allowed to "
 			+ "login if the UserId or Password field is left blank")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user is not allowed to "
@@ -205,7 +205,7 @@ public class LoginTest extends BaseClass{
 	}
 		
 	
-	@Test(groups = "Regression", description="Verify if the application closes on three unsuccessful login attempts")
+	@Test(groups = {"Regression"}, description="Verify if the application closes on three unsuccessful login attempts")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the application closes on three unsuccessful login attempts")
 	@Story("LOGIN_009")
@@ -228,7 +228,7 @@ public class LoginTest extends BaseClass{
 	}
 
 	
-	@Test(groups = "Regression", description="Verify if the first created admin user "
+	@Test(groups = {"Regression"}, description="Verify if the first created admin user "
 			+ "is not allowed to change his password during first login instance after user creation")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the first created admin user "
@@ -246,7 +246,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify if the Change Password tickbox "
+	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox "
 			+ "is in enabled state during consecutive logins by the first admin user")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Change Password tickbox "
@@ -266,7 +266,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify if checking the "
+	@Test(groups = {"Regression"}, description="Verify if checking the "
 			+ "Change Password tickbox allows the user to change his password")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if checking the "
@@ -286,7 +286,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify if unchecking the "
+	@Test(groups = {"Regression"}, description="Verify if unchecking the "
 			+ "Change Password tickbox restricts the user from changing his password")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if unchecking the "
@@ -314,7 +314,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = "Regression", description="Verify if user can change "
+	@Test(groups = {"Regression"}, description="Verify if user can change "
 			+ "the password by entering new password and clicking on the OK button")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if user can change "
@@ -330,7 +330,7 @@ public class LoginTest extends BaseClass{
 	}
 		
 	
-	@Test(groups = "Regression", description="Verify if clicking on the Cancel button"
+	@Test(groups = {"Regression"}, description="Verify if clicking on the Cancel button"
 			+ " in the Change password field restores the previous password")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if clicking on the Cancel button"
@@ -360,7 +360,7 @@ public class LoginTest extends BaseClass{
 	
 	
 	//A Sys Admin User created
-	@Test(groups = "Regression, Sanity", description="Verify if subsequent users created "
+	@Test(groups = {"Regression", "Sanity"}, description="Verify if subsequent users created "
 			+ "are forced to change their password during first login instance")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Verify if subsequent users created "
@@ -390,7 +390,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	//A Sys Supervisor User created	
-	@Test(groups = "Regression", description="Verify if the Change Password tickbox"
+	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox"
 			+ " is in enabled state during furthur login attempts by the subsequent users")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Change Password tickbox"
@@ -418,7 +418,7 @@ public class LoginTest extends BaseClass{
 	}
 	
 	//A Sys Operator User created	
-	@Test(groups = "Regression", description="Verify if a user"
+	@Test(groups = {"Regression"}, description="Verify if a user"
 			+ " is forced to change his password while login, if his password has been changed by the admin user")
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("Verify if a user"

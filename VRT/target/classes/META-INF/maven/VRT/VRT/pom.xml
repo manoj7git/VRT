@@ -24,7 +24,8 @@
 				<version>2.20</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+						<!-- <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile> -->
+						<suiteXmlFile>src/test/resources/testngAssetHubSanity.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<argLine>
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
@@ -156,6 +157,15 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.5</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.7.25</version>
+			<scope>test</scope>
+		</dependency>
+		
 						
 
 	</dependencies>
