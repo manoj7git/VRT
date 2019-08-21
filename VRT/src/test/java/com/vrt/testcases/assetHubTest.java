@@ -42,7 +42,7 @@ public class assetHubTest extends BaseClass {
 	assetCreationPage assetCreationPage;
 
 	
-/*	@BeforeClass
+	@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -74,7 +74,7 @@ public class assetHubTest extends BaseClass {
 				Thread.sleep(1000);
 			}
 		}		
-	}*/
+	}
 	 
 	/*@AfterClass
 	public void email() throws EmailException {
