@@ -5,6 +5,7 @@
 	<listeners>
 		<!-- <listener class-name="com.vrt.Listners.ExtentReporterNG" /> -->
 		<listener class-name="com.vrt.Listners.AllureReportListner" />
+		<listener class-name="com.vrt.Listners.RetryTransformer" />
 	</listeners>
 
 
@@ -13,8 +14,8 @@
 		<classes>
 			<!-- <class name="com.vrt.testcases.LoginTest" /> -->
 			<!-- <class name="com.vrt.testcases.assetCreationTest" /> -->
-			<!-- <class name="com.vrt.testcases.HitNTrialTests" /> -->
-			<class name="com.vrt.testcases.assetHubTest" />
+			<class name="com.vrt.testcases.HitNTrialTests" />
+			<!-- <class name="com.vrt.testcases.assetHubTest" /> -->
 		</classes>
 	</test>
 </suite>

@@ -5,9 +5,10 @@
 	<listeners>
 		<!-- <listener class-name="com.vrt.Listners.ExtentReporterNG" /> -->
 		<listener class-name="com.vrt.Listners.AllureReportListner" />
+		<listener class-name="com.vrt.Listners.RetryTransformer" />
 	</listeners>
 
-	<test name="AssetHubSanityTest">
+	<test name="AssetHubRregressionTest">
 	
 		<groups>
 			<run>

@@ -3,19 +3,15 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [VRTAPPTest]">
   <listeners>
     <listener class-name="com.vrt.Listners.AllureReportListner"/>
+    <listener class-name="com.vrt.Listners.RetryTransformer"/>
   </listeners>
   <test thread-count="5" name="VRTAssetHubPageTest(failed)">
-    <groups>
-      <run>
-        <include name="Sanity"/>
-      </run>
-    </groups>
     <classes>
-      <class name="com.vrt.testcases.assetHubTest">
+      <class name="com.vrt.testcases.HitNTrialTests">
         <methods>
-          <include name="ASST001"/>
+          <include name="retryFailTC"/>
         </methods>
-      </class> <!-- com.vrt.testcases.assetHubTest -->
+      </class> <!-- com.vrt.testcases.HitNTrialTests -->
     </classes>
   </test> <!-- VRTAssetHubPageTest(failed) -->
 </suite> <!-- Failed suite [VRTAPPTest] -->
