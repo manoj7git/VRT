@@ -1,10 +1,13 @@
 package com.vrt.testcases;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -30,7 +33,7 @@ public class HitNTrialTests extends BaseClass {
 		MainLoginPage = new LoginPage();
 		MainHubPage = MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
-		assetCreationPage=assetHubPage.ClickAddAssetBtn();
+		//assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
 
 /*	// TearDown of the App
@@ -73,9 +76,23 @@ public class HitNTrialTests extends BaseClass {
 	}
 	*/
 	
+	
+	/*@Test
+	public void retryFailTC() {
+		Assert.assertEquals(true, false);		
+	}*/
+	
 	@Test
+	public void fetchAssettypelist() {
+		assetHubPage.assetList_TypeFilter();
+		
+		//Assert.assertEquals(true, false);		
+	}
+	
+	
+/*	@Test
 	public void fetchAssetUnit() {
 		assetCreationPage.selectAssetSizeUnit("cu ft");		
-	}
+	}*/
 	
 }

@@ -2,9 +2,9 @@ package com.vrt.testcases;
 
 import java.util.Arrays;
 
-import org.apache.commons.mail.EmailException;
+/*import org.apache.commons.mail.EmailException;
 import org.apache.tools.ant.taskdefs.SendEmail;
-import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterClass;*/
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -41,7 +41,7 @@ public class assetHubTest extends BaseClass {
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
 
-	
+	/*
 	@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
@@ -75,7 +75,8 @@ public class assetHubTest extends BaseClass {
 			}
 		}		
 	}
-	 
+	*/ 
+
 	/*@AfterClass
 	public void email() throws EmailException {
 		emailUtility.sendEmail();
@@ -98,9 +99,7 @@ public class assetHubTest extends BaseClass {
 	}
 
 	
-	// ASST001-Verify if selecting the Assets tile from the main hub page,
-	// user is navigated to the Asset Details screen
-	@Test(groups = {"Sanity", "Regression"}, description = "Verify if selecting the Assets tile from the main "
+/*	@Test(groups = {"Sanity", "Regression"}, description = "ASST001-Verify if selecting the Assets tile from the main "
 			+ "hub page , user is navigated to the Asset Details screen")
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("Verify if selecting the Assets tile from the main hub page,"
@@ -112,11 +111,13 @@ public class assetHubTest extends BaseClass {
 		sa1.assertEquals(assetHubPage.assetPageTitle(), "Assets",
 				"FAIL: TC-ASST001 -Incorrect Asset Page title or landed into incorrect Page");
 		sa1.assertAll();
-	}
+	}*/
+	
+	
 	
 	
 	// ASST002-Verify if with  fresh installation, no assets should be displayed
-	@Test(groups = {"Regression"}, description = "Verify if with  fresh installation,"
+/*	@Test(groups = {"Regression"}, description = "ASST002-Verify if with  fresh installation,"
 			+ " no assets should be displayed")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if with  fresh installation, no assets should be displayed")
@@ -128,10 +129,15 @@ public class assetHubTest extends BaseClass {
 				"FAIL: TC-ASST002 -Already assets present in the system which "
 				+ "suggests its not an Fresh Installation may have been upgraded");
 		sa2.assertAll();
-	}
+	}*/
+	
+	
+	//ASST003 TC = ASST149 below
+	
+	
 	
 	//ASST004-Verify if Predefined Sort Options namely -Type, Model, Size, Manufacturer and Location are present
-	@Test(groups = {"Regression"}, description = "ASST004-Verify if Predefined Sort Options namely -Type,"
+/*	@Test(groups = {"Regression"}, description = "ASST004-Verify if Predefined Sort Options namely -Type,"
 			+ "Manufacturer and Location are present")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST004-Verify if Predefined Sort Options namely -Type, Manufacturer and Location are present")
@@ -143,11 +149,13 @@ public class assetHubTest extends BaseClass {
 		sa3.assertEquals(assetHubPage.manufacturerFilterBtn(), true, "FAIL: TC-ASST004 -Manufacturer FIlter is absent from the Assethub Page");
 		sa3.assertEquals(assetHubPage.locationFilterBtn(), true, "FAIL: TC-ASST004 -Location FIlter is absent from the Assethub Page");
 		sa3.assertAll();
-	}
+	}*/
+	
+	
 	
 	
 	//ASST005-Verify  if Add New and Search -magnifier Icons are present at the right top corner of the assets page
-	@Test(groups = {"Regression"}, description = "ASST005-Verify  if Add New and Search -magnifier Icons"
+/*	@Test(groups = {"Regression"}, description = "ASST005-Verify  if Add New and Search -magnifier Icons"
 	 +"are present at the right top corner of the assets page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST005-Verify if Add New and Search Icons are present at the right top corner of the assets page")
@@ -159,11 +167,13 @@ public class assetHubTest extends BaseClass {
 		sa4.assertEquals(assetHubPage.addAst(), true, "FAIL: TC-ASST005 -Asset Add button missing");
 		
 		sa4.assertAll();
-	}
+	}*/
+	
+	
 	
 	
 	//ASST006-Verify  if clicking on New icon opens a New Asset creation page
-	@Test(groups = {"Regression"}, description = "ASST006-Verify  if clicking on New icon opens a New Asset creation page")
+/*	@Test(groups = {"Regression"}, description = "ASST006-Verify  if clicking on New icon opens a New Asset creation page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST006-Verify  if clicking on New icon opens a New Asset creation page")
 	@Story("ASST006")
@@ -175,11 +185,13 @@ public class assetHubTest extends BaseClass {
 		sa5.assertEquals(assetCreationPage.newAssetCreatePagetitle(), true, "FAIL: TC-ASST006 -Landed "
 				+ "to Wrong page instead of New Asset creation page");				
 		sa5.assertAll();
-	}
+	}*/
+	
+	
 	
 	
 	//ASST007-Verify if clicking on Back Button at the left top to return to main Hub page
-	@Test(groups = {"Regression"}, description = "ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
+	/*@Test(groups = {"Regression"}, description = "ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
 	@Story("ASST007")
@@ -191,12 +203,11 @@ public class assetHubTest extends BaseClass {
 		sa6.assertEquals(MainHubPage.mainPageTitle(), true, "FAIL: TC-ASST007 -Landed "
 				+ "to Wrong page instead of Main Hub page");				
 		sa6.assertAll();
-	}
+	}*/
 	
+
 	
-	/*//ASST008-Verify if the help section in the Asset hub page by clicking Help icon displays  context sensitive
-	//information related to creating, filtering and searching of assets
-	@Test(groups = {"Sanity", "Regression"}, description = "ASST008-Verify if the help section in the "
+/*	@Test(groups = {"Sanity", "Regression"}, description = "ASST008-Verify if the help section in the "
 			+ "Asset hub page is displayed by clicking Help icon")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST008-Verify if the help section in the Asset hub page is displayed by clicking Help icon")
@@ -204,12 +215,50 @@ public class assetHubTest extends BaseClass {
 	public void ASST008() throws InterruptedException {
 		SoftAssert sa7 = new SoftAssert();
 		
-		MainHubPage=assetHubPage.ClickBackBtn();
+		assetHubPage.rightclickonAssetPageTitle();
+		assetHubPage.clickHelpIcon();
 
-		sa7.assertEquals(MainHubPage.mainPageTitle(), true, "FAIL: TC-ASST007 -Landed "
-				+ "to Wrong page instead of Main Hub page");				
+		sa7.assertEquals(assetHubPage.is_assetHubHelpWindow_Displayed(), true, "FAIL: TC-ASST008 -AssetHub Help"
+				+ "window did not appear or wrong Help window displayed");				
 		sa7.assertAll();
-	}*/
+	}
+	*/
+	
+	/*
+	 * Conduct the Below tests after conducting the Asset Creation Test cases
+	 */
+	
+	
+	@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
+			+ "user is able to filter all the assets correctly by Asset Type")
+	@Severity(SeverityLevel.NORMAL)
+	@Description("ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type")
+	@Story("ASST011")
+	public void ASST011() throws InterruptedException {
+		SoftAssert sa8 = new SoftAssert();
+		
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();
+
+		sa8.assertEquals(assetCreationPage.newAssetCreatePagetitle(), true, "FAIL: TC-ASST010 -Clicking on "
+				+ "Add Asset Icon, do not Redirect to the New Asset creation screen ");				
+		sa8.assertAll();
+	}
+	
+	//ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type
+		@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
+				+ "user is able to filter all the assets correctly by Asset Type")
+		@Severity(SeverityLevel.NORMAL)
+		@Description("ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type")
+		@Story("ASST011")
+		public void ASST012() throws InterruptedException {
+			SoftAssert sa8 = new SoftAssert();
+			
+			assetCreationPage = assetHubPage.ClickAddAssetBtn();
+
+			sa8.assertEquals(assetCreationPage.newAssetCreatePagetitle(), true, "FAIL: TC-ASST010 -Clicking on "
+					+ "Add Asset Icon, do not Redirect to the New Asset creation screen ");				
+			sa8.assertAll();
+		}
 	
 	/*// ASST147 - Verify all the changes made to the asset are displayed correctly at Asset Hub Page
 	//Enter a set of Unique Asset details info in the corresponding excel data sheet "tc147"
@@ -239,7 +288,7 @@ public class assetHubTest extends BaseClass {
 		System.out.println("exp asst info1:"+Arrays.toString(expectedAssetInfo));
 		
 		String[] ActualAssetinfo = assetHubPage.assetTile(Name);
-		System.out.println("Act asst info1:"+Arrays.toString(ActualAssetinfo));
+		System.out.println("Actual asst info1:"+Arrays.toString(ActualAssetinfo));
 		for (String str2 : ActualAssetinfo) {
 			System.out.println("Act asst info2: "+str2);
 		}
