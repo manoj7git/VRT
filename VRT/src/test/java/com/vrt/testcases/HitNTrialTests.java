@@ -84,9 +84,10 @@ public class HitNTrialTests extends BaseClass {
 	
 	@Test
 	public void fetchAssettypelist() {
-		assetHubPage.assetList_TypeFilter();
+		boolean state = assetHubPage.assetList_TypeFilter();
+		System.out.println(state);
 		
-		//Assert.assertEquals(true, false);		
+		Assert.assertEquals(state, true);		
 	}
 	
 	
