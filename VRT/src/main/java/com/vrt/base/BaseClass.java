@@ -1,9 +1,13 @@
 package com.vrt.base;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -183,7 +187,7 @@ public class BaseClass {
 	public static HashMap<String, String> getUNCredentials() {
 		HashMap<String, String> UserMap = new HashMap<String, String>();
 		
-		UserMap.put("adminFull", "5:Welcome5@AM");
+		UserMap.put("adminFull", "1:Welcome1@AM");
 		UserMap.put("SysAdmin", "5:Welcome5@AM");
 		UserMap.put("SysSupervisor", "5:Welcome5@AM");
 		UserMap.put("SysOperator", "5:Welcome5@AM");	
@@ -201,6 +205,25 @@ public class BaseClass {
 	public static String getPW(String role) {
 		String PW = getUNCredentials().get(role).split(":")[1];
 		return PW;
+	}
+	
+	//File renaming/creating method
+	public void renameFile(String filePath, String fileName) throws IOException {
+
+		// File path
+		String filepath = filePath;
+		File file = new File(filepath + "/" + fileName);
+		
+		//System.out.println(file.exists());
+		if (!file.exists()) {
+			//file.createNewFile();
+			System.out.println("Target File NOT present");
+		} else {
+			String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+			File backupFile = new File(filepath + "/" + timestamp + "_NgvUsers.uux");
+			file.renameTo(backupFile);
+			System.out.println("Target file renamed");
+		}				
 	}
 	
 	

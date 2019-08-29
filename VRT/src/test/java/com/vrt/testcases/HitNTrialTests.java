@@ -4,7 +4,9 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -92,27 +94,32 @@ public class HitNTrialTests extends BaseClass {
 		
 		Assert.assertEquals(state, true);		
 	}*/
-	
-	
+	/*
 	@Test (description="Check for File renaming")
-	public void fetchAssettypelist() throws IOException {
-		// get current project path
-		//String filePath = System.getProperty("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData");
+	public void renameFile() throws IOException {
+
 		// create a new file
-		File file = new File("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData\\asa.txt");
+		String filepath ="C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData";
+		
+		File file = new File(filepath + "/" + "NgvUsers.uux");
 		System.out.println(file.getName());
 		System.out.println(file.exists());
 		if (!file.exists()) {
-			file.createNewFile();
+			//file.createNewFile();
 			System.out.println("No User DB File present");
 		} else {
-			File backupFile = new File("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData\\backup_asa.txt");
+			String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+			File backupFile = new File(filepath + "/" + timestamp + "_NgvUsers.uux");
 			file.renameTo(backupFile);
-			System.out.println("File already exist and backup file is created");
-			//file.renameTo(backupFile);
-		}
-		
-		//Assert.assertEquals(state, true);		
+		}	
+				
+	}
+	*/
+	
+	@Test (description="Check for File renaming")
+	public void renameFile2() throws IOException {
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+				
 	}
 	
 	

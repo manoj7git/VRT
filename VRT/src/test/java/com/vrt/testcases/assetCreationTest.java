@@ -2,6 +2,7 @@ package com.vrt.testcases;
 
 
 
+import java.io.IOException;
 //import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -34,7 +35,7 @@ public class assetCreationTest extends BaseClass{
 	//Refer Test data folder>AssetNameTestData.xlsx sheet for test data i/p
 	
 	//Initialization of the Pages
-	LoginPage MainLoginPage;
+	LoginPage LoginPage;
 	MainHubPage MainHubPage;
 	UserManagementPage UserManagementPage;
 	assetHubPage assetHubPage;
@@ -43,37 +44,33 @@ public class assetCreationTest extends BaseClass{
 	
 	//Ensure the User has got rights to create Assets
 	@BeforeClass
-	public void AssetCreationSetup() throws InterruptedException {
+	public void AssetCreationSetup() throws InterruptedException, IOException {
+
+		// Rename the User file (NgvUsers.uxx) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
-		MainLoginPage = new LoginPage();
-		
-		try {
-			MainLoginPage.AlertLogin("5", "Welcome2@AM");
+		LoginPage = new LoginPage();
+		UserManagementPage = LoginPage.DefaultLogin();
+		LoginPage = UserManagementPage.FirstUserCreation("User1", "1", "Welcome1@AM", "Welcome1@AM", "FullAdmin",
+				"12345678", "abc@gmail.com");
+		MainHubPage = LoginPage.Login("1", "Welcome1@AM");
+		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		UserManagementPage.clickAnyUserinUserList("User1");
 
-			if ((MainLoginPage.InvalidLoginAlertmsgPresence())) {
-				System.out.println("User 5 got full Admin privilege");
-				AppClose();
-				Thread.sleep(1000);
-			}
-		} catch (Exception e) {
-			MainHubPage = new MainHubPage();
-			UserManagementPage = MainHubPage.ClickAdminTile();
-			UserManagementPage.clickAnyUserinUserList("User5");
+		UserManagementPage.clickPrivRunQual();
+		UserManagementPage.clickPrivCreateEditAsset();
+		UserManagementPage.clickPrivCreateEditSetup();
+		UserManagementPage.clickPrivRunCal();
 
-			boolean stat = UserManagementPage.PrivCreateEditAssetgstatus();
-			if (!stat) {
-				UserManagementPage.clickPrivCreateEditAsset();
-				UserManagementPage.ClickNewUserSaveButton();
-				UserLoginPopup("5", "Welcome2@AM");
-				MainHubPage = UserManagementPage.ClickBackButn();
-				MainLoginPage = MainHubPage.UserSignOut();
-				MainLoginPage.ChangeNewPWwithoutPWCheckBox("5", "Welcome2@AM", getPW("adminFull"));
+		UserManagementPage.ClickNewUserSaveButton();
+		UserLoginPopup("1", "Welcome1@AM");
+		MainHubPage = UserManagementPage.ClickBackButn();
 
-				AppClose();
-				Thread.sleep(1000);
-			}
-		}		
+		AppClose();
+		Thread.sleep(1000);
+
 	}
 	
 	
@@ -81,8 +78,8 @@ public class assetCreationTest extends BaseClass{
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
-		MainLoginPage= new LoginPage();
-		MainHubPage=MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
+		LoginPage= new LoginPage();
+		MainHubPage=LoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		assetHubPage=MainHubPage.ClickAssetTile();
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}

@@ -38,7 +38,7 @@ public class MainHubPage extends BaseClass {
 	}
 	
 	//Click the Admin Tile
-	public UserManagementPage ClickAdminTile() throws InterruptedException {
+	public UserManagementPage ClickAdminTile_UMpage() throws InterruptedException {
 		clickOn(MainUIAdminTile);
 		Thread.sleep(1000);
 		return new UserManagementPage();

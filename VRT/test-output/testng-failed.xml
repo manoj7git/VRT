@@ -3,11 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.vrt.testcases.HitNTrialTests">
+      <class name="com.vrt.testcases.assetHubTest">
         <methods>
-          <include name="fetchAssettypelist"/>
+          <include name="Teardown"/>
+          <include name="AssetCreationSetup"/>
+          <include name="ASST001"/>
+          <include name="Setup"/>
         </methods>
-      </class> <!-- com.vrt.testcases.HitNTrialTests -->
+      </class> <!-- com.vrt.testcases.assetHubTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

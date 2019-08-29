@@ -1,5 +1,6 @@
 package com.vrt.testcases;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 /*import org.apache.commons.mail.EmailException;
@@ -35,47 +36,41 @@ public class assetHubTest extends BaseClass {
 	// Refer Test data folder>AssetNameTestData.xlsx sheet for test data i/p
 
 	// Initialization of the Pages
-	LoginPage MainLoginPage;
+	LoginPage LoginPage;
 	MainHubPage MainHubPage;
 	UserManagementPage UserManagementPage;
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
 
-	/*
 	@BeforeClass
-	public void AssetCreationSetup() throws InterruptedException {
+	public void AssetCreationSetup() throws InterruptedException, IOException {
+
+		// Rename the User file (NgvUsers.uxx) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
-		MainLoginPage = new LoginPage();
-		
-		try {
-			MainLoginPage.AlertLogin("5", "Welcome2@AM");
+		LoginPage = new LoginPage();
+		UserManagementPage = LoginPage.DefaultLogin();
+		LoginPage = UserManagementPage.FirstUserCreation("User1", "1", "Welcome1@AM", "Welcome1@AM", "FullAdmin",
+				"12345678", "abc@gmail.com");
+		MainHubPage = LoginPage.Login("1", "Welcome1@AM");
+		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		UserManagementPage.clickAnyUserinUserList("User1");
 
-			if ((MainLoginPage.InvalidLoginAlertmsgPresence())) {
-				System.out.println("User 5 got full Admin privilege");
-				AppClose();
-				Thread.sleep(1000);
-			}
-		} catch (Exception e) {
-			MainHubPage = new MainHubPage();
-			UserManagementPage = MainHubPage.ClickAdminTile();
-			UserManagementPage.clickAnyUserinUserList("User5");
+		UserManagementPage.clickPrivRunQual();
+		UserManagementPage.clickPrivCreateEditAsset();
+		UserManagementPage.clickPrivCreateEditSetup();
+		UserManagementPage.clickPrivRunCal();
 
-			boolean stat = UserManagementPage.PrivCreateEditAssetgstatus();
-			if (!stat) {
-				UserManagementPage.clickPrivCreateEditAsset();
-				UserManagementPage.ClickNewUserSaveButton();
-				UserLoginPopup("5", "Welcome2@AM");
-				MainHubPage = UserManagementPage.ClickBackButn();
-				MainLoginPage = MainHubPage.UserSignOut();
-				MainLoginPage.ChangeNewPWwithoutPWCheckBox("5", "Welcome2@AM", getPW("adminFull"));
+		UserManagementPage.ClickNewUserSaveButton();
+		UserLoginPopup("1", "Welcome1@AM");
+		MainHubPage = UserManagementPage.ClickBackButn();
 
-				AppClose();
-				Thread.sleep(1000);
-			}
-		}		
-	}
-	*/ 
+		AppClose();
+		Thread.sleep(1000);
+
+	}	
 
 	/*@AfterClass
 	public void email() throws EmailException {
@@ -87,8 +82,8 @@ public class assetHubTest extends BaseClass {
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
-		MainLoginPage = new LoginPage();
-		MainHubPage = MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
+		LoginPage = new LoginPage();
+		MainHubPage = LoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();		
 	}
 
@@ -229,7 +224,7 @@ public class assetHubTest extends BaseClass {
 	 */
 	
 	
-	@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
+	/*@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
 			+ "user is able to filter all the assets correctly by Asset Type")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type")
@@ -242,10 +237,11 @@ public class assetHubTest extends BaseClass {
 		sa8.assertEquals(assetCreationPage.newAssetCreatePagetitle(), true, "FAIL: TC-ASST010 -Clicking on "
 				+ "Add Asset Icon, do not Redirect to the New Asset creation screen ");				
 		sa8.assertAll();
-	}
+	}*/
+	
 	
 	//ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type
-		@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
+		/*@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
 				+ "user is able to filter all the assets correctly by Asset Type")
 		@Severity(SeverityLevel.NORMAL)
 		@Description("ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type")
@@ -258,7 +254,7 @@ public class assetHubTest extends BaseClass {
 			sa8.assertEquals(assetCreationPage.newAssetCreatePagetitle(), true, "FAIL: TC-ASST010 -Clicking on "
 					+ "Add Asset Icon, do not Redirect to the New Asset creation screen ");				
 			sa8.assertAll();
-		}
+		}*/
 	
 	/*// ASST147 - Verify all the changes made to the asset are displayed correctly at Asset Hub Page
 	//Enter a set of Unique Asset details info in the corresponding excel data sheet "tc147"

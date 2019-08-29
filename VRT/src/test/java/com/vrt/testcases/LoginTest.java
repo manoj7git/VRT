@@ -370,7 +370,7 @@ public class LoginTest extends BaseClass{
 		SoftAssert sa16 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
-		UserManagementPage=MainHubPage.ClickAdminTile();
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
 		UserManagementPage.CreateAdminUser("5", "Welcome2@AM", "User1", "1", "Welcome2@AM", "SysAdmin", "123456789", "user1@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
@@ -400,7 +400,7 @@ public class LoginTest extends BaseClass{
 		SoftAssert sa17 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
-		UserManagementPage=MainHubPage.ClickAdminTile();
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
 		UserManagementPage.CreateSupervisorUser("5", "Welcome2@AM", "User2", "2", "Welcome1@AM", "SysSupervisor", "123456789", "user2@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
@@ -428,7 +428,7 @@ public class LoginTest extends BaseClass{
 		SoftAssert sa18 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
-		UserManagementPage=MainHubPage.ClickAdminTile();
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
 		UserManagementPage.CreateOperatorUser("5", "Welcome2@AM", "User8", "8", "Welcome1@AM", "SysOperator", "123456789", "user8@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
@@ -440,7 +440,7 @@ public class LoginTest extends BaseClass{
 		MainLoginPage=MainHubPage.UserSignOut();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
-		UserManagementPage=MainHubPage.ClickAdminTile();
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
 		UserManagementPage.clickAnyUserinUserList("User8");
 		UserManagementPage.enterNewUserPW("Welcome3@AM");

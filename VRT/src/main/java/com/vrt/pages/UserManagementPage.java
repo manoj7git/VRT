@@ -265,5 +265,38 @@ public class UserManagementPage extends BaseClass{
 		return checkboxSelectStatus(UMAssetPriv);
 	}
 	
+	//check/select Run Qual Privilege checkbox
+	public void clickPrivRunQual() throws InterruptedException {
+		clickOn(UMQualPriv);
+		Thread.sleep(1000);
+	}
+	
+	//Verify if Run Qual Privilege checked/selected or not
+	public boolean PrivRunQualstatus() {
+		return checkboxSelectStatus(UMQualPriv);
+	}
+	
+	//check/select Create/Edit Setup Privilege checkbox
+	public void clickPrivCreateEditSetup() throws InterruptedException {
+		clickOn(UMSetupPriv);
+		Thread.sleep(1000);
+	}
+	
+	//Verify if Create/Edit Setup Privilege checked/selected or not
+	public boolean PrivCreateEditSetupstatus() {
+		return checkboxSelectStatus(UMSetupPriv);
+	}
+	
+	//check/select Run Cal Privilege checkbox
+	public void clickPrivRunCal() throws InterruptedException {
+		clickOn(UMCalPriv);
+		Thread.sleep(1000);
+	}
+	
+	//Verify if Run Cal Privilege checked/selected or not
+	public boolean PrivRunCalstatus() {
+		return checkboxSelectStatus(UMCalPriv);
+	}
+	
 
 }
