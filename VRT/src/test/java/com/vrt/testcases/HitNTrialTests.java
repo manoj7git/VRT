@@ -2,6 +2,8 @@ package com.vrt.testcases;
 
 import static org.testng.Assert.assertEquals;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class HitNTrialTests extends BaseClass {
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
 
-	@BeforeMethod(alwaysRun=true)
+/*	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -35,7 +37,8 @@ public class HitNTrialTests extends BaseClass {
 		assetHubPage = MainHubPage.ClickAssetTile();
 		//assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
-
+*/
+	
 /*	// TearDown of the App
 	@AfterMethod
 	public void Teardown() {
@@ -82,12 +85,34 @@ public class HitNTrialTests extends BaseClass {
 		Assert.assertEquals(true, false);		
 	}*/
 	
-	@Test
+	/*@Test
 	public void fetchAssettypelist() {
 		boolean state = assetHubPage.assetList_TypeFilter();
 		System.out.println(state);
 		
 		Assert.assertEquals(state, true);		
+	}*/
+	
+	
+	@Test (description="Check for File renaming")
+	public void fetchAssettypelist() throws IOException {
+		// get current project path
+		//String filePath = System.getProperty("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData");
+		// create a new file
+		File file = new File("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData\\asa.txt");
+		System.out.println(file.getName());
+		System.out.println(file.exists());
+		if (!file.exists()) {
+			file.createNewFile();
+			System.out.println("No User DB File present");
+		} else {
+			File backupFile = new File("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData\\backup_asa.txt");
+			file.renameTo(backupFile);
+			System.out.println("File already exist and backup file is created");
+			//file.renameTo(backupFile);
+		}
+		
+		//Assert.assertEquals(state, true);		
 	}
 	
 	

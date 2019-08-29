@@ -99,7 +99,7 @@ public class assetHubTest extends BaseClass {
 	}
 
 	
-/*	@Test(groups = {"Sanity", "Regression"}, description = "ASST001-Verify if selecting the Assets tile from the main "
+	@Test(groups = {"Sanity", "Regression"}, description = "ASST001-Verify if selecting the Assets tile from the main "
 			+ "hub page , user is navigated to the Asset Details screen")
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("Verify if selecting the Assets tile from the main hub page,"
@@ -111,7 +111,7 @@ public class assetHubTest extends BaseClass {
 		sa1.assertEquals(assetHubPage.assetPageTitle(), "Assets",
 				"FAIL: TC-ASST001 -Incorrect Asset Page title or landed into incorrect Page");
 		sa1.assertAll();
-	}*/
+	}
 	
 	
 	

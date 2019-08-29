@@ -5,7 +5,6 @@
     <classes>
       <class name="com.vrt.testcases.HitNTrialTests">
         <methods>
-          <include name="Setup"/>
           <include name="fetchAssettypelist"/>
         </methods>
       </class> <!-- com.vrt.testcases.HitNTrialTests -->
