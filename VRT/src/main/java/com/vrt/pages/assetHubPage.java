@@ -11,16 +11,47 @@ import com.vrt.base.BaseClass;
 
 public class assetHubPage extends BaseClass{
 	
-	// Asset Hub Page Element definition
-	WebElement AssetPageTitle = driver.findElementByAccessibilityId("AssetsHeaderTextBlock");
-	List <WebElement> AssetList = driver.findElementByAccessibilityId("ItemGridView").findElements(By.className("GridViewItem"));
-	WebElement AddAssetBtn = driver.findElementByAccessibilityId("AddedAssetsButton");
-	WebElement TypeBtn = driver.findElementByAccessibilityId("TypeButton");
-	WebElement ManufacturerBtn = driver.findElementByAccessibilityId("ManufacturerButton");
-	WebElement LocationBtn = driver.findElementByAccessibilityId("LocationButton");
-	WebElement BackBtn = driver.findElementByAccessibilityId("BackButton");
-	WebElement SearchBtn = driver.findElementByAccessibilityId("SearchAssetsButton");
 	
+	WebElement AssetPageTitle = null;
+	List <WebElement> AssetList = null;
+	WebElement AddAssetBtn = null;
+	WebElement anyAsstTile = null;
+	WebElement TypeBtn = null;
+	WebElement ManufacturerBtn = null;
+	WebElement LocationBtn = null;
+	WebElement BackBtn = null;
+	WebElement SearchBtn = null;
+	
+	private void resetWebElements()
+	{
+		AssetPageTitle = null;
+		AssetList = null;
+		AddAssetBtn = null;
+		anyAsstTile = null;
+		TypeBtn = null;
+		ManufacturerBtn = null;
+		LocationBtn = null;
+		BackBtn = null;
+		SearchBtn = null;
+	}
+	
+	private void initWebElements()
+	{
+		AssetPageTitle = driver.findElementByAccessibilityId("AssetsHeaderTextBlock");
+		AssetList = driver.findElementByAccessibilityId("ItemGridView").findElements(By.className("GridViewItem"));
+		AddAssetBtn = driver.findElementByAccessibilityId("AddedAssetsButton");
+		anyAsstTile = driver.findElementByClassName("GridViewItem");
+		TypeBtn = driver.findElementByAccessibilityId("TypeButton");
+		ManufacturerBtn = driver.findElementByAccessibilityId("ManufacturerButton");
+		LocationBtn = driver.findElementByAccessibilityId("LocationButton");
+		BackBtn = driver.findElementByAccessibilityId("BackButton");
+		SearchBtn = driver.findElementByAccessibilityId("SearchAssetsButton");
+	}
+	
+	assetHubPage()
+	{
+		initWebElements();
+	}
 	
 	//Get the Asset Page title
 	public String assetPageTitle() {
@@ -33,8 +64,14 @@ public class assetHubPage extends BaseClass{
 	}
 	
 	//Verify the presence of Manufacturer Filter Button
-	public boolean manufacturerFilterBtn() {
+	public boolean manufacturerFilterBtnstate() {
 		return IsElementVisibleStatus(ManufacturerBtn);
+	}
+	
+	//Click Manufacturer Filter Button
+	public void click_manufacturerFilterBtn() throws InterruptedException {
+		clickOn(ManufacturerBtn);
+		Thread.sleep(2000);
 	}
 	
 	//Verify the presence of Location Filter Button 
@@ -59,6 +96,12 @@ public class assetHubPage extends BaseClass{
 		return new assetCreationPage();
 	}
 	
+	//Click on any Asset
+	public assetDetailsPage click_AnyAsset(WebElement e) {
+		clickOn(e);
+		return new assetDetailsPage();
+	}
+
 	//Click the Back Button
 	public MainHubPage ClickBackBtn() throws InterruptedException {
 		clickOn(BackBtn);
@@ -183,7 +226,7 @@ public class assetHubPage extends BaseClass{
 	}
 	*/
 
-	// Get the Assets list based on Type in the Asset hub page
+	//Get the Assets list based on Type filter in the Asset hub page
 	public boolean assetList_TypeFilter() {
 		boolean response = false;
 		
@@ -192,21 +235,20 @@ public class assetHubPage extends BaseClass{
 		// Asset groups list classified according to Type
 		List<WebElement> AssetType_List = driver.findElementByAccessibilityId("ItemGridView")
 				.findElements(By.className("GroupItem"));
-		System.out.println("Total Asset Types created: " + AssetType_List.size());
+		//System.out.println("Total Asset Types created: " + AssetType_List.size());
 
 		// Loop for the different Asset type groups created
 		for (int i = 0; i < AssetType_List.size(); i++) {
 			String Asset_Group_Type_Name = AssetType_List.get(i).findElement(By.className("TextBlock")).getText();
-			System.out
-					.println("Asset type data : " + AssetType_List.get(i).findElement(By.className("TextBlock")).getText());
+			//System.out.println("Asset type data : " + AssetType_List.get(i).findElement(By.className("TextBlock")).getText());
 
 			List<WebElement> Asset_List_against_Type = AssetType_List.get(i).findElements(By.className("GridViewItem"));
-			System.out.println(" Asset tile info count: " + Asset_List_against_Type.size());
+			//System.out.println(" Asset tile info count: " + Asset_List_against_Type.size());
 
 			// Fetch all the contents of the Asset tile against the corresponding Asset Type group
 			for (int j = 0; j < Asset_List_against_Type.size(); j++) {
 				String Individual_Asset_Type = Asset_List_against_Type.get(j).getText();
-				System.out.println("AssetTileInfo: " + Asset_List_against_Type.get(j).getText());
+				//System.out.println("AssetTileInfo: " + Asset_List_against_Type.get(j).getText());
 
 				if (Asset_Group_Type_Name.equals(Individual_Asset_Type)) {
 					response = true;
@@ -219,39 +261,55 @@ public class assetHubPage extends BaseClass{
 		}
 		return response;
 	}
-	
-	
-	// Get the Assets list based on Type in the Asset hub page
-	public boolean assetList_ManufacturerFilter() {
+		
+	// Get the Assets list based on Manufacturer filter in the Asset hub page
+	public boolean assetList_ManufacturerFilter() throws InterruptedException {
 		boolean response = false;
 		
-		clickOn(ManufacturerBtn);
+		click_manufacturerFilterBtn();
 
 		// Asset groups list classified according to Type
 		List<WebElement> AssetType_List = driver.findElementByAccessibilityId("ItemGridView")
 				.findElements(By.className("GroupItem"));
-		System.out.println("Total Asset Types created: " + AssetType_List.size());
-
+		System.out.println("Total Asset Types_Mfg created: " + AssetType_List.size());
+		//int sizeOfColumns = AssetType_List.size();
 		// Loop for the different Asset type(Manufacturer) groups created
-		for (int i = 0; i < AssetType_List.size(); i++) {
+		for (int i = 0; i < AssetType_List.size(); i++) {			
+			
 			String Asset_Group_Type_Name = AssetType_List.get(i).findElement(By.className("TextBlock")).getText();
 			System.out
 					.println("Asset Manufacturer data : " + AssetType_List.get(i).findElement(By.className("TextBlock")).getText());
 
-			List<WebElement> Asset_List_against_Manufacturer = AssetType_List.get(i).findElements(By.className("GridViewItem"));
+			List<WebElement> Asset_List_against_Manufacturer = AssetType_List.get(i).findElements(By.className("GridViewItem"));			
 			System.out.println(" Asset tile info count: " + Asset_List_against_Manufacturer.size());
-
+			//Thread.sleep(1000);
+			//int numberOfItemsInColumn = Asset_List_against_Manufacturer.size();
 			// Loop through each Asset under the Filter type Group
 			//Fetch all the contents of the Asset tile against the corresponding Asset Manufacturer group
 			for (int j = 0; j < Asset_List_against_Manufacturer.size(); j++) {
-				//CLick the 1st Asset under the respective Filter Group
+				//CLick the each Asset under the respective Filter Group
 				Asset_List_against_Manufacturer.get(j).click();
+				Thread.sleep(1000);
 				
-				String Individual_Asset_Type = Asset_List_against_Manufacturer.get(j).getText();
-				System.out.println("AssetTileInfo: " + Asset_List_against_Manufacturer.get(j).getText());
+				WebElement AssetDetail_Mfginfo = driver.findElementByAccessibilityId("ManufacturerTextBlock");
+				String Individual_Asset_Mfgdata = AssetDetail_Mfginfo.getText();				
+				System.out.println("AssetDetail_MfgInfo: " + Individual_Asset_Mfgdata);
 
-				if (Asset_Group_Type_Name.equals(Individual_Asset_Type)) {
-					response = true;
+				if (Asset_Group_Type_Name.equals(Individual_Asset_Mfgdata)) {
+					response = true;	
+
+					WebElement AsstDetail_BackBtn = driver.findElementByAccessibilityId("ArrowGlyph");
+					AsstDetail_BackBtn.click();
+					Thread.sleep(1000);
+					
+					resetWebElements();
+					initWebElements();
+					click_manufacturerFilterBtn();
+					
+					AssetType_List = driver.findElementByAccessibilityId("ItemGridView")
+							.findElements(By.className("GroupItem"));
+					Asset_List_against_Manufacturer = AssetType_List.get(i).findElements(By.className("GridViewItem"));
+					
 					continue;
 				} else {
 					response = false;

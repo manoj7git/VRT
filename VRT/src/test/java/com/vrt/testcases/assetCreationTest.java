@@ -179,7 +179,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST103a - Verify if the equipment id text field do not accept invalid data parameters except 
 	//input as upper case, lower case, numeric and special character like, hyphen, underscore, Slash -Forward and backward-, comma and Period
 	//Verify all the validation alert message observed with invalid Data parameters input to the Eqip field.
-	@Test(dataProvider="getEqpIDinValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
+	@Test(groups = {"Sanity"}, dataProvider="getEqpIDinValidTestData", dataProviderClass=TestUtilities.class, 
 			description="Verify if the Equipment field do not accept In-Valid Data parameters")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Equipment field do not accept In-Valid Data parameters")

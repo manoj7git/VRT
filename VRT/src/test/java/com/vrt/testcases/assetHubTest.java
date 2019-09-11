@@ -3,6 +3,7 @@ package com.vrt.testcases;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.testng.Assert;
 /*import org.apache.commons.mail.EmailException;
 import org.apache.tools.ant.taskdefs.SendEmail;
 import org.testng.annotations.AfterClass;*/
@@ -21,6 +22,8 @@ import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetCreationPage;
 import com.vrt.pages.assetHubPage;
+//import com.vrt.pages.assetDetailsPage;
+
 import com.vrt.utility.TestUtilities;
 //import com.vrt.utility.emailUtility;
 
@@ -41,20 +44,27 @@ public class assetHubTest extends BaseClass {
 	UserManagementPage UserManagementPage;
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
+	//assetDetailsPage assetDetailsPage;
 
-	@BeforeClass
+	/*@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException, IOException {
 
-		// Rename the User file (NgvUsers.uxx) if exists
+		//Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		
+		//Rename the cache Asset file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+		
+		//Rename the Asset folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		UserManagementPage = LoginPage.DefaultLogin();
-		LoginPage = UserManagementPage.FirstUserCreation("User1", "1", "Welcome1@AM", "Welcome1@AM", "FullAdmin",
+		LoginPage = UserManagementPage.FirstUserCreation("User1", getUN("adminFull"), getPW("adminFull"), getPW("adminFull"), "FullAdmin",
 				"12345678", "abc@gmail.com");
-		MainHubPage = LoginPage.Login("1", "Welcome1@AM");
+		MainHubPage = LoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 		UserManagementPage.clickAnyUserinUserList("User1");
 
@@ -64,14 +74,14 @@ public class assetHubTest extends BaseClass {
 		UserManagementPage.clickPrivRunCal();
 
 		UserManagementPage.ClickNewUserSaveButton();
-		UserLoginPopup("1", "Welcome1@AM");
+		UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
 		Thread.sleep(1000);
-
-	}	
-
+	}*/	
+	
+	
 	/*@AfterClass
 	public void email() throws EmailException {
 		emailUtility.sendEmail();
@@ -93,8 +103,8 @@ public class assetHubTest extends BaseClass {
 		driver.quit();
 	}
 
-	
-	@Test(groups = {"Sanity", "Regression"}, description = "ASST001-Verify if selecting the Assets tile from the main "
+	//ASST001
+	/*@Test(groups = {"Sanity", "Regression"}, description = "ASST001-Verify if selecting the Assets tile from the main "
 			+ "hub page , user is navigated to the Asset Details screen")
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("Verify if selecting the Assets tile from the main hub page,"
@@ -106,9 +116,7 @@ public class assetHubTest extends BaseClass {
 		sa1.assertEquals(assetHubPage.assetPageTitle(), "Assets",
 				"FAIL: TC-ASST001 -Incorrect Asset Page title or landed into incorrect Page");
 		sa1.assertAll();
-	}
-	
-	
+	}*/	
 	
 	
 	// ASST002-Verify if with  fresh installation, no assets should be displayed
@@ -130,7 +138,6 @@ public class assetHubTest extends BaseClass {
 	//ASST003 TC = ASST149 below
 	
 	
-	
 	//ASST004-Verify if Predefined Sort Options namely -Type, Model, Size, Manufacturer and Location are present
 /*	@Test(groups = {"Regression"}, description = "ASST004-Verify if Predefined Sort Options namely -Type,"
 			+ "Manufacturer and Location are present")
@@ -147,9 +154,7 @@ public class assetHubTest extends BaseClass {
 	}*/
 	
 	
-	
-	
-	//ASST005-Verify  if Add New and Search -magnifier Icons are present at the right top corner of the assets page
+	//ASST005
 /*	@Test(groups = {"Regression"}, description = "ASST005-Verify  if Add New and Search -magnifier Icons"
 	 +"are present at the right top corner of the assets page")
 	@Severity(SeverityLevel.NORMAL)
@@ -163,11 +168,9 @@ public class assetHubTest extends BaseClass {
 		
 		sa4.assertAll();
 	}*/
+		
 	
-	
-	
-	
-	//ASST006-Verify  if clicking on New icon opens a New Asset creation page
+	//ASST006
 /*	@Test(groups = {"Regression"}, description = "ASST006-Verify  if clicking on New icon opens a New Asset creation page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST006-Verify  if clicking on New icon opens a New Asset creation page")
@@ -183,9 +186,7 @@ public class assetHubTest extends BaseClass {
 	}*/
 	
 	
-	
-	
-	//ASST007-Verify if clicking on Back Button at the left top to return to main Hub page
+	//ASST007
 	/*@Test(groups = {"Regression"}, description = "ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST007-Verify if clicking on Back Button at the left top to return to main Hub page")
@@ -201,8 +202,8 @@ public class assetHubTest extends BaseClass {
 	}*/
 	
 
-	
-/*	@Test(groups = {"Sanity", "Regression"}, description = "ASST008-Verify if the help section in the "
+	//ASST008
+	/*@Test(groups = {"Sanity", "Regression"}, description = "ASST008-Verify if the help section in the "
 			+ "Asset hub page is displayed by clicking Help icon")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("ASST008-Verify if the help section in the Asset hub page is displayed by clicking Help icon")
@@ -219,46 +220,93 @@ public class assetHubTest extends BaseClass {
 	}
 	*/
 	
+	
+	//ASST009 = Manual Test
+	
+	//ASST010 = ASST006	
+	
+	//ASST011
+	/*@Test(groups = {"Sanity", "Regression"}, dataProvider = "tcasst011", dataProviderClass = TestUtilities.class,
+			description = "ASST011-Verify if click on the Type filter user is able to "
+					+ "filter all the assets correctly by Asset Type")
+	@Severity(SeverityLevel.NORMAL)
+	@Description("ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type")
+	@Story("ASST011")
+	public void ASST011(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description) 
+					throws InterruptedException {
+		SoftAssert sa8 = new SoftAssert();
+		
+		//Asset creation method
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUN("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		// Click the Back button in the Asset creation/details page & click the Save message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Check for the Asset Filter method
+		boolean state = assetHubPage.assetList_TypeFilter();
+		//System.out.println(state);
+		
+		Assert.assertEquals(state, true);	
+
+
+		sa8.assertEquals(state, true, "FAIL: TC-ASST011 -Type filter is not working in the Asset Hub page");				
+		sa8.assertAll();
+	}*/
+
+	
+	//ASST012 = Not Valid
+	
+	//ASST013 = Not Valid
+	
+	
+	//ASST014
+	@Test(groups = { "Sanity",
+			"Regression" }, dataProvider = "tcasst014", dataProviderClass = TestUtilities.class, 
+			description = "ASST014-Verify if click on the Manufacturer filter user is able to "
+					+ "filter all the assets correctly by Asset Manufacturer")
+	@Severity(SeverityLevel.NORMAL)
+	@Description("ASST014-Verify if click on the Manufacturer filter user is able to "
+			+ "filter all the assets correctly by Asset Manufacturer")
+	@Story("ASST014")
+	public void ASST014(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException, IOException {
+		SoftAssert sa9 = new SoftAssert();
+
+		// Asset creation method
+		/*assetCreationPage = assetHubPage.ClickAddAssetBtn();
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				Frequency, FrequencyInterval, Description);
+		UserLoginPopup(getUN("adminFull"), getPW("adminFull")); // Enter User Credentials to Save Asset
+		// Click the Back button in the Asset creation/details page & click the Save
+		// message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();*/
+
+		// Check for the Asset Filter method
+		boolean state = assetHubPage.assetList_ManufacturerFilter();
+		System.out.println(state);
+
+		Assert.assertEquals(state, true);
+
+		sa9.assertEquals(state, true, "FAIL: TC-ASST014 -Manufacturer filter is not working in the Asset Hub page");
+		sa9.assertAll();
+	}
+	
+	
+	
+	
 	/*
 	 * Conduct the Below tests after conducting the Asset Creation Test cases
 	 */
 	
-	
-	/*@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
-			+ "user is able to filter all the assets correctly by Asset Type")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type")
-	@Story("ASST011")
-	public void ASST011() throws InterruptedException {
-		SoftAssert sa8 = new SoftAssert();
-		
-		assetCreationPage = assetHubPage.ClickAddAssetBtn();
-
-		sa8.assertEquals(assetCreationPage.newAssetCreatePagetitle(), true, "FAIL: TC-ASST010 -Clicking on "
-				+ "Add Asset Icon, do not Redirect to the New Asset creation screen ");				
-		sa8.assertAll();
-	}*/
-	
-	
-	//ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type
-		/*@Test(groups = {"Sanity", "Regression"}, description = "ASST011-Verify if click on the Type filter "
-				+ "user is able to filter all the assets correctly by Asset Type")
-		@Severity(SeverityLevel.NORMAL)
-		@Description("ASST011-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type")
-		@Story("ASST011")
-		public void ASST012() throws InterruptedException {
-			SoftAssert sa8 = new SoftAssert();
-			
-			assetCreationPage = assetHubPage.ClickAddAssetBtn();
-
-			sa8.assertEquals(assetCreationPage.newAssetCreatePagetitle(), true, "FAIL: TC-ASST010 -Clicking on "
-					+ "Add Asset Icon, do not Redirect to the New Asset creation screen ");				
-			sa8.assertAll();
-		}*/
-	
 	/*// ASST147 - Verify all the changes made to the asset are displayed correctly at Asset Hub Page
 	//Enter a set of Unique Asset details info in the corresponding excel data sheet "tc147"
-	@Test({"Sanity", "Regression"}, dataProvider = "tc147", dataProviderClass = TestUtilities.class, groups = "Sanity", 
+	@Test(groups ={"Sanity", "Regression"}, dataProvider = "tc147", dataProviderClass = TestUtilities.class,  
 			description = "Verify all the changes made to the asset are displayed correctly at Asset Hub Page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify all the changes made to the asset are displayed correctly at Asset Hub Page")
@@ -268,13 +316,11 @@ public class assetHubTest extends BaseClass {
 			throws InterruptedException {
 		SoftAssert sa1 = new SoftAssert();
 		
+		//Asset creation method
 		assetCreationPage = assetHubPage.ClickAddAssetBtn();
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);
-
-		// Enter User Credentials to Save Asset
-		UserLoginPopup(getUN("adminFull"), getPW("adminFull"));
-
+				Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUN("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
 		// Click the Back button in the Asset creation/details page & click the Save message if
 		// displayed in order to move to Asset Hub Page
 		assetHubPage = assetCreationPage.clickBackBtn();
@@ -297,8 +343,8 @@ public class assetHubTest extends BaseClass {
 	/*// ASST149_ASST003 - Verify if the number of assets present in the Asset Hub page
 	// is equal to the count displayed in the Asset tile of the Main Hub page	
 	// Enter a set of Unique Asset details info in the corresponding excel data sheet "tc149"
-	@Test({"Sanity", "Regression"}, dataProvider = "tc149", dataProviderClass = TestUtilities.class, groups = "Sanity", description = "Verify "
-			+ "if the Asset count info is equal to the assets created in the Asset Hub page")
+	@Test(groups ={"Sanity", "Regression"}, dataProvider = "tc149", dataProviderClass = TestUtilities.class, 
+			description = "Verify if the Asset count info is equal to the assets created in the Asset Hub page")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Verify if the Asset count info is equal to the assets created in the Asset Hub page")
 	@Story("ASST149_ASST003")

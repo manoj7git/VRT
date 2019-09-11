@@ -187,6 +187,20 @@ public class TestUtilities extends BaseClass{
 		return data;
 	}
 	
+	@DataProvider(name="tcasst011")
+	public static Object[][] tcasst011() {				
+		String sheetName = "tcasst011";    
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name="tcasst014")
+	public static Object[][] tcasst014() {				
+		String sheetName = "tcasst014";    
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
 	
 	//Method to call the below method to capture screenshot when a Test Fails
 	public static void takeScreenshotAtEndOfTest() throws IOException {

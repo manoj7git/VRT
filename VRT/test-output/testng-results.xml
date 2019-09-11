@@ -2,30 +2,83 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="45621" started-at="2019-08-29T19:18:08Z" finished-at="2019-08-29T19:18:54Z">
+  <suite name="Default suite" duration-ms="46873" started-at="2019-09-11T15:10:43Z" finished-at="2019-09-11T15:11:29Z">
     <groups>
       <group name="Sanity">
-        <method signature="assetHubTest.ASST001()[pri:0, instance:com.vrt.testcases.assetHubTest@1ee4730]" name="ASST001" class="com.vrt.testcases.assetHubTest"/>
+        <method signature="assetHubTest.ASST014(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetHubTest@72c927f1]" name="ASST014" class="com.vrt.testcases.assetHubTest"/>
       </group> <!-- Sanity -->
       <group name="Regression">
-        <method signature="assetHubTest.ASST001()[pri:0, instance:com.vrt.testcases.assetHubTest@1ee4730]" name="ASST001" class="com.vrt.testcases.assetHubTest"/>
+        <method signature="assetHubTest.ASST014(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetHubTest@72c927f1]" name="ASST014" class="com.vrt.testcases.assetHubTest"/>
       </group> <!-- Regression -->
     </groups>
-    <test name="Default test" duration-ms="45621" started-at="2019-08-29T19:18:08Z" finished-at="2019-08-29T19:18:54Z">
+    <test name="Default test" duration-ms="46873" started-at="2019-09-11T15:10:43Z" finished-at="2019-09-11T15:11:29Z">
       <class name="com.vrt.testcases.assetHubTest">
-        <test-method status="PASS" signature="AssetCreationSetup()[pri:0, instance:com.vrt.testcases.assetHubTest@1ee4730]" name="AssetCreationSetup" is-config="true" duration-ms="35344" started-at="2019-08-29T19:18:08Z" finished-at="2019-08-29T19:18:43Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- AssetCreationSetup -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.assetHubTest@1ee4730]" name="Setup" is-config="true" duration-ms="9775" started-at="2019-08-29T19:18:43Z" finished-at="2019-08-29T19:18:53Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.assetHubTest@72c927f1]" name="Setup" is-config="true" duration-ms="9151" started-at="2019-09-11T15:10:44Z" finished-at="2019-09-11T15:10:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="ASST001()[pri:0, instance:com.vrt.testcases.assetHubTest@1ee4730]" name="ASST001" duration-ms="155" started-at="2019-08-29T19:18:53Z" description="ASST001-Verify if selecting the Assets tile from the main hub page , user is navigated to the Asset Details screen" finished-at="2019-08-29T19:18:54Z">
+        <test-method status="PASS" signature="ASST014(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetHubTest@72c927f1]" name="ASST014" duration-ms="36402" started-at="2019-09-11T15:10:53Z" description="ASST014-Verify if click on the Manufacturer filter user is able to filter all the assets correctly by Asset Manufacturer" data-provider="tcasst014" finished-at="2019-09-11T15:11:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Asset019]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[19]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[HeatBath]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[6-Manufacturer]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[6-location]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[Model-14]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[5]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[cu ft]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[Years]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[ASST014-]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ASST001 -->
-        <test-method status="PASS" signature="Teardown()[pri:0, instance:com.vrt.testcases.assetHubTest@1ee4730]" name="Teardown" is-config="true" duration-ms="43" started-at="2019-08-29T19:18:54Z" finished-at="2019-08-29T19:18:54Z">
+        </test-method> <!-- ASST014 -->
+        <test-method status="PASS" signature="Teardown()[pri:0, instance:com.vrt.testcases.assetHubTest@72c927f1]" name="Teardown" is-config="true" duration-ms="31" started-at="2019-09-11T15:11:29Z" finished-at="2019-09-11T15:11:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->

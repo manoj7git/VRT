@@ -30,7 +30,7 @@ public class HitNTrialTests extends BaseClass {
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
 
-/*	@BeforeMethod(alwaysRun=true)
+	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -39,7 +39,7 @@ public class HitNTrialTests extends BaseClass {
 		assetHubPage = MainHubPage.ClickAssetTile();
 		//assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
-*/
+
 	
 /*	// TearDown of the App
 	@AfterMethod
@@ -87,13 +87,18 @@ public class HitNTrialTests extends BaseClass {
 		Assert.assertEquals(true, false);		
 	}*/
 	
-	/*@Test
-	public void fetchAssettypelist() {
-		boolean state = assetHubPage.assetList_TypeFilter();
-		System.out.println(state);
+	@Test
+	public void fetchAssettypelist() throws InterruptedException {
+		boolean state1 = assetHubPage.assetList_TypeFilter();
+		System.out.println(state1);
+		/*boolean state2 = assetHubPage.assetList_ManufacturerFilter();
+		System.out.println(state2);*/
 		
-		Assert.assertEquals(state, true);		
-	}*/
+		Assert.assertEquals(state1, true);	
+		//Assert.assertEquals(state2, true);	
+	}
+	
+	
 	/*
 	@Test (description="Check for File renaming")
 	public void renameFile() throws IOException {
@@ -116,11 +121,20 @@ public class HitNTrialTests extends BaseClass {
 	}
 	*/
 	
-	@Test (description="Check for File renaming")
+/*	@Test (description="Check for File renaming")
 	public void renameFile2() throws IOException {
+		//Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		
+		//Rename the cache Asset file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+		
+		//Rename the Asset folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 				
-	}
+	}*/
 	
 	
 /*	@Test

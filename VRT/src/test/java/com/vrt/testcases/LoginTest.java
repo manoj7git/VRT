@@ -146,7 +146,7 @@ public class LoginTest extends BaseClass{
 		sa5.assertAll();
 	}
 
-	/*
+	
 	@Test(groups = "Regression", description="Verify if the Cancel button resets "
 			+ "the UserId and Password fields to Null")
 	@Severity(SeverityLevel.NORMAL)
@@ -169,7 +169,7 @@ public class LoginTest extends BaseClass{
 		
 		sa6.assertAll();
 	}
-	*/
+	
 	
 	@Test(groups = {"Regression"}, description="Verify if user is not allowed to login with invalid credentials")
 	@Severity(SeverityLevel.NORMAL)

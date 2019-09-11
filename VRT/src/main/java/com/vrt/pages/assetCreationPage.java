@@ -524,11 +524,4 @@ public class assetCreationPage extends BaseClass{
 	}
 	
 	
-	
-	
-		
-	
-
-
-
 }
