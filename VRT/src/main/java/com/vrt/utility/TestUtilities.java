@@ -15,12 +15,53 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 
 import com.vrt.base.BaseClass;
 
 public class TestUtilities extends BaseClass{
 	
+	
+	//Method to call the below method to capture screenshot when a Test Fails
+	public static void takeScreenshotAtEndOfTest() throws IOException {
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+		FileUtils.copyFile(scrFile,
+				new File("C:\\Users\\manoj.ghadei\\git\\VRT\\VRT\\Screenshots" + "_" + timestamp + ".png"));
+		// FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" +
+		// System.currentTimeMillis() + ".png"));
+	}
+	
+	
+	public static String getFailedTCScreenshot(WebDriver driver, String screenshotName) throws IOException{
+		String dateName = new SimpleDateFormat("yyyy_MM_dd_hhmmss").format(new Date());
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		// after execution, you could see a folder "FailedTestsScreenshots"
+		// under src folder
+		String destination = System.getProperty("user.dir") + "/FailedTestsScreenshots/" + screenshotName + dateName
+				+ ".png";
+		File finalDestination = new File(destination);
+		FileUtils.copyFile(source, finalDestination);
+		return destination;
+	}
+	
+	public static String getPassTCScreenshot(WebDriver driver, String screenshotName) throws IOException{
+		String dateName = new SimpleDateFormat("yyyy_MM_dd_hhmmss").format(new Date());
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		// after execution, you could see a folder "FailedTestsScreenshots"
+		// under src folder
+		String destination = System.getProperty("user.dir") + "/PassTCScreenshots/" + screenshotName + dateName
+				+ ".png";
+		File finalDestination = new File(destination);
+		FileUtils.copyFile(source, finalDestination);
+		return destination;
+	}
+	
+	
+	//Read TestData from the Excel sheet
 	public static String TestData_sheetPath = "C:\\Users\\manoj.ghadei\\git\\VRT\\VRT\\TestData\\AssetNameTestData.xlsx";	
 	static Workbook book;
 	static Sheet sheet;
@@ -202,14 +243,7 @@ public class TestUtilities extends BaseClass{
 	}
 	
 	
-	//Method to call the below method to capture screenshot when a Test Fails
-	public static void takeScreenshotAtEndOfTest() throws IOException {
-		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
-		FileUtils.copyFile(scrFile, new File("C:\\Users\\manoj.ghadei\\git\\VRT\\VRT\\Screenshots"
-				+"_"+timestamp+".png"));		
-		//FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
-	}
+
 	
 
 }

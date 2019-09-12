@@ -6,7 +6,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import com.vrt.Listners.AllureReportListner;
+//import com.vrt.Listners.AllureReportListner;
 import com.vrt.base.BaseClass;
 import com.vrt.pages.LoginPage;
 import com.vrt.pages.MainHubPage;
@@ -17,7 +17,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;*/
 
-@Listeners({AllureReportListner.class})
+//@Listeners({AllureReportListner.class})
 
 public class UserManagementTest extends BaseClass{
 	

@@ -7,17 +7,15 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import com.vrt.Listners.AllureReportListner;
-/*import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;*/
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 
 import com.vrt.base.BaseClass;
 import com.vrt.pages.LoginPage;
@@ -25,14 +23,16 @@ import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetHubPage;
 import com.vrt.pages.assetCreationPage;
-
 import com.vrt.utility.TestUtilities;
 
-//@Listeners(AllureReportListner.class)
+
 public class assetCreationTest extends BaseClass{
 	
 	//Refer TestUtilities Class for Data provider methods
-	//Refer Test data folder>AssetNameTestData.xlsx sheet for test data i/p
+	//Refer Test data folder>AssetNameTestData.xlsx sheet for test data i/p	
+	
+	public ExtentReports extent;
+	public ExtentTest extentTest;
 	
 	//Initialization of the Pages
 	LoginPage LoginPage;
@@ -43,11 +43,22 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//Ensure the User has got rights to create Assets
-	@BeforeClass
+	@BeforeTest
 	public void AssetCreationSetup() throws InterruptedException, IOException {
+		
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html",true);
+		extent.addSystemInfo("VRT Version", "1.0.0.37");
+		extent.addSystemInfo("BS Version", "0.6.13");
+		extent.addSystemInfo("Lgr Version", "1.2.6");
+		extent.addSystemInfo("User Name", "Manoj");
+		extent.addSystemInfo("TestSuiteName", "Hit&Trail");
 
 		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		//Rename the cache Asset file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
+		//Rename the Asset folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -73,6 +84,14 @@ public class assetCreationTest extends BaseClass{
 
 	}
 	
+	
+	//After All the tests are conducted
+	@AfterTest
+	public void endReport(){
+		extent.flush();
+		extent.close();
+	}
+
 	
 	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {

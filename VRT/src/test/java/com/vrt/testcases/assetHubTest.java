@@ -14,7 +14,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import com.vrt.Listners.AllureReportListner;
+//import com.vrt.Listners.AllureReportListner;
 
 import com.vrt.base.BaseClass;
 import com.vrt.pages.LoginPage;
@@ -32,7 +32,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;*/
 
-@Listeners(AllureReportListner.class)
+//@Listeners(AllureReportListner.class)
 public class assetHubTest extends BaseClass {
 
 	// Refer TestUtilities Class for Data provider methods

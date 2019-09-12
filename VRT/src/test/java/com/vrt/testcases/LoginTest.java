@@ -1,31 +1,64 @@
 package com.vrt.testcases;
 
 
+import java.io.IOException;
+
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import com.vrt.Listners.AllureReportListner;
+//import com.vrt.Listners.AllureReportListner;
 import com.vrt.base.BaseClass;
+import com.vrt.utility.TestUtilities;
 import com.vrt.pages.LoginPage;
 import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 
-/*import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
-*/
-@Listeners({AllureReportListner.class})
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+
 public class LoginTest extends BaseClass{
+	
+	public ExtentReports extent;
+	public ExtentTest extentTest;
 	
 	LoginPage MainLoginPage;
 	MainHubPage MainHubPage;
 	UserManagementPage UserManagementPage;
 	
+	//Before All the tests are conducted
+	@BeforeTest
+	private void setExtent() throws IOException {
+		
+		// Rename the User file (NgvUsers.uxx) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		//Rename the cache Asset file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
+		//Rename the Asset folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html",true);
+		extent.addSystemInfo("VRT Version", "1.0.0.37");
+		extent.addSystemInfo("BS Version", "0.6.13");
+		extent.addSystemInfo("Lgr Version", "1.2.6");
+		extent.addSystemInfo("User Name", "Manoj");
+		extent.addSystemInfo("TestSuiteName", "Hit&Trail");
+
+	}
 	
+	//After All the tests are conducted
+	@AfterTest
+	public void endReport(){
+		extent.flush();
+		extent.close();
+	}
 	
 	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
@@ -36,18 +69,34 @@ public class LoginTest extends BaseClass{
 
 	// TearDown of the App
 	@AfterMethod(alwaysRun=true)
-	public void Teardown() {
+	public void Teardown(ITestResult result) throws IOException {
+		if(result.getStatus()==ITestResult.FAILURE){
+			extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS # "+result.getName()+" #"); //to add name in extent report
+			extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS # "+result.getThrowable()+" #"); //to add error/exception in extent report
+			
+			String screenshotPath1 = TestUtilities.getFailedTCScreenshot(driver, result.getName());
+			extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath1)); //to add screenshot in extent report
+			//extentTest.log(LogStatus.FAIL, extentTest.addScreencast(screenshotPath)); //to add screencast/video in extent report
+		}
+		else if(result.getStatus()==ITestResult.SKIP){
+			extentTest.log(LogStatus.SKIP, "Test Case SKIPPED IS " + result.getName());
+		}
+		else if(result.getStatus()==ITestResult.SUCCESS){
+			extentTest.log(LogStatus.PASS, "Test Case PASSED IS # " + result.getName()+" #");
+			String screenshotPath2 = TestUtilities.getPassTCScreenshot(driver, result.getName());
+			extentTest.log(LogStatus.PASS, extentTest.addScreenCapture(screenshotPath2)); //to add screenshot in extent report
+
+		}		
+		extent.endTest(extentTest); //ending test and ends the current test and prepare to create html report
+		
 		driver.quit();
 	}
 	
 	
 	@Test(groups = {"Regression"}, description="Verify if user can log into "
 			+ "the Kaye Application after installation with default Kaye/411 credentials")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if user can log into "
-			//+ "the Kaye Application after installation with default Kaye/411 credentials")
-	//@Story("LOGIN_001")
 	public void LOGIN_001() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_001");
 		//String result = "";
 		//String exception = null;
 		SoftAssert sa1 = new SoftAssert();
@@ -62,11 +111,8 @@ public class LoginTest extends BaseClass{
 
 	@Test(groups = {"Regression", "Sanity"},description="Verify if clicking on the "
 			+ "Kaye application tab opens the Login Screen of the application")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if clicking on the "
-			//+ "Kaye application tab opens the Login Screen of the application")
-	//@Story("LOGIN_002")
-	public void LOGIN_002() throws Exception {			
+	public void LOGIN_002() throws Exception {		
+		extentTest = extent.startTest("LOGIN_002");
 		SoftAssert sa2 = new SoftAssert();
 		
 		boolean state = MainLoginPage.LaunchAppLoginScreen();
@@ -79,10 +125,8 @@ public class LoginTest extends BaseClass{
 	
 	
 	@Test(groups = {"Regression"}, description="Verify  the contents of the Kaye application Login Screen ")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify  the contents of the Kaye application Login Screen")
-	//@Story("LOGIN_003")
-	public void LOGIN_003() throws Exception {		
+	public void LOGIN_003() throws Exception {	
+		extentTest = extent.startTest("LOGIN_003");
 		SoftAssert sa3 = new SoftAssert();
 		//Validate Product Name
 		String expectedAppName = "ValProbe RT System";
@@ -107,11 +151,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if the input data in the "
 			+ "Password field is displayed as astrisk")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if the input data in the " + 
-			//"Password field is displayed as astrisk")
-	//@Story("LOGIN_004")
 	public void LOGIN_004() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_004");
 		SoftAssert sa4 = new SoftAssert();
 		
 		MainLoginPage.EnterUserPW("abc");
@@ -125,11 +166,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression", "Sanity"}, description="Verify if user can login into "
 			+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if user can login into "
-			//+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
-	//@Story("LOGIN_005")
 	public void LOGIN_005() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_005");
 		SoftAssert sa5 = new SoftAssert();
 		
 		//Login using Default Kaye/411
@@ -149,11 +187,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = "Regression", description="Verify if the Cancel button resets "
 			+ "the UserId and Password fields to Null")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if the Cancel button resets "
-			//+ "the UserId and Password fields to Null")
-	//@Story("LOGIN_006")
 	public void LOGIN_006() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_006");
 		SoftAssert sa6 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("a");
@@ -172,10 +207,8 @@ public class LoginTest extends BaseClass{
 	
 	
 	@Test(groups = {"Regression"}, description="Verify if user is not allowed to login with invalid credentials")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if user is not allowed to login with invalid credentials")
-	//@Story("LOGIN_007")
 	public void LOGIN_007() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_007");
 		SoftAssert sa7 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("a");
@@ -191,11 +224,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if user is not allowed to "
 			+ "login if the UserId or Password field is left blank")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if user is not allowed to "
-			//+ "login if the UserId or Password field is left blank")
-	//@Story("LOGIN_008")
 	public void LOGIN_008() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_008");
 		SoftAssert sa8 = new SoftAssert();
 		
 		sa8.assertEquals(MainLoginPage.LoginBtnEnablestatus(), false, "FAIL: Login button enabled"
@@ -206,10 +236,8 @@ public class LoginTest extends BaseClass{
 		
 	
 	@Test(groups = {"Regression"}, description="Verify if the application closes on three unsuccessful login attempts")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if the application closes on three unsuccessful login attempts")
-	//@Story("LOGIN_009")
 	public void LOGIN_009() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_009");
 		SoftAssert sa9 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("1");
@@ -230,11 +258,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if the first created admin user "
 			+ "is not allowed to change his password during first login instance after user creation")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if the first created admin user "
-			//+ "is not allowed to change his password during first login instance after user creation")
-	//@Story("LOGIN_010")
 	public void LOGIN_010() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_010");
 		SoftAssert sa10 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("5");
@@ -248,11 +273,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox "
 			+ "is in enabled state during consecutive logins by the first admin user")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if the Change Password tickbox "
-			//+ "is in enabled state during consecutive logins by the first admin user")
-	//@Story("LOGIN_012")
 	public void LOGIN_012() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_012");
 		SoftAssert sa11 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome1@AM");
@@ -268,11 +290,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if checking the "
 			+ "Change Password tickbox allows the user to change his password")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if checking the "
-			//+ "Change Password tickbox allows the user to change his password")
-	//@Story("LOGIN_013")
 	public void LOGIN_013() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_013");
 		SoftAssert sa12 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("5");
@@ -288,11 +307,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if unchecking the "
 			+ "Change Password tickbox restricts the user from changing his password")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if unchecking the "
-			//+ "Change Password tickbox restricts the user from changing his password")
-	//@Story("LOGIN_014")
 	public void LOGIN_014() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_014");
 		SoftAssert sa13 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("5");
@@ -316,11 +332,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if user can change "
 			+ "the password by entering new password and clicking on the OK button")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if user can change "
-			//+ "the password by entering new password and clicking on the OK button")
-	//@Story("LOGIN_015")
 	public void LOGIN_015() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_015");
 		SoftAssert sa14 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.ChangeNewPW("5", "Welcome1@AM", "Welcome2@AM");
@@ -332,11 +345,8 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if clicking on the Cancel button"
 			+ " in the Change password field restores the previous password")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if clicking on the Cancel button"
-			//+ " in the Change password field restores the previous password")
-	//@Story("LOGIN_016")
 	public void LOGIN_016() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_016");
 		SoftAssert sa15 = new SoftAssert();
 		
 		MainLoginPage.LoginEntry("5", "Welcome2@AM");
@@ -362,11 +372,8 @@ public class LoginTest extends BaseClass{
 	//A Sys Admin User created
 	@Test(groups = {"Regression", "Sanity"}, description="Verify if subsequent users created "
 			+ "are forced to change their password during first login instance")
-	//@Severity(SeverityLevel.CRITICAL)
-	//@Description("Verify if subsequent users created "
-			//+ "are forced to change their password during first login instance")
-	//@Story("LOGIN_017-18")
 	public void LOGIN_017_018() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_017_18");
 		SoftAssert sa16 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
@@ -392,11 +399,8 @@ public class LoginTest extends BaseClass{
 	//A Sys Supervisor User created	
 	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox"
 			+ " is in enabled state during furthur login attempts by the subsequent users")
-	//@Severity(SeverityLevel.NORMAL)
-	//@Description("Verify if the Change Password tickbox"
-			//+ " is in enabled state during furthur login attempts by the subsequent users")
-	//@Story("LOGIN_019")
 	public void LOGIN_019() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_019");
 		SoftAssert sa17 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
@@ -420,11 +424,8 @@ public class LoginTest extends BaseClass{
 	//A Sys Operator User created	
 	@Test(groups = {"Regression"}, description="Verify if a user"
 			+ " is forced to change his password while login, if his password has been changed by the admin user")
-	//@Severity(SeverityLevel.BLOCKER)
-	//@Description("Verify if a user"
-			//+ " is forced to change his password while login, if his password has been changed by the admin user")
-	//@Story("LOGIN_020")
 	public void LOGIN_020() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_020");
 		SoftAssert sa18 = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
