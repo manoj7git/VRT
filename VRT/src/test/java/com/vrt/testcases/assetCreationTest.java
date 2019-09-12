@@ -14,10 +14,10 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.vrt.Listners.AllureReportListner;
-import io.qameta.allure.Description;
+/*import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
+import io.qameta.allure.Story;*/
 
 import com.vrt.base.BaseClass;
 import com.vrt.pages.LoginPage;
@@ -28,7 +28,7 @@ import com.vrt.pages.assetCreationPage;
 
 import com.vrt.utility.TestUtilities;
 
-@Listeners(AllureReportListner.class)
+//@Listeners(AllureReportListner.class)
 public class assetCreationTest extends BaseClass{
 	
 	//Refer TestUtilities Class for Data provider methods
@@ -96,9 +96,9 @@ public class assetCreationTest extends BaseClass{
 	 //ASST100
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset name text box accepts input only up to 25 characters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the asset name text box accepts input only up to 25 characters")
-	@Story("ASST100")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the asset name text box accepts input only up to 25 characters")
+	//@Story("ASST100")
 	public void ASST100() throws InterruptedException {
 		SoftAssert sa1 = new SoftAssert();
 		String expectedtxt = "12345678901234567890123456";  //26 Char input
@@ -118,9 +118,9 @@ public class assetCreationTest extends BaseClass{
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Name field.
 	@Test(dataProvider="getAstNameInvalidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Name do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Name do not accept In-Valid Data parameters")
-	@Story("ASST101a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Name do not accept In-Valid Data parameters")
+	//@Story("ASST101a")
 	public void ASST101a(Object ...dataProvider) throws InterruptedException {
 		SoftAssert sa2 = new SoftAssert();
 		String Name = (String) dataProvider[0]; 
@@ -145,9 +145,9 @@ public class assetCreationTest extends BaseClass{
 	//numeric and special character like, hyphen, underscore, Slash -Forward and backward- and space
 	@Test(dataProvider="getAstNameValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Name accepts Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Name accepts Valid Data parameters")
-	@Story("ASST101b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Name accepts Valid Data parameters")
+	//@Story("ASST101b")
 	public void ASST101b(String Name, String ID, String Type, String Manufacturer, String Location, String UserName, String Password) throws InterruptedException {
 		SoftAssert sa3 = new SoftAssert();
 		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);	
@@ -160,9 +160,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST102 - Verify if the equipment id text box should accepts input only up to 15 characters
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the equipment id text box should accepts input only up to 15 characterss")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the equipment id text box should accepts input only up to 15 characters")
-	@Story("ASST102")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the equipment id text box should accepts input only up to 15 characters")
+	//@Story("ASST102")
 	public void ASST102() throws InterruptedException {
 		SoftAssert sa4 = new SoftAssert();
 		String expectedtxt = "123456789012345a";  //16 Char input
@@ -181,9 +181,9 @@ public class assetCreationTest extends BaseClass{
 	//Verify all the validation alert message observed with invalid Data parameters input to the Eqip field.
 	@Test(groups = {"Sanity"}, dataProvider="getEqpIDinValidTestData", dataProviderClass=TestUtilities.class, 
 			description="Verify if the Equipment field do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Equipment field do not accept In-Valid Data parameters")
-	@Story("ASST103a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Equipment field do not accept In-Valid Data parameters")
+	//@Story("ASST103a")
 	public void ASST103a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg, String UserName, String Password) throws InterruptedException {
 		SoftAssert sa4 = new SoftAssert();
 		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);		
@@ -197,9 +197,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST103b - Verify if the Equipment ID text box accept input as upper case, lower case, 
 	//numeric and special character like, hyphen, underscore, Slash -Forward and backward, comma and Period
 	@Test(dataProvider="getEqpIDValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, description="Verify if the Equipment field accepts Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Equipment field accepts Valid Data parameters")
-	@Story("ASST103b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Equipment field accepts Valid Data parameters")
+	//@Story("ASST103b")
 	public void ASST103b(String Name, String ID, String Type, String Manufacturer, String Location, String UserName, String Password) throws InterruptedException {
 		SoftAssert sa5 = new SoftAssert();
 		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);	
@@ -212,9 +212,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST104 - Verify if the asset type combo box by default displays the option as Select
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset type combo box by default displays the option as Select")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the asset type combo box by default displays the option as Select")
-	@Story("ASST104")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the asset type combo box by default displays the option as Select")
+	//@Story("ASST104")
 	public void ASST104() {
 		SoftAssert sa6 = new SoftAssert();
 		
@@ -227,9 +227,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST105-- Verify if the user can type in the desired asset type name
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the user can type in the desired asset type name")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the user can type in the desired asset type name")
-	@Story("ASST105")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the user can type in the desired asset type name")
+	//@Story("ASST105")
 	public void ASST105() {
 		SoftAssert sa7 = new SoftAssert();
 		assetCreationPage.enterAssetType("Oven");
@@ -245,9 +245,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST106 - Verify if the asset type combo box allows only 50 character input
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset type combo box allows only 50 character input")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the asset type combo box allows only 50 character input")
-	@Story("ASST106")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the asset type combo box allows only 50 character input")
+	//@Story("ASST106")
 	public void ASST106() {
 		SoftAssert sa8 = new SoftAssert();
 		
@@ -268,9 +268,9 @@ public class assetCreationTest extends BaseClass{
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Type field.
 	@Test(dataProvider="getAstTypeInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Type field do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Type field do not accept In-Valid Data parameters")
-	@Story("ASST107a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Type field do not accept In-Valid Data parameters")
+	//@Story("ASST107a")
 	public void ASST107a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg, String UserName, String Password) throws InterruptedException {
 		SoftAssert sa9 = new SoftAssert();
 		assetCreationPage.assetCreationWithType(Name, ID, Type, Manufacturer, Location);		
@@ -285,9 +285,9 @@ public class assetCreationTest extends BaseClass{
 	//numeric and special character like, hyphen, underscore, Slash -Forward and backward, comma and Period
 	@Test(dataProvider="getAstTypeValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Type field accepts Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Type field accepts Valid Data parameters")
-	@Story("ASST107b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Type field accepts Valid Data parameters")
+	//@Story("ASST107b")
 	public void ASST107b(String Name, String ID, String Type, String Manufacturer, String Location, String UserName, String Password) throws InterruptedException {
 		SoftAssert sa10 = new SoftAssert();
 		assetCreationPage.assetCreationWithType(Name, ID, Type, Manufacturer, Location);	
@@ -300,9 +300,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST108 - Verify if the Asset types are sorted in alphabetic order
 	@Test(groups = {"Sanity"},
 			description="Verify if the Asset types are sorted in alphabetic order")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset types are sorted in alphabetic order")
-	@Story("ASST108")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset types are sorted in alphabetic order")
+	//@Story("ASST108")
 	public void ASST108() throws InterruptedException {
 		SoftAssert sa11 = new SoftAssert();
 		
@@ -345,9 +345,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST109 - Verify if the values in the Asset type combo box are selectable by touching the screen
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the values in the Asset type combo box are selectable by touching the screen")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the values in the Asset type combo box are selectable by touching the screen")
-	@Story("ASST109")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the values in the Asset type combo box are selectable by touching the screen")
+	//@Story("ASST109")
 	public void ASST109() {
 		SoftAssert sa12 = new SoftAssert();
 		
@@ -362,9 +362,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST110 - Verify if the asset model field accepts input only up to 50 characters
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the asset model field accepts input only up to 50 characters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the asset model field accepts input only up to 50 characters")
-	@Story("ASST110")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the asset model field accepts input only up to 50 characters")
+	//@Story("ASST110")
 	public void ASST110() {
 		SoftAssert sa13 = new SoftAssert();
 		
@@ -385,9 +385,9 @@ public class assetCreationTest extends BaseClass{
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Model field.
 	@Test(dataProvider="getAstMdlInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Model field do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Model field do not accept In-Valid Data parameters")
-	@Story("ASST111a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Model field do not accept In-Valid Data parameters")
+	//@Story("ASST111a")
 	public void ASST111a(String Name, String ID, String Type, String Manufacturer, String Location, String Model, String ExpAlrtMsg) throws InterruptedException {
 		SoftAssert sa14 = new SoftAssert();
 		assetCreationPage.assetCreationWithModel(Name, ID, Type, Manufacturer, Location, Model);		
@@ -402,9 +402,9 @@ public class assetCreationTest extends BaseClass{
 	//and special characters like Hyphen, Period, Forward slash, Comma, Underscore and space as input
 	@Test(dataProvider="getAstMdlValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Model field accept Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Model field accept Valid Data parameters")
-	@Story("ASST111b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Model field accept Valid Data parameters")
+	//@Story("ASST111b")
 	public void ASST111b(String Name, String ID, String Type, String Manufacturer, String Location, String Model) throws InterruptedException {
 		SoftAssert sa15 = new SoftAssert();
 		assetCreationPage.assetCreationWithModel(Name, ID, Type, Manufacturer, Location, Model);		
@@ -418,9 +418,9 @@ public class assetCreationTest extends BaseClass{
 	// and special characters such as point or comma
 	@Test(dataProvider="getAstSizeValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size field accept Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Size field accept Valid Data parameters")
-	@Story("ASST112")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Size field accept Valid Data parameters")
+	//@Story("ASST112")
 	public void ASST112(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit) throws InterruptedException {
 		SoftAssert sa17 = new SoftAssert();
 		assetCreationPage.assetCreationWithSize(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
@@ -435,9 +435,9 @@ public class assetCreationTest extends BaseClass{
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Size field.
 	@Test(dataProvider="getAstSizeInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size field do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Size field do not accept In-Valid Data parameters")
-	@Story("ASST113")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Size field do not accept In-Valid Data parameters")
+	//@Story("ASST113")
 	public void ASST113(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
 		SoftAssert sa16 = new SoftAssert();
 		assetCreationPage.assetCreationWithSize(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
@@ -451,9 +451,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST114 - Verify if by default the units drop down display as Select
 	@Test(groups = {"Sanity"}, 
 			description="Verify if by default the units drop down display as Select")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if by default the units drop down display as Select")
-	@Story("ASST114")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if by default the units drop down display as Select")
+	//@Story("ASST114")
 	public void ASST114() {
 		SoftAssert sa18 = new SoftAssert();		
 		
@@ -466,9 +466,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST115 - Verify if the user is able to type in the desired units
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the user is able to type in the desired units")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the user is able to type in the desired units")
-	@Story("ASST115")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the user is able to type in the desired units")
+	//@Story("ASST115")
 	public void ASST115() {
 		SoftAssert sa19 = new SoftAssert();		
 		
@@ -482,9 +482,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST116 - Verify if the unit combo box allows only up to 50 character input
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the unit combo box allows only up to 50 character input")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the unit combo box allows only up to 50 character input")
-	@Story("ASST116")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the unit combo box allows only up to 50 character input")
+	//@Story("ASST116")
 	public void ASST116() {
 		SoftAssert sa19 = new SoftAssert();	
 		
@@ -505,9 +505,9 @@ public class assetCreationTest extends BaseClass{
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Size unit field.
 	@Test(dataProvider="getAstSizeUnitInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size Unit field do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Size Unit field do not accept In-Valid Data parameters")
-	@Story("ASST117a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Size Unit field do not accept In-Valid Data parameters")
+	//@Story("ASST117a")
 	public void ASST117a(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
 		SoftAssert sa20 = new SoftAssert();
 		assetCreationPage.assetCreationWithSizeUnit(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
@@ -522,9 +522,9 @@ public class assetCreationTest extends BaseClass{
 	//special characters like Hyphen, Period, slash -Forward and backward- ,Comma, Underscore and space as input
 	@Test(dataProvider="getAstSizeUnitValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Size Unit field accept Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Size Unit field accept Valid Data parameters")
-	@Story("ASST117b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Size Unit field accept Valid Data parameters")
+	//@Story("ASST117b")
 	public void ASST117b(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit) throws InterruptedException {
 		SoftAssert sa21 = new SoftAssert();
 		assetCreationPage.assetCreationWithSizeUnit(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
@@ -538,9 +538,9 @@ public class assetCreationTest extends BaseClass{
 	// cubic meter-cu m-, cubic inches-cu in- etc,in abbreviated form along with the user defined units
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the drop down box list outs the units used for volumes")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the drop down box list outs the units used for volumes")
-	@Story("ASST118")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the drop down box list outs the units used for volumes")
+	//@Story("ASST118")
 	public void ASST118() throws InterruptedException {
 		SoftAssert sa22 = new SoftAssert();
 		
@@ -582,9 +582,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST119 - Verify if the Manufacturer combo box by default displays the option as Select
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the Manufacturer combo box by default displays the option as Select")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Manufacturer combo box by default displays the option as Select")
-	@Story("ASST119")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Manufacturer combo box by default displays the option as Select")
+	//@Story("ASST119")
 	public void ASST119() {
 		SoftAssert sa23 = new SoftAssert();
 		
@@ -597,9 +597,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST120-- Verify if the user is able to type in the manufacturer name
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the user is able to type in the manufacturer name")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the user is able to type in the manufacturer name")
-	@Story("ASST120")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the user is able to type in the manufacturer name")
+	//@Story("ASST120")
 	public void ASST120() {
 		SoftAssert sa24 = new SoftAssert();
 		assetCreationPage.enterManufacturerName("Hybd");
@@ -615,9 +615,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST121 - Verify if the Manufacturer name accepts up to 100 characters
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the Manufacturer name accepts up to 100 characters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Manufacturer name accepts up to 100 characters")
-	@Story("ASST121")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Manufacturer name accepts up to 100 characters")
+	//@Story("ASST121")
 	public void ASST121() {
 		SoftAssert sa25 = new SoftAssert();
 		
@@ -639,9 +639,9 @@ public class assetCreationTest extends BaseClass{
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Manufacturer field.
 	@Test(dataProvider = "getAstMakerInValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Manufacturer field do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Manufacturer field do not accept In-Valid Data parameters")
-	@Story("ASST122a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Manufacturer field do not accept In-Valid Data parameters")
+	//@Story("ASST122a")
 	public void ASST122a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
 			throws InterruptedException {
 		SoftAssert sa26 = new SoftAssert();
@@ -657,9 +657,9 @@ public class assetCreationTest extends BaseClass{
 	// special characters like Hyphen, slash -Forward and backward- Underscore and space as input
 	@Test(dataProvider = "getAstMakerValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Manufacturer field accept Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Manufacturer field accept Valid Data parameters")
-	@Story("ASST122b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Manufacturer field accept Valid Data parameters")
+	//@Story("ASST122b")
 	public void ASST122b(String Name, String ID, String Type, String Manufacturer, String Location)throws InterruptedException {
 		SoftAssert sa27 = new SoftAssert();
 
@@ -673,9 +673,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST123 - Verify if the Manufacturers names are sorted in alphabetic order
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the Manufacturers names are sorted in alphabetic order")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Manufacturers names are sorted in alphabetic order")
-	@Story("ASST123")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Manufacturers names are sorted in alphabetic order")
+	//@Story("ASST123")
 	public void ASST123() throws InterruptedException {
 		SoftAssert sa28 = new SoftAssert();
 
@@ -692,9 +692,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST127 - Verify if the Validation Frequency has 2 combo boxes that display default option as Select
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the Validation Frequency has 2 combo boxes that display default option as Select")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Validation Frequency has 2 combo boxes that display default option as Select")
-	@Story("ASST127")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Validation Frequency has 2 combo boxes that display default option as Select")
+	//@Story("ASST127")
 	public void ASST127() throws InterruptedException {
 		SoftAssert sa29 = new SoftAssert();
 		
@@ -714,10 +714,10 @@ public class assetCreationTest extends BaseClass{
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the First combo box of Validation frequency contains "
 			+ "numbers from 1 to 24 sorted in ascending order")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the First combo box of Validation frequency contains "
-			+ "numbers from 1 to 24 sorted in ascending order")
-	@Story("ASST128")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the First combo box of Validation frequency contains "
+			//+ "numbers from 1 to 24 sorted in ascending order")
+	//@Story("ASST128")
 	public void ASST128() throws InterruptedException {
 		SoftAssert sa30 = new SoftAssert();
 		
@@ -739,10 +739,10 @@ public class assetCreationTest extends BaseClass{
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the second combo box against the Validation Frequency "
 			+ "field lists weeks, months and years")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the second combo box against the Validation Frequency "
-			+ "field lists weeks, months and years")
-	@Story("ASST129")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the second combo box against the Validation Frequency "
+			//+ "field lists weeks, months and years")
+	//@Story("ASST129")
 	public void ASST129() throws InterruptedException {
 		SoftAssert sa31 = new SoftAssert();
 		
@@ -762,10 +762,10 @@ public class assetCreationTest extends BaseClass{
 	@Test(groups = {"Sanity"}, 
 			description="Verify if Validation frequency should be selectable "
 			+ "by touching the available choices")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if Validation frequency should be selectable "
-			+ "by touching the available choices")
-	@Story("ASST130a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if Validation frequency should be selectable "
+			//+ "by touching the available choices")
+	//@Story("ASST130a")
 	public void ASST130a() throws InterruptedException {
 		SoftAssert sa32 = new SoftAssert();
 		
@@ -783,10 +783,10 @@ public class assetCreationTest extends BaseClass{
 	@Test(groups = {"Sanity"}, 
 			description="Verify if Validation frequency Interval combobox should be selectable "
 			+ "by touching the available choices")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if Validation frequency Interval combobox should be selectable "
-			+ "by touching the available choices")
-	@Story("ASST130b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if Validation frequency Interval combobox should be selectable "
+			//+ "by touching the available choices")
+	//@Story("ASST130b")
 	public void ASST130b() throws InterruptedException {
 		SoftAssert sa33 = new SoftAssert();
 		
@@ -802,9 +802,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST131 - Verify if the Location combo box by default displays the option as Select
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the Location combo box by default displays the option as Select")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Location combo box by default displays the option as Select")
-	@Story("ASST131")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Location combo box by default displays the option as Select")
+	//@Story("ASST131")
 	public void ASST131() {
 		SoftAssert sa34 = new SoftAssert();
 		
@@ -817,9 +817,9 @@ public class assetCreationTest extends BaseClass{
 	//ASST132 - Verify if the user should is able to type in the Location name
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the user should is able to type in the Location name")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the user should is able to type in the Location name")
-	@Story("ASST132")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the user should is able to type in the Location name")
+	//@Story("ASST132")
 	public void ASST132() {
 		SoftAssert sa35 = new SoftAssert();
 		
@@ -833,9 +833,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST133 - Verify if the Location name accepts a character input up to 100
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the Location name accepts a character input up to 100")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Location name accepts a character input up to 100")
-	@Story("ASST133")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Location name accepts a character input up to 100")
+	//@Story("ASST133")
 	public void ASST133() {
 		SoftAssert sa36 = new SoftAssert();
 
@@ -859,9 +859,9 @@ public class assetCreationTest extends BaseClass{
 	// input to the Asset Location field.
 	@Test(dataProvider = "getAstLocationInValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Location field do not accept In-Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Location field do not accept In-Valid Data parameters")
-	@Story("ASST134a")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Location field do not accept In-Valid Data parameters")
+	//@Story("ASST134a")
 	public void ASST134a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
 			throws InterruptedException {
 		SoftAssert sa37 = new SoftAssert();
@@ -878,9 +878,9 @@ public class assetCreationTest extends BaseClass{
 	// special characters like Hyphen, slash -Forward and backward- Underscore and space as input
 	@Test(dataProvider = "getAstLocationValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if the Asset Location field accept Valid Data parameters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Asset Location field accept Valid Data parameters")
-	@Story("ASST134b")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Asset Location field accept Valid Data parameters")
+	//@Story("ASST134b")
 	public void ASST134b(String Name, String ID, String Type, String Manufacturer, String Location)
 			throws InterruptedException {
 		SoftAssert sa38 = new SoftAssert();
@@ -895,9 +895,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST135 - Verify if the description text box accepts input up to 250 characters
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the description text box accepts input up to 250 characters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the description text box accepts input up to 250 characters")
-	@Story("ASST135")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the description text box accepts input up to 250 characters")
+	//@Story("ASST135")
 	public void ASST135() {
 		SoftAssert sa39 = new SoftAssert();
 
@@ -919,9 +919,9 @@ public class assetCreationTest extends BaseClass{
 	//spaces and special characters
 	@Test(groups = {"Sanity"}, 
 			description="Verify if the description text box should accept upper case, lower case, numeric, spaces and special characters")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the description text box should accept upper case, lower case, numeric, spaces and special characters")
-	@Story("ASST136")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the description text box should accept upper case, lower case, numeric, spaces and special characters")
+	//@Story("ASST136")
 	public void ASST136() throws InterruptedException {
 		SoftAssert sa40 = new SoftAssert();
 		
@@ -937,9 +937,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST143 - Verify the cancel button will discard the entries made at the current screen
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify the cancel button will discard the entries made at the current screen")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify the cancel button will discard the entries made at the current screen")
-	@Story("ASST143")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify the cancel button will discard the entries made at the current screen")
+	//@Story("ASST143")
 	public void ASST143(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description) throws InterruptedException {
 		SoftAssert sa41 = new SoftAssert();		
@@ -986,9 +986,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST144 - Verify if the back button will -prompt as discard the changes- with Yes or No option
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if the back button will -prompt as discard the changes- with Yes or No option")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the back button will -prompt as discard the changes- with Yes or No option")
-	@Story("ASST144")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the back button will -prompt as discard the changes- with Yes or No option")
+	//@Story("ASST144")
 	public void ASST144(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {
@@ -1014,9 +1014,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST145 - Verify if No Option is selected and verify if the application allows the user to stay in the same page
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
 			description="Verify if No Option is selected and verify if the application allows the user to stay in the same page")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if No Option is selected and verify if the application allows the user to stay in the same page")
-	@Story("ASST145")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if No Option is selected and verify if the application allows the user to stay in the same page")
+	//@Story("ASST145")
 	public void ASST145(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {
@@ -1044,9 +1044,9 @@ public class assetCreationTest extends BaseClass{
 	// ASST146 - Verify if option Yes is selected, app discard the changes made and goes back to the Asset Page
 	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
 			description="Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
-	@Story("ASST146")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
+	//@Story("ASST146")
 	public void ASST146(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {

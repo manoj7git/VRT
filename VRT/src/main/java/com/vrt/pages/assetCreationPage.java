@@ -114,6 +114,8 @@ public class assetCreationPage extends BaseClass{
 	
 	//Enter Manufacturer Name
 	public void enterManufacturerName(String AMN) {
+		clickOn(AssetEditBox.get(3));
+		clickOn(AssetEditBox.get(3));
 		ClearText(AssetEditBox.get(3));
 		enterText(AssetEditBox.get(3), AMN);
 		//AssetEditBox.get(3).sendKeys(AMN);
@@ -166,6 +168,8 @@ public class assetCreationPage extends BaseClass{
 	
 	//Enter Location 
 	public void enterLocation(String AL) {
+		clickOn(AssetEditBox.get(1));
+		clickOn(AssetEditBox.get(1));
 		ClearText(AssetEditBox.get(1));
 		enterText(AssetEditBox.get(1), AL);
 		//AssetEditBox.get(1).sendKeys(AL);
@@ -198,6 +202,8 @@ public class assetCreationPage extends BaseClass{
 	//Enter Asset Size
 	public void enterSize_Unit1(String ASize, String ASUnit) {
 		//System.out.println("~~~"+ASize);
+		clickOn(AssetSizeTxtBox);
+		clickOn(AssetSizeTxtBox);
 		ClearText(AssetSizeTxtBox);
 		enterText(AssetSizeTxtBox, ASize);
 		selectAssetSizeUnit(ASUnit);
@@ -415,12 +421,12 @@ public class assetCreationPage extends BaseClass{
 	
 	//Asset Creation with all Data entry
 	public void assetCreationWithAllFieldEntry(String AName, String AID, String AType, 
-			String AManufaturer, String ALocation, String AModel, String ASize, String AUnit, 
+			String AManufacturer, String ALocation, String AModel, String ASize, String AUnit, 
 			String AFreq, String AFreqInt, String ADesc) throws InterruptedException {
 		enterAssetName(AName);
 		enterAssetID(AID);
 		SelectAssetType(AType);
-		enterManufacturerName(AManufaturer);
+		enterManufacturerName(AManufacturer);
 		enterLocation(ALocation);
 		enterModelName(AModel);
 		enterSize_Unit1(ASize, AUnit);
@@ -428,7 +434,7 @@ public class assetCreationPage extends BaseClass{
 		selectAssetFreqIntrvl(AFreqInt);
 		enterAstDescription(ADesc);
 		
-		clickSaveBtn();		
+		clickSaveBtn(); 
 	}
 	
 	//Asset Creation with Type

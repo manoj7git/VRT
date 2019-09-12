@@ -5,7 +5,7 @@ package com.vrt.pages;
 import org.openqa.selenium.WebElement;
 import com.vrt.base.BaseClass;
 
-import io.qameta.allure.Step;
+//import io.qameta.allure.Step;
 
 public class LoginPage extends BaseClass {
 
@@ -22,64 +22,64 @@ public class LoginPage extends BaseClass {
 	Methods of Main Login Page
 	------------------------*/
 	
-	@Step("Launch of Main App with Login page...")
+	//Launch of Main App with Login page...")
 	public boolean LaunchAppLoginScreen() 
 	{		
 		return IsElementEnabledStatus(MainLoginUID);		 
 	}
 	
-	@Step("Check the contents of the Main Login screen")
+	//Check the contents of the Main Login screen")
 	public String AppName() 
 	{
 		return FetchText(ProductName);
 	}
 	
-	@Step("Verify the User ID field presence...")
+	//Verify the User ID field presence...")
 	public boolean UserIDFieldPresence() 
 	{
 		return IsElementEnabledStatus(MainLoginUID);
 	}
 	
-	@Step("Enter User ID: {0}")
+	//Enter User ID: {0}")
 	public void EnterUserID(String UID) 
 	{
 		ClearText(MainLoginUID);
 		enterText(MainLoginUID, UID);
 	}
 	
-	@Step("Get the User ID field data...")
+	//Get the User ID field data...")
 	public String GetTextUserIDField() 
 	{
 		return FetchText(MainLoginUID);
 	}
 	
-	@Step("Verify the User PW field presence...")
+	//Verify the User PW field presence...")
 	public boolean UserPWFieldPresence() 
 	{
 		return IsElementEnabledStatus(MainLoginPW);
 	}
 	
-	@Step("Enter User PW: {0}")
+	//Enter User PW: {0}")
 	public void EnterUserPW(String PW) 
 	{
 		ClearText(MainLoginPW);
 		enterText(MainLoginPW, PW);
 	}
 	
-	@Step("Get the User PW field data...")
+	//Get the User PW field data...")
 	public String GetTextUserPWField() 
 	{
 		return FetchText(MainLoginPW);
 	}
 	
-	@Step("Verify the change User PW field active or not...")
+	//Verify the change User PW field active or not...")
 	public boolean ChangePWCheckBoxEnableStatus() 
 	{
 		WebElement MainLoginChgPWChckBx = driver.findElementByName("Change Password");
 		return IsElementEnabledStatus(MainLoginChgPWChckBx);
 	}
 	
-	@Step("Click Change PW Checkbox...")
+	//Click Change PW Checkbox...")
 	public void ClickChangePWCheckbox() throws InterruptedException 
 	{
 		WebElement MainLoginChgPWChckBx = driver.findElementByName("Change Password");
@@ -87,54 +87,54 @@ public class LoginPage extends BaseClass {
 		Thread.sleep(1000);
 	}
 	
-	@Step("Verify the LoginBtnEnablestatus...")
+	//Verify the LoginBtnEnablestatus...")
 	public boolean LoginBtnEnablestatus() 
 	{
 		return IsElementEnabledStatus(MainLoginBtn);
 	}	
 	
-	@Step("Verify the LoginBtnPresence...")
+	//Verify the LoginBtnPresence...")
 	public boolean LoginBtnPresence() 
 	{
 		return MainLoginBtn.isDisplayed();
 	}
 	
-	@Step("Click Login Btn...")
+	//Click Login Btn...")
 	public void ClickLoginBtn() throws InterruptedException 
 	{
 		clickOn(MainLoginBtn);
 		Thread.sleep(1000);
 	}
 	
-	@Step("Verify the InvalidLoginAlertmsgPresence...")
+	//Verify the InvalidLoginAlertmsgPresence...")
 	public boolean InvalidLoginAlertmsgPresence() 
 	{
 		WebElement InvalidLoginMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return IsElementVisibleStatus(InvalidLoginMsg);
 	}
 	
-	@Step("Verify the NewPWFieldPresence...")
+	//Verify the NewPWFieldPresence...")
 	public boolean NewPWFieldPresence() 
 	{
 		WebElement MainLoginNewPWfield = driver.findElementByAccessibilityId("NewPasswordTextBox");
 		return IsElementVisibleStatus(MainLoginNewPWfield);
 	}
 	
-	@Step("Enter User New PW: {0}")
+	//Enter User New PW: {0}")
 	public void enterNewPW(String NewPW) 
 	{
 		WebElement MainLoginNewPWfield = driver.findElementByAccessibilityId("NewPasswordTextBox");
 		enterText(MainLoginNewPWfield, NewPW);
 	}
 	
-	@Step("Enter User Confirm New PW: {0}")
+	//Enter User Confirm New PW: {0}")
 	public void enterConfNewPW(String NewCPW) 
 	{
 		WebElement MainLoginConfNewPW = driver.findElementByAccessibilityId("ConfirmPasswordTextBox");
 		enterText(MainLoginConfNewPW, NewCPW);
 	}
 	
-	@Step("Click New PW Save Btn...")
+	//Click New PW Save Btn...")
 	public MainHubPage ClickNewPWSaveBtn() throws InterruptedException 
 	{
 		WebElement MainLoginNewPWSaveBtn = driver.findElementByName("OK");
@@ -144,19 +144,19 @@ public class LoginPage extends BaseClass {
 		return new MainHubPage();
 	}
 	
-	@Step("Verify the CancelBtnPresence...")
+	//Verify the CancelBtnPresence...")
 	public boolean CancelBtnPresence() 
 	{
 		return IsElementEnabledStatus(MainLoginCnclBtn);
 	}
 	
-	@Step("Click Cancel Btn...")
+	//Click Cancel Btn...")
 	public void ClickCancelBtn() 
 	{
 		clickOn(MainLoginCnclBtn);
 	}
 	
-	@Step("ChangeNewPW Operation...")
+	//ChangeNewPW Operation...")
 	public MainHubPage ChangeNewPW(String UID, String PW, String NPW) throws InterruptedException 
 	{
 		EnterUserID(UID);
@@ -172,7 +172,7 @@ public class LoginPage extends BaseClass {
 		return new MainHubPage();
 	}
 	
-	@Step("ChangeNewPWwithoutPWCheckBox Operation...")
+	//ChangeNewPWwithoutPWCheckBox Operation...")
 	public MainHubPage ChangeNewPWwithoutPWCheckBox(String UID, String PW, String NPW) throws InterruptedException 
 	{
 		EnterUserID(UID);
@@ -188,7 +188,7 @@ public class LoginPage extends BaseClass {
 		return new MainHubPage();
 	}
 	
-	@Step("Login method for User OTHER THAN Kaye/411...")
+	//Login method for User OTHER THAN Kaye/411...")
 	public MainHubPage Login(String UID, String PW) throws InterruptedException 
 	{		
 		EnterUserID(UID);
@@ -199,7 +199,7 @@ public class LoginPage extends BaseClass {
 		return new MainHubPage();
 	}
 	
-	@Step("Login method for User OTHER THAN Kaye/411... to verify authentication failures")
+	//Login method for User OTHER THAN Kaye/411... to verify authentication failures")
 	public void AlertLogin(String UID, String PW) throws InterruptedException 
 	{		
 		EnterUserID(UID);
@@ -209,7 +209,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	
-	@Step("Login method using Kaye/411")
+	//Login method using Kaye/411")
 	public UserManagementPage DefaultLogin() throws InterruptedException 
 	{	
 		MainLoginUID.sendKeys("Kaye");
@@ -220,14 +220,14 @@ public class LoginPage extends BaseClass {
 		return new UserManagementPage();
 	}
 	
-	@Step("Login method for User OTHER THAN Kaye/411...")
+	//Login method for User OTHER THAN Kaye/411...")
 	public void LoginEntry(String UID, String PW) throws InterruptedException 
 	{		
 		EnterUserID(UID);
 		EnterUserPW(PW);			
 	}
 	
-	@Step("EnterNewPWtext peration...")
+	//EnterNewPWtext operation...")
 	public MainHubPage EnterNewPWtext(String NPW) throws InterruptedException 
 	{		
 		enterNewPW(NPW);

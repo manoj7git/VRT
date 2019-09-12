@@ -1,6 +1,6 @@
 package com.vrt.Listners;
 
-import io.qameta.allure.Attachment;
+//import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,19 +19,19 @@ public class AllureReportListner implements ITestListener {
 	}
 
 	// Text attachments for Allure
-	@Attachment(value = "Page screenshot", type = "image/png")
+	//@Attachment(value = "Page screenshot", type = "image/png")
 	public byte[] saveScreenshotPNG(WebDriver driver) {
 		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 	}
 
 	// Text attachments for Allure
-	@Attachment(value = "{0}", type = "text/plain")
+	//@Attachment(value = "{0}", type = "text/plain")
 	public static String saveTextLog(String message) {
 		return message;
 	}
 
 	// HTML attachments for Allure
-	@Attachment(value = "{0}", type = "text/html")
+	//@Attachment(value = "{0}", type = "text/html")
 	public static String attachHtml(String html) {
 		return html;
 	}

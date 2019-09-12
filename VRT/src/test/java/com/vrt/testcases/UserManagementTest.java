@@ -12,10 +12,10 @@ import com.vrt.pages.LoginPage;
 import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 
-import io.qameta.allure.Description;
+/*import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
+import io.qameta.allure.Story;*/
 
 @Listeners({AllureReportListner.class})
 
@@ -41,11 +41,11 @@ public class UserManagementTest extends BaseClass{
 	
 	@Test(groups = {"Sanity", "Regression"}, description = "ADMN120-Verify able to navigate to User Management screen from Admin screen"
 			+ "hub page , user is navigated to the User Management screen screen")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if selecting the User Management screen from Admin screen,"
-			+ " user is navigated to the User Management screen")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if selecting the User Management screen from Admin screen,"
+			//+ " user is navigated to the User Management screen")
 	
-	@Story("ADMN120")
+	//@Story("ADMN120")
 	public void ADMN120() throws InterruptedException {
 		SoftAssert sa1 = new SoftAssert();
 

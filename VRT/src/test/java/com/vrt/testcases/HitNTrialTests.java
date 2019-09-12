@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -22,6 +23,7 @@ import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetCreationPage;
 import com.vrt.pages.assetHubPage;
+import com.vrt.utility.TestUtilities;
 
 public class HitNTrialTests extends BaseClass {
 	LoginPage MainLoginPage;
@@ -30,8 +32,16 @@ public class HitNTrialTests extends BaseClass {
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
 
+	@BeforeClass
+	private void testsetup() throws IOException {
+		//Rename the cache Asset file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+		
+		//Rename the Asset folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+	}
 	@BeforeMethod(alwaysRun=true)
-	public void Setup() throws InterruptedException {
+	public void Setup() throws InterruptedException {		
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		MainLoginPage = new LoginPage();
@@ -41,11 +51,11 @@ public class HitNTrialTests extends BaseClass {
 	}
 
 	
-/*	// TearDown of the App
+	// TearDown of the App
 	@AfterMethod
 	public void Teardown() {
 		driver.quit();
-	}*/
+	}
 
 	/*
 	 * @Test public void PrivTest() throws InterruptedException {
@@ -87,18 +97,32 @@ public class HitNTrialTests extends BaseClass {
 		Assert.assertEquals(true, false);		
 	}*/
 	
-	@Test
+	/*@Test
 	public void fetchAssettypelist() throws InterruptedException {
-		boolean state1 = assetHubPage.assetList_TypeFilter();
+		boolean state1 = assetHubPage.assetList_LocationFilter();
 		System.out.println(state1);
-		/*boolean state2 = assetHubPage.assetList_ManufacturerFilter();
-		System.out.println(state2);*/
+		boolean state2 = assetHubPage.assetList_ManufacturerFilter();
+		System.out.println(state2);
 		
 		Assert.assertEquals(state1, true);	
 		//Assert.assertEquals(state2, true);	
+	}*/
+		
+	@Test (dataProvider = "tcasst014", dataProviderClass = TestUtilities.class,
+			description="check the behaviour issue of the Asset creation")
+	public void fetchAssettypelist(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description) throws InterruptedException {
+		//Asset creation method
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUN("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		// Click the Back button in the Asset creation/details page & click the Save message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();	
 	}
 	
-	
+
 	/*
 	@Test (description="Check for File renaming")
 	public void renameFile() throws IOException {

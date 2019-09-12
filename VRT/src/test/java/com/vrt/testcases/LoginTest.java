@@ -13,11 +13,11 @@ import com.vrt.pages.LoginPage;
 import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 
-import io.qameta.allure.Description;
+/*import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-
+*/
 @Listeners({AllureReportListner.class})
 public class LoginTest extends BaseClass{
 	
@@ -43,10 +43,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if user can log into "
 			+ "the Kaye Application after installation with default Kaye/411 credentials")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if user can log into "
-			+ "the Kaye Application after installation with default Kaye/411 credentials")
-	@Story("LOGIN_001")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if user can log into "
+			//+ "the Kaye Application after installation with default Kaye/411 credentials")
+	//@Story("LOGIN_001")
 	public void LOGIN_001() throws InterruptedException {
 		//String result = "";
 		//String exception = null;
@@ -62,10 +62,10 @@ public class LoginTest extends BaseClass{
 
 	@Test(groups = {"Regression", "Sanity"},description="Verify if clicking on the "
 			+ "Kaye application tab opens the Login Screen of the application")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if clicking on the "
-			+ "Kaye application tab opens the Login Screen of the application")
-	@Story("LOGIN_002")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if clicking on the "
+			//+ "Kaye application tab opens the Login Screen of the application")
+	//@Story("LOGIN_002")
 	public void LOGIN_002() throws Exception {			
 		SoftAssert sa2 = new SoftAssert();
 		
@@ -79,9 +79,9 @@ public class LoginTest extends BaseClass{
 	
 	
 	@Test(groups = {"Regression"}, description="Verify  the contents of the Kaye application Login Screen ")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify  the contents of the Kaye application Login Screen")
-	@Story("LOGIN_003")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify  the contents of the Kaye application Login Screen")
+	//@Story("LOGIN_003")
 	public void LOGIN_003() throws Exception {		
 		SoftAssert sa3 = new SoftAssert();
 		//Validate Product Name
@@ -107,10 +107,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if the input data in the "
 			+ "Password field is displayed as astrisk")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the input data in the " + 
-			"Password field is displayed as astrisk")
-	@Story("LOGIN_004")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the input data in the " + 
+			//"Password field is displayed as astrisk")
+	//@Story("LOGIN_004")
 	public void LOGIN_004() throws InterruptedException {
 		SoftAssert sa4 = new SoftAssert();
 		
@@ -125,10 +125,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression", "Sanity"}, description="Verify if user can login into "
 			+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if user can login into "
-			+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
-	@Story("LOGIN_005")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if user can login into "
+			//+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
+	//@Story("LOGIN_005")
 	public void LOGIN_005() throws InterruptedException {
 		SoftAssert sa5 = new SoftAssert();
 		
@@ -149,10 +149,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = "Regression", description="Verify if the Cancel button resets "
 			+ "the UserId and Password fields to Null")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Cancel button resets "
-			+ "the UserId and Password fields to Null")
-	@Story("LOGIN_006")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Cancel button resets "
+			//+ "the UserId and Password fields to Null")
+	//@Story("LOGIN_006")
 	public void LOGIN_006() throws InterruptedException {
 		SoftAssert sa6 = new SoftAssert();
 		
@@ -172,9 +172,9 @@ public class LoginTest extends BaseClass{
 	
 	
 	@Test(groups = {"Regression"}, description="Verify if user is not allowed to login with invalid credentials")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if user is not allowed to login with invalid credentials")
-	@Story("LOGIN_007")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if user is not allowed to login with invalid credentials")
+	//@Story("LOGIN_007")
 	public void LOGIN_007() throws InterruptedException {
 		SoftAssert sa7 = new SoftAssert();
 		
@@ -191,10 +191,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if user is not allowed to "
 			+ "login if the UserId or Password field is left blank")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if user is not allowed to "
-			+ "login if the UserId or Password field is left blank")
-	@Story("LOGIN_008")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if user is not allowed to "
+			//+ "login if the UserId or Password field is left blank")
+	//@Story("LOGIN_008")
 	public void LOGIN_008() throws InterruptedException {
 		SoftAssert sa8 = new SoftAssert();
 		
@@ -206,9 +206,9 @@ public class LoginTest extends BaseClass{
 		
 	
 	@Test(groups = {"Regression"}, description="Verify if the application closes on three unsuccessful login attempts")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the application closes on three unsuccessful login attempts")
-	@Story("LOGIN_009")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the application closes on three unsuccessful login attempts")
+	//@Story("LOGIN_009")
 	public void LOGIN_009() throws InterruptedException {
 		SoftAssert sa9 = new SoftAssert();
 		
@@ -230,10 +230,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if the first created admin user "
 			+ "is not allowed to change his password during first login instance after user creation")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the first created admin user "
-			+ "is not allowed to change his password during first login instance after user creation")
-	@Story("LOGIN_010")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the first created admin user "
+			//+ "is not allowed to change his password during first login instance after user creation")
+	//@Story("LOGIN_010")
 	public void LOGIN_010() throws InterruptedException {
 		SoftAssert sa10 = new SoftAssert();
 		
@@ -248,10 +248,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox "
 			+ "is in enabled state during consecutive logins by the first admin user")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Change Password tickbox "
-			+ "is in enabled state during consecutive logins by the first admin user")
-	@Story("LOGIN_012")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Change Password tickbox "
+			//+ "is in enabled state during consecutive logins by the first admin user")
+	//@Story("LOGIN_012")
 	public void LOGIN_012() throws InterruptedException {
 		SoftAssert sa11 = new SoftAssert();
 		
@@ -268,10 +268,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if checking the "
 			+ "Change Password tickbox allows the user to change his password")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if checking the "
-			+ "Change Password tickbox allows the user to change his password")
-	@Story("LOGIN_013")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if checking the "
+			//+ "Change Password tickbox allows the user to change his password")
+	//@Story("LOGIN_013")
 	public void LOGIN_013() throws InterruptedException {
 		SoftAssert sa12 = new SoftAssert();
 		
@@ -288,10 +288,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if unchecking the "
 			+ "Change Password tickbox restricts the user from changing his password")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if unchecking the "
-			+ "Change Password tickbox restricts the user from changing his password")
-	@Story("LOGIN_014")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if unchecking the "
+			//+ "Change Password tickbox restricts the user from changing his password")
+	//@Story("LOGIN_014")
 	public void LOGIN_014() throws InterruptedException {
 		SoftAssert sa13 = new SoftAssert();
 		
@@ -316,10 +316,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if user can change "
 			+ "the password by entering new password and clicking on the OK button")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if user can change "
-			+ "the password by entering new password and clicking on the OK button")
-	@Story("LOGIN_015")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if user can change "
+			//+ "the password by entering new password and clicking on the OK button")
+	//@Story("LOGIN_015")
 	public void LOGIN_015() throws InterruptedException {
 		SoftAssert sa14 = new SoftAssert();
 		
@@ -332,10 +332,10 @@ public class LoginTest extends BaseClass{
 	
 	@Test(groups = {"Regression"}, description="Verify if clicking on the Cancel button"
 			+ " in the Change password field restores the previous password")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if clicking on the Cancel button"
-			+ " in the Change password field restores the previous password")
-	@Story("LOGIN_016")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if clicking on the Cancel button"
+			//+ " in the Change password field restores the previous password")
+	//@Story("LOGIN_016")
 	public void LOGIN_016() throws InterruptedException {
 		SoftAssert sa15 = new SoftAssert();
 		
@@ -362,10 +362,10 @@ public class LoginTest extends BaseClass{
 	//A Sys Admin User created
 	@Test(groups = {"Regression", "Sanity"}, description="Verify if subsequent users created "
 			+ "are forced to change their password during first login instance")
-	@Severity(SeverityLevel.CRITICAL)
-	@Description("Verify if subsequent users created "
-			+ "are forced to change their password during first login instance")
-	@Story("LOGIN_017-18")
+	//@Severity(SeverityLevel.CRITICAL)
+	//@Description("Verify if subsequent users created "
+			//+ "are forced to change their password during first login instance")
+	//@Story("LOGIN_017-18")
 	public void LOGIN_017_018() throws InterruptedException {
 		SoftAssert sa16 = new SoftAssert();
 		
@@ -392,10 +392,10 @@ public class LoginTest extends BaseClass{
 	//A Sys Supervisor User created	
 	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox"
 			+ " is in enabled state during furthur login attempts by the subsequent users")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Verify if the Change Password tickbox"
-			+ " is in enabled state during furthur login attempts by the subsequent users")
-	@Story("LOGIN_019")
+	//@Severity(SeverityLevel.NORMAL)
+	//@Description("Verify if the Change Password tickbox"
+			//+ " is in enabled state during furthur login attempts by the subsequent users")
+	//@Story("LOGIN_019")
 	public void LOGIN_019() throws InterruptedException {
 		SoftAssert sa17 = new SoftAssert();
 		
@@ -420,10 +420,10 @@ public class LoginTest extends BaseClass{
 	//A Sys Operator User created	
 	@Test(groups = {"Regression"}, description="Verify if a user"
 			+ " is forced to change his password while login, if his password has been changed by the admin user")
-	@Severity(SeverityLevel.BLOCKER)
-	@Description("Verify if a user"
-			+ " is forced to change his password while login, if his password has been changed by the admin user")
-	@Story("LOGIN_020")
+	//@Severity(SeverityLevel.BLOCKER)
+	//@Description("Verify if a user"
+			//+ " is forced to change his password while login, if his password has been changed by the admin user")
+	//@Story("LOGIN_020")
 	public void LOGIN_020() throws InterruptedException {
 		SoftAssert sa18 = new SoftAssert();
 		
