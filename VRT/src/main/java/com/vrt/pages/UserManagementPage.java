@@ -1,3 +1,8 @@
+/**
+ * @author ruchika.behura
+ *
+ */
+
 package com.vrt.pages;
 
 import java.util.List;
@@ -23,7 +28,7 @@ public class UserManagementPage extends BaseClass{
 	WebElement PhoneUMField = driver.findElementByAccessibilityId("PhoneTextBox");
 	WebElement EmailUMField = driver.findElementByAccessibilityId("EmailTextBox");
 	WebElement DeleteUMBtn = driver.findElementByName("Delete");
-	
+		
 	WebElement UMAssetPriv = driver.findElementByAccessibilityId("AssetsPrivlegesCheckBox");
 	WebElement UMSetupPriv = driver.findElementByAccessibilityId("SetupCreationCheckBox");
 	WebElement UMQualPriv = driver.findElementByAccessibilityId("QualificationExecutionCheckBox");
@@ -41,17 +46,74 @@ public class UserManagementPage extends BaseClass{
 		return IsElementEnabledStatus(UMHeaderText);
 	}	
 	
+	public boolean IsNewUserBtnPresence() 
+	{
+		return IsElementEnabledStatus(NewUserUMBtn);
+	}
+	
 	//Click NewUser button
 	public void ClickNewUser() {
 		clickOn(NewUserUMBtn);
 	}
+	
 	
 	//Enter User Name text
 	public void enterNewUserName(String NewUN) {
 		ClearText(UNUMField);
 		enterText(UNUMField, NewUN);
 	}
-	
+	//Verify the User Name field presence...")
+		public boolean UserNameFieldPresence() 
+		{
+			return IsElementEnabledStatus(UNUMField);
+		}
+		
+//Verify the UserID Field presence...")
+				public boolean UserIDFieldPresence() 
+				{
+					return IsElementEnabledStatus(UserIDUMField);
+				}
+				
+//Verify the Password Field presence...")
+			public boolean PassworFieldPresence() 
+			{
+			return IsElementEnabledStatus(PWUMField);
+			}
+			
+//Verify the ConPassword Field presence...")
+			public boolean ConPassworFieldPresence() 
+			{
+			return IsElementEnabledStatus(ConPWUMField);
+			}
+//Verify the Title Field presence...")
+			public boolean TitleFieldPresence() 
+			{
+			return IsElementEnabledStatus(TitleUMField);
+			}
+			
+//Verify the UserType Field presence...")
+			public boolean UserTypeField_EnableState() 
+			{
+			return IsElementEnabledStatus(UserTypeUMDropDown);
+			}
+			
+//Verify the Phone Field presence...")
+			public boolean PhoneFieldPresence() 
+			{
+			return IsElementEnabledStatus(PhoneUMField);
+			}	
+//Verify the Email Field presence...")
+			public boolean EmailFieldPresence() 
+			{
+			return IsElementEnabledStatus(EmailUMField);
+			}
+			
+//Verify the Email Field presence...")
+			public boolean PrivillagecheckboxPresence() 
+			{
+			return IsElementEnabledStatus(UMAssetPriv);
+			}		
+			
 	//Fetch User Name text
 	public String GetUserNametext() {
 		return FetchText(UNUMField);
@@ -61,9 +123,15 @@ public class UserManagementPage extends BaseClass{
 	public void enterNewUserID(String NewUID) {
 		ClearText(UserIDUMField);
 		enterText(UserIDUMField, NewUID);
-	}
+	}	
+		
 	
-	//Enter PW text
+//Fetch User Name text
+      public String GetUserIDtext() {
+	  return FetchText(UserIDUMField);
+}
+	
+//Enter PW text
 	public void enterNewUserPW(String NewPW) {
 		ClearText(PWUMField);
 		enterText(PWUMField, NewPW);
@@ -76,9 +144,10 @@ public class UserManagementPage extends BaseClass{
 	}
 	
 	//Enter Title text
-	public void enterNewUserTitle(String Title) {
+	public void enterNewUserTitle(String Title) throws InterruptedException {
 		ClearText(TitleUMField);
 		enterText(TitleUMField, Title);
+		Thread.sleep(1000);
 	}
 	
 	//Enter Title text
@@ -86,7 +155,31 @@ public class UserManagementPage extends BaseClass{
 		clickOn(TitleUMField);
 	}
 	
-	//Click the UserType Dropdown List
+	//Select UserType
+	
+	public void select_UserType(String Utype) throws InterruptedException 
+	{
+		System.out.println(Utype);
+		clickOn(UserTypeUMDropDown);
+		Thread.sleep(1000);
+		WebElement UMAdministrator1 = driver.findElementByName("System Administrator");
+		
+		/*
+		 * WebElement UMSupervisor = driver.findElementByName("Supervisor"); WebElement
+		 * UMOperator = driver.findElementByName("Operator");
+		 */
+		WebElement UMSelect1 = driver.findElementByName("Select");
+		
+		if (Utype.equals(UMSelect1.getText())) {
+			clickOn(UMSelect1);
+			Thread.sleep(500);
+		} else if (Utype.equals(UMAdministrator1.getText()))
+			//SelectAdministrator();
+			clickOn(UMAdministrator1);
+		//Thread.sleep(500);
+	}
+	
+	//Click the UserType Drop down List
 	public void ClickUserTypeDropDown() throws InterruptedException 
 	{
 		clickOn(UserTypeUMDropDown);
@@ -296,7 +389,29 @@ public class UserManagementPage extends BaseClass{
 	//Verify if Run Cal Privilege checked/selected or not
 	public boolean PrivRunCalstatus() {
 		return checkboxSelectStatus(UMCalPriv);
+	}	
+
+	
+	//User Management Creation with Mandatory fields
+		public void UMCreation_MandatoryFields(String UName, String UID,String Pwd,String Cpwd, String Titl, String Utype) throws InterruptedException {
+			enterNewUserName(UName);
+			enterNewUserID(UID);
+			enterNewUserPW(Pwd);
+			enterNewUserConfPW(Cpwd);
+			enterNewUserTitle(Titl);
+			select_UserType(Utype);			
+			ClickNewUserSaveButton();		
+		}
+	
+	//Fetch the Save Alert message
+	public String AlertMsg() {
+		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return FetchText(Msg);
 	}
 	
-
+	//Login Popup presence 
+		public boolean UserLoginPopupVisible() throws InterruptedException {
+			WebElement LgInPopup = driver.findElementByName("Enter User Credentials");
+			return IsElementVisibleStatus(LgInPopup);
+		}
 }

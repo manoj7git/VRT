@@ -1,10 +1,18 @@
+/**
+ * @author manoj.ghadei
+ *
+ */
+
 package com.vrt.utility;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
 
@@ -21,6 +29,23 @@ import org.testng.annotations.DataProvider;
 import com.vrt.base.BaseClass;
 
 public class TestUtilities extends BaseClass{
+	
+	public String convert_StringDate_to_ActualDate_inCertainFormat(String dateString) throws ParseException {	   
+	    
+	    SimpleDateFormat formating = new SimpleDateFormat("dd MMM yyyy"); 
+	    String dateinString = dateString;
+	    //System.out.println(dateString);
+	    Date date = formating.parse(dateinString);
+	    
+	    //System.out.println(date);
+	    //System.out.println(formating.format(date));
+	    
+	    SimpleDateFormat formatter = new SimpleDateFormat("MM-d-yyyy"); 	    
+	    String strDate = formatter.format(date);
+	    //System.out.println("Date Format with MM-d-yyyy : "+strDate);
+	    return strDate;    
+	    
+	}
 	
 	
 	//Method to call the below method to capture screenshot when a Test Fails
@@ -62,7 +87,8 @@ public class TestUtilities extends BaseClass{
 	
 	
 	//Read TestData from the Excel sheet
-	public static String TestData_sheetPath = "C:\\Users\\manoj.ghadei\\git\\VRT\\VRT\\TestData\\AssetNameTestData.xlsx";	
+	//public static String TestData_sheetPath = "D:\\Stored-Code\\TestAutomation\\Development\\Root\\Source\\VRT\\TestData\\AssetNameTestData.xlsx";	
+	public static String TestData_sheetPath = "D:\\Stored-Code\\TestAutomation\\Development\\Root\\Source\\VRT\\TestData\\UserManagementTestData.xlsx";
 	static Workbook book;
 	static Sheet sheet;
 
@@ -242,8 +268,24 @@ public class TestUtilities extends BaseClass{
 		return data;
 	}
 	
-	
+	@DataProvider(name="tcADMN124")
+	public static Object[][] tcADMN124() {				
+		String sheetName = "tcADMN124";    
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}	
 
+	@DataProvider(name="tcADMN125")
+	public static Object[][] tcADMN125() {				
+		String sheetName = "tcADMN125";    
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}	
 	
-
+	@DataProvider(name="tcADMN125a")
+	public static Object[][] tcADMN125a() {				
+		String sheetName = "tcADMN125a";    
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}	
 }

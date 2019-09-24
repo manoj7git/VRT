@@ -1,9 +1,15 @@
+/**
+ * @author manoj.ghadei
+ *
+ */
+
 package com.vrt.testcases;
 
 import static org.testng.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -19,6 +25,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -79,7 +86,7 @@ public class HitNTrialTests extends BaseClass {
 		extent.close();
 	}
 	
-	@BeforeMethod(alwaysRun=true)
+	/*@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {		
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -87,10 +94,10 @@ public class HitNTrialTests extends BaseClass {
 		MainHubPage = MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
 		//assetCreationPage=assetHubPage.ClickAddAssetBtn();
-	}
+	}*/
 
 	
-	// TearDown of the App
+	/*// TearDown of the App
 	@AfterMethod
 	public void Teardown(ITestResult result) throws IOException {
 		
@@ -114,7 +121,7 @@ public class HitNTrialTests extends BaseClass {
 		extent.endTest(extentTest); //ending test and ends the current test and prepare to create html report
 		driver.quit();
 	}
-
+*/
 	/*
 	 * @Test public void PrivTest() throws InterruptedException {
 	 * MainHubPage=MainLoginPage.Login("5", "Welcome5@AM");
@@ -155,7 +162,7 @@ public class HitNTrialTests extends BaseClass {
 		Assert.assertEquals(true, false);		
 	}*/
 	
-	@Test
+	/*@Test
 	public void fetchAssetLocationfilter() throws InterruptedException {
 		extentTest = extent.startTest("fetchAssetLocationfilter");
 		boolean state1 = assetHubPage.assetList_LocationFilter();
@@ -164,17 +171,14 @@ public class HitNTrialTests extends BaseClass {
 		
 		Assert.assertEquals(state1, true);	
 	
-	}
+	}*/
 	
 	@Test
-	public void fetchAssetMfgfilter() throws InterruptedException {
-		extentTest = extent.startTest("fetchAssetMfgfilter");
-
-		boolean state1 = assetHubPage.assetList_ManufacturerFilter();
-		System.out.println(state1);
+	public void checkDateformat() throws InterruptedException, ParseException {
 		
-		Assert.assertEquals(state1, false);	
-	
+		TestUtilities TU = new TestUtilities();
+		String date = TU.convert_StringDate_to_ActualDate_inCertainFormat("16 Dec 2019");
+		System.out.println(date);
 	}
 		
 	/*@Test (dataProvider = "tcasst014", dataProviderClass = TestUtilities.class,
@@ -191,6 +195,7 @@ public class HitNTrialTests extends BaseClass {
 		assetHubPage = assetCreationPage.clickBackBtn();	
 	}*/
 	
+
 
 	/*
 	@Test (description="Check for File renaming")

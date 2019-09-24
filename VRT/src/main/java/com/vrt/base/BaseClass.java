@@ -1,3 +1,8 @@
+/**
+ * @author manoj.ghadei
+ *
+ */
+
 package com.vrt.base;
 
 import java.io.File;
@@ -184,26 +189,26 @@ public class BaseClass {
 	//HashMap is basically used in App where there is a 
 	//Different Users/Roles : Permission Based User Management System 
 	//with Unique UN:PW (kay Value) comibination with no duplicates to be used
-	public static HashMap<String, String> getUNCredentials() {
+	public static HashMap<String, String> getUIDCredentials() {
 		HashMap<String, String> UserMap = new HashMap<String, String>();
 		
 		UserMap.put("adminFull", "1:Welcome1@AM");
-		UserMap.put("SysAdmin", "5:Welcome5@AM");
-		UserMap.put("SysSupervisor", "5:Welcome5@AM");
-		UserMap.put("SysOperator", "5:Welcome5@AM");	
+		UserMap.put("SysAdmin", "2:Welcome2@AM");
+		UserMap.put("SysSupervisor", "3:Welcome3@AM");
+		UserMap.put("SysOperator", "4:Welcome4@AM");	
 		
 		return UserMap;
 	}
 	
 	//Fetch the UserName credentials from the above GetUNCredentials HashMap method
-	public static String getUN(String role) {
-		String UN = getUNCredentials().get(role).split(":")[0];
-		return UN;
+	public static String getUID(String role) {
+		String UID = getUIDCredentials().get(role).split(":")[0];
+		return UID;
 	}
 	
 	//Fetch the Password credentials from the above GetUNCredentials HashMap method
 	public static String getPW(String role) {
-		String PW = getUNCredentials().get(role).split(":")[1];
+		String PW = getUIDCredentials().get(role).split(":")[1];
 		return PW;
 	}
 	
@@ -225,6 +230,18 @@ public class BaseClass {
 			System.out.println("Target file renamed");
 		}				
 	}
+	
+	/*//Login Popup presence 
+	public boolean UserLoginPopupVisible() throws InterruptedException {
+		WebElement LgInPopup = driver.findElementByName("Enter User Credentials");
+		return IsElementVisibleStatus(LgInPopup);
+	}
+	
+	//Close Login Popup 
+	public void UserLoginPopupClose() throws InterruptedException {
+		WebElement LgInPopupCancel = driver.findElementByName("Cancel");
+		clickOn(LgInPopupCancel);
+	}*/
 	
 	
 }
