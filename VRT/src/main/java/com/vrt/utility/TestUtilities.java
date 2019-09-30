@@ -30,10 +30,9 @@ import com.vrt.base.BaseClass;
 
 public class TestUtilities extends BaseClass{
 	
-	public String convert_StringDate_to_ActualDate_inCertainFormat(String dateString) throws ParseException {	   
-	    
+	public String convert_StringDate_to_ActualDate_inCertainFormat(String dt) throws ParseException {
 	    SimpleDateFormat formating = new SimpleDateFormat("dd MMM yyyy"); 
-	    String dateinString = dateString;
+	    String dateinString = dt;
 	    //System.out.println(dateString);
 	    Date date = formating.parse(dateinString);
 	    
@@ -43,8 +42,7 @@ public class TestUtilities extends BaseClass{
 	    SimpleDateFormat formatter = new SimpleDateFormat("MM-d-yyyy"); 	    
 	    String strDate = formatter.format(date);
 	    //System.out.println("Date Format with MM-d-yyyy : "+strDate);
-	    return strDate;    
-	    
+	    return strDate; 
 	}
 	
 	
@@ -287,5 +285,40 @@ public class TestUtilities extends BaseClass{
 		String sheetName = "tcADMN125a";    
 		Object[][] data = getTestData(sheetName);
 		return data;
+	}
+	
+	@DataProvider(name="tcADMN129")
+	public static Object[][] tcADMN129() {				
+		String sheetName = "tcADMN129";    
+		Object[][] data = getTestData(sheetName);
+		return data;
 	}	
+	
+	@DataProvider(name="tcADMN129a")
+	public static Object[][] tcADMN129a() {
+		String sheetname = "tcADMN129a";
+		 Object[][] data = getTestData(sheetname);
+		 return data;
+	}
+	
+	@DataProvider(name="tcADMN133")
+	public static Object[][] tcADMN133() {
+		String sheetname = "tcADMN133";
+		 Object[][] data = getTestData(sheetname);
+		 return data;
+	}
+	@DataProvider(name="tcADMN134")
+	public static Object[][] tcADMN134() {
+		String sheetname = "tcADMN134";
+		 Object[][] data = getTestData(sheetname);
+		 return data;
+	}
+
+	@DataProvider(name="tcADMN146")
+	public static Object[][] tcADMN146() {
+		String sheetname = "tcADMN146";
+		 Object[][] data = getTestData(sheetname);
+		 return data;
+	}
+
 }

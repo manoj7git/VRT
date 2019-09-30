@@ -175,10 +175,11 @@ public class HitNTrialTests extends BaseClass {
 	
 	@Test
 	public void checkDateformat() throws InterruptedException, ParseException {
-		
-		TestUtilities TU = new TestUtilities();
-		String date = TU.convert_StringDate_to_ActualDate_inCertainFormat("16 Dec 2019");
-		System.out.println(date);
+		String filename = "HelpFileWord.docx";
+		String filepath = System.getProperty("user.dir") + "\\TestData\\" + filename;
+		System.out.println(filepath);
+		//String filename = System.getProperty("user.dir") + "\\TestData\\"+ "HelpFileWord.docx";
+		//System.out.println(filename);
 	}
 		
 	/*@Test (dataProvider = "tcasst014", dataProviderClass = TestUtilities.class,

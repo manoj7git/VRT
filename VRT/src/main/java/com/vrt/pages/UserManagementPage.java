@@ -127,9 +127,9 @@ public class UserManagementPage extends BaseClass{
 		
 	
 //Fetch User Name text
-      public String GetUserIDtext() {
-	  return FetchText(UserIDUMField);
-}
+	public String GetUserIDtext() {
+		return FetchText(UserIDUMField);
+	}
 	
 //Enter PW text
 	public void enterNewUserPW(String NewPW) {
