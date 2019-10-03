@@ -44,8 +44,10 @@ public class assetDetailsPage extends BaseClass {
 	WebElement UploadDocs_Btn = null;
 	WebElement VRTappClose_Btn = null;
 	WebElement InitiateQual_Btn = null;
+	WebElement SetupsHeaderTxt = null;
 	WebElement NewSetupCreate_Btn = null;
 	WebElement CopySetup_Btn = null;
+	WebElement AssetEdit_Btn = null;
 	
 	
 	
@@ -69,8 +71,10 @@ public class assetDetailsPage extends BaseClass {
 		DocsTile_Count = driver.findElementByAccessibilityId("DocumentsCountTextBlock");
 		VRTappClose_Btn = driver.findElementByAccessibilityId("Close");
 		InitiateQual_Btn = driver.findElementByAccessibilityId("StartQualificationButton");
+		SetupsHeaderTxt = driver.findElementByAccessibilityId("SetupsHeaderTextBlock");		
 		NewSetupCreate_Btn = driver.findElementByAccessibilityId("CreateSetupButton");
 		CopySetup_Btn = driver.findElementByAccessibilityId("CopySetupButton");
+		AssetEdit_Btn = driver.findElementByAccessibilityId("EditAssetsButton");
 
 	}
 
@@ -82,6 +86,11 @@ public class assetDetailsPage extends BaseClass {
 	// Check the presence of Setup tile
 	public boolean setupTile_state() {
 		return IsElementVisibleStatus(Asset_SetupTile);
+	}
+	
+	// Check the Setup tile default selected
+	public String get_Setupheader_txt() {
+		return FetchText(SetupsHeaderTxt);
 	}
 	
 	// Get the Setup count data form the Setup tile
@@ -211,6 +220,12 @@ public class assetDetailsPage extends BaseClass {
 	public void click_CopyStup_Btn() throws InterruptedException {
 		clickOn(CopySetup_Btn);
 		Thread.sleep(1000);
+	}
+	
+	// Click the Asset Edit button
+	public void click_AssetEditBtn() throws InterruptedException {
+		clickOn(AssetEdit_Btn);
+		Thread.sleep(1000);		
 	}
 	
 	//Click VRT app close button

@@ -63,7 +63,7 @@ public class assetDetailsTest extends BaseClass {
 		extent.addSystemInfo("User Name", "Manoj");
 		extent.addSystemInfo("TestSuiteName", "AssetHubTest");
 
-		/*// Rename the User file (NgvUsers.uxx) if exists
+		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		// Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
@@ -99,7 +99,7 @@ public class assetDetailsTest extends BaseClass {
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 
 		AppClose();
-		Thread.sleep(1000);*/
+		Thread.sleep(1000);
 
 	}
 
@@ -153,7 +153,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 
 	
-	/*// ASST016
+	// ASST016
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST016-Verify if selecting the target Asset "
 			+ "tile in Asset hub page , user is navigated to the target Asset Details screen "
 			+ "with Asset name & Asset Type info displayed in the Header")
@@ -328,7 +328,7 @@ public class assetDetailsTest extends BaseClass {
 	
 	// ASST025
 	@Test(groups = { "Regression" }, description = "ASST025-Verif if the application declines uploading documents that has same name")
-	public void ASST024() throws InterruptedException, ParseException, IOException, AWTException {
+	public void ASST025() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
 				.startTest("ASST025-Verif if the application declines uploading documents that has same name");
 		SoftAssert sa = new SoftAssert();
@@ -397,27 +397,7 @@ public class assetDetailsTest extends BaseClass {
 		sa.assertEquals(actAlert_msg, expAlert_msg,
 				"FAIL: TC-ASST034 - Copy asset window appears even if only Asset present");
 		sa.assertAll();
-	}*/
-	
-	
-	
-	// ASST034
-	@Test(groups = { "Sanity", "Regression" }, description = "ASST034-Verify if only one Asset is available then "
-			+ "copy setup screen should not allow any action")
-	public void ASST034() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent.startTest("ASST034-Verify if only one Asset is available then copy setup screen should not allow any action");
-		SoftAssert sa = new SoftAssert();
-
-		assetDetailsPage.click_CopyStup_Btn();
-		
-		String expAlert_msg = "To perform Copy Setup more than 1 asset required.";
-		String actAlert_msg = assetDetailsPage.alertMeg_CopyAsset_WithOneAsset();
-
-		sa.assertEquals(actAlert_msg, expAlert_msg,
-				"FAIL: TC-ASST034 - Copy asset window appears even if only Asset present");
-		sa.assertAll();
 	}
-
 	
 	
 	

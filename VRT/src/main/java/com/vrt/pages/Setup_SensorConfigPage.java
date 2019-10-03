@@ -8,9 +8,12 @@ public class Setup_SensorConfigPage extends BaseClass{
 	
 	// Sensor Configuration page element variable declaration definition
 	WebElement SensorConfigPageTitle = null;
+	WebElement SensorConfigPageHeaderTxt = null;
 	
 	private void initializeEelements() {
 		SensorConfigPageTitle = driver.findElementByName("Sensors Configuration");
+		SensorConfigPageHeaderTxt = driver.findElementByAccessibilityId("SetupHeaderTextBlock");
+		
 	}
 	
 	Setup_SensorConfigPage() {
@@ -25,7 +28,14 @@ public class Setup_SensorConfigPage extends BaseClass{
 	
 	// Get the Sensor Configuration page title text
 	public String get_SensorConfigurationPage_titletext() {
+		return FetchText(SensorConfigPageHeaderTxt);
+	}
+	
+	// Get the Sensor Configuration page text
+	public String get_SensorConfigurationPage_text() {
 		return FetchText(SensorConfigPageTitle);
 	}
+	
+	
 
 }
