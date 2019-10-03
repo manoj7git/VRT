@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.vrt.base.BaseClass;
 import com.vrt.pages.LoginPage;
 import com.vrt.pages.MainHubPage;
+import com.vrt.pages.Setup_SensorConfigPage;
 import com.vrt.pages.Setup_defineSetupPage;
 import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetCreationPage;
@@ -39,6 +40,7 @@ public class setup_defineSetupTest extends BaseClass{
 	assetCreationPage assetCreationPage;
 	assetDetailsPage assetDetailsPage;
 	Setup_defineSetupPage defineSetupPage;
+	Setup_SensorConfigPage SensorConfigPage;
 
 	// Before All the tests are conducted
 	@BeforeTest
@@ -51,7 +53,7 @@ public class setup_defineSetupTest extends BaseClass{
 		extent.addSystemInfo("User Name", "Manoj");
 		extent.addSystemInfo("TestSuiteName", "AssetHubTest");
 
-		// Rename the User file (NgvUsers.uxx) if exists
+		/*// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		// Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
@@ -91,7 +93,7 @@ public class setup_defineSetupTest extends BaseClass{
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 
 		AppClose();
-		Thread.sleep(1000);
+		Thread.sleep(1000);*/
 
 	}
 
@@ -147,7 +149,7 @@ public class setup_defineSetupTest extends BaseClass{
 	
 	
 	// Test Cases
-	// SET002
+	/*// SET002
 	@Test(groups = {
 			"Sanity" }, description = "SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active")
 	public void SET002() throws InterruptedException {
@@ -160,6 +162,31 @@ public class setup_defineSetupTest extends BaseClass{
 		
 
 		sa.assertEquals(assetDetailsPage.get_Setupheader_txt(), "Setups", "FAIL: SET 002-Setup tile is not Active under Asset details page");
+		sa.assertAll();
+	}*/
+	
+	
+	// SET009
+	@Test(groups = {
+			"Sanity" }, description = "SET 009- UI_Verify if the setup name created in the _Define Setup_ page is "
+					+ "displayed at the top left of the Sensors Configuration page when click on the next tab at Define Setup")
+	public void SET009() throws InterruptedException {
+		extentTest = extent
+				.startTest("SET 009- UI_Verify if the setup name created in the _Define Setup_ page is displayed at the top "
+						+ "left of the Sensors Configuration page when click on the next tab at Define Setup");
+		SoftAssert sa = new SoftAssert();
+		
+		String SetupNameEntered = defineSetupPage.get_defineSetupPage_setupName();
+		//System.out.println(SetupNameEntered);
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.enter_defineSetupPage_SensorCount("1");
+		SensorConfigPage=defineSetupPage.click_defineSetupPage_nxtBtn();
+		String SetupNameDisplayed = SensorConfigPage.get_SensorConfigurationPage_titletext();
+		//System.out.println(SetupNameDisplayed);
+		
+
+		sa.assertEquals(SetupNameEntered, SetupNameDisplayed, 
+				"FAIL: SET 009-Setup Name not displayed in the header of Sensor Config page of Setup");
 		sa.assertAll();
 	}
 
