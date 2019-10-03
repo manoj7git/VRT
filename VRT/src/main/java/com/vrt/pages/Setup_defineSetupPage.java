@@ -21,8 +21,8 @@ public class Setup_defineSetupPage extends BaseClass {
 		DefineSetup_backBtn = driver.findElementByAccessibilityId("GoButton");
 		DefineSetup_SetupName_txtBx = driver.findElementByAccessibilityId("SetupNameTextBox");
 		DefineSetup_Sensordata_txtBx = driver.findElementByAccessibilityId("ContentElement");
-		DefineSetup_AssetID_txtBx = driver.findElementByAccessibilityId("ContentElement");
-		Next_Btn = driver.findElementByAccessibilityId("VessalTextBox");
+		DefineSetup_AssetID_txtBx = driver.findElementByAccessibilityId("VessalTextBox");
+		Next_Btn = driver.findElementByAccessibilityId("NextButton");
 		
 	}
 	
