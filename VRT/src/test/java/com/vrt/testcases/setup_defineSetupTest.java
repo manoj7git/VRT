@@ -7,6 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -55,6 +57,10 @@ public class setup_defineSetupTest extends BaseClass{
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
 		// Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		// Rename the cache Setup file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache\\ValProbeRT", "Setup.txt");
+		// Rename the VRT Setups folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "VRTSetups");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -107,6 +113,7 @@ public class setup_defineSetupTest extends BaseClass{
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();		
 		assetDetailsPage = assetHubPage.click_assetTile("Asset01");
+		defineSetupPage = assetDetailsPage.click_NewStupCreateBtn();
 	}
 
 	// TearDown of the App
@@ -136,6 +143,24 @@ public class setup_defineSetupTest extends BaseClass{
 		extent.endTest(extentTest); // ending test and ends the current test and prepare to create html report
 
 		driver.quit();
+	}
+	
+	
+	// Test Cases
+	// SET002
+	@Test(groups = {
+			"Sanity" }, description = "SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active")
+	public void SET002() throws InterruptedException {
+		extentTest = extent
+				.startTest("SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active");
+		SoftAssert sa = new SoftAssert();
+		
+		defineSetupPage.click_defineSetupPage_backBtn();
+		assetDetailsPage=defineSetupPage.click_YesofAlert_msg();
+		
+
+		sa.assertEquals(assetDetailsPage.get_Setupheader_txt(), "Setups", "FAIL: SET 002-Setup tile is not Active under Asset details page");
+		sa.assertAll();
 	}
 
 
