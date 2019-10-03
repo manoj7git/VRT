@@ -149,9 +149,9 @@ public class setup_defineSetupTest extends BaseClass{
 	
 	
 	// Test Cases
-	/*// SET002
+	// SET002
 	@Test(groups = {
-			"Sanity" }, description = "SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active")
+			"Regression" }, description = "SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active")
 	public void SET002() throws InterruptedException {
 		extentTest = extent
 				.startTest("SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active");
@@ -163,12 +163,12 @@ public class setup_defineSetupTest extends BaseClass{
 
 		sa.assertEquals(assetDetailsPage.get_Setupheader_txt(), "Setups", "FAIL: SET 002-Setup tile is not Active under Asset details page");
 		sa.assertAll();
-	}*/
+	}
 	
 	
 	// SET009
 	@Test(groups = {
-			"Sanity" }, description = "SET 009- UI_Verify if the setup name created in the _Define Setup_ page is "
+			"Regression" }, description = "SET 009- UI_Verify if the setup name created in the _Define Setup_ page is "
 					+ "displayed at the top left of the Sensors Configuration page when click on the next tab at Define Setup")
 	public void SET009() throws InterruptedException {
 		extentTest = extent
@@ -189,6 +189,114 @@ public class setup_defineSetupTest extends BaseClass{
 				"FAIL: SET 009-Setup Name not displayed in the header of Sensor Config page of Setup");
 		sa.assertAll();
 	}
+	
+	
+	// SET010
+	@Test(groups = {
+			"Regression" }, description = "SET 010- UI_Verify if _New Setup_, _Type of Asset_ , _Equipment Name_ is "
+					+ "displayed at the top left of the Define Setup page when clicked on _ (+) New_ button in Asset details page.")
+	public void SET010() throws InterruptedException {
+		extentTest = extent
+				.startTest("SET 010- UI_Verify if _New Setup_, _Type of Asset_ , _Equipment Name_ is displayed at the top left of the "
+						+ "Define Setup page when clicked on _ (+) New_ button in Asset details page.");
+		SoftAssert sa = new SoftAssert();
+		
+		String DefineSetupTitleTxt = defineSetupPage.get_defineSetupPage_Titletext();
+		String StHd1 = DefineSetupTitleTxt.split("-")[0];
+		//System.out.println(StHd1);
+		String StHd2 = DefineSetupTitleTxt.split("-")[1];
+		//System.out.println(StHd2);
+		String StHd3 = DefineSetupTitleTxt.split("-")[2];
+		//System.out.println(StHd3);
+		
+		defineSetupPage.click_defineSetupPage_backBtn();
+		assetDetailsPage=defineSetupPage.click_YesofAlert_msg();
+		String AstHeaderTxt = assetDetailsPage.assetDetail_PageTitle();
+		String ADHd1 = AstHeaderTxt.split(" - ")[0];
+		//System.out.println(ADHd1);
+		String ADHd2 = AstHeaderTxt.split(" - ")[1];
+		//System.out.println(ADHd2);		
+
+		sa.assertEquals(StHd1, "New Setup", 
+				"FAIL: SET 010-Define Setup Header text mismatches for New Setup String");
+		sa.assertEquals(StHd2, ADHd1, 
+				"FAIL: SET 010-Define Setup Header text mismatches for Asset Type String");
+		sa.assertEquals(StHd3, ADHd2, 
+				"FAIL: SET 010-Define Setup Header text mismatches for Asset Name String");
+		sa.assertAll();
+	}
+	
+	
+	// SET011
+	@Test(groups = {
+			"Sanity", "Regression" }, description = "SET 011- UI_Verify if _Setup Name_ (mandatory field) "
+					+ "is displayed in the _Define Setup_ screen.")
+	public void SET011() throws InterruptedException {
+		extentTest = extent
+				.startTest("SET 011- UI_Verify if _Setup Name_ (mandatory field) is displayed "
+						+ "in the _Define Setup_ screen.");
+		SoftAssert sa = new SoftAssert();
+		
+		defineSetupPage.clear_defineSetupPage_setupName();
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.enter_defineSetupPage_SensorCount("1");
+		defineSetupPage.click_defineSetupPage_nxtBtn();
+
+		String ExpAlertMsg = "Setup Name is mandatory, please enter Setup Name";
+		String ActualAlertMsg = defineSetupPage.get_ButtomBarAlertmsg_txt();
+		//System.out.println(ActualAlertMsg);
+
+		sa.assertEquals(ActualAlertMsg, ExpAlertMsg, 
+				"FAIL: SET 011-Setup Name field mandatory alert message not displayed or Wrong Alert msg");
+		sa.assertAll();
+	}
+	
+	
+	// SET012
+	@Test(groups = {
+			"Sanity", "Regression" }, description = "SET 012- UI_Verify if  _Number of Sensors _ (mandatory field)"
+					+ " is displayed in the _Define Setup_ screen.")
+	public void SET012() throws InterruptedException {
+		extentTest = extent
+				.startTest("SET 012- UI_Verify if  _Number of Sensors _ (mandatory field) is displayed "
+						+ "in the _Define Setup_ screen.");
+		SoftAssert sa = new SoftAssert();
+		
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.click_defineSetupPage_nxtBtn();
+
+		String ExpAlertMsg = "Number of Sensors is mandatory, please enter Number of Sensors";
+		String ActualAlertMsg = defineSetupPage.get_ButtomBarAlertmsg_txt();
+		System.out.println(ActualAlertMsg);
+
+		sa.assertEquals(ActualAlertMsg, ExpAlertMsg, 
+				"FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg");
+		sa.assertAll();
+	}
+	
+	
+	/*// SET013
+	@Test(groups = {
+			"Sanity", "Regression" }, description = "SET 013- UI_Verify if  _ Eq ID_ ( prepoluted field) "
+					+ "is displayed in the _Define Setup_ screen.")
+	public void SET013() throws InterruptedException {
+		extentTest = extent
+				.startTest("SET 013-Verify if Eq ID (prepoluted field) is displayed in the _Define Setup_ screen.");
+		SoftAssert sa = new SoftAssert();
+		
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.click_defineSetupPage_nxtBtn();
+
+		String ExpAlertMsg = "Number of Sensors is mandatory, please enter Number of Sensors";
+		String ActualAlertMsg = defineSetupPage.get_ButtomBarAlertmsg_txt();
+		System.out.println(ActualAlertMsg);
+
+		sa.assertEquals(ActualAlertMsg, ExpAlertMsg, 
+				"FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg");
+		sa.assertAll();
+	}*/
 
 
 }

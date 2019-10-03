@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
-                    <span>C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1940304139\testng-customsuite.xml</span>
+                    <span>C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse-27290640\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -59,7 +59,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="group-Default_suite">
-                    <span>0 groups</span>
+                    <span>1 group</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                    <span class="method-stats">1 method, 1 failed,   </span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -102,24 +102,10 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.HitNTrialTests" hash-for-method="fetchAssetMfgfilter">fetchAssetMfgfilter</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.setup_defineSetupTest" hash-for-method="SET012">SET012</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
-                  </li>
-                  <li>
-                    <span class="method-list-title passed">Passed methods</span>
-                    <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
-                    </span>
-                    <div class="method-list-content passed suite-Default_suite">
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.HitNTrialTests" hash-for-method="fetchAssetLocationfilter">fetchAssetLocationfilter</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content passed suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -134,22 +120,18 @@
           <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">com.vrt.testcases.HitNTrialTests</span>
+              <span class="class-name">com.vrt.testcases.setup_defineSetupTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="fetchAssetMfgfilter">
-                  </a> <!-- fetchAssetMfgfilter -->
-                  <span class="method-name">fetchAssetMfgfilter</span>
-                  <div class="stack-trace">java.lang.AssertionError: expected [false] but found [true]
-	at org.testng.Assert.fail(Assert.java:96)
-	at org.testng.Assert.failNotEquals(Assert.java:776)
-	at org.testng.Assert.assertEqualsImpl(Assert.java:137)
-	at org.testng.Assert.assertEquals(Assert.java:118)
-	at org.testng.Assert.assertEquals(Assert.java:568)
-	at org.testng.Assert.assertEquals(Assert.java:578)
-	at com.vrt.testcases.HitNTrialTests.fetchAssetMfgfilter(HitNTrialTests.java:178)
+                  <a name="SET012">
+                  </a> <!-- SET012 -->
+                  <span class="method-name">SET012</span>
+                  <div class="stack-trace">java.lang.AssertionError: The following asserts failed:
+	FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg expected [Setup Name is mandatory, please enter Setup Name] but found [Number of Sensors is mandatory, please enter Number of Sensors]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
+	at com.vrt.testcases.setup_defineSetupTest.SET012(setup_defineSetupTest.java:275)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -177,29 +159,16 @@
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 
 </div> <!-- stack-trace -->
+                  <em>
+(SET 012- UI_Verify if  _Number of Sensors _ (mandatory field) is displayed in the _Define Setup_ screen.)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-Default_suite-class-failed -->
-          <div class="suite-Default_suite-class-passed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.vrt.testcases.HitNTrialTests</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="fetchAssetLocationfilter">
-                  </a> <!-- fetchAssetLocationfilter -->
-                  <span class="method-name">fetchAssetLocationfilter</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-passed -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1940304139\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse-27290640\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -208,7 +177,7 @@
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.vrt.testcases.HitNTrialTests&quot;/&gt;
+      &lt;class name=&quot;com.vrt.testcases.setup_defineSetupTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -232,6 +201,14 @@
             <span class="header-content">Groups for Default suite</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="test-group">
+              <span class="test-group-name">Regression</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">SET012</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="times-Default_suite" class="panel">
@@ -248,20 +225,16 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'fetchAssetLocationfilter')
-data.setCell(0, 2, 'com.vrt.testcases.HitNTrialTests')
-data.setCell(0, 3, 17983);
-data.setCell(1, 0, 1)
-data.setCell(1, 1, 'fetchAssetMfgfilter')
-data.setCell(1, 2, 'com.vrt.testcases.HitNTrialTests')
-data.setCell(1, 3, 12615);
+data.setCell(0, 1, 'SET012')
+data.setCell(0, 2, 'com.vrt.testcases.setup_defineSetupTest')
+data.setCell(0, 3, 1793);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 30 seconds</span>
+              <span class="suite-total-time">Total running time: 1 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -287,40 +260,28 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.vrt.testcases.HitNTrialTests</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.vrt.testcases.setup_defineSetupTest</div> <!-- chronological-class-name -->
               <div class="configuration-test before">
-                <span class="method-name">setExtent</span>
+                <span class="method-name">AssetCreationSetup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-method before">
                 <span class="method-name">Setup</span>
-                <span class="method-start">121 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
-                <span class="method-name">fetchAssetLocationfilter</span>
-                <span class="method-start">8507 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-method after">
-                <span class="method-name">Teardown([TestResult name=fetchAssetLocationfilter status=SUCCESS method=HitNTrialTests.fetchAssetLocationfil...)</span>
-                <span class="method-start">26492 ms</span>
-              </div> <!-- configuration-method after -->
-              <div class="configuration-method before">
-                <span class="method-name">Setup</span>
-                <span class="method-start">26576 ms</span>
+                <span class="method-start">94 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">fetchAssetMfgfilter</span>
-                <span class="method-start">34783 ms</span>
+                <span class="method-name">SET012</span>
+                <span class="method-start">12061 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">Teardown([TestResult name=fetchAssetMfgfilter status=FAILURE method=HitNTrialTests.fetchAssetMfgfilter()[pri:...)</span>
-                <span class="method-start">47402 ms</span>
+                <span class="method-name">Teardown([TestResult name=SET012 status=FAILURE method=setup_defineSetupTest.SET012()[pri:0, instance:com.vrt...)</span>
+                <span class="method-start">13854 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-test after">
-                <span class="method-name">endReport</span>
-                <span class="method-start">47494 ms</span>
+                <span class="method-name">endReport_releaseMomory</span>
+                <span class="method-start">13948 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

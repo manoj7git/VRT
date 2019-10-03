@@ -1,53 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="2" passed="1">
+<testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="47908" started-at="2019-09-12T18:38:10Z" finished-at="2019-09-12T18:38:58Z">
+  <suite name="Default suite" duration-ms="14182" started-at="2019-10-03T15:01:34Z" finished-at="2019-10-03T15:01:48Z">
     <groups>
+      <group name="Regression">
+        <method signature="setup_defineSetupTest.SET012()[pri:0, instance:com.vrt.testcases.setup_defineSetupTest@6fc6f14e]" name="SET012" class="com.vrt.testcases.setup_defineSetupTest"/>
+      </group> <!-- Regression -->
     </groups>
-    <test name="Default test" duration-ms="47908" started-at="2019-09-12T18:38:10Z" finished-at="2019-09-12T18:38:58Z">
-      <class name="com.vrt.testcases.HitNTrialTests">
-        <test-method status="PASS" signature="setExtent()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="setExtent" is-config="true" duration-ms="113" started-at="2019-09-12T18:38:10Z" finished-at="2019-09-12T18:38:10Z">
+    <test name="Default test" duration-ms="14182" started-at="2019-10-03T15:01:34Z" finished-at="2019-10-03T15:01:48Z">
+      <class name="com.vrt.testcases.setup_defineSetupTest">
+        <test-method status="PASS" signature="AssetCreationSetup()[pri:0, instance:com.vrt.testcases.setup_defineSetupTest@6fc6f14e]" name="AssetCreationSetup" is-config="true" duration-ms="94" started-at="2019-10-03T15:01:34Z" finished-at="2019-10-03T15:01:34Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setExtent -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="Setup" is-config="true" duration-ms="8386" started-at="2019-09-12T18:38:10Z" finished-at="2019-09-12T18:38:18Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="fetchAssetLocationfilter()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="fetchAssetLocationfilter" duration-ms="17983" started-at="2019-09-12T18:38:18Z" finished-at="2019-09-12T18:38:36Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- fetchAssetLocationfilter -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="Teardown" is-config="true" duration-ms="83" started-at="2019-09-12T18:38:36Z" finished-at="2019-09-12T18:38:36Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=fetchAssetLocationfilter status=SUCCESS method=HitNTrialTests.fetchAssetLocationfilter()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="Setup" is-config="true" duration-ms="8207" started-at="2019-09-12T18:38:36Z" finished-at="2019-09-12T18:38:45Z">
+        </test-method> <!-- AssetCreationSetup -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.setup_defineSetupTest@6fc6f14e]" name="Setup" is-config="true" duration-ms="11967" started-at="2019-10-03T15:01:34Z" finished-at="2019-10-03T15:01:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="FAIL" signature="fetchAssetMfgfilter()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="fetchAssetMfgfilter" duration-ms="12615" started-at="2019-09-12T18:38:45Z" finished-at="2019-09-12T18:38:57Z">
+        <test-method status="FAIL" signature="SET012()[pri:0, instance:com.vrt.testcases.setup_defineSetupTest@6fc6f14e]" name="SET012" duration-ms="1793" started-at="2019-10-03T15:01:46Z" description="SET 012- UI_Verify if  _Number of Sensors _ (mandatory field) is displayed in the _Define Setup_ screen." finished-at="2019-10-03T15:01:47Z">
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[expected [false] but found [true]]]>
+              <![CDATA[The following asserts failed:
+FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg expected [Setup Name is mandatory, please enter Setup Name] but found [Number of Sensors is mandatory, please enter Number of Sensors]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [false] but found [true]
-at org.testng.Assert.fail(Assert.java:96)
-at org.testng.Assert.failNotEquals(Assert.java:776)
-at org.testng.Assert.assertEqualsImpl(Assert.java:137)
-at org.testng.Assert.assertEquals(Assert.java:118)
-at org.testng.Assert.assertEquals(Assert.java:568)
-at org.testng.Assert.assertEquals(Assert.java:578)
-at com.vrt.testcases.HitNTrialTests.fetchAssetMfgfilter(HitNTrialTests.java:178)
+              <![CDATA[java.lang.AssertionError: The following asserts failed:
+FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg expected [Setup Name is mandatory, please enter Setup Name] but found [Number of Sensors is mandatory, please enter Number of Sensors]
+at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
+at com.vrt.testcases.setup_defineSetupTest.SET012(setup_defineSetupTest.java:275)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -78,23 +59,23 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- fetchAssetMfgfilter -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="Teardown" is-config="true" duration-ms="91" started-at="2019-09-12T18:38:57Z" finished-at="2019-09-12T18:38:57Z">
+        </test-method> <!-- SET012 -->
+        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.setup_defineSetupTest@6fc6f14e]" name="Teardown" is-config="true" duration-ms="94" started-at="2019-10-03T15:01:47Z" finished-at="2019-10-03T15:01:48Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=fetchAssetMfgfilter status=FAILURE method=HitNTrialTests.fetchAssetMfgfilter()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33] output={null}]]]>
+                <![CDATA[[TestResult name=SET012 status=FAILURE method=setup_defineSetupTest.SET012()[pri:0, instance:com.vrt.testcases.setup_defineSetupTest@6fc6f14e] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.HitNTrialTests@13a5fe33]" name="endReport" is-config="true" duration-ms="406" started-at="2019-09-12T18:38:57Z" finished-at="2019-09-12T18:38:58Z">
+        <test-method status="PASS" signature="endReport_releaseMomory()[pri:0, instance:com.vrt.testcases.setup_defineSetupTest@6fc6f14e]" name="endReport_releaseMomory" is-config="true" duration-ms="234" started-at="2019-10-03T15:01:48Z" finished-at="2019-10-03T15:01:48Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- endReport -->
-      </class> <!-- com.vrt.testcases.HitNTrialTests -->
+        </test-method> <!-- endReport_releaseMomory -->
+      </class> <!-- com.vrt.testcases.setup_defineSetupTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
