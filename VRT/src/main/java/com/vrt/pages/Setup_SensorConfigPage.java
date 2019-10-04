@@ -7,8 +7,8 @@ import com.vrt.base.BaseClass;
 public class Setup_SensorConfigPage extends BaseClass{
 	
 	// Sensor Configuration page element variable declaration definition
-	WebElement SensorConfigPageTitle = null;
-	WebElement SensorConfigPageHeaderTxt = null;
+	private WebElement SensorConfigPageTitle = null;
+	private WebElement SensorConfigPageHeaderTxt = null;
 	
 	private void initializeEelements() {
 		SensorConfigPageTitle = driver.findElementByName("Sensors Configuration");

@@ -24,11 +24,12 @@ import com.vrt.pages.assetCreationPage;
 import com.vrt.pages.assetDetailsPage;
 import com.vrt.pages.assetHubPage;
 import com.vrt.utility.TestUtilities;
+import com.vrt.utility.setupCreationUtility;
 
 public class setup_defineSetupTest extends BaseClass{
 
 	// Refer TestUtilities Class for Data provider methods
-	// Refer Test data folder>AssetNameTestData.xlsx sheet for test data i/p
+	// Refer Test data folder>SetupTestData.xlsx sheet for test data i/p
 
 	public ExtentReports extent;
 	public ExtentTest extentTest;
@@ -46,6 +47,8 @@ public class setup_defineSetupTest extends BaseClass{
 	// Before All the tests are conducted
 	@BeforeTest
 	public void AssetCreationSetup() throws InterruptedException, IOException {
+		
+		
 
 		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ExtentReport.html", true);
 		extent.addSystemInfo("VRT Version", "1.0.0.37");
@@ -337,7 +340,7 @@ public class setup_defineSetupTest extends BaseClass{
 	
 	// SET019a
 	@Test(groups = {
-			"Sanity", "Regression" }, dataProvider="SET019a", dataProviderClass=TestUtilities.class,
+			"Sanity", "Regression" }, dataProvider="SET019a", dataProviderClass=setupCreationUtility.class,
 					description = "SET 019-UI_Verify if the setup name text field allows up to "
 					+ "35 character input that comprises of alphanumeric, special characters -,_,: and space.")
 	public void SET019a(Object ...dataProvider) throws InterruptedException, ParseException {

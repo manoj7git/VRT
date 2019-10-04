@@ -29,6 +29,7 @@ import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetHubPage;
 import com.vrt.pages.assetCreationPage;
 import com.vrt.utility.TestUtilities;
+import com.vrt.utility.assetCreationUtility;
 
 
 public class assetCreationTest extends BaseClass{
@@ -155,7 +156,7 @@ public class assetCreationTest extends BaseClass{
 
 	
 	//ASST101a
-	@Test(groups = {"Sanity", "Regression"},dataProvider="getAstNameInvalidTestData", dataProviderClass=TestUtilities.class, 
+	@Test(groups = {"Sanity", "Regression"},dataProvider="getAstNameInvalidTestData", dataProviderClass=assetCreationUtility.class, 
 			description="Verify if the Asset Name do not accept In-Valid Data parameters")
 	public void ASST101a(Object ...dataProvider) throws InterruptedException {
 		extentTest = extent.startTest("ASST101a-Verify if the Asset Name do not accept In-Valid Data parameters");
@@ -179,7 +180,7 @@ public class assetCreationTest extends BaseClass{
 
 	
 	//ASST101b
-	@Test(dataProvider="getAstNameValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider="getAstNameValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Name accepts Valid Data parameters")
 	public void ASST101b(Object ...dataProvider) throws InterruptedException {
 		extentTest = extent.startTest("ASST101b-Verify if the Asset Name accepts Valid Data parameters");
@@ -219,7 +220,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST103a
-	@Test(groups = {"Sanity"}, dataProvider="getEqpIDinValidTestData", dataProviderClass=TestUtilities.class, 
+	@Test(groups = {"Sanity"}, dataProvider="getEqpIDinValidTestData", dataProviderClass=assetCreationUtility.class, 
 			description="Verify if the Equipment field do not accept In-Valid Data parameters")
 	public void ASST103a(Object ...dataProvider) throws InterruptedException {
 		extentTest = extent.startTest("ASST103a-Verify if the Equipment field do not accept In-Valid Data parameters");
@@ -243,7 +244,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST103b
-	@Test(dataProvider="getEqpIDValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider="getEqpIDValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify if the Equipment field accepts Valid Data parameters")
 	public void ASST103b(String Name, String ID, String Type, String Manufacturer, 
 			String Location, String UserName, String Password) throws InterruptedException {
@@ -305,7 +306,7 @@ public class assetCreationTest extends BaseClass{
 	
 
 	//ASST107a 
-	@Test(dataProvider="getAstTypeInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity","Regression"},
+	@Test(dataProvider="getAstTypeInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity","Regression"},
 			description="Verify if the Asset Type field do not accept In-Valid Data parameters")
 	public void ASST107a(String Name, String ID, String Type, String Manufacturer, 
 			String Location, String ExpAlrtMsg, String UserName, String Password) throws InterruptedException {
@@ -320,7 +321,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST107b 
-	@Test(dataProvider="getAstTypeValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider="getAstTypeValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Type field accepts Valid Data parameters")
 	public void ASST107b(String Name, String ID, String Type, String Manufacturer, 
 			String Location, String UserName, String Password) throws InterruptedException {
@@ -412,7 +413,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST111a 
-	@Test(dataProvider="getAstMdlInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider="getAstMdlInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Model field do not accept In-Valid Data parameters")
 	public void ASST111a(String Name, String ID, String Type, String Manufacturer, String Location, String Model, String ExpAlrtMsg) throws InterruptedException {
 		extentTest = extent.startTest("ASST111a-Verify if the Asset Model field do not accept In-Valid Data parameters");
@@ -426,7 +427,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST111b
-	@Test(dataProvider="getAstMdlValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider="getAstMdlValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Model field accept Valid Data parameters")
 	public void ASST111b(String Name, String ID, String Type, String Manufacturer, String Location, String Model) throws InterruptedException {
 		extentTest = extent.startTest("ASST111b-Verify if the Asset Model field accept Valid Data parameters");
@@ -439,7 +440,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST112
-	@Test(dataProvider="getAstSizeValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider="getAstSizeValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Size field accept Valid Data parameters")
 	public void ASST112(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit) throws InterruptedException {
 		extentTest = extent.startTest("ASST112-Verify if the Asset Size field accept Valid Data parameters");
@@ -454,7 +455,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST113 - Verify if the Asset Size text box accepts inputs as numeric
 	//and special characters such as point or comma.
 	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Size field.
-	@Test(dataProvider="getAstSizeInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider="getAstSizeInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Size field do not accept In-Valid Data parameters")
 	public void ASST113(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
 		extentTest = extent.startTest("ASST113-Verify if the Asset Model field accept Valid Data parameters");
@@ -514,7 +515,7 @@ public class assetCreationTest extends BaseClass{
 	
 		
 	//ASST117a
-	@Test(dataProvider="getAstSizeUnitInValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider="getAstSizeUnitInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Size Unit field do not accept In-Valid Data parameters")
 	public void ASST117a(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
 		extentTest = extent.startTest("ASST117a - Verify if the Asset Size Unit field do not accept In-Valid Data parameters");
@@ -528,7 +529,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST117b
-	@Test(dataProvider="getAstSizeUnitValidTestData", dataProviderClass=TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider="getAstSizeUnitValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Size Unit field accept Valid Data parameters")
 	public void ASST117b(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit) throws InterruptedException {
 		extentTest = extent.startTest("ASST117b - Verify if the Asset Size Unit field accept Valid Data parameters");
@@ -632,7 +633,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//ASST122a
-	@Test(dataProvider = "getAstMakerInValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider = "getAstMakerInValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Manufacturer field do not accept In-Valid Data parameters")
 	public void ASST122a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
 			throws InterruptedException {
@@ -648,7 +649,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST122b - Verify if Manufacturer text box accepts upper case, lower case, numeric and
 	// special characters like Hyphen, slash -Forward and backward- Underscore and space as input
-	@Test(dataProvider = "getAstMakerValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider = "getAstMakerValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Manufacturer field accept Valid Data parameters")
 	public void ASST122b(String Name, String ID, String Type, String Manufacturer, String Location)throws InterruptedException {
 		extentTest = extent.startTest("ASST122b- Verify if the Asset Manufacturer field accept Valid Data parameters");
@@ -824,7 +825,7 @@ public class assetCreationTest extends BaseClass{
 		
 		
 	// ASST134
-	@Test(dataProvider = "getAstLocationInValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider = "getAstLocationInValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify if the Asset Location field do not accept In-Valid Data parameters")
 	public void ASST134a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
 			throws InterruptedException {
@@ -840,7 +841,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST134b
-	@Test(dataProvider = "getAstLocationValidTestData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider = "getAstLocationValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if the Asset Location field accept Valid Data parameters")
 	public void ASST134b(String Name, String ID, String Type, String Manufacturer, String Location)
 			throws InterruptedException {
@@ -894,7 +895,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST143
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify the cancel button will discard the entries made at the current screen")
 	public void ASST143(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description) throws InterruptedException {
@@ -942,7 +943,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST144
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify if the back button will -prompt as discard the changes- with Yes or No option")
 	public void ASST144(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
@@ -969,7 +970,7 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	// ASST145
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"}, 
+	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
 			description="Verify if No Option is selected and verify if the application allows the user to stay in the same page")
 	public void ASST145(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
@@ -999,7 +1000,7 @@ public class assetCreationTest extends BaseClass{
 
 	
 	// ASST146
-	@Test(dataProvider = "getAstALLData", dataProviderClass = TestUtilities.class, groups = {"Sanity"},
+	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
 			description="Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
 	public void ASST146(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)

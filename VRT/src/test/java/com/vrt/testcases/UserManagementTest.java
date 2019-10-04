@@ -24,6 +24,7 @@ import com.vrt.pages.LoginPage;
 import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 import com.vrt.utility.TestUtilities;
+import com.vrt.utility.userManagementUtility;
 
 public class UserManagementTest extends BaseClass {
 	public ExtentReports extent;
@@ -199,7 +200,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN124
-	@Test(dataProvider = "tcADMN124", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN124", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "ADMN124-Verify if mandatory fields are marked on the user management screen-Name, "
 					+ "User ID, Password, Confirm Password, Title and User Type")
 
@@ -226,7 +227,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN125
-	@Test(dataProvider = "tcADMN125", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN125", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valdiations  for User Name Field at User Management screen")
 
 	public void ADMN125(Object... dataProvider) throws InterruptedException {
@@ -252,7 +253,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN125a
-	@Test(dataProvider = "tcADMN125a", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN125a", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Validations  for User Name Field at User Management screen")
 
 	public void ADMN125a(Object... dataProvider) throws InterruptedException {
@@ -296,7 +297,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN129
-	@Test(dataProvider = "tcADMN129", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN129", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Validations for User ID Field at User management screen")
 
 	public void ADMN129(Object... dataProvider) throws InterruptedException {
@@ -322,7 +323,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN129a
-	@Test(dataProvider = "tcADMN129a", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN129a", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Validations for User ID Field at User management screen")
 
 	public void ADMN129a(Object... dataProvider) throws InterruptedException {
@@ -368,7 +369,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN133
-	@Test(dataProvider = "tcADMN133", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN133", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Validations for  unique User ID Field at User management screen")
 
 	public void ADMN133(Object... dataProvider) throws InterruptedException {
@@ -393,7 +394,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN134
-	@Test(dataProvider = "tcADMN134", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN134", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Validations for  unique User Name Field at User management screen")
 
 	public void ADMN134(Object... dataProvider) throws InterruptedException {
@@ -494,7 +495,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	//ADMN146
-	@Test(dataProvider = "tcADMN146", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN146", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs allowed for Title field validations")
 
 	public void ADMN146(Object... dataProvider) throws InterruptedException {
@@ -519,7 +520,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN146a
-	@Test(dataProvider = "tcADMN146", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN146", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Invalid inputs not allowed for Title field validations")
 
 	public void ADMN146a(Object... dataProvider) throws InterruptedException {
@@ -545,7 +546,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	//ADMN147a
-	@Test(dataProvider = "tcADMN147a", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN147a", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Invalid inputs for User type field validations")
 
 	public void ADMN147a(Object... dataProvider) throws InterruptedException {
@@ -568,7 +569,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	//ADMN150
-	@Test(dataProvider = "tcADMN150", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN150", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs for Phone number field")
 
 	public void ADMN150(Object... dataProvider) throws InterruptedException {
@@ -593,7 +594,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN150a
-	@Test(dataProvider = "tcADMN150a", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN150a", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs for Phone number field")
 
 	public void ADMN150a(Object... dataProvider) throws InterruptedException {
@@ -631,7 +632,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN159
-	@Test(dataProvider = "tcADMN159", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN159", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Invalid formats for Email Field at User Management Screen")
 
 	public void tcADMN159(Object... dataProvider) throws InterruptedException {
@@ -656,7 +657,7 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN160
-	@Test(dataProvider = "tcADMN160", dataProviderClass = TestUtilities.class, groups = {
+	@Test(dataProvider = "tcADMN160", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify valid formats for Email Field at User Management Screen")
 	public void ADMN160(Object... dataProvider) throws InterruptedException {
 		extentTest = extent.startTest("ADMN160-Verify Valid formats for  Email Field at User Management Screen");

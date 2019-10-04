@@ -7,13 +7,13 @@ import com.vrt.base.BaseClass;
 public class Setup_defineSetupPage extends BaseClass {
 	
 	// Define Setup page element variable declaration definition
-	WebElement DefineSetupPageName = null;
-	WebElement DefineSetupPageTitle = null;
-	WebElement DefineSetup_backBtn = null;	
-	WebElement DefineSetup_SetupName_txtBx = null;
-	WebElement DefineSetup_Sensordata_txtBx = null;
-	WebElement DefineSetup_AssetID_txtBx = null;
-	WebElement Next_Btn = null;
+	private WebElement DefineSetupPageName = null;
+	private WebElement DefineSetupPageTitle = null;
+	private WebElement DefineSetup_backBtn = null;	
+	private WebElement DefineSetup_SetupName_txtBx = null;
+	private WebElement DefineSetup_Sensordata_txtBx = null;
+	private WebElement DefineSetup_AssetID_txtBx = null;
+	private WebElement Next_Btn = null;
 	
 	private void initializeEelements() {
 		DefineSetupPageName = driver.findElementByName("Define Setup");
