@@ -223,9 +223,10 @@ public class assetDetailsPage extends BaseClass {
 	}
 	
 	// Click the Asset Edit button
-	public void click_AssetEditBtn() throws InterruptedException {
+	public assetCreationPage click_AssetEditBtn() throws InterruptedException {
 		clickOn(AssetEdit_Btn);
-		Thread.sleep(1000);		
+		Thread.sleep(1000);
+		return new assetCreationPage();
 	}
 	
 	//Click VRT app close button

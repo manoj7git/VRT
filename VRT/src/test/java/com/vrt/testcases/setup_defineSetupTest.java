@@ -149,7 +149,7 @@ public class setup_defineSetupTest extends BaseClass{
 	
 	
 	// Test Cases
-	// SET002
+	/*// SET002
 	@Test(groups = {
 			"Regression" }, description = "SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active")
 	public void SET002() throws InterruptedException {
@@ -274,29 +274,29 @@ public class setup_defineSetupTest extends BaseClass{
 				"FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg");
 		sa.assertAll();
 	}
+	*/
 	
-	
-	/*// SET013
+	// SET013
 	@Test(groups = {
-			"Sanity", "Regression" }, description = "SET 013- UI_Verify if  _ Eq ID_ ( prepoluted field) "
+			"Sanity", "Regression" }, description = "SET 013- UI_Verify if  _ Asset ID_ (prepoluted field) "
 					+ "is displayed in the _Define Setup_ screen.")
 	public void SET013() throws InterruptedException {
 		extentTest = extent
-				.startTest("SET 013-Verify if Eq ID (prepoluted field) is displayed in the _Define Setup_ screen.");
+				.startTest("SET 013-Verify if Asset ID (prepoluted field) is displayed in the _Define Setup_ screen.");
 		SoftAssert sa = new SoftAssert();
 		
-		defineSetupPage.click_defineSetupPage_SensorCountField();
-		defineSetupPage.clear_defineSetupPage_SensorCount();
-		defineSetupPage.click_defineSetupPage_nxtBtn();
+		String AssetIDTxtinSetup = defineSetupPage.get_AssetID_text();
+		//System.out.println(AssetIDTxtinSetup);		
+		defineSetupPage.click_defineSetupPage_backBtn();
+		assetDetailsPage=defineSetupPage.click_YesofAlert_msg();
+		assetCreationPage = assetDetailsPage.click_AssetEditBtn();
+		String AssetIDTxtinAssetEditPage = assetCreationPage.getEqpID();
+		//System.out.println(AssetIDTxtinAssetEditPage);
 
-		String ExpAlertMsg = "Number of Sensors is mandatory, please enter Number of Sensors";
-		String ActualAlertMsg = defineSetupPage.get_ButtomBarAlertmsg_txt();
-		System.out.println(ActualAlertMsg);
-
-		sa.assertEquals(ActualAlertMsg, ExpAlertMsg, 
-				"FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg");
+		sa.assertEquals(AssetIDTxtinAssetEditPage, AssetIDTxtinSetup, 
+				"FAIL: SET 013-Asset ID field Data do not match with the actual Asset ID created");
 		sa.assertAll();
-	}*/
+	}
 
 
 }
