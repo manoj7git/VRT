@@ -61,5 +61,12 @@ public class setupCreationUtility extends BaseClass{
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
+	
+	@DataProvider(name = "SET019b")
+	public static Object[][] SET019b() {
+		String sheetName = "SET019b";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
 
 }

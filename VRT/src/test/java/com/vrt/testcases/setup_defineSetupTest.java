@@ -131,8 +131,8 @@ public class setup_defineSetupTest extends BaseClass{
 			// to add error/exception in extent report
 			extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS # " + result.getThrowable() + " #");
 			// to add screenshot in extent report
-			String screenshotPath1 = TestUtilities.getFailedTCScreenshot(driver, result.getName());
-			extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath1));
+			//String screenshotPath1 = TestUtilities.getFailedTCScreenshot(driver, result.getName());
+			//extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath1));
 			// to add screencast/video in extent report
 			// extentTest.log(LogStatus.FAIL, extentTest.addScreencast(screenshotPath));
 
@@ -335,7 +335,7 @@ public class setup_defineSetupTest extends BaseClass{
 			sa.assertEquals(false, true, "FAIL: SET 017-Setup Name default data does not match with Current Date & Time stamp");
 			sa.assertAll();
 		}
-	}*/
+	}
 	
 	
 	// SET019a
@@ -363,6 +363,36 @@ public class setup_defineSetupTest extends BaseClass{
 		
 		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration", 
 				"FAIL:SET 019- Setup Name do not accept the Valid characters ");		
+
+	}*/
+	
+	
+	// SET019b
+	@Test(groups = {
+			"Regression" }, dataProvider="SET019b", dataProviderClass=setupCreationUtility.class,
+					description = "SET 019-UI_Verify if the setup name text field do not allow "
+							+ "invalid data except alphanumeric, special characters -,_,: and space.")
+	public void SET019b(Object ...dataProvider) throws InterruptedException, ParseException {
+		extentTest = extent
+				.startTest("SET 019-UI_Verify if the setup name text field do not allow invalid data "
+						+ "except alphanumeric, special characters -,_,: and space.");
+		SoftAssert sa = new SoftAssert();
+		
+		String SetUpName = (String) dataProvider[0];
+		String ExpString = SetUpName;
+		System.out.println(ExpString);
+		String SensorNumb = (String) dataProvider[1];	
+		String ErrorAlertMsg = (String) dataProvider[2];
+			
+		defineSetupPage.clear_defineSetupPage_setupName();
+		defineSetupPage.enter_defineSetupPage_setupName(SetUpName);
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
+		defineSetupPage.click_defineSetupPage_nxtBtn();
+		
+		sa.assertEquals(defineSetupPage.get_ButtomBarAlertmsg_txt(), ErrorAlertMsg, 
+				"FAIL:SET 019b- Setup Name accepts the In-Valid characters ");		
 
 	}
 	
