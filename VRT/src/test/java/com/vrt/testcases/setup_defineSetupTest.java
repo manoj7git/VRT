@@ -1,6 +1,7 @@
 package com.vrt.testcases;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -274,7 +275,7 @@ public class setup_defineSetupTest extends BaseClass{
 				"FAIL: SET 012-Sensor Data field mandatory alert message not displayed or Wrong Alert msg");
 		sa.assertAll();
 	}
-	*/
+	
 	
 	// SET013
 	@Test(groups = {
@@ -297,6 +298,71 @@ public class setup_defineSetupTest extends BaseClass{
 				"FAIL: SET 013-Asset ID field Data do not match with the actual Asset ID created");
 		sa.assertAll();
 	}
+	
+	
+	// SET017
+	@Test(groups = {
+			"Sanity", "Regression" }, description = "'SET 017-UI_Verify if the setup name field, "
+					+ "by default is displayed as current date and 24 hour time format DD-MMM-YYYY HH-MM-SS")
+	public void SET017() throws InterruptedException, ParseException {
+		extentTest = extent
+				.startTest("'SET 017-UI_Verify if the setup name field, by default is displayed "
+						+ "as current date and 24 hour time format DD-MMM-YYYY HH-MM-SS");
+		SoftAssert sa = new SoftAssert();
+		
+		defineSetupPage.click_defineSetupPage_backBtn();
+		assetDetailsPage=defineSetupPage.click_YesofAlert_msg();
+		
+		TestUtilities tu = new TestUtilities();
+		String Current_DtTime_txt = tu.get_CurrentDate_inCertainFormat("dd-MMM-YYYY HH:mm:ss");
+		String Current_DtTime1 = Current_DtTime_txt.split("0", 2)[1];		
+		//System.out.println(Current_DtTime1);
+		String[] output = Current_DtTime1.split("\\:");		
+		String Current_DtTime2 = output[0]+":"+output[1];
+		//System.out.println(Current_DtTime2);
+		
+		defineSetupPage=assetDetailsPage.click_NewStupCreateBtn();
+		String SetupName_txt = defineSetupPage.get_defineSetupPage_setupName();
+		//System.out.println(SetupName_txt);	
+		
+		if (SetupName_txt.equals(Current_DtTime1) || (SetupName_txt.contains(Current_DtTime2))) {
+			sa.assertEquals(true, true);
+			sa.assertAll();
+		} else {
+			sa.assertEquals(false, true, "FAIL: SET 017-Setup Name default data does not match with Current Date & Time stamp");
+			sa.assertAll();
+		}
+	}*/
+	
+	
+	// SET019a
+	@Test(groups = {
+			"Sanity", "Regression" }, dataProvider="SET019a", dataProviderClass=TestUtilities.class,
+					description = "SET 019-UI_Verify if the setup name text field allows up to "
+					+ "35 character input that comprises of alphanumeric, special characters -,_,: and space.")
+	public void SET019a(Object ...dataProvider) throws InterruptedException, ParseException {
+		extentTest = extent
+				.startTest("SET 019-UI_Verify if the setup name text field allows up to 35 character input that "
+						+ "comprises of alphanumeric, special characters -,_,: and space.");
+		SoftAssert sa = new SoftAssert();
+		
+		String SetUpName = (String) dataProvider[0];
+		String ExpString = SetUpName;
+		System.out.println(ExpString);
+		String SensorNumb = (String) dataProvider[1];		
+			
+		defineSetupPage.clear_defineSetupPage_setupName();
+		defineSetupPage.enter_defineSetupPage_setupName(SetUpName);
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
+		SensorConfigPage=defineSetupPage.click_defineSetupPage_nxtBtn();
+		
+		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration", 
+				"FAIL:SET 019- Setup Name do not accept the Valid characters ");		
+
+	}
+	
 
 
 }

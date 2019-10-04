@@ -122,15 +122,15 @@ public class HitNTrialTests extends BaseClass {
 		driver.quit();
 	}
 */
-	/*
-	 * @Test public void PrivTest() throws InterruptedException {
-	 * MainHubPage=MainLoginPage.Login("5", "Welcome5@AM");
-	 * UserManagementPage=MainHubPage.ClickAdminTile();
-	 * UserManagementPage.clickAnyUserinUserList("User5"); boolean stat=
-	 * UserManagementPage.PrivCreateEditAssetgstatus(); System.out.println(stat);
-	 * UserManagementPage.clickPrivCreateEditAsset();
-	 * System.out.println(UserManagementPage.PrivCreateEditAssetgstatus()); }
-	 */
+	
+	@Test
+	public void PrivTest() throws InterruptedException, ParseException {
+		TestUtilities tu = new TestUtilities();
+		String dt = tu.get_CurrentDate_inCertainFormat("dd-MMM-YYYY HH:mm:ss");
+		System.out.println(dt);
+
+	}
+	 
 
 /*	@Test
 	public void fetchAssetlist() {
@@ -173,14 +173,7 @@ public class HitNTrialTests extends BaseClass {
 	
 	}*/
 	
-	@Test
-	public void checkDateformat() throws InterruptedException, ParseException {
-		String filename = "HelpFileWord.docx";
-		String filepath = System.getProperty("user.dir") + "\\TestData\\" + filename;
-		System.out.println(filepath);
-		//String filename = System.getProperty("user.dir") + "\\TestData\\"+ "HelpFileWord.docx";
-		//System.out.println(filename);
-	}
+
 		
 	/*@Test (dataProvider = "tcasst014", dataProviderClass = TestUtilities.class,
 			description="check the behaviour issue of the Asset creation")

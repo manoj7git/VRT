@@ -43,6 +43,15 @@ public class TestUtilities extends BaseClass {
 		// System.out.println("Date Format with MM-d-yyyy : "+strDate);
 		return strDate;
 	}
+	
+	public String get_CurrentDate_inCertainFormat(String dtFormat) throws ParseException {
+		SimpleDateFormat formating = new SimpleDateFormat(dtFormat);		
+		Date date = new Date();
+		
+		String strDate = formating.format(date);
+		//System.out.println(formating.format(date));
+		return strDate;
+	}
 
 	// Method to call the below method to capture screenshot when a Test Fails
 	public static void takeScreenshotAtEndOfTest() throws IOException {
@@ -81,9 +90,10 @@ public class TestUtilities extends BaseClass {
 	}
 
 	// Read TestData from the Excel sheet
-	// public static String TestData_sheetPath =
-	// "D:\\Stored-Code\\TestAutomation\\Development\\Root\\Source\\VRT\\TestData\\AssetNameTestData.xlsx";
-	public static String TestData_sheetPath = "D:\\Stored-Code\\TestAutomation\\Development\\Root\\Source\\VRT\\TestData\\UserManagementTestData.xlsx";
+	//public static String TestData_sheetPath = "D:\\Stored-Code\\TestAutomation\\Development\\Root\\Source\\VRT\\TestData\\AssetNameTestData.xlsx";
+	public static String TestData_sheetPath = System.getProperty("user.dir") + "/TestData/" + "SetupTestData.xlsx";
+			//"D:\\Stored-Code\\TestAutomation\\Development\\Root\\Source\\VRT\\TestData\\SetupTestData.xlsx";
+	//public static String TestData_sheetPath = "D:\\Stored-Code\\TestAutomation\\Development\\Root\\Source\\VRT\\TestData\\UserManagementTestData.xlsx";
 	static Workbook book;
 	static Sheet sheet;
 
@@ -118,6 +128,7 @@ public class TestUtilities extends BaseClass {
 	}
 
 	// Data Providers
+	//ASSET Creation module related Test Data reference
 	@DataProvider(name = "getAstNameInvalidTestData")
 	public static Object[][] getAstNameInvalidTestData() {
 
@@ -261,7 +272,20 @@ public class TestUtilities extends BaseClass {
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
-
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//SETUP Creation module related Test Data reference
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@DataProvider(name = "SET019a")
+	public static Object[][] SET019a() {
+		String sheetName = "SET019a";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}	
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//ADMIN module related Test Data reference
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@DataProvider(name = "tcADMN124")
 	public static Object[][] tcADMN124() {
 		String sheetName = "tcADMN124";
