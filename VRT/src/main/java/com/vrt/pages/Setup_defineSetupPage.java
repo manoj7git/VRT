@@ -13,6 +13,9 @@ public class Setup_defineSetupPage extends BaseClass {
 	private WebElement DefineSetup_SetupName_txtBx = null;
 	private WebElement DefineSetup_Sensordata_txtBx = null;
 	private WebElement DefineSetup_AssetID_txtBx = null;
+	private WebElement DefineSetup_SOP_txtBx = null;
+	private WebElement DefineSetup_LoadDesc_txtBx = null;
+	private WebElement DefineSetup_Cmnts_txtBx = null;
 	private WebElement Next_Btn = null;
 	
 	private void initializeEelements() {
@@ -22,6 +25,9 @@ public class Setup_defineSetupPage extends BaseClass {
 		DefineSetup_SetupName_txtBx = driver.findElementByAccessibilityId("SetupNameTextBox");
 		DefineSetup_Sensordata_txtBx = driver.findElementByAccessibilityId("ContentElement");
 		DefineSetup_AssetID_txtBx = driver.findElementByAccessibilityId("VessalTextBox");
+		DefineSetup_SOP_txtBx = driver.findElementByAccessibilityId("SopProtocolTextBox");
+		DefineSetup_LoadDesc_txtBx = driver.findElementByAccessibilityId("LoadDescTextBox");
+		DefineSetup_Cmnts_txtBx = driver.findElementByAccessibilityId("CommentTextBox");
 		Next_Btn = driver.findElementByAccessibilityId("NextButton");
 		
 	}
@@ -50,6 +56,12 @@ public class Setup_defineSetupPage extends BaseClass {
 	public void click_defineSetupPage_backBtn() throws InterruptedException {
 		clickOn(DefineSetup_backBtn);
 		Thread.sleep(1000);
+	}
+	
+	// Check the presence of Alert message on clicking the Setup Back Button
+	public boolean visible_AlertMsg_state() {
+		WebElement alrtmsg = driver.findElementByName("You are about to lose your changes.Do you want to continue ?");
+		return IsElementVisibleStatus(alrtmsg);
 	}
 	
 	// Click Yes to Alert message
@@ -119,6 +131,71 @@ public class Setup_defineSetupPage extends BaseClass {
 	public String get_ButtomBarAlertmsg_txt() {
 		WebElement alrtmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(alrtmsg);
+	}
+	
+	// Check the presence of SOP field in Define Setup page
+	public boolean visible_SOPField() {
+		return IsElementVisibleStatus(DefineSetup_SOP_txtBx);
+	}
+	
+	// Click SOP field
+	public void click_defineSetupPage_SOPField() {
+		clickOn(DefineSetup_SOP_txtBx);
+	}	
+	
+	// Clear Sensor count data	
+	public void clear_defineSetupPage_SOP() {
+		ClearText(DefineSetup_SOP_txtBx);
+	}
+	
+	// Enter SOP data
+	public void enter_defineSetupPage_SOP(String SOPdt) {
+		enterText(DefineSetup_SOP_txtBx, SOPdt);
+	}
+	
+	// Check the presence of Load Description field in Define Setup page
+	public boolean visible_LoadDescField() {
+		return IsElementVisibleStatus(DefineSetup_LoadDesc_txtBx);
+	}
+	
+	// Click Load Description field
+	public void click_defineSetupPage_LoadDescField() {
+		clickOn(DefineSetup_LoadDesc_txtBx);
+	}	
+	
+	// Clear Load Description data field
+	public void clear_defineSetupPage_LoadDesc() {
+		ClearText(DefineSetup_LoadDesc_txtBx);
+	}
+	
+	// Enter Load Description data
+	public void enter_defineSetupPage_LoadDesc(String LDdt) {
+		enterText(DefineSetup_LoadDesc_txtBx, LDdt);
+	}
+	
+	// Check the presence of comments field in Define Setup page
+	public boolean visible_Comments_Field() {
+		return IsElementVisibleStatus(DefineSetup_Cmnts_txtBx);
+	}
+	
+	// Click comments field
+	public void click_defineSetupPage_commentsField() {
+		clickOn(DefineSetup_Cmnts_txtBx);
+	}	
+	
+	// Clear comments data field
+	public void clear_defineSetupPage_comments() {
+		ClearText(DefineSetup_Cmnts_txtBx);
+	}
+	
+	// Enter comments data
+	public void enter_defineSetupPage_comments(String Cmntdt) {
+		enterText(DefineSetup_Cmnts_txtBx, Cmntdt);
+	}
+	
+	// Fetch comments field data
+	public String get_defineSetupPage_comments_txtData() {
+		return FetchText(DefineSetup_Cmnts_txtBx);
 	}
 	
 	
