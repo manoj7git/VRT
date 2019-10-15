@@ -5,6 +5,10 @@
 
 package com.vrt.pages;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -28,6 +32,7 @@ public class UserManagementPage extends BaseClass {
 	WebElement PhoneUMField = driver.findElementByAccessibilityId("PhoneTextBox");
 	WebElement EmailUMField = driver.findElementByAccessibilityId("EmailTextBox");
 	WebElement DeleteUMBtn = driver.findElementByName("Delete");
+	
 
 	WebElement UMAssetPriv = driver.findElementByAccessibilityId("AssetsPrivlegesCheckBox");
 	WebElement UMSetupPriv = driver.findElementByAccessibilityId("SetupCreationCheckBox");
@@ -57,7 +62,9 @@ public class UserManagementPage extends BaseClass {
 	WebElement ManualSync = driver.findElementByAccessibilityId("ManualSyncCheckBox");
 	WebElement CameraAccess = driver.findElementByAccessibilityId("CamerAccessCheckbox");
 	WebElement DeletePassFailTemplate = driver.findElementByAccessibilityId("DeleteTemplateCheckBox");
-
+	WebElement DisableCheckbox = driver.findElementByAccessibilityId("DisableUserCheckBox");
+	WebElement UsersListButton = driver.findElementByAccessibilityId("PrintUsersListButton");
+	
 	/*----------------------
 	Methods of UserManagement Page
 	------------------------*/
@@ -417,6 +424,16 @@ public class UserManagementPage extends BaseClass {
 		select_UserType(Utype);
 		ClickNewUserSaveButton();
 	}
+	// Checking Admin Privileges Without saving the data 
+		public void UMPrivilages(String UName, String UID, String Pwd, String Cpwd, String Titl, String Utype)
+				throws InterruptedException {
+			enterNewUserName(UName);
+			enterNewUserID(UID);
+			enterNewUserPW(Pwd);
+			enterNewUserConfPW(Cpwd);
+			enterNewUserTitle(Titl);
+			select_UserType(Utype);
+		}
 
 	// User Management Creation with Non Mandatory fields
 	public void UMCreation_NonmandatoryFields(String UName, String UID, String Pwd, String Cpwd, String Titl,
@@ -488,4 +505,186 @@ public class UserManagementPage extends BaseClass {
 		WebElement LgInPopup = driver.findElementByName("Enter User Credentials");
 		return IsElementVisibleStatus(LgInPopup);
 	}
+	
+	// Click on the User Image Tile Button
+	public void click_UserImageTile() throws InterruptedException {
+		WebElement 	UserImgTileBtn = driver.findElementByAccessibilityId("UserImage");
+		clickOn(UserImgTileBtn);
+		Thread.sleep(1000);
+	}
+
+	// Click the Browse button under User Image tile
+	public void click_UploadBrowseBtn() throws InterruptedException {
+		WebElement 	BrowseBtn = driver.findElementByAccessibilityId("BrowseButton");
+		clickOn(BrowseBtn);
+		Thread.sleep(1000);
+	}
+
+	// Upload images methods
+	public void upload_UserImage(String filename) throws AWTException, IOException, InterruptedException {
+
+		// switch to the file upload window
+		WebElement alert = driver.switchTo().activeElement();
+		Thread.sleep(1000);
+
+		// enter the filename
+		String filepath = System.getProperty("user.dir") + "\\TestData\\" + filename;
+		// System.out.println(filepath);
+
+		alert.sendKeys(filepath);
+		Thread.sleep(1000);
+
+		// hit enter
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);
+
+		// switch back
+		driver.switchTo().activeElement();
+	}
+	
+	// DisableUserCheckBox
+	
+	// check/select Disable User CheckBox
+		public void Select_DisableUserCheckBox() throws InterruptedException {
+			clickOn(DisableCheckbox);
+		}
+// Click the created User Name
+		public void Click_CreatedUsernameBtn() throws InterruptedException {
+			WebElement 	UserNameBtn = driver.findElementByAccessibilityId("UserNameTextBlock");
+			clickOn(UserNameBtn);
+}
+// Does it display the Save Alert message if a user disable his own account
+		public boolean DisableAlertMsgVisible()throws InterruptedException {
+			WebElement Dmsg = driver.findElementByName("Sorry, you cannot delete or disable the Logged in User Account");
+			return IsElementVisibleStatus(Dmsg);
+		}
+		
+// Verify if Admin Privilege checked/selected or not
+		public boolean Adminstatus() {
+			return checkboxSelectStatus(AdminPriv);
+		}
+// Verify if Create/Edit Equipment Privilege checked/selected or not
+				public boolean CreateAndEditEquipmentstatus() {
+					return checkboxSelectStatus(CreaeteEditEquipPriv);
+				}
+// Verify if Create Reports Privilege checked/selected or not
+				public boolean CreateReportsstatus() {
+					return checkboxSelectStatus(CreateReports);
+				}
+// Verify if Create Pass/Fail template Privilege checked/selected or not
+				public boolean CreatePassFailtemplatestatus() {
+					return checkboxSelectStatus(CreatePassFailTemplate);
+				}
+// Verify if Audit trail template Privilege checked/selected or not
+				public boolean Audittrailstatus() {
+					return checkboxSelectStatus(AuditTrail);
+				}
+// Verify if Delete Assets Privilege checked/selected or not
+				public boolean DeleteAssetsstatus() {
+					return checkboxSelectStatus(DeleteAssets );
+				}
+// Verify if Delete Setup Privilege checked/selected or not
+				public boolean DeleteSetupstatus() {
+					return checkboxSelectStatus(DeleteSetup);
+				}
+// Verify if Delete Equipment Privilege checked/selected or not
+				public boolean DeleteEquipmentstatus() {
+					return checkboxSelectStatus(DeleteEquipment);
+				}
+// Verify if Delete Study Files/Reports Privilege checked/selected or not
+				public boolean DeleteStudyFilesReportsstatus() {
+					return checkboxSelectStatus(DeleteStudyFiles);
+				}
+// Verify if Edit Pass/Fail template Privilege checked/selected or not
+				public boolean EditPassFailtemplatestatus() {
+					return checkboxSelectStatus(EditPassFailTemplate);
+				}
+// Verify if Copy Files/Reports Privilege checked/selected or not
+				public boolean CopyFilesReportsstatus() {
+					return checkboxSelectStatus(CopyFilesReports);
+				}
+// Verify if Archive data Privilege checked/selected or not
+				public boolean Archivedatastatus() {
+					return checkboxSelectStatus(ArchiveData);
+				}
+// Verify if Camera Access Privilege checked/selected or not
+				public boolean CameraAccessstatus() {
+					return checkboxSelectStatus(CameraAccess);
+				}
+//Verify if Manual Sync Privilege checked/selected or not
+               public boolean ManualSyncstatus() {
+	              return checkboxSelectStatus(ManualSync);
+                }
+// Verify if Delete pass/fail template Privilege checked/selected or not
+				public boolean Deletepassfailtemplatestatus() {
+					return checkboxSelectStatus(DeletePassFailTemplate);
+				}
+// Verify if Create/Edit Asset Privilege checked/selected or not
+				public boolean CreaeteEditAssetPrivstatus() {
+					return checkboxSelectStatus(CreaeteEditAssetPriv);
+				}
+// Verify if Create/Edit setup Privilege checked/selected or not
+				public boolean CreaeteEditSetupstatus() {
+					return checkboxSelectStatus(CreaeteEditSetupPriv);
+				}
+// Verify if Run Qualification Privilege checked/selected or not
+				public boolean RunQualificationstatus() {
+					return checkboxSelectStatus(RunQualification);
+				}
+// Verify if Run Calibration  Privilege checked/selected or not
+				public boolean RunCalibrationstatus() {
+					return checkboxSelectStatus(RunCalibration );
+		}
+			
+// Click UsersListButton button
+             public void ClickUsersListButton() {
+					clickOn(UsersListButton);
+				}
+     // To open the user list pop up  presence
+         	public boolean UserListOpenPopupvisible() throws InterruptedException {
+         	 driver.switchTo().activeElement();
+        		Thread.sleep(1000);
+         		WebElement UserlistopenPopup = driver.findElementByAccessibilityId("HeadText");
+         		return IsElementVisibleStatus(UserlistopenPopup);
+         	}
+         	//Click on Delete button
+         	public void ClickDeletebtn() {
+         		clickOn(DeleteUMBtn);
+         	}
+        	
+         // confirmation pop-up should be displayed for Delete user
+         	
+         	public boolean confirmationPopupvisible() throws InterruptedException {
+         		WebElement DeletePopup = driver.findElementByAccessibilityId("TitleBar");
+         		return IsElementVisibleStatus(DeletePopup);
+         	}
+         	//Click on  "Yes" button from the delete confirmation pop-up 
+         	public void Delete_ClickYesBtn() throws InterruptedException {
+         		WebElement Yesbtn = driver.findElementByAccessibilityId("Button1");
+         		clickOn(Yesbtn);
+         	}
+         	//Click on  "No" button from the delete confirmation pop-up 
+         	public void Delete_ClickNoBtn() throws InterruptedException {
+         		WebElement Nobtn = driver.findElementByAccessibilityId("Button0");
+         		clickOn(Nobtn);
+         	}
+// Deleted alert message visible
+         	
+         	public boolean Delete_alertvisible() throws InterruptedException {
+         		WebElement Deletealert = driver.findElementByAccessibilityId("displayMessageTextBlock");
+         		return IsElementVisibleStatus(Deletealert);
+         	}
+         	
+         	//Click on the Search box and enter valid user name
+         	public void EnterdatainSearchBox(String entrUN) throws InterruptedException {
+         		WebElement SrchBox = driver.findElementByAccessibilityId("SearchTextBox");
+         		clickOn(SrchBox);
+         		enterText(SrchBox,entrUN);
+         	}
+         	//User1
+         	public boolean IsSearchNamevisible() throws InterruptedException {
+         		WebElement srchname = driver.findElementByName("User1");
+         		return IsElementVisibleStatus(srchname);
+         	}
 }

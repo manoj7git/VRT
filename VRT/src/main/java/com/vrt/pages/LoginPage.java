@@ -239,5 +239,55 @@ public class LoginPage extends BaseClass {
 		
 		return new MainHubPage();
 	}	
+	
+	//Login For Disable User accounts
+	public void DisableUserLogin() throws InterruptedException 
+	{	
+		MainLoginUID.sendKeys("95");
+		MainLoginPW.sendKeys("13");
+		MainLoginBtn.click();
+	}
+	
+	//ADMN196-Verify Reset pwd functionality for 1st  AdminTest user	
+	public void FirstTest_AdminLogin() throws InterruptedException 
+	{	
+		MainLoginUID.sendKeys("202");
+		MainLoginPW.sendKeys("2");
+		MainLoginBtn.click();
+		Thread.sleep(2000);
+	}
+	
+	
+	public void AfterReset_AdminLogin() throws InterruptedException 
+	{	
+		MainLoginUID.sendKeys("202");
+		MainLoginPW.sendKeys("6");
+		MainLoginBtn.click();
+		Thread.sleep(2000);
+	}
+	
+//For Deleted user Login 
+	public void DeletedUserLogin() throws InterruptedException 
+	{	
+		MainLoginUID.sendKeys("38am");
+		MainLoginPW.sendKeys("3");
+		MainLoginBtn.click();
+	}
+	//Alert message for entering deleted users credentials
+	
+	public String Deleteduser_AlertMsg() {
+		WebElement LogMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return FetchText(LogMsg);
+	}
+	
+	//ADMN198.1- Verify if Administrator is able to access the default privilege-Create_Edit Equipment
 
-}
+	
+		public void Equip_Priv_AdminLogin() throws InterruptedException 
+		{	
+			MainLoginUID.sendKeys("E3");
+			MainLoginPW.sendKeys("1");
+			MainLoginBtn.click();
+			Thread.sleep(2000);
+		}
+	}

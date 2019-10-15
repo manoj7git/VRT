@@ -13,8 +13,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -57,11 +59,11 @@ public class assetDetailsTest extends BaseClass {
 	public void AssetCreationSetup() throws InterruptedException, IOException {
 
 		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ExtentReport.html", true);
-		extent.addSystemInfo("VRT Version", "1.0.0.37");
-		extent.addSystemInfo("BS Version", "0.6.13");
-		extent.addSystemInfo("Lgr Version", "1.2.6");
+		extent.addSystemInfo("VRT Version", "1.0.0.39");
+		extent.addSystemInfo("BS Version", "0.6.18");
+		extent.addSystemInfo("Lgr Version", "1.2.9");
 		extent.addSystemInfo("User Name", "Manoj");
-		extent.addSystemInfo("TestSuiteName", "AssetHubTest");
+		extent.addSystemInfo("TestSuiteName", "AssetetailsTest");
 
 		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
@@ -103,7 +105,7 @@ public class assetDetailsTest extends BaseClass {
 
 	}
 
-	// After All the tests are conducted
+	// After All the tests are conducted	
 	@AfterTest
 	public void endReport_releaseMomory() {
 		extent.flush();
@@ -153,7 +155,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 
 	
-	// ASST016
+	// 01-ASST016
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST016-Verify if selecting the target Asset "
 			+ "tile in Asset hub page , user is navigated to the target Asset Details screen "
 			+ "with Asset name & Asset Type info displayed in the Header")
@@ -169,7 +171,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 
 	
-	// ASST017
+	// 02-ASST017
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST017-Verify if Edit Icon is present"
 			+ " at the right top corner of assets detail page and opens the Edit asset - asset details "
 			+ "screen with the possibility to edit the selected asset")
@@ -194,7 +196,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 
 	
-	// ASST018
+	// 03-ASST018
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST018-Verify if clicking on "
 			+ "Back Button at the left top to return to Assets Hub page")
 	public void ASST018() throws InterruptedException {
@@ -213,7 +215,7 @@ public class assetDetailsTest extends BaseClass {
 	// ASST019 = Manual Test
 
 	
-	// ASST020
+	// 04-ASST020
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST020-Verify if the data displayed "
 			+ "in the assets detail page is exactly same as the information given for asset in Create new Asset page")
 	public void ASST020() throws InterruptedException, ParseException {
@@ -234,7 +236,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 
 	
-	// ASST021
+	// 05-ASST021
 	@Test(groups = { "Regression" }, description = "ASST021-Verify the first tier at the right hand side of the asset "
 					+ "detail page should have the following tiles arranged sequentially- Setups, Qualifications,Reports, Documents.")
 	public void ASST021() throws InterruptedException, ParseException {
@@ -255,7 +257,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 	
 	
-	// ASST022
+	// 06-ASST022
 	@Test(groups = { "Regression" }, description = "ASST022-Verify for  a fresh asset with no activities - "
 			+ "Setups, Qualifications, Reports and Docs -  as mentioned, all tiles should display 0")
 	public void ASST022() throws InterruptedException, ParseException {
@@ -277,7 +279,7 @@ public class assetDetailsTest extends BaseClass {
 	
 
 	
-	// ASST024
+	// 07-ASST024
 	@Test(groups = { "Regression" }, description = "ASST024-Verify if any number of documents uploaded,"
 			+ "the same number is displayed on the documents tile")
 	public void ASST024() throws InterruptedException, ParseException, IOException, AWTException {
@@ -326,7 +328,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 	
 	
-	// ASST025
+	// 08-ASST025
 	@Test(groups = { "Regression" }, description = "ASST025-Verif if the application declines uploading documents that has same name")
 	public void ASST025() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
@@ -352,7 +354,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 	
 	
-	// ASST029
+	// 09-ASST029
 	@Test(groups = { "Regression" }, description = "ASST029-Verify Initiate Qualification, "
 			+ "Initiate Calibration and Initiate Verification buttons are enable if any study is selected")
 	public void ASST029() throws InterruptedException, ParseException, IOException, AWTException {
@@ -366,7 +368,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 	
 	
-	// ASST033
+	// 10-ASST033
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST033-Verify  New button is available "
 			+ "and clicking on button user should able to define new setup")
 	public void ASST033() throws InterruptedException, ParseException, IOException, AWTException {
@@ -382,7 +384,7 @@ public class assetDetailsTest extends BaseClass {
 	}
 	
 	
-	// ASST034
+	// 11-ASST034
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST034-Verify if only one Asset is available then "
 			+ "copy setup screen should not allow any action")
 	public void ASST034() throws InterruptedException, ParseException, IOException, AWTException {

@@ -150,7 +150,7 @@ public class setup_defineSetupTest extends BaseClass{
 	
 	
 	// Test Cases
-	// SET002
+	// 01-SET002
 	@Test(groups = {
 			"Regression" }, description = "SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active")
 	public void SET002() throws InterruptedException {
@@ -167,7 +167,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET009
+	// 02-SET009
 	@Test(groups = {
 			"Regression" }, description = "SET 009- UI_Verify if the setup name created in the _Define Setup_ page is "
 					+ "displayed at the top left of the Sensors Configuration page when click on the next tab at Define Setup")
@@ -192,7 +192,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET010
+	// 03-SET010
 	@Test(groups = {
 			"Regression" }, description = "SET 010- UI_Verify if _New Setup_, _Type of Asset_ , _Equipment Name_ is "
 					+ "displayed at the top left of the Define Setup page when clicked on _ (+) New_ button in Asset details page.")
@@ -228,7 +228,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET011
+	// 04-SET011
 	@Test(groups = {
 			"Sanity", "Regression" }, description = "SET 011- UI_Verify if _Setup Name_ (mandatory field) "
 					+ "is displayed in the _Define Setup_ screen.")
@@ -253,7 +253,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET012
+	// 05-SET012
 	@Test(groups = {
 			"Sanity", "Regression" }, description = "SET 012- UI_Verify if  _Number of Sensors _ (mandatory field)"
 					+ " is displayed in the _Define Setup_ screen.")
@@ -277,7 +277,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET013
+	// 06-SET013
 	@Test(groups = {
 			"Sanity", "Regression" }, description = "SET 013- UI_Verify if  _ Asset ID_ (prepoluted field) "
 					+ "is displayed in the _Define Setup_ screen.")
@@ -300,7 +300,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET017
+	// 07-SET017
 	@Test(groups = {
 			"Sanity", "Regression" }, description = "'SET 017-UI_Verify if the setup name field, "
 					+ "by default is displayed as current date and 24 hour time format DD-MMM-YYYY HH-MM-SS")
@@ -335,7 +335,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET019
+	// 08-SET019
 	@Test(groups = {
 			"Sanity", "Regression" }, dataProvider="SET019", dataProviderClass=setupCreationUtility.class,
 					description = "SET 019-UI_Verify if the setup name text field allows up to "
@@ -365,7 +365,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET020
+	// 09-SET020
 	@Test(groups = {
 			"Regression" }, dataProvider="SET020", dataProviderClass=setupCreationUtility.class,
 					description = "SET 019-UI_Verify if the setup name text field do not allow "
@@ -396,7 +396,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET024
+	// 10-SET024
 	@Test(groups = {
 			"Sanity", "Regression" }, dataProvider="SET024", dataProviderClass=setupCreationUtility.class,
 					description = "SET 024-UI_Verify if the _Number of Sensors_ text box is editable and allows "
@@ -423,7 +423,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET025
+	// 11-SET025
 	@Test(groups = {
 			"Regression" }, dataProvider="SET025", dataProviderClass=setupCreationUtility.class,
 					description = "SET 025-UI_Verify if _Number of Sensors_ field can accept only numeric values.")
@@ -449,7 +449,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET026a
+	// 12-SET026a
 	@Test(groups = {
 			"Regression" }, dataProvider="SET026a", dataProviderClass=setupCreationUtility.class,
 					description = "SET 026-UI_Verify if _SOP Protocol Number_ field  can accept upto 50 characters that comprises"
@@ -479,7 +479,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET026b
+	// 13-SET026b
 	@Test(groups = {
 			"Regression" }, dataProvider="SET026b", dataProviderClass=setupCreationUtility.class,
 					description = "SET 026-UI_Verify if _SOP Protocol Number_ field  can accept upto 50 characters that comprises"
@@ -510,7 +510,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET027a
+	// 14-SET027a
 	@Test(groups = { "Sanity",
 			"Regression" }, dataProvider = "SET027a", dataProviderClass = setupCreationUtility.class,
 			description = "SET 027-UI_Verify if _Load Description_ field  can accept upto 50 characters that comprises"
@@ -536,7 +536,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 		
 		
-	// SET027b
+	// 15-SET027b
 	@Test(groups = {
 			"Regression" }, dataProvider = "SET027b", dataProviderClass = setupCreationUtility.class, 
 					description = "SET 027-UI_Verify if _Load Description_ field  can accept upto 50 characters that comprises"
@@ -562,7 +562,7 @@ public class setup_defineSetupTest extends BaseClass{
 
 	}
 	
-	// SET028a
+	// 16-SET028a
 	@Test(groups = { "Sanity",
 			"Regression" }, dataProvider = "SET028", dataProviderClass = setupCreationUtility.class,
 			description = "SET 028-UI_Verify if the _Comments_ field accepts up to 25 characters input "
@@ -588,7 +588,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 		
 		
-	// SET028b
+	// 17-SET028b
 	@Test(groups = { "Regression" }, description = "SET 028-UI_Verify if the _Comments_ field accepts up to 25 characters input")
 	public void SET028b()
 			throws InterruptedException, ParseException {
@@ -613,7 +613,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET029
+	// 18-SET029
 	@Test(groups = { "Sanity", "Regression" }, 
 			description = "SET 029- Fnc_Verify if clicking on the back button pops up a warning message, "
 					+ "You are about to lose your changes. Do you want to continue_ with Yes and No buttons.")
@@ -633,7 +633,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET030
+	// 19-SET030
 	@Test(groups = { "Sanity", "Regression" }, 
 			description = "SET 030- Fnc_Verify if clicking on _Yes_ discards the changes made "
 					+ "and bring application back to Assets details page")
@@ -655,7 +655,7 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// SET031
+	// 20-SET031
 	@Test(groups = { "Regression" }, 
 			description = "SET 031-Fnc_Verify if clicking on _No_ allows the user to stay in the current page")
 	public void SET031() throws InterruptedException, ParseException {
