@@ -519,6 +519,18 @@ public class UserManagementPage extends BaseClass {
 		clickOn(BrowseBtn);
 		Thread.sleep(1000);
 	}
+	// Click the Camera Icon under User Image tile
+		public void click_CameraIcon() throws InterruptedException {
+			WebElement 	CameraIcon = driver.findElementByAccessibilityId("CameraImage");
+			clickOn(CameraIcon);
+			Thread.sleep(2000);
+		}
+		// Camera On Header Title  is Visible ...
+		public boolean CameraOnTitleVisible() {
+			WebElement IsCameraOn = driver.findElementByName("Camera");
+				return IsElementVisibleStatus(IsCameraOn);
+			}	
+	//AccessibilityText	
 
 	// Upload images methods
 	public void upload_UserImage(String filename) throws AWTException, IOException, InterruptedException {
@@ -550,10 +562,8 @@ public class UserManagementPage extends BaseClass {
 			clickOn(DisableCheckbox);
 		}
 // Click the created User Name
-		public void Click_CreatedUsernameBtn() throws InterruptedException {
-			WebElement 	UserNameBtn = driver.findElementByAccessibilityId("UserNameTextBlock");
-			clickOn(UserNameBtn);
-}
+		
+
 // Does it display the Save Alert message if a user disable his own account
 		public boolean DisableAlertMsgVisible()throws InterruptedException {
 			WebElement Dmsg = driver.findElementByName("Sorry, you cannot delete or disable the Logged in User Account");
@@ -624,6 +634,14 @@ public class UserManagementPage extends BaseClass {
 				public boolean CreaeteEditAssetPrivstatus() {
 					return checkboxSelectStatus(CreaeteEditAssetPriv);
 				}
+	//Click on the Create/Edit Asset Privilege Check Box	
+				public void Click_CreaeteEditAssetCheckBox()
+				{
+					clickOn(CreaeteEditAssetPriv);
+				}
+				
+				
+				
 // Verify if Create/Edit setup Privilege checked/selected or not
 				public boolean CreaeteEditSetupstatus() {
 					return checkboxSelectStatus(CreaeteEditSetupPriv);
@@ -687,4 +705,5 @@ public class UserManagementPage extends BaseClass {
          		WebElement srchname = driver.findElementByName("User1");
          		return IsElementVisibleStatus(srchname);
          	}
+         	       	
 }

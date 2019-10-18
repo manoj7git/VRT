@@ -149,4 +149,10 @@ public class userManagementUtility extends BaseClass{
 		 return data;
 	}
 
+	@DataProvider(name="tcADMN188a")
+	public static Object[][] tcADMN188a() {
+		String sheetname = "tcADMN188a";
+		 Object[][] data = getTestData(sheetname);
+		 return data;
+	}
 }

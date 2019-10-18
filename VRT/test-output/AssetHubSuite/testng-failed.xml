@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [AssetHubSuite]">
   <listeners>
     <listener class-name="com.vrt.Listners.AllureReportListner"/>
+    <listener class-name="com.vrt.Listners.RetryTransformer"/>
   </listeners>
   <test thread-count="5" name="AssetHubSanityTest(failed)">
     <groups>
       <run>
-        <include name="Regression"/>
+        <include name="Sanity"/>
       </run>
     </groups>
     <classes>
       <class name="com.vrt.testcases.assetHubTest">
         <methods>
           <include name="Teardown"/>
-          <include name="ASST002"/>
+          <include name="ASST001"/>
           <include name="Setup"/>
+          <include name="ASST147"/>
+          <include name="ASST008"/>
         </methods>
       </class> <!-- com.vrt.testcases.assetHubTest -->
     </classes>

@@ -279,15 +279,4 @@ public class LoginPage extends BaseClass {
 		WebElement LogMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(LogMsg);
 	}
-	
-	//ADMN198.1- Verify if Administrator is able to access the default privilege-Create_Edit Equipment
-
-	
-		public void Equip_Priv_AdminLogin() throws InterruptedException 
-		{	
-			MainLoginUID.sendKeys("E3");
-			MainLoginPW.sendKeys("1");
-			MainLoginBtn.click();
-			Thread.sleep(2000);
-		}
-	}
+}

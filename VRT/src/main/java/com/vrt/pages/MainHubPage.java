@@ -20,6 +20,10 @@ public class MainHubPage extends BaseClass {
 	WebElement AssetCountInfoInAsstTile = driver.findElementByAccessibilityId("TitleCountTextBlock");
 	WebElement MainUIPageTitle= driver.findElementByName("ValProbe RT System");
 	WebElement MainUIEquipmentTitle= driver.findElementByName("Equipment");
+	WebElement FileManagementTitle= driver.findElementByName("File Management");
+	WebElement AuditTitle= driver.findElementByName("Audit");
+
+	
 	
 	//Verify the Main Hub Page title name
 	public boolean mainPageTitle() {
@@ -69,5 +73,18 @@ public class MainHubPage extends BaseClass {
 			Thread.sleep(1000);
 			return new EquipmentHubPage();
 		}
-
+		
+		//Click the Equipment Tile
+				public FileManagementPage ClickFileManagementTitle() throws InterruptedException {
+					clickOn(FileManagementTitle);
+					Thread.sleep(1000);
+					return new FileManagementPage();
+				}
+		
+	//Click the Audit Title 
+				public AuditPage ClickAuditTitle() throws InterruptedException {
+					clickOn(AuditTitle);
+					Thread.sleep(1000);
+					return new AuditPage();
+				}				
 }

@@ -189,6 +189,16 @@ public class assetDetailsPage extends BaseClass {
 		Thread.sleep(1000);
 		return new assetCreationPage();
 	}
+	//Click the Asset edit button to get alert msg..when admin does not have the privilege to edit the asset
+		public void click_assetEditBtn_alrt() throws InterruptedException {
+			clickOn(AssetEditBtn);
+			Thread.sleep(1000);
+		}
+		//Fetch the alert message when admin not have the privilege to edit the asset
+		public String AlertMsg() {
+			WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+			return FetchText(Msg);
+		}
 
 	// Click the Back Button
 	public assetHubPage ClickBackBtn() throws InterruptedException {
@@ -215,6 +225,11 @@ public class assetDetailsPage extends BaseClass {
 		Thread.sleep(1000);
 		return new Setup_defineSetupPage();
 	}
+	// Fetch the alert message when does not have access to on new Setup create button 
+		public void click_NewStupCreateBtn_alert() throws InterruptedException {
+			clickOn(NewSetupCreate_Btn);
+			Thread.sleep(1000);
+		}
 	
 	// Click Copy Setup button
 	public void click_CopyStup_Btn() throws InterruptedException {

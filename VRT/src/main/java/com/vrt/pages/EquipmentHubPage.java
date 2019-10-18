@@ -19,7 +19,7 @@ import com.vrt.pages.EquipmentPage;
 import com.vrt.base.BaseClass;
 
 public class EquipmentHubPage extends BaseClass {
-
+	//IRTDHubPage IRTDHubPage;
 	// EquipmentHubPage Element definition
 	WebElement AddButton = null;
 
@@ -34,20 +34,20 @@ public class EquipmentHubPage extends BaseClass {
 
 	}
 	
-	// Click AddButton
-	public EquipmentPage ClickAddButton() throws InterruptedException {
-		clickOn(AddButton);
-		Thread.sleep(1000);
-		return new EquipmentPage();
-	}
-
-	// IRTD
-	// Click on IRTD List box of Equipment page
-/*	public EquipmentIRTDHubPage ClickonIRTDlistbox() {
-		WebElement irtdbox = driver.findElementByName("IRTD");
-		clickOn(irtdbox);
-		return EquipmentIRTDHubPage;
-	}*/
+	// Click AddButton 
+		public EquipmentPage ClickAddButton() throws InterruptedException {
+			clickOn(AddButton);
+			Thread.sleep(1000);
+			return new EquipmentPage();
+		}
+		
+		//IRTD
+				//Click on IRTD List box of Equipment page
+				public IRTDHubPage ClickonIRTDlistbox() {
+					WebElement irtdbox = driver.findElementByName("IRTD");
+					clickOn(irtdbox);
+					return new IRTDHubPage();
+				}
 
 }
 

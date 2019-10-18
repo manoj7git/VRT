@@ -25,7 +25,9 @@ public class assetHubPage extends BaseClass{
 	WebElement LocationBtn = null;
 	WebElement BackBtn = null;
 	WebElement SearchBtn = null;	
-	
+	WebElement AddAssetButton = null;
+	WebElement AssetHub_BackButton = null;
+		
 	//Page element Initialize method
 	private void initElements()
 	{
@@ -37,6 +39,8 @@ public class assetHubPage extends BaseClass{
 		LocationBtn = driver.findElementByAccessibilityId("LocationButton");
 		BackBtn = driver.findElementByAccessibilityId("BackButton");
 		SearchBtn = driver.findElementByAccessibilityId("SearchAssetsButton");
+		AddAssetButton = driver.findElementByAccessibilityId("AddedAssetsButton");
+		AssetHub_BackButton = driver.findElementByAccessibilityId("BackButton");
 	}
 	
 	//Constructor for initializing the page elements
@@ -209,6 +213,7 @@ public class assetHubPage extends BaseClass{
 		}		
 		return new assetDetailsPage();
 	}
+	
 	
 	// Get the Asset count info in the Asset hub page
 	public String assetcount() {
@@ -431,4 +436,29 @@ public class assetHubPage extends BaseClass{
 		}
 		return response;
 	}
+	
+	//Click on ADD(+) icon 
+	
+	public assetCreationPage Click_AddAssetButton()
+	{
+		clickOn(AddAssetButton);
+		return new assetCreationPage();
+	}
+	//Click on ADD(+) icon for non default priviligae  of ADMIN
+	
+		public void Click_AddButton()
+		{
+			clickOn(AddAssetButton);
+		}
+	
+	public String AlertMsg() {
+		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return FetchText(Msg);
+	}
+//click Back button to move to MainHub Page from Asset Hub page in case new Asset is created
+		public MainHubPage clickBackBtn() throws InterruptedException {
+			clickOn(AssetHub_BackButton);		
+			Thread.sleep(1000);
+			return new MainHubPage();
+		}
 }

@@ -105,7 +105,7 @@ public class EquipmentPage extends BaseClass {
 			WebElement LgInPopup = driver.findElementByName("Enter User Credentials");
 			return IsElementVisibleStatus(LgInPopup);
 		}
-		
+				
 //Enter Mandatory fields and create Equipment
 		public void EqipCreation_MandatoryFields(String EID, String EMnum,String Etype)throws InterruptedException {
 			enterNewEquipmentID(EID);
@@ -113,7 +113,13 @@ public class EquipmentPage extends BaseClass {
 			select_EquipmentType(Etype);
 			ClickSaveButton();
 		}
-	
+//Click on back button 
+				public EquipmentHubPage ClickBackBtn() {
+				WebElement backBtn = driver.findElementByAccessibilityId("ArrowGlyph");	
+				clickOn(backBtn);
+				return new EquipmentHubPage();
+				}
+
 		
 }
 

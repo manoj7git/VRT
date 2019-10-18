@@ -2,19 +2,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AssetHubSuite" parallel="false">
 
-	<listeners>
-		<!-- <listener class-name="com.vrt.Listners.ExtentReporterNG" /> -->
+<!-- 	<listeners>
+		<listener class-name="com.vrt.Listners.ExtentReporterNG" />
 		<listener class-name="com.vrt.Listners.AllureReportListner" />
 		<listener class-name="com.vrt.Listners.RetryTransformer" />
-	</listeners>
+	</listeners> -->
 
 	<test name="AssetHubSanityTest">
 	
-		<groups>
+<!-- 		<groups>
 			<run>
 				<include name="Sanity"></include>
 			</run>
-		</groups>
+		</groups> -->
 		
 		<classes>
 			<class name="com.vrt.testcases.assetHubTest" />

@@ -49,7 +49,7 @@ public class UserManagementTest extends BaseClass {
 
 		// Rename the User file (NgvUsers.uxx) if exists
 
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		/*renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -71,7 +71,7 @@ public class UserManagementTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);
+		Thread.sleep(1000);*/
 
 	}
 
@@ -125,7 +125,7 @@ public class UserManagementTest extends BaseClass {
 
 	// ADMN120
 
-	@Test(groups = { "Sanity",
+	/*@Test(groups = { "Sanity",
 			"Regression" }, description = "ADMN120-Verify able to navigate to User Management screen from Admin screen"
 					+ "hub page , user is navigated to the User Management screen screen")
 	public void ADMN120() throws InterruptedException {
@@ -587,11 +587,11 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = UserManagementPage.AlertMsg();
 		s19.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s19.assertAll();
-	}
+	}*/
 
 	// ADMN150
 
-	@Test(dataProvider = "tcADMN150", dataProviderClass = userManagementUtility.class, groups = {
+	/*@Test(dataProvider = "tcADMN150", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs for Phone number field")
 
 	public void ADMN150(Object... dataProvider) throws InterruptedException {
@@ -613,11 +613,11 @@ public class UserManagementTest extends BaseClass {
 				PhoneNo, Email);
 		sa20.assertEquals(UserManagementPage.UserLoginPopupVisible(), true);
 		sa20.assertAll();
-	}
+	}*/
 
 	// ADMN150a
 
-	@Test(dataProvider = "tcADMN150a", dataProviderClass = userManagementUtility.class, groups = {
+	/*@Test(dataProvider = "tcADMN150a", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs for Phone number field")
 
 	public void ADMN150a(Object... dataProvider) throws InterruptedException {
@@ -639,11 +639,11 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = UserManagementPage.AlertMsg();
 		s20.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s20.assertAll();
-	}
+	} */
 
 	// ADMN155t
 
-	@Test(groups = { "Regression" }, description = "Verify that Email field is non-mandatory")
+	/*@Test(groups = { "Regression" }, description = "Verify that Email field is non-mandatory")
 
 	public void ADMN155t() throws InterruptedException {
 		extentTest = extent.startTest("ADMN155-Verify that Email field is non-mandatory");
@@ -653,11 +653,11 @@ public class UserManagementTest extends BaseClass {
 				"9023456789", "");
 		sa21.assertEquals(UserManagementPage.UserLoginPopupVisible(), true);
 		sa21.assertAll();
-	}
+	} */
 
 	// ADMN159
 
-	@Test(dataProvider = "tcADMN159", dataProviderClass = userManagementUtility.class, groups = {
+	/*@Test(dataProvider = "tcADMN159", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Invalid formats for Email Field at User Management Screen")
 
 	public void tcADMN159(Object... dataProvider) throws InterruptedException {
@@ -679,11 +679,11 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = UserManagementPage.AlertMsg();
 		s21.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s21.assertAll();
-	}
+	}*/
 
 	// ADMN160 : Verify valid formats for Email Field at User Management Screen
 
-	@Test(dataProvider = "tcADMN160", dataProviderClass = userManagementUtility.class, groups = {
+	/*@Test(dataProvider = "tcADMN160", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify valid formats for Email Field at User Management Screen")
 	public void ADMN160(Object... dataProvider) throws InterruptedException {
 		extentTest = extent.startTest("ADMN160-Verify Valid formats for  Email Field at User Management Screen");
@@ -702,11 +702,11 @@ public class UserManagementTest extends BaseClass {
 				PhoneNo, Email);
 		sab21.assertEquals(UserManagementPage.UserLoginPopupVisible(), true);
 		sab21.assertAll();
-	}
+	}*/
 
 	// ADMN183-Verify Valid validation for Photo field
 
-	@Test(groups = { "Regression" }, description = "ADMN183-Verify Valid validation for Photo field")
+	/*@Test(groups = { "Regression" }, description = "ADMN183-Verify Valid validation for Photo field")
 	public void ADMN183() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN183-Verify Valid validation for Photo field");
 		UserManagementPage.ClickNewUser();
@@ -714,11 +714,11 @@ public class UserManagementTest extends BaseClass {
 		UserManagementPage.click_UploadBrowseBtn();
 		UserManagementPage.upload_UserImage("UserimageValid");
 		System.out.println("Image Uploaded Successfully");
-	}
+	}*/
 
 //ADMN184-Verify Invalid validation for Photo field
 
-	@Test(groups = { "Regression" }, description = "ADMN184-Verify InValid validation for Photo field")
+	/*@Test(groups = { "Regression" }, description = "ADMN184-Verify InValid validation for Photo field")
 	public void ADMN184() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN184-Verify Invalid validation for Photo field");
 		UserManagementPage.ClickNewUser();
@@ -730,23 +730,23 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = UserManagementPage.AlertMsg();
 		sa22.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		sa22.assertAll();
-	}
+	}*/
 
 	// Verify the Disable User Account check Box validations
 	// ADMN188-Verify that Disable user Account check box is default unselected for
 	// any new user that is created
 
-	@Test(groups = { "Regression" }, description = "ADMN188-Verify InValid validation for Photo field")
+	/*@Test(groups = { "Regression" }, description = "ADMN188-Verify InValid validation for Photo field")
 	public void ADMN188() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest(
 				"ADMN188-Verify that Disable user Account check box is default unselected for any new user that is created");
 		UserManagementPage.ClickNewUser();
 		UserManagementPage.Select_DisableUserCheckBox();
-	}
+	}*/
 
 	// ADMN188a-Verify user is able to disable a user while creating it
 
-	@Test(dataProvider = "tcADMN188a", dataProviderClass = TestUtilities.class,
+	/*@Test(dataProvider = "tcADMN188a", dataProviderClass = TestUtilities.class,
 	  groups = { "Regression" }, description =
 	  "Verify user is able to disable a user while creating it") 
 	public void ADMN188a(Object... dataProvider) throws InterruptedException { 
@@ -763,11 +763,11 @@ public class UserManagementTest extends BaseClass {
 	  UserManagementPage.UMCreation_MandatoryFields(Name, UserID, Password,ConfirmPassword, Title, UserType);
 	  UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 	  
-	  }
+	  }*/
 	 
 	// ADMN188b- Verify Application should not allow to login with disable User id
 
-	@Test(groups = {
+	/*@Test(groups = {
 			"Regression" }, description = "ADMN188b-Verify Application should not allow to login with disable User id")
 	public void ADMN188b() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN188b-Verify Application should not allow to login with disable User id ");
@@ -780,11 +780,11 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = UserManagementPage.AlertMsg();
 		sa23.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		sa23.assertAll();
-	}
+	}*/
 
 //	ADMN188c-Verify if a user can disable his own account
 
-	@Test(groups = { "Regression" }, description = "ADMN188c-Verify if a user can disable his own account")
+	/*@Test(groups = { "Regression" }, description = "ADMN188c-Verify if a user can disable his own account")
 	public void ADMN188c() throws InterruptedException {
 		extentTest = extent.startTest("ADMN188c-Verify if a user can disable his own account");
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
@@ -792,28 +792,28 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.Click_CreatedUsernameBtn();
+		UserManagementPage.clickAnyUserinUserList("User1");
 		UserManagementPage.Select_DisableUserCheckBox();
 		UserManagementPage.ClickNewUserSaveButton();
 		SoftAssert sa24 = new SoftAssert();
 		sa24.assertEquals(UserManagementPage.DisableAlertMsgVisible(), true);
 		sa24.assertAll();
 
-	}
+	}*/
 
 	// ADMN194-Verify User Creation for an Administrator User
 
-	@Test(groups = { "Regression" }, description = "ADMN194-Verify User Creation for an Administrator User")
+	/*@Test(groups = { "Regression" }, description = "ADMN194-Verify User Creation for an Administrator User")
 	public void ADMN194() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("Verify User Creation for an Administrator User");
 		UserManagementPage.ClickNewUser();
 		UserManagementPage.UMCreation_MandatoryFields("AdminTest1", "202", "2", "2", "Admin", "System Administrator");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
-	}
+	}*/
 
 	// ADMN196-Verify Reset pwd functionality for first Admin user
 
-	@Test(groups = { "Regression" }, description = "ADMN194-Verify User Creation for an Administrator User")
+	/*@Test(groups = { "Regression" }, description = "ADMN194-Verify User Creation for an Administrator User")
 	public void ADMN196() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("Verify User Creation for an Administrator User");
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
@@ -821,10 +821,11 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		LoginPage.FirstTest_AdminLogin();
 		MainHubPage = LoginPage.EnterNewPWtext("6");
-	}
+	}*/
+	
 // ADMN196a-Verify user should not be able to login with the previous password
 
-	@Test(groups = { "Regression" }, description = "ADMN194-Verify User Creation for an Administrator User")
+	/*@Test(groups = { "Regression" }, description = "ADMN194-Verify User Creation for an Administrator User")
 
 	public void ADMN196a() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("Verify User Creation for an Administrator User");
@@ -832,11 +833,11 @@ public class UserManagementTest extends BaseClass {
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		LoginPage.FirstTest_AdminLogin();
-	}
+	}*/
 
 //ADMN196b-Verify After resetting the password user should be able to login with the new password
 
-	@Test(groups = { "Regression" }, description = "ADMN194b-Verify After resetting the password "
+	/*@Test(groups = { "Regression" }, description = "ADMN194b-Verify After resetting the password "
 			+ "user is able to login with the new password")
 	public void ADMN196b() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
@@ -845,11 +846,11 @@ public class UserManagementTest extends BaseClass {
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		LoginPage.AfterReset_AdminLogin();
-	}
+	}*/
 
 	// ADMN198-Verify the default privileges for Administrator
 
-	@Test(groups = { "Regression" }, description = "Verify the default privileges for Administrator")
+	/*@Test(groups = { "Regression" }, description = "Verify the default privileges for Administrator")
 	public void ADMN198() throws Exception {
 		extentTest = extent.startTest("ADMN198-Verify the default privileges for Administrator");
 
@@ -874,11 +875,11 @@ public class UserManagementTest extends BaseClass {
 		sa26.assertEquals(UserManagementPage.CameraAccessstatus(), true, "FAIL: CheckBox Not Checked");
 		sa26.assertEquals(UserManagementPage.ManualSyncstatus(), true, "FAIL: CheckBox Not Checked");
 		sa26.assertEquals(UserManagementPage.Deletepassfailtemplatestatus(), true, "FAIL: CheckBox Not Checked");
-	}
+	}*/
 
-// ADMN198a-Verify the other parameters are unchecked for Administrator
+// ADMN198a-Verify the non- default privileges  for Administrator User
 
-	@Test(groups = { "Regression" }, description = "Verify the other parameters are unchecked for Administrator")
+	/*@Test(groups = { "Regression" }, description = "Verify the other parameters are unchecked for Administrator")
 	public void ADMN198a() throws Exception {
 		extentTest = extent.startTest("ADMN198a-Verify the other parameters are unchecked for Administrator");
 
@@ -889,12 +890,12 @@ public class UserManagementTest extends BaseClass {
 		s26.assertEquals(UserManagementPage.CreaeteEditAssetPrivstatus(), false, "FAIL: CheckBox Checked");
 		s26.assertEquals(UserManagementPage.RunQualificationstatus(), false, "FAIL: CheckBox Checked");
 		s26.assertEquals(UserManagementPage.RunCalibrationstatus(), false, "FAIL: CheckBox Checked");
-	}
+	}*/
 
 	// ADMN243_Verify a confirmation pop-up should be displayed with Yes and No
 	// buttons when user click on delete button
 
-	@Test(groups = { "Regression" }, description = "ADMN243_Verify a confirmation pop-up should be displayed")
+	/*@Test(groups = { "Regression" }, description = "ADMN243_Verify a confirmation pop-up should be displayed")
 	public void ADMN243() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN243_Verify a confirmation pop-up should be displayed");
 		SoftAssert s28 = new SoftAssert();
@@ -906,15 +907,16 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.Click_CreatedUsernameBtn();
+		//UserManagementPage.Click_CreatedUsernameBtn();
+		UserManagementPage.clickAnyUserinUserList("Test1a");
 		UserManagementPage.ClickDeletebtn();
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		s28.assertEquals(UserManagementPage.confirmationPopupvisible(), true);
 		s28.assertAll();
-	}
+	}*/
 
 	// ADMN243a-Verify user is able to delete the selected account
-	@Test(groups = { "Regression" }, description = "Verify user is able to delete the selected account")
+	/*@Test(groups = { "Regression" }, description = "Verify user is able to delete the selected account")
 	public void ADMN243a() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN243a_Verify user is able to delete the selected account");
 		SoftAssert s29 = new SoftAssert();
@@ -926,7 +928,7 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.Click_CreatedUsernameBtn();
+		UserManagementPage.clickAnyUserinUserList("ORNA4");
 		UserManagementPage.ClickDeletebtn();
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage.Delete_ClickYesBtn();
@@ -950,11 +952,11 @@ public class UserManagementTest extends BaseClass {
 		s29.assertEquals("User", "Userffg", "Result is Not matching");
 		s29.assertEquals(actwords[1], "ORNA3", "Result is Not matching");
 		s29.assertEquals(actwords[2], "deleted", "Result is Not matching");
-	}
+	}*/
 	// 'ADMN243b-The pop-up should get dismissed and user should remain on the same
 	// screen when user click on NO button from the confirmation pop-up
 
-	@Test(groups = {
+	/*@Test(groups = {
 			"Regression" }, description = "Verify user is able to should remain on the same screen when user click on NO button from the confirmation pop-up ")
 	public void ADMN243b() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN243b_The pop-up should get dismissed and user should remain on "
@@ -968,18 +970,18 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.Click_CreatedUsernameBtn();
+		UserManagementPage.clickAnyUserinUserList("Mango");
 		UserManagementPage.ClickDeletebtn();
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage.Delete_ClickNoBtn();
 		sa29.assertEquals(UserManagementPage.IsUMscreenDisplayed(), true);
 		sa29.assertAll();
-	}
+	}*/
 	// ADMN243c-Verify the deleted user should not be able to login to the
 	// application
 	// (Verify the alert message)
 
-	@Test(groups = {
+	/*@Test(groups = {
 			"Regression" }, description = "Verify the deleted user should not be able to login to the application")
 	public void ADMN243c() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
@@ -993,7 +995,7 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.Click_CreatedUsernameBtn();
+		UserManagementPage.clickAnyUserinUserList("Cor38");
 		UserManagementPage.ClickDeletebtn();
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage.Delete_ClickYesBtn();
@@ -1005,12 +1007,12 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = LoginPage.Deleteduser_AlertMsg();
 		s29.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s29.assertAll();
-	}
+	}*/
 
 	// ADMN243d-Verify a validation message should be displayed when user try to
 	// create a new user id with the already deleted user id details
 
-	@Test(groups = {
+	/*@Test(groups = {
 			"Regression" }, description = "Verify a validation message should be displayed when user try to create a new user id with the already deleted user id details ")
 	public void ADMN243d() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN243d_Verify a validation message should be displayed when "
@@ -1024,7 +1026,7 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.Click_CreatedUsernameBtn();
+		UserManagementPage.clickAnyUserinUserList("BM2");
 		UserManagementPage.ClickDeletebtn();
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage.Delete_ClickYesBtn();
@@ -1039,7 +1041,64 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = UserManagementPage.AlertMsg();
 		s30.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s30.assertAll();
+	}*/
+	@Test(groups = { "Regression" }, description ="Verify User Creation for Supervisor User"
+			  ) public void ADMN201() throws InterruptedException, ParseException,
+			  IOException, AWTException { extentTest = extent.
+			  startTest("ADMN201-Verify User Creation for Supervisor User"); 
+			  UserManagementPage.ClickNewUser();
+			  UserManagementPage.UMPrivilages("Schck","s1","3Check@3","3Check@3", "Srviser","Supervisor");
+			  SoftAssert s31 = new SoftAssert();
+			// Validate check boxes are checked
+				s31.assertEquals(UserManagementPage.CreaeteEditAssetPrivstatus(), true, "FAIL: Not Checked");
+				s31.assertEquals(UserManagementPage.CreaeteEditSetupstatus(), true, "FAIL: Not Checked");
+				s31.assertEquals(UserManagementPage.CreateReportsstatus(), true, "FAIL: Not Checked");
+				s31.assertEquals(UserManagementPage.Audittrailstatus(), true, "FAIL: Not Checked");
+				s31.assertEquals(UserManagementPage.RunQualificationstatus(), true, "FAIL: Not Checked");
+				s31.assertEquals(UserManagementPage.RunCalibrationstatus(), true, "FAIL: Not Checked");
+				s31.assertEquals(UserManagementPage.ManualSyncstatus(), true, "FAIL: Not Checked");
+				s31.assertEquals(UserManagementPage.CameraAccessstatus(), true, "FAIL: Not Checked");
 	}
-	// ADMN247-Verify search functionality for valid input
+	//ADMN202_1.0-Verify the non- default privileges  for Supervisor User
+	@Test(groups = { "Regression" }, description = "Verify the other parameters are unchecked for Administrator")
+	public void ADMN198a() throws Exception {
+		extentTest = extent.startTest("ADMN198a-Verify the other parameters are unchecked for Administrator");
 
+		// Click on NewUser button
+		UserManagementPage.ClickNewUser();
+		UserManagementPage.UMPrivilages("Schck", "s1", "3Check@3", "3Check@3", "Srviser", "Supervisor");
+		SoftAssert s32 = new SoftAssert();
+		// Validate check boxes are not checked
+		s32.assertEquals(UserManagementPage.Adminstatus(), false, "FAIL: Checked");
+		s32.assertEquals(UserManagementPage.CreateAndEditEquipmentstatus(), false, "FAIL: CheckBox Checked");
+		s32.assertEquals(UserManagementPage.CreatePassFailtemplatestatus(), false, "FAIL: CheckBox Not Checked");
+		s32.assertEquals(UserManagementPage.DeleteAssetsstatus(), false, "FAIL: Checked");
+		s32.assertEquals(UserManagementPage.DeleteSetupstatus(), false,  "FAIL: CheckBox  Checked");
+		s32.assertEquals(UserManagementPage.DeleteEquipmentstatus(), false, "FAIL: CheckBox Checked");
+		s32.assertEquals(UserManagementPage.DeleteStudyFilesReportsstatus(), false, "FAIL: CheckBox Checked");
+		s32.assertEquals(UserManagementPage.EditPassFailtemplatestatus(), false, "FAIL: CheckBox Checked");
+		s32.assertEquals(UserManagementPage.CopyFilesReportsstatus(), false, "FAIL: Checked");
+		s32.assertEquals(UserManagementPage.Archivedatastatus(), false, "FAIL: CheckBox Checked");
+		s32.assertEquals(UserManagementPage.Deletepassfailtemplatestatus(), false,  "FAIL: CheckBox Checked");
+		
+	}
+	
+	// ADMN201-Verify User Creation for Supervisor User
+	/*@Test(groups = { "Regression" }, description ="Verify User Creation for Supervisor User"
+			  ) public void ADMN201() throws InterruptedException, ParseException,
+			  IOException, AWTException { extentTest = extent.
+			  startTest("ADMN201-Verify User Creation for Supervisor User");
+			  UserManagementPage.ClickNewUser();
+			  UserManagementPage.UMCreation_MandatoryFields("Sup1", getUID("SysSupervisor"), "3Welcome3@AM", "3Welcome3@AM","Supervisor", "Supervisor");  
+			  UserLoginPopup(getUID("adminFull"),getPW("adminFull")); 
+			  MainHubPage = UserManagementPage.ClickBackButn();
+			  LoginPage = MainHubPage.UserSignOut();
+			  Thread.sleep(1000);
+			  LoginPage.EnterUserID("3");
+			  LoginPage.EnterUserPW("3Welcome3@AM");
+			  LoginPage.ClickLoginBtn();
+			  MainHubPage = LoginPage.EnterNewPWtext("Welcome3@AM");
+			  LoginPage = MainHubPage.UserSignOut();
+	}*/
+	
 }
