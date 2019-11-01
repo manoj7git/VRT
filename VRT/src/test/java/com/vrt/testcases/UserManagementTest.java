@@ -49,7 +49,7 @@ public class UserManagementTest extends BaseClass {
 
 		// Rename the User file (NgvUsers.uxx) if exists
 
-		/*renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -71,7 +71,7 @@ public class UserManagementTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);*/
+		Thread.sleep(1000);
 
 	}
 
@@ -125,7 +125,7 @@ public class UserManagementTest extends BaseClass {
 
 	// ADMN120
 
-	/*@Test(groups = { "Sanity",
+	@Test(groups = { "Sanity",
 			"Regression" }, description = "ADMN120-Verify able to navigate to User Management screen from Admin screen"
 					+ "hub page , user is navigated to the User Management screen screen")
 	public void ADMN120() throws InterruptedException {
@@ -587,7 +587,7 @@ public class UserManagementTest extends BaseClass {
 		String ActAlertMsg = UserManagementPage.AlertMsg();
 		s19.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s19.assertAll();
-	}*/
+	}
 
 	// ADMN150
 

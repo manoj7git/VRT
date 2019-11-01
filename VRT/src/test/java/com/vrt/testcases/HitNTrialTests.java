@@ -125,9 +125,25 @@ public class HitNTrialTests extends BaseClass {
 	
 	@Test
 	public void PrivTest() throws InterruptedException, ParseException {
-		TestUtilities tu = new TestUtilities();
-		String dt = tu.get_CurrentDate_inCertainFormat("dd-MMM-YYYY HH:mm:ss");
-		System.out.println(dt);
+		
+		String expted = "abcd";
+		String act = "efgh";
+		
+		SoftAssert sa = new SoftAssert();
+		sa.assertEquals(act, expted);
+		sa.assertEquals(act, expted, "Fail");
+		sa.assertAll();
+		
+//		if (!expted.equals(act)) {
+//			sa.assertEquals(true, false);
+//			sa.assertAll();
+//		}
+//		else {
+//			sa.assertEquals(true, true);
+//			sa.assertAll();
+//		}
+
+
 
 	}
 	 

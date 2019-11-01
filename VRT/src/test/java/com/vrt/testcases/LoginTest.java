@@ -177,19 +177,20 @@ public class LoginTest extends BaseClass{
 		//Login using Default Kaye/411
 		UserManagementPage=MainLoginPage.DefaultLogin();
 		//Create the 1st User
-		MainLoginPage = UserManagementPage.FirstUserCreation("User5", "5", "Welcome1@AM", "Welcome1@AM", "System Admin Manager", "123456789", "abc@gmail.com");
+		MainLoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"),
+				getPW("adminFull"), "FullAdmin", "123456789", "abc@gmail.com");
 		//Login with new User Credentials
-		MainHubPage=MainLoginPage.Login("5", "Welcome1@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 				
 		//Verify if New User is logged in correctly
-		sa5.assertEquals(MainHubPage.LoggedinUserName(), "User5", "FAIL: Incorrect User "
+		sa5.assertEquals(MainHubPage.LoggedinUserName(), "User1", "FAIL: Incorrect User "
 				+ "is logged to the system or unable to Login in");
 		
 		sa5.assertAll();
 	}
 
 	
-	@Test(groups = "Regression", description="Verify if the Cancel button resets "
+/*	@Test(groups = "Regression", description="Verify if the Cancel button resets "
 			+ "the UserId and Password fields to Null")
 	public void LOGIN_006() throws InterruptedException {
 		extentTest = extent.startTest("LOGIN_006");
@@ -207,7 +208,7 @@ public class LoginTest extends BaseClass{
 		sa6.assertEquals(PWtxt, "", "FAIL: Cancel button unable to clear the Password field");	
 		
 		sa6.assertAll();
-	}
+	}*/
 	
 	
 	@Test(groups = {"Regression"}, description="Verify if user is not allowed to login with invalid credentials")
@@ -266,7 +267,7 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_010");
 		SoftAssert sa10 = new SoftAssert();
 		
-		MainLoginPage.EnterUserID("5");
+		MainLoginPage.EnterUserID(getUID("adminFull"));
 		MainLoginPage.EnterUserPW("Welcome1@AM");
 		
 		sa10.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: The 1st User is "
@@ -281,10 +282,10 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_012");
 		SoftAssert sa11 = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login("5", "Welcome1@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		MainLoginPage=MainHubPage.UserSignOut();
-		MainLoginPage.EnterUserID("5");
-		MainLoginPage.EnterUserPW("Welcome1@AM");
+		MainLoginPage.EnterUserID(getUID("adminFull"));
+		MainLoginPage.EnterUserPW(getPW("adminFull"));
 		
 		sa11.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: The 1st User is "
 		+"NOT allowed to Change its PW with Change PW option in disbaled state");
@@ -298,8 +299,8 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_013");
 		SoftAssert sa12 = new SoftAssert();
 		
-		MainLoginPage.EnterUserID("5");
-		MainLoginPage.EnterUserPW("Welcome1@AM");
+		MainLoginPage.EnterUserID(getUID("adminFull"));
+		MainLoginPage.EnterUserPW(getPW("adminFull"));
 		MainLoginPage.ClickChangePWCheckbox();
 		MainLoginPage.ClickLoginBtn();
 
@@ -315,8 +316,8 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_014");
 		SoftAssert sa13 = new SoftAssert();
 		
-		MainLoginPage.EnterUserID("5");
-		MainLoginPage.EnterUserPW("Welcome1@AM");
+		MainLoginPage.EnterUserID(getUID("adminFull"));
+		MainLoginPage.EnterUserPW(getPW("adminFull"));
 		MainLoginPage.ClickChangePWCheckbox();
 		MainLoginPage.ClickLoginBtn();
 		
@@ -340,9 +341,9 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_015");
 		SoftAssert sa14 = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.ChangeNewPW("5", "Welcome1@AM", "Welcome2@AM");
+		MainHubPage=MainLoginPage.ChangeNewPW(getUID("adminFull"), getPW("adminFull"), "Welcome2@AM");
 		
-		sa14.assertEquals(MainHubPage.LoggedinUserName(), "User5", "FAIL: Password did not change for the User");
+		sa14.assertEquals(MainHubPage.LoggedinUserName(), "User1", "FAIL: Password did not change for the User");
 		sa14.assertAll();
 	}
 		
@@ -353,7 +354,7 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_016");
 		SoftAssert sa15 = new SoftAssert();
 		
-		MainLoginPage.LoginEntry("5", "Welcome2@AM");
+		MainLoginPage.LoginEntry(getUID("adminFull"), "Welcome2@AM");
 		MainLoginPage.ClickChangePWCheckbox();
 		MainLoginPage.ClickLoginBtn();
 		MainLoginPage.enterNewPW("Welcome3@AM");
@@ -365,9 +366,9 @@ public class LoginTest extends BaseClass{
 		Thread.sleep(1000);
 		MainLoginPage= new LoginPage();
 		
-		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
 
-		sa15.assertEquals(MainHubPage.LoggedinUserName(), "User5", "FAIL: Cancel button"
+		sa15.assertEquals(MainHubPage.LoggedinUserName(), "User1", "FAIL: Cancel button"
 				+ " at New PW change did not work as intended");
 		sa15.assertAll();
 	}
@@ -380,14 +381,14 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_017_18");
 		SoftAssert sa16 = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
-		UserManagementPage.CreateAdminUser("5", "Welcome2@AM", "User1", "1", "Welcome2@AM", "SysAdmin", "123456789", "user1@aas.com");
+		UserManagementPage.CreateAdminUser(getUID("adminFull"), "Welcome2@AM", "User2", getUID("SysAdmin"), "Welcome1@AM", "SysAdmin", "123456789", "user1@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("1", "Welcome2@AM");
+		MainLoginPage.LoginEntry(getUID("SysAdmin"), "Welcome1@AM");
 		MainLoginPage.ClickLoginBtn();
 		
 		sa16.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: A New User created"
@@ -395,7 +396,7 @@ public class LoginTest extends BaseClass{
 		sa16.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: A New User created" 
 				+ " is not forced to change PW on logging in for 1st time with New PW field in Disabled/Invisible state");
 				
-		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome1@AM");
+		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("SysAdmin"));
 		MainHubPage.UserSignOut();
 		sa16.assertAll();
 	}
@@ -407,18 +408,18 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_019");
 		SoftAssert sa17 = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
-		UserManagementPage.CreateSupervisorUser("5", "Welcome2@AM", "User2", "2", "Welcome1@AM", "SysSupervisor", "123456789", "user2@aas.com");
+		UserManagementPage.CreateSupervisorUser(getUID("adminFull"), "Welcome2@AM", "User3", getUID("SysSupervisor"), "Welcome1@AM", "SysSupervisor", "123456789", "user2@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("2", "Welcome1@AM");
+		MainLoginPage.LoginEntry(getUID("SysSupervisor"), "Welcome1@AM");
 		MainLoginPage.ClickLoginBtn();
-		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome2@AM");
+		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("SysSupervisor"));
 		MainLoginPage=MainHubPage.UserSignOut();
-		MainLoginPage.LoginEntry("2", "Welcome2@AM");
+		MainLoginPage.LoginEntry(getUID("SysSupervisor"), getPW("SysSupervisor"));
 
 		sa17.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: ChangePWCheck box "
 				+ "appear to be in Disable state");
@@ -432,31 +433,31 @@ public class LoginTest extends BaseClass{
 		extentTest = extent.startTest("LOGIN_020");
 		SoftAssert sa18 = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
-		UserManagementPage.CreateOperatorUser("5", "Welcome2@AM", "User8", "8", "Welcome1@AM", "SysOperator", "123456789", "user8@aas.com");
+		UserManagementPage.CreateOperatorUser(getUID("adminFull"), "Welcome2@AM", "User4", getUID("SysOperator"), "Welcome1@AM", "SysOperator", "123456789", "user8@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("8", "Welcome1@AM");
+		MainLoginPage.LoginEntry(getUID("SysOperator"), "Welcome1@AM");
 		MainLoginPage.ClickLoginBtn();
 		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome2@AM"); //User8 forced to Rest PW
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainHubPage=MainLoginPage.Login("5", "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
 		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
-		UserManagementPage.clickAnyUserinUserList("User8");
+		UserManagementPage.clickAnyUserinUserList("User4");
 		UserManagementPage.enterNewUserPW("Welcome3@AM");
 		UserManagementPage.enterNewUserConfPW("Welcome3@AM");
 		UserManagementPage.ClickTitlefield();
 		UserManagementPage.ClickNewUserSaveButton();
-		UserLoginPopup("5", "Welcome2@AM");
+		UserLoginPopup(getUID("adminFull"), "Welcome2@AM");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainLoginPage.LoginEntry("8", "Welcome3@AM");
+		MainLoginPage.LoginEntry(getUID("SysOperator"), getPW("SysSupervisor"));
 		MainLoginPage.ClickLoginBtn();
 
 		sa18.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: User is NOT "
@@ -464,7 +465,7 @@ public class LoginTest extends BaseClass{
 		sa18.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: User is NOT " 
 				+ " forced to change his password while login with New PW field in Disabled/Invisible state");
 		
-		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome8@AM");
+		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("SysOperator"));
 		MainHubPage.UserSignOut();
 		sa18.assertAll();
 	}		

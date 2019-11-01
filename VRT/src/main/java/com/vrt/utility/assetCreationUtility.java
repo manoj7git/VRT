@@ -52,48 +52,55 @@ public class assetCreationUtility extends BaseClass{
 
 	// Data Providers
 	//ASSET Creation module related Test Data reference
-	@DataProvider(name = "getAstNameInvalidTestData")
+	@DataProvider(name = "ASST03")
 	public static Object[][] getAstNameInvalidTestData() {
 
 		// "AstName" sheet is the sheet name from which Data related to Asset Name field
 		// is read
-		String sheetName = "InvalidAstName";
+		String sheetName = "ASST03";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "getAstNameValidTestData")
+	@DataProvider(name = "ASST02")
 	public static Object[][] getAstNameValidTestData() {
 
-		String sheetName = "ValidAstName";
+		String sheetName = "ASST02";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "getEqpIDinValidTestData")
+	@DataProvider(name = "ASST06")
 	public static Object[][] getEqpIDinValidTestData() {
-		String sheetName = "InvalidEqpID";
+		String sheetName = "ASST06";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "getEqpIDValidTestData")
+	@DataProvider(name = "ASST05")
 	public static Object[][] getEqpIDValidTestData() {
-		String sheetName = "ValidEqipID";
+		String sheetName = "ASST05";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "getAstTypeInValidTestData")
+	@DataProvider(name = "ASST10")
 	public static Object[][] getAstTypeInValidTestData() {
-		String sheetName = "InvalidAstType";
+		String sheetName = "ASST10";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "getAstTypeValidTestData")
+	@DataProvider(name = "ASST09")
 	public static Object[][] getAstTypeValidTestData() {
-		String sheetName = "ValidAstType";
+		String sheetName = "ASST09";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "getAstMdlInValidTestData")
+	public static Object[][] getAstMdlInValidTestData() {
+		String sheetName = "InvalidAstMdl";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}

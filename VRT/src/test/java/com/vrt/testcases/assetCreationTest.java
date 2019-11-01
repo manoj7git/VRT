@@ -70,9 +70,9 @@ public class assetCreationTest extends BaseClass{
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		UserManagementPage = LoginPage.DefaultLogin();
-		LoginPage = UserManagementPage.FirstUserCreation("User1", "1", "Welcome1@AM", "Welcome1@AM", "FullAdmin",
+		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"), getPW("adminFull"), "FullAdmin",
 				"12345678", "abc@gmail.com");
-		MainHubPage = LoginPage.Login("1", "Welcome1@AM");
+		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 		UserManagementPage.clickAnyUserinUserList("User1");
 
@@ -82,15 +82,14 @@ public class assetCreationTest extends BaseClass{
 		UserManagementPage.clickPrivRunCal();
 
 		UserManagementPage.ClickNewUserSaveButton();
-		UserLoginPopup("1", "Welcome1@AM");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
 		Thread.sleep(1000);
 
 	}
-	
-	
+		
 	//After All the tests are conducted
 	@AfterTest
 	public void endReport(){
@@ -98,7 +97,7 @@ public class assetCreationTest extends BaseClass{
 		extent.close();
 	}
 
-	
+	//Before all tests are conducted 
 	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
@@ -108,7 +107,6 @@ public class assetCreationTest extends BaseClass{
 		assetHubPage=MainHubPage.ClickAssetTile();
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
-
 	
 	// TearDown of the App
 	@AfterMethod(alwaysRun=true)
@@ -134,14 +132,15 @@ public class assetCreationTest extends BaseClass{
 		driver.quit();
 	}
 
+	//~~~~~~~~~~
+	//Test Cases
+	//~~~~~~~~~~
 	
-	
-	 //ASST100
-	@Test(groups = {"Sanity"}, 
-			description="Verify if the asset name text box accepts input only up to 25 characters")
+	/*//ASST01-Verify if 25 max characters allowed in Asset name field
+	@Test(groups = {"Sanity", "Regression"}, 
+			description="ASST01-Verify if 25 max characters allowed in Asset name field")
 	public void ASST100() throws InterruptedException {
-		extentTest = extent.startTest("ASST100-Verify if the asset name text box accepts "
-				+ "input only up to 25 characters");
+		extentTest = extent.startTest("ASST01-Verify if 25 max characters allowed in Asset name field");
 		SoftAssert sa1 = new SoftAssert();
 		String expectedtxt = "12345678901234567890123456";  //26 Char input
 		//System.out.println("count of Asset name text to be entered: "+expectedtxt.length());
@@ -154,36 +153,11 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 
-	
-	//ASST101a
-	@Test(groups = {"Sanity", "Regression"},dataProvider="getAstNameInvalidTestData", dataProviderClass=assetCreationUtility.class, 
-			description="Verify if the Asset Name do not accept In-Valid Data parameters")
-	public void ASST101a(Object ...dataProvider) throws InterruptedException {
-		extentTest = extent.startTest("ASST101a-Verify if the Asset Name do not accept In-Valid Data parameters");
-		SoftAssert sa2 = new SoftAssert();
-		String Name = (String) dataProvider[0]; 
-		String ID = (String) dataProvider[1];
-		String Type = (String) dataProvider[2]; 
-		String Manufacturer = (String) dataProvider[3];
-		String Location = (String) dataProvider[4];
-		String ExpAlrtMsg = (String) dataProvider[5]; 
-		String UserName = (String) dataProvider[6]; 
-		String Password = (String) dataProvider[7];
-		
-		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);		
-		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
-		
-		sa2.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);		
-		sa2.assertAll();
-	}
-	
-
-	
-	//ASST101b
-	@Test(dataProvider="getAstNameValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify if the Asset Name accepts Valid Data parameters")
-	public void ASST101b(Object ...dataProvider) throws InterruptedException {
-		extentTest = extent.startTest("ASST101b-Verify if the Asset Name accepts Valid Data parameters");
+	//ASST02-Verify the valid inputs accepted in Asset name field
+	@Test(dataProvider="ASST02", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
+			description="ASST02-Verify the valid inputs accepted in Asset name field")
+	public void ASST02(Object ...dataProvider) throws InterruptedException {
+		extentTest = extent.startTest("ASST02-Verify the valid inputs accepted in Asset name field");
 		SoftAssert sa3 = new SoftAssert();
 		
 		String Name = (String) dataProvider[0]; 
@@ -191,22 +165,41 @@ public class assetCreationTest extends BaseClass{
 		String Type = (String) dataProvider[2]; 
 		String Manufacturer = (String) dataProvider[3];
 		String Location = (String) dataProvider[4]; 
-		String UserName = (String) dataProvider[5]; 
-		String Password = (String) dataProvider[6];
 		
 		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);	
 		
-		sa3.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);		
+		sa3.assertEquals(assetCreationPage.UserLoginPopupVisible(), true, 
+				"Fail: Asset Name not accepting the Valid characters");		
 		sa3.assertAll();
 	}
 	
 	
-	//ASST102
-	@Test(groups = {"Sanity"}, 
-			description="Verify if the equipment id text box should accepts input only up to 15 characters")
-	public void ASST102() throws InterruptedException {
-		extentTest = extent.startTest("ASST102-Verify if the equipment id text box should accepts "
-				+ "input only up to 15 characters");
+	//ASST03-Verify the invalid inputs in Asset name field
+	@Test(groups = {"Sanity", "Regression"},dataProvider="ASST03", dataProviderClass=assetCreationUtility.class, 
+			description="ASST03-Verify the invalid inputs in Asset name field")
+	public void ASST03(Object ...dataProvider) throws InterruptedException {
+		extentTest = extent.startTest("ASST03-Verify the invalid inputs in Asset name field");
+		SoftAssert sa2 = new SoftAssert();
+		String Name = (String) dataProvider[0]; 
+		String ID = (String) dataProvider[1];
+		String Type = (String) dataProvider[2]; 
+		String Manufacturer = (String) dataProvider[3];
+		String Location = (String) dataProvider[4];
+		String ExpAlrtMsg = (String) dataProvider[5]; 
+		
+		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);		
+		String ActAlertMsg = assetCreationPage.AlertMsg();
+		
+		sa2.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Asset Name field accepting invalid characters");		
+		sa2.assertAll();
+	}
+	
+	
+	//ASST04-Verify if 15 max characters allowed in Asset ID field
+	@Test(groups = {"Sanity", "Regression"}, 
+			description="ASST04-Verify if 15 max characters allowed in Asset ID field")
+	public void ASST04() throws InterruptedException {
+		extentTest = extent.startTest("ASST04-Verify if 15 max characters allowed in Asset ID field");
 		SoftAssert sa4 = new SoftAssert();
 		String expectedtxt = "123456789012345a";  //16 Char input
 		System.out.println("count of Equipment ID text to be entered: "+expectedtxt.length());
@@ -214,16 +207,31 @@ public class assetCreationTest extends BaseClass{
 		String actualtextentered = assetCreationPage.getEqpID();
 		System.out.println("count of Equipment ID text entered: "+actualtextentered.length());
 		
-		sa4.assertEquals(actualtextentered.length(), 15, "FAIL: Equipment ID accepts more than 100 characters");
+		sa4.assertEquals(actualtextentered.length(), 15, "FAIL: Asset ID accepts more than 15 characters");
 		sa4.assertAll();
 	}
 	
 	
-	//ASST103a
-	@Test(groups = {"Sanity"}, dataProvider="getEqpIDinValidTestData", dataProviderClass=assetCreationUtility.class, 
-			description="Verify if the Equipment field do not accept In-Valid Data parameters")
-	public void ASST103a(Object ...dataProvider) throws InterruptedException {
-		extentTest = extent.startTest("ASST103a-Verify if the Equipment field do not accept In-Valid Data parameters");
+	//ASST05-Verify the valid inputs accepted in Asset ID field
+	@Test(dataProvider="ASST05", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
+			description="ASST05-Verify the valid inputs accepted in Asset ID field")
+	public void ASST05(String Name, String ID, String Type, String Manufacturer, 
+			String Location, String UserName, String Password) throws InterruptedException {
+		extentTest = extent.startTest("ASST05-Verify the valid inputs accepted in Asset ID field");
+		SoftAssert sa5 = new SoftAssert();
+		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);	
+		
+		sa5.assertEquals(assetCreationPage.UserLoginPopupVisible(), true, 
+				"FAIL: Asset ID do not acceit valid characters");		
+		sa5.assertAll();
+	}
+	
+	
+	//ASST06-Verify the invalid inputs in Asset ID field
+	@Test(groups = {"Sanity", "Regression"}, dataProvider="ASST06", dataProviderClass=assetCreationUtility.class, 
+			description="ASST06-Verify the invalid inputs in Asset ID field")
+	public void ASST06(Object ...dataProvider) throws InterruptedException {
+		extentTest = extent.startTest("ASST06-Verify the invalid inputs in Asset ID field");
 		SoftAssert sa4 = new SoftAssert();
 		
 		String Name = (String) dataProvider[0]; 
@@ -232,65 +240,33 @@ public class assetCreationTest extends BaseClass{
 		String Manufacturer = (String) dataProvider[3];
 		String Location = (String) dataProvider[4]; 
 		String ExpAlrtMsg = (String) dataProvider[5]; 
-		String UserName = (String) dataProvider[6]; 
-		String Password = (String) dataProvider[7];
 		
 		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);		
-		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
+		String ActAlertMsg = assetCreationPage.AlertMsg();
 		
-		sa4.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);		
+		sa4.assertEquals(ActAlertMsg, ExpAlrtMsg, "Fail: Asset ID field accepts Invalid characters");		
 		sa4.assertAll();
 	}
-	
-	
-	//ASST103b
-	@Test(dataProvider="getEqpIDValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify if the Equipment field accepts Valid Data parameters")
-	public void ASST103b(String Name, String ID, String Type, String Manufacturer, 
-			String Location, String UserName, String Password) throws InterruptedException {
-		extentTest = extent.startTest("ASST103b-Verify if the Equipment field accepts Valid Data parameters");
-		SoftAssert sa5 = new SoftAssert();
-		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);	
 		
-		sa5.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);		
-		sa5.assertAll();
-	}
 	
-	
-	//ASST104 - Verify if the asset type combo box by default displays the option as Select
+	//ASST07-Verify the drop down list values for Asset Type field
 	@Test(groups = {"Sanity", "Regression"}, 
-			description="Verify if the asset type combo box by default displays the option as Select")
-	public void ASST104() {
-		extentTest = extent.startTest("ASST104-Verify if the asset type combo box by default displays the option as Select");
+			description="ASST07-Verify the drop down list values for Asset Type field")
+	public void ASST07() {
+		extentTest = extent.startTest("ASST07-Verify the drop down list values for Asset Type field");
 		SoftAssert sa6 = new SoftAssert();
 		
 		sa6.assertEquals(assetCreationPage.getAssetTypetext(), "Select", 
 				"FAIL: Select is not the default Asset Type selected data");
 		sa6.assertAll();
 	}
+
 	
-	
-	//ASST105
-	@Test(groups = {"Sanity"}, 
-			description="Verify if the user can type in the desired asset type name")
-	public void ASST105() {
-		extentTest = extent.startTest("ASST105-Verify if the user can type in the desired asset type name");
-		SoftAssert sa7 = new SoftAssert();
-		assetCreationPage.enterAssetType("Oven");
-		assetCreationPage.enterManufacturerName("Hybd");
-		assetCreationPage.getAssetTypetext();
-		
-		sa7.assertEquals(assetCreationPage.getAssetTypetext(), "Oven", "FAIL: Unable to enter "
-				+ "value in the Asset Type field");
-		sa7.assertAll();
-	}
-	
-	
-	//ASST106 
-	@Test(groups = {"Sanity"}, 
-			description="Verify if the asset type combo box allows only 50 character input")
-	public void ASST106() {
-		extentTest = extent.startTest("ASST106-Verify if the asset type combo box allows only 50 character input");
+	//ASST08-Verify if 50 max character length for Asset Type field
+	@Test(groups = {"Sanity", "Regression"}, 
+			description="ASST08-Verify if 50 max character length for Asset Type field")
+	public void ASST08() {
+		extentTest = extent.startTest("ASST08-Verify if 50 max character length for Asset Type field");
 		SoftAssert sa8 = new SoftAssert();
 		
 		String expectedtxt = "12345678901234567890123456789012345678901234567890a";  //51 Char input
@@ -300,66 +276,67 @@ public class assetCreationTest extends BaseClass{
 		String actualtextentered = assetCreationPage.getAssetTypetext();
 		System.out.println("count of Asset Type text entered: "+actualtextentered.length());
 		
-		sa8.assertEquals(actualtextentered.length(), 50, "FAIL: Asset Type accepts more than 100 characters");
+		sa8.assertEquals(actualtextentered.length(), 50, "FAIL: Asset Type accepts more than 50 characters");
 		sa8.assertAll();
 	}
 	
 
-	//ASST107a 
-	@Test(dataProvider="getAstTypeInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity","Regression"},
-			description="Verify if the Asset Type field do not accept In-Valid Data parameters")
-	public void ASST107a(String Name, String ID, String Type, String Manufacturer, 
+	//ASST10-Verify the invalid inputs in Asset Type field
+	@Test(dataProvider="ASST10", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
+			description="ASST10-Verify the invalid inputs in Asset Type field")
+	public void ASST10(String Name, String ID, String Type, String Manufacturer, 
 			String Location, String ExpAlrtMsg, String UserName, String Password) throws InterruptedException {
-		extentTest = extent.startTest("ASST107a-Verify if the Asset Type field do not accept In-Valid Data parameters");
+		extentTest = extent.startTest("ASST10-Verify the invalid inputs in Asset Type field");
 		SoftAssert sa9 = new SoftAssert();
 		assetCreationPage.assetCreationWithType(Name, ID, Type, Manufacturer, Location);		
-		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
+		String ActAlertMsg = assetCreationPage.AlertMsg();
 		
-		sa9.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);		
+		sa9.assertEquals(ActAlertMsg, ExpAlrtMsg, "Fail: Asset Type field accepts Invalid characters");		
 		sa9.assertAll();
 	}
 	
 	
-	//ASST107b 
-	@Test(dataProvider="getAstTypeValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify if the Asset Type field accepts Valid Data parameters")
-	public void ASST107b(String Name, String ID, String Type, String Manufacturer, 
+	//ASST09-Verify the valid inputs accepted in Asset Type field 
+	@Test(dataProvider="ASST09", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
+			description="ASST09-Verify the valid inputs accepted in Asset Type field")
+	public void ASST09(String Name, String ID, String Type, String Manufacturer, 
 			String Location, String UserName, String Password) throws InterruptedException {
-		extentTest = extent.startTest("ASST107b-Verify if the Asset Type field accepts Valid Data parameters");
+		extentTest = extent.startTest("ASST09-Verify the valid inputs accepted in Asset Type field");
 		SoftAssert sa10 = new SoftAssert();
 		assetCreationPage.assetCreationWithType(Name, ID, Type, Manufacturer, Location);	
 		
-		sa10.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);		
+		sa10.assertEquals(assetCreationPage.UserLoginPopupVisible(), true, 
+				"Fail: Asset Type field do not accept valid characters");		
 		sa10.assertAll();
 	}
 	
 	
-	//ASST108 
-	@Test(groups = {"Sanity", "Regression"},
-			description="Verify if the Asset types are sorted in alphabetic order")
-	public void ASST108() throws InterruptedException {
-		extentTest = extent.startTest("ASST108-Verify if the Asset types are sorted in alphabetic order");
+	//ASST11-Verify if the Asset types are sorted in alphabetic order 
+	@Test(groups = {"Sanity", "Functional"},
+			description="ASST11-Verify if the Asset types are sorted in alphabetic order")
+	public void ASST11() throws InterruptedException {
+		extentTest = extent.startTest("ASST11-Verify if the Asset types are sorted in alphabetic order");
 		SoftAssert sa11 = new SoftAssert();
 		
-		assetCreationPage.assetCreationWithType("3", "3", "Freezer", "DAS", "AGR");
+		assetCreationPage.assetCreationWithType("Asset1", "1", "Freezer", "AAS", "HYBD");
 		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
 		
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();
-		assetCreationPage.assetCreationWithType("4", "4", "Bath", "AAS", "MOM");
+		assetCreationPage.assetCreationWithType("Asset2", "2", "Bath", "AAS", "HYBD");
 		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
 		
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();		
-		assetCreationPage.assetCreationWithType("5", "5", "ColdChamber", "BAS", "DEL");
+		assetCreationPage.assetCreationWithType("Asset3", "3", "ColdChamber", "AAS", "HYBD");
 		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
 		
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();		
-		assetCreationPage.assetCreationWithType("6", "6", "DeepFreezer", "CAS", "BBS");
+		assetCreationPage.assetCreationWithType("Asset4", "4", "DeepFreezer", "AAS", "HYBD");
 		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		assetCreationPage.CloseAlertMsg();
 		assetHubPage = assetCreationPage.clickBackBtn();
@@ -374,7 +351,7 @@ public class assetCreationTest extends BaseClass{
 
 		sa11.assertEquals(OriginalList, SortedNewList);
 		sa11.assertAll();
-	}
+	}*/
 	
 	
 	//ASST109 
@@ -392,7 +369,7 @@ public class assetCreationTest extends BaseClass{
 		sa12.assertAll();
 	}
 	
-	
+	/*
 	//ASST110 - 
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="Verify if the asset model field accepts input only up to 50 characters")
@@ -1025,5 +1002,6 @@ public class assetCreationTest extends BaseClass{
 
 		sa44.assertEquals(assetHubPage.addAst(), true);
 		sa44.assertAll();
-	}
+	}*/
+	
 }

@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [AssetHubSuite]">
-  <listeners>
-    <listener class-name="com.vrt.Listners.AllureReportListner"/>
-    <listener class-name="com.vrt.Listners.RetryTransformer"/>
-  </listeners>
-  <test thread-count="5" name="AssetHubSanityTest(failed)">
-    <groups>
-      <run>
-        <include name="Sanity"/>
-      </run>
-    </groups>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.vrt.testcases.assetHubTest">
+      <class name="com.vrt.testcases.HitNTrialTests">
         <methods>
-          <include name="Teardown"/>
-          <include name="ASST001"/>
-          <include name="Setup"/>
-          <include name="ASST147"/>
-          <include name="ASST008"/>
+          <include name="endReport"/>
+          <include name="setExtent"/>
+          <include name="PrivTest"/>
         </methods>
-      </class> <!-- com.vrt.testcases.assetHubTest -->
+      </class> <!-- com.vrt.testcases.HitNTrialTests -->
     </classes>
-  </test> <!-- AssetHubSanityTest(failed) -->
-</suite> <!-- Failed suite [AssetHubSuite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

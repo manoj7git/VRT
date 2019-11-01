@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="assetDetailsSanityTest(failed)">
+    <groups>
+      <run>
+        <include name="Sanity"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.vrt.testcases.assetDetailsTest">
+        <methods>
+          <include name="ASST016"/>
+          <include name="ASST020"/>
+          <include name="ASST018"/>
+          <include name="Setup"/>
+          <include name="ASST017"/>
+          <include name="ASST033"/>
+          <include name="Teardown"/>
+          <include name="ASST034"/>
+        </methods>
+      </class> <!-- com.vrt.testcases.assetDetailsTest -->
+    </classes>
+  </test> <!-- assetDetailsSanityTest(failed) -->
+</suite> <!-- Failed suite [Suite] -->

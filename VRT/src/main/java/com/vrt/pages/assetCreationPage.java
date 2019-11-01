@@ -83,10 +83,10 @@ public class assetCreationPage extends BaseClass{
 		}
 		
 		String[] Obtainedlist= removeDuplicateStringinArray(str, "Select");
-		//System.out.println(Arrays.toString(Obtainedlist));
+		System.out.println(Arrays.toString(Obtainedlist));
 		
 		clickOn(AssetModelTxtBox);
-		//System.out.println("---------");
+		System.out.println("---------");
 		return Obtainedlist;		
 	}
 	
@@ -456,7 +456,7 @@ public class assetCreationPage extends BaseClass{
 		enterManufacturerName(AManufacturer);
 		enterLocation(ALocation);
 		enterModelName(AModel);
-		enterSize_Unit1(ASize, AUnit);
+		enterSize_Unit(ASize, AUnit);
 		selectAssetFreq(AFreq);
 		selectAssetFreqIntrvl(AFreqInt);
 		enterAstDescription(ADesc);
