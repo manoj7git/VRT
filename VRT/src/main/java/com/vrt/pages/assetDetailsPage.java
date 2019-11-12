@@ -48,7 +48,9 @@ public class assetDetailsPage extends BaseClass {
 	WebElement NewSetupCreate_Btn = null;
 	WebElement CopySetup_Btn = null;
 	WebElement AssetEdit_Btn = null;
-	
+	WebElement AssetHub_ImgHldr = null;
+	WebElement AssetHub_ImgHldr_NextBtn = null;
+	WebElement AssetHub_ImgHldr_PrvsBtn = null;
 	
 	
 
@@ -75,6 +77,8 @@ public class assetDetailsPage extends BaseClass {
 		NewSetupCreate_Btn = driver.findElementByAccessibilityId("CreateSetupButton");
 		CopySetup_Btn = driver.findElementByAccessibilityId("CopySetupButton");
 		AssetEdit_Btn = driver.findElementByAccessibilityId("EditAssetsButton");
+		AssetHub_ImgHldr = driver.findElementByClassName("Image");
+
 
 	}
 
@@ -101,6 +105,11 @@ public class assetDetailsPage extends BaseClass {
 	// Check the enable state of Initiate Qual button under Setup tile
 	public boolean InitiateQualBtn_state() {
 		return IsElementEnabledStatus(InitiateQual_Btn);
+	}
+	
+	// Click the Initiate Qual button under Setup tile
+	public void click_InitiateQualBtn() {
+		clickOn(InitiateQual_Btn);
 	}
 	
 	// Check the presence of Qual tile
@@ -209,12 +218,14 @@ public class assetDetailsPage extends BaseClass {
 
 	// Get the Asset info in Asset details page
 	public String[] get_assetinfo() throws ParseException {
-		String[] asstDetailinfo = new String[5];
+		String[] asstDetailinfo = new String[6];
 		asstDetailinfo[0] = get_asset_IDinfo();
 		asstDetailinfo[1] = get_asset_Modelinfo();
 		asstDetailinfo[2] = get_asset_Mfginfo();
 		asstDetailinfo[3] = get_asset_Typeinfo();
 		asstDetailinfo[4] = get_asset_LastValidatedinfo();
+		String[] AsstTitle = assetDetail_PageTitle().split(" - ");
+		asstDetailinfo[5] = AsstTitle[1];
 
 		return asstDetailinfo;
 	}
@@ -237,12 +248,12 @@ public class assetDetailsPage extends BaseClass {
 		Thread.sleep(1000);
 	}
 	
-	// Click the Asset Edit button
+/*	// Click the Asset Edit button
 	public assetCreationPage click_AssetEditBtn() throws InterruptedException {
 		clickOn(AssetEdit_Btn);
 		Thread.sleep(1000);
 		return new assetCreationPage();
-	}
+	}*/
 	
 	//Click VRT app close button
 	public void click_vrtAppcloseBtn() throws InterruptedException {
@@ -294,6 +305,31 @@ public class assetDetailsPage extends BaseClass {
 	}
 	
 	
+	//click Next button of the Asset Image Holder
+	public void click_ImgNextkBtn() throws InterruptedException {
+		clickOn(AssetHub_ImgHldr);
+		Thread.sleep(500);
+		AssetHub_ImgHldr_NextBtn = driver.findElementByAccessibilityId("NextButtonHorizontal");
+		clickOn(AssetHub_ImgHldr_NextBtn);
+		clickOn(SetupsHeaderTxt);
+		Thread.sleep(5000);
+		//clickOn(AssetHub_ImgHldr);
+	}
+	
+	//click Previous button of the Asset Image Holder
+	public void click_ImgPrevkBtn() throws InterruptedException {
+		clickOn(AssetHub_ImgHldr);
+		Thread.sleep(500);
+		AssetHub_ImgHldr_PrvsBtn = driver.findElementByAccessibilityId("PreviousButtonHorizontal");
+		clickOn(SetupsHeaderTxt);
+		Thread.sleep(5000);
+		//clickOn(AssetHub_ImgHldr);
+	}
+	
+	public void Capture_AsstImg(String Img_Name) throws IOException {		
+		TestUtilities tu = new TestUtilities();
+		tu.capture_element_screenshot(driver, AssetHub_ImgHldr, "TestData", Img_Name);
+	}
 	
 	
 

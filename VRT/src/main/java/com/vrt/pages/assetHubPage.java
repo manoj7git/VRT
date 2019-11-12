@@ -5,6 +5,7 @@
 
 package com.vrt.pages;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.vrt.base.BaseClass;
+import com.vrt.utility.TestUtilities;
 
 public class assetHubPage extends BaseClass{
 	
@@ -27,6 +29,7 @@ public class assetHubPage extends BaseClass{
 	WebElement SearchBtn = null;	
 	WebElement AddAssetButton = null;
 	WebElement AssetHub_BackButton = null;
+
 		
 	//Page element Initialize method
 	private void initElements()
@@ -41,6 +44,7 @@ public class assetHubPage extends BaseClass{
 		SearchBtn = driver.findElementByAccessibilityId("SearchAssetsButton");
 		AddAssetButton = driver.findElementByAccessibilityId("AddedAssetsButton");
 		AssetHub_BackButton = driver.findElementByAccessibilityId("BackButton");
+
 	}
 	
 	//Constructor for initializing the page elements
@@ -214,6 +218,43 @@ public class assetHubPage extends BaseClass{
 		return new assetDetailsPage();
 	}
 	
+	// Get the target Asset tile Height Width info in the Asset hub page
+	public String[] assetTile_Dimension(String AssetName) {
+		List<WebElement> AssetList = driver.findElementByAccessibilityId("ItemGridView")
+				.findElements(By.className("GridViewItem"));
+		//System.out.println("Total Assets created: " + AssetList.size());
+
+		// Declaring Asset Tile dimensions
+		int Ht = 0;
+		int wdth = 0;
+
+		// Loop for the different Asset tiles created
+		for (int i = 0; i < AssetList.size(); i++) {
+			//System.out.println("Asset type : " + AssetList.get(i).getText());
+
+			List<WebElement> AssetTileInfoList = AssetList.get(i).findElements(By.className("TextBlock"));
+			//System.out.println(" Asset tile info count: " + AssetTileInfoList.size());
+
+			// Fetch all the contents of the Asset tile
+			for (int j = 0; j < AssetTileInfoList.size(); j++) {
+				// System.out.println("AssetTileInfo: "+AssetTileInfoList.get(j).getText());
+
+				if (AssetTileInfoList.get(j).getText().equals(AssetName)) {
+					
+					Ht = AssetTileInfoList.get(j).getSize().height;
+					wdth = AssetTileInfoList.get(j).getSize().width;
+
+				}
+			}
+		}
+		// Returning the String object
+		String Height = Integer.toString(Ht);
+		String Width = Integer.toString(wdth);
+		
+		String[] AsstDimension = {Height, Width};
+		return AsstDimension;
+
+	}
 	
 	// Get the Asset count info in the Asset hub page
 	public String assetcount() {
@@ -455,10 +496,13 @@ public class assetHubPage extends BaseClass{
 		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(Msg);
 	}
-//click Back button to move to MainHub Page from Asset Hub page in case new Asset is created
-		public MainHubPage clickBackBtn() throws InterruptedException {
-			clickOn(AssetHub_BackButton);		
-			Thread.sleep(1000);
-			return new MainHubPage();
-		}
+
+	//click Back button to move to MainHub Page from Asset Hub page in case new Asset is created
+	public MainHubPage clickBackBtn() throws InterruptedException {
+		clickOn(AssetHub_BackButton);
+		Thread.sleep(1000);
+		return new MainHubPage();
+	}
+
+	
 }

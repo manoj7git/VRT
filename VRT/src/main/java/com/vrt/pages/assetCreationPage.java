@@ -5,15 +5,27 @@
 
 package com.vrt.pages;
 
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.vrt.base.BaseClass;
+import com.vrt.utility.TestUtilities;
+
 
 public class assetCreationPage extends BaseClass{
 	
@@ -29,6 +41,11 @@ public class assetCreationPage extends BaseClass{
 	WebElement AssetFrqBtn = driver.findElementByAccessibilityId("CalibrationFrequencyComboBox");
 	WebElement AssetFrqIntrvlBtn = driver.findElementByAccessibilityId("CalibrationFrequencyMeasurementComboBox");
 	WebElement AssetDescTextField = driver.findElementByAccessibilityId("DescriptionTextBox");
+	WebElement AssetImgBrowseBtn = driver.findElementByAccessibilityId("AssetImageButton");	
+	WebElement AssetImg1_Btn = driver.findElementByAccessibilityId("AssetImage1");
+	WebElement AssetImg2_Btn = driver.findElementByAccessibilityId("AssetImage2");
+	WebElement AssetImg3_Btn = driver.findElementByAccessibilityId("AssetImage3");
+	WebElement AssetImg_Camera_Btn = driver.findElementByAccessibilityId("AssertCameraUploadButton");	
 	WebElement AssetSaveBtn = driver.findElementByName("Save");
 	WebElement AssetClearBtn = driver.findElementByName("Clear");
 	WebElement AssetBackBtn = driver.findElementByAccessibilityId("BackButton");
@@ -69,6 +86,25 @@ public class assetCreationPage extends BaseClass{
 	//Fetch default Asset Type data
 	public String getAssetTypetext() {
 		return AssetEditBox.get(0).getText();		
+	}
+	
+	//Fetch list of raw Asset location data as is viewed
+	public String[] getAssetLocationlist() {
+		clickOn(Combobx.get(1));
+		List <WebElement> Combobxlist = driver.findElementsByClassName("ComboBoxItem");		
+		
+		String str[] = new String[Combobxlist.size()];
+		
+		for (int i = 0; i < Combobxlist.size(); i++) {
+			str[i]=Combobxlist.get(i).getText();		
+		}
+		
+		String[] Obtainedlist= removeDuplicateStringinArray(str, "Select");
+		System.out.println(Arrays.toString(Obtainedlist));
+		
+		clickOn(AssetModelTxtBox);
+		System.out.println("---------");
+		return Obtainedlist;		
 	}
 	
 	//Fetch list of raw Asset Type data as is viewed
@@ -206,7 +242,7 @@ public class assetCreationPage extends BaseClass{
 		return FetchText(AssetModelTxtBox);		
 	}
 		
-	//Enter Asset Size
+	//Enter Asset Size & Unit
 	public void enterSize_Unit(String ASize, String ASUnit) {
 		//System.out.println("~~~"+ASize);
 		ClearText(AssetSizeTxtBox);
@@ -250,9 +286,87 @@ public class assetCreationPage extends BaseClass{
 				unit.click();
 			}
 		}
+	}	
+	
+	//CLick on the Asset Validation date Picker button
+	public void click_AsstValidationDatePkr_Btn() {
+		clickOn(AssetLstVldtdDate);
 	}
 	
+	//Fetch Asset Validation date data
+	public String getAsstValidationDatetext() {
+		return FetchText(AssetLstVldtdDate);		
+	}
+	
+	// Select Asset Last Validate Date data other than current Date
+	public void selectAssetLastVldtDay(String Day) throws InterruptedException {
 
+		//click_AsstValidationDatePkr_Btn();
+		Actions ac = new Actions(driver);
+
+		for (int i = 1; i <= 31; i++) {
+			String Date = getAsstValidationDatetext();
+			String[] expDate = Date.split("-");
+			//System.out.println(expDate[1]);
+
+			if (expDate[1].equals(Day)) {
+				break;
+			}else {
+				click_AsstValidationDatePkr_Btn();
+				ac.sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+				Thread.sleep(500);
+			}
+		}
+	}
+	
+	// Select Asset Last Validate Month data other than current Month
+	public void selectAssetLastVldt_Mnth(String Month) throws InterruptedException {
+
+		//click_AsstValidationDatePkr_Btn();
+		Actions ac = new Actions(driver);
+
+		for (int i = 1; i <= 12; i++) {
+			String Date = getAsstValidationDatetext();
+			String[] expDate = Date.split("-");
+			//System.out.println(expDate[0]);
+
+			if (expDate[0].equals(Month)) {
+				break;
+			}else {
+				click_AsstValidationDatePkr_Btn();			
+				ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+				Thread.sleep(500);
+			}
+		}
+	}
+	
+	// Select Asset Last Validate Year data other than current Month
+	public void selectAssetLastVldt_Yr(String Yr) throws InterruptedException {
+
+		// click_AsstValidationDatePkr_Btn();
+		Actions ac = new Actions(driver);
+		String Date = getAsstValidationDatetext();
+		String[] expDate = Date.split("-");
+		//System.out.println(expDate[2]);
+		
+		while (!expDate[2].equals(Yr)) {
+			click_AsstValidationDatePkr_Btn();
+			Thread.sleep(1000);
+			ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+			Thread.sleep(1000);
+			Date = getAsstValidationDatetext();
+			expDate = Date.split("-");
+			//System.out.println(expDate[2]);
+		}
+
+	}
+	
+	public void selectAssetLastVldDate(String Day, String Month, String Year) throws InterruptedException {
+		selectAssetLastVldtDay(Day);
+		selectAssetLastVldt_Mnth(Month);
+		selectAssetLastVldt_Yr(Year);
+	}
+	
 	// Fetch list of raw Asset Frequency data as is viewed
 	public String[] getAssetFreqlist() {
 		clickOn(AssetFrqBtn);
@@ -347,11 +461,68 @@ public class assetCreationPage extends BaseClass{
 	public void enterAstDescription(String ADesc) {
 		ClearText(AssetDescTextField);
 		enterText(AssetDescTextField, ADesc);
-	}
+	}	
 	
 	//Fetch Asset Description data
 	public String getAssetDescriptiontext() {		
 		return FetchText(AssetDescTextField);		
+	}
+	
+	//Click Browse Image button
+	public void click_ImgBrws_Btn() throws InterruptedException {
+		clickOn(AssetImgBrowseBtn);
+		Thread.sleep(500);
+	}
+
+	//Click Camera Image button
+	public void click_Img_Camera_Btn() throws InterruptedException {
+		clickOn(AssetImg_Camera_Btn);
+		Thread.sleep(5000);
+	}
+	
+	//Click Image1 Placeholder button
+	public void click_Img1_Placeholder_Btn() throws InterruptedException {
+		clickOn(AssetImg1_Btn);
+		Thread.sleep(500);
+	}
+	
+	//Click Image Placeholder Edit button
+	public void click_Img_Placeholder_Edit_Btn() throws InterruptedException {
+		WebElement AssetImgEditBtn = driver.findElementByAccessibilityId("ChangeImage");
+		clickOn(AssetImgEditBtn);
+		Thread.sleep(500);
+	}
+	
+	//Click Image Placeholder Delete button
+	public void click_Img_Placeholder_Delete_Btn() throws InterruptedException {
+		WebElement AssetImgDeleteBtn = driver.findElementByAccessibilityId("RemoveButton");
+		clickOn(AssetImgDeleteBtn);
+		Thread.sleep(1000);
+	}
+	
+	public void capture_Camera_Img() throws InterruptedException {
+		click_Img_Camera_Btn();
+		
+		WebElement Click_Camera_Wdw_capture_Btn = driver.findElementByName("Take Photo");
+		clickOn(Click_Camera_Wdw_capture_Btn);
+		Thread.sleep(500);
+		WebElement Click_Camera_Wdw_Accept_Btn = driver.findElementByName("Accept");
+		clickOn(Click_Camera_Wdw_Accept_Btn);
+		Thread.sleep(500);
+	}
+	
+	public void Capture_AsstImg1(String Img_Name) throws IOException {
+		
+		TestUtilities tu = new TestUtilities();
+		tu.capture_element_screenshot(driver, AssetImg1_Btn, "TestData", Img_Name);      
+
+	}
+	
+	public void Capture_AsstImg2(String Img_Name) throws IOException {
+		
+		TestUtilities tu = new TestUtilities();
+		tu.capture_element_screenshot(driver, AssetImg2_Btn, "TestData", Img_Name);      
+
 	}
 	
 	//verify Save button presence
@@ -396,7 +567,7 @@ public class assetCreationPage extends BaseClass{
 		return new assetHubPage();
 	}
 	
-	//click Back button to move to assetHub Page in case new Asset is created
+	//click Back button to move to assetDetails Page in case Asset is in edit mode
 	public assetDetailsPage click_BackBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);
 		Thread.sleep(1000);
@@ -409,7 +580,7 @@ public class assetCreationPage extends BaseClass{
 		Thread.sleep(1000);		
 	}
 	
-	//Discard alert message
+	//Discard alert message presence
 	public boolean discardAlert() throws InterruptedException {
 		clickOn(AssetBackBtn);		
 		Thread.sleep(1000);	
@@ -448,8 +619,11 @@ public class assetCreationPage extends BaseClass{
 	
 	//Asset Creation with all Data entry
 	public void assetCreationWithAllFieldEntry(String AName, String AID, String AType, 
-			String AManufacturer, String ALocation, String AModel, String ASize, String AUnit, 
+			String AManufacturer, String ALocation, String AModel, String ASize, String AUnit, String ALVDate,
 			String AFreq, String AFreqInt, String ADesc) throws InterruptedException {
+		
+		String[] AstLstVldDate = ALVDate.split("-");		
+		
 		enterAssetName(AName);
 		enterAssetID(AID);
 		SelectAssetType(AType);
@@ -457,6 +631,7 @@ public class assetCreationPage extends BaseClass{
 		enterLocation(ALocation);
 		enterModelName(AModel);
 		enterSize_Unit(ASize, AUnit);
+		selectAssetLastVldDate(AstLstVldDate[1], AstLstVldDate[0], AstLstVldDate[2]);
 		selectAssetFreq(AFreq);
 		selectAssetFreqIntrvl(AFreqInt);
 		enterAstDescription(ADesc);

@@ -5,10 +5,15 @@
 
 package com.vrt.testcases;
 
+import java.awt.AWTException;
 import java.io.IOException;
+import java.text.ParseException;
 //import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -27,6 +32,7 @@ import com.vrt.pages.LoginPage;
 import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetHubPage;
+import com.vrt.pages.assetDetailsPage;
 import com.vrt.pages.assetCreationPage;
 import com.vrt.utility.TestUtilities;
 import com.vrt.utility.assetCreationUtility;
@@ -46,6 +52,7 @@ public class assetCreationTest extends BaseClass{
 	UserManagementPage UserManagementPage;
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
+	assetDetailsPage assetDetailsPage;
 	
 	
 	//Ensure the User has got rights to create Assets
@@ -60,12 +67,13 @@ public class assetCreationTest extends BaseClass{
 		extent.addSystemInfo("TestSuiteName", "Asset Creation Test");
 
 		// Rename the User file (NgvUsers.uxx) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		//Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
-
+		
+		/*
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
@@ -86,7 +94,7 @@ public class assetCreationTest extends BaseClass{
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);
+		Thread.sleep(1000);*/
 
 	}
 		
@@ -136,7 +144,8 @@ public class assetCreationTest extends BaseClass{
 	//Test Cases
 	//~~~~~~~~~~
 	
-	/*//ASST01-Verify if 25 max characters allowed in Asset name field
+	/*
+	//ASST01-Verify if 25 max characters allowed in Asset name field
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="ASST01-Verify if 25 max characters allowed in Asset name field")
 	public void ASST100() throws InterruptedException {
@@ -351,30 +360,173 @@ public class assetCreationTest extends BaseClass{
 
 		sa11.assertEquals(OriginalList, SortedNewList);
 		sa11.assertAll();
-	}*/
+	}
+
 	
-	
-	//ASST109 
-	@Test(groups = {"Sanity", "Regression"}, 
-			description="Verify if the values in the Asset type combo box are selectable by touching the screen")
-	public void ASST109() {
-		extentTest = extent.startTest("ASST109-Verify if the values in the Asset type combo box"
-				+ " are selectable by touching the screen");
-		SoftAssert sa12 = new SoftAssert();
-		
-		assetCreationPage.SelectAssetType("DeepFreezer");
-		String ActualAssetTypeSelected = assetCreationPage.getAssetTypetext();
-		
-		sa12.assertEquals(ActualAssetTypeSelected, "DeepFreezer");
-		sa12.assertAll();
+	// ASST12-Verify the drop down list Manufacturer field displays the option as Select
+	@Test(groups = {"Sanity" }, 
+			description = "ASST12-Verify the drop down list Manufacturer field displays the option as Select")
+	public void ASST12() {
+		extentTest = extent.startTest("ASST12-Verify the drop down list Manufacturer field displays the option as Select");
+		SoftAssert sa23 = new SoftAssert();
+
+		sa23.assertEquals(assetCreationPage.getAssetManufacturertext(), "Select",
+				"FAIL: Select is not the default Asset Manufacturer selected data");
+		sa23.assertAll();
 	}
 	
-	/*
-	//ASST110 - 
+	// ASST13- Verify if the Manufacturer name accepts up to 100 characters
+	@Test(groups = { "Sanity" }, description = "Verify if the Manufacturer name accepts up to 100 characters")
+	public void ASST13() {
+		extentTest = extent.startTest("ASST13 - Verify if the Manufacturer name accepts up to 100 characters");
+		SoftAssert sa25 = new SoftAssert();
+
+		String expectedtxt = "123456789012345678901234567890123456789012345678901234567890"
+				+ "1234567890123456789012345678901234567890a"; // 101 Char input
+		// System.out.println("count of Asset Manufacturer text to be entered:
+		// "+expectedtxt.length());
+
+		assetCreationPage.enterManufacturerName(expectedtxt);
+		String actualtextentered = assetCreationPage.getAssetManufacturertext();
+		// System.out.println("count of Asset Manufacturer text entered:
+		// "+actualtextentered.length());
+
+		sa25.assertEquals(actualtextentered.length(), 100, "FAIL: Asset Manufacturer accepts more than 100 characters");
+		sa25.assertAll();
+	}
+
+
+	// ASST14a-Verify the valid inputs accepted in Manufacturer field upper case, lower case,
+	// numeric and special characters like Hyphen, slash -Forward and backward- Underscore and
+	// space as input
+	@Test(dataProvider = "ASST14", dataProviderClass = assetCreationUtility.class, groups = {
+			"Sanity" }, description = "ASST14-Verify the valid inputs accepted in Manufacturer field")
+	public void ASST14a(String Name, String ID, String Type, String Manufacturer, String Location)
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST14-Verify the valid inputs accepted in Manufacturer field");
+		SoftAssert sa27 = new SoftAssert();
+
+		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
+
+		sa27.assertEquals(assetCreationPage.UserLoginPopupVisible(), true, 
+				"FAIL: Asset Manufacturer field do not accept Valid characters ");
+		sa27.assertAll();
+	}
+	
+		// ASST14b-Verify if the Manufacturers names are sorted in alphabetic order
+	@Test(groups = { "Sanity" }, description = "Verify if the Manufacturers names are sorted in alphabetic order")
+	public void ASST14b() throws InterruptedException {
+		extentTest = extent.startTest("ASST123 - Verify if the Manufacturers names are sorted in alphabetic order");
+		SoftAssert sa28 = new SoftAssert();
+
+		String[] OriginalList = assetCreationPage.getAssetMakerlist();
+		// System.out.println(Arrays.toString(OriginalList));
+		String[] SortedNewList = assetCreationPage.getAssetMakerSortedlist();
+		// System.out.println(Arrays.toString(SortedNewList));
+
+		sa28.assertEquals(OriginalList, SortedNewList);
+		sa28.assertAll();
+	}
+
+	// ASST15-Verify the invalid inputs in Manufacturer field
+	@Test(dataProvider = "ASST15", dataProviderClass = assetCreationUtility.class, groups = {
+			"Sanity" }, description = "ASST15-Verify the invalid inputs in Manufacturer field")
+	public void ASST122a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
+			throws InterruptedException {
+		extentTest = extent
+				.startTest("ASST15-Verify the invalid inputs in Manufacturer field");
+		SoftAssert sa26 = new SoftAssert();
+		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
+		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
+
+		sa26.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg, 
+				"FAIL: Asset Manufacturer field accepts InValid characters");
+		sa26.assertAll();
+	}
+
+
+	//ASST16- Verify the drop down list values for Location field
+	@Test(groups = {"Sanity"}, 
+			description="ASST16- Verify the drop down list values for Location field")
+	public void ASST16() throws InterruptedException {
+		extentTest = extent.startTest("ASST16- Verify the drop down list values for Location field");
+		SoftAssert sa34 = new SoftAssert();
+		
+		sa34.assertEquals(assetCreationPage.getAssetLocationtext(), "Select", 
+				"FAIL: Select is not the default Asset Location selected data");		
+		
+		assetCreationPage.assetCreationWithType("Asset5", "5", "DeepFreezer", "AAS", "INDIA");
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		assetCreationPage.CloseAlertMsg();
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		assetCreationPage=assetHubPage.ClickAddAssetBtn();
+		
+		String[] OriginalList = assetCreationPage.getAssetLocationlist();
+		//System.out.println(Arrays.toString(OriginalList));
+
+		sa34.assertEquals(OriginalList[1], "INDIA", 
+				"FAIL: Asset Location dropdown down list do not reflect the location list data");
+		sa34.assertAll();
+	}	
+	
+	
+	// ASST17-Verify of 100 max character length for Location field
+	@Test(groups = { "Sanity" }, description = "ASST17-Verify of 100 max character length for Location field")
+	public void ASST17() {
+		extentTest = extent.startTest("ASST17-Verify of 100 max character length for Location field");
+		SoftAssert sa36 = new SoftAssert();
+
+		String expectedtxt = "123456789012345678901234567890123456789012345678901234567890"
+				+ "1234567890123456789012345678901234567890a"; // 101 Char input
+		// System.out.println("count of Asset Location text to be entered:
+		// "+expectedtxt.length());
+
+		assetCreationPage.enterLocation(expectedtxt);
+		String actualtextentered = assetCreationPage.getAssetLocationtext();
+		// System.out.println("count of Asset Location text entered:
+		// "+actualtextentered.length());
+
+		sa36.assertEquals(actualtextentered.length(), 100, "FAIL: Asset Location accepts more than 100 characters");
+		sa36.assertAll();
+	}
+		
+	
+	// ASST18-Verify the valid inputs accepted in Location field
+	@Test(dataProvider = "ASST18", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
+			description="ASST18-Verify the valid inputs accepted in Location field")
+	public void ASST18(String Name, String ID, String Type, String Manufacturer, String Location)
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST18-Verify the valid inputs accepted in Location field");
+		SoftAssert sa38 = new SoftAssert();
+
+		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
+
+		sa38.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);
+		sa38.assertAll();
+	}
+		
+	// ASST19-Verify the invalid inputs in Location field
+	@Test(dataProvider = "ASST19", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
+			description="ASST19-Verify the invalid inputs in Location field")
+	public void ASST19(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST19-Verify the invalid inputs in Location field");
+		SoftAssert sa37 = new SoftAssert();
+
+		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
+		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
+
+		sa37.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);
+		sa37.assertAll();
+	}
+
+	
+	//ASST20-Verify if 50 max character length for Model field - 
 	@Test(groups = {"Sanity", "Regression"}, 
-			description="Verify if the asset model field accepts input only up to 50 characters")
-	public void ASST110() {
-		extentTest = extent.startTest("ASST110-Verify if the asset model field accepts input only up to 50 characters");
+			description="ASST20-Verify if 50 max character length for Model field")
+	public void ASST20() {
+		extentTest = extent.startTest("ASST20-Verify if 50 max character length for Model field");
 		SoftAssert sa13 = new SoftAssert();
 		
 		String expectedtxt = "12345678901234567890123456789012345678901234567890a";  //51 Char input
@@ -389,38 +541,41 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	//ASST111a 
-	@Test(dataProvider="getAstMdlInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify if the Asset Model field do not accept In-Valid Data parameters")
-	public void ASST111a(String Name, String ID, String Type, String Manufacturer, String Location, String Model, String ExpAlrtMsg) throws InterruptedException {
-		extentTest = extent.startTest("ASST111a-Verify if the Asset Model field do not accept In-Valid Data parameters");
-		SoftAssert sa14 = new SoftAssert();
-		assetCreationPage.assetCreationWithModel(Name, ID, Type, Manufacturer, Location, Model);		
-		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
-		
-		sa14.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);		
-		sa14.assertAll();
-	}
-	
-	
-	//ASST111b
-	@Test(dataProvider="getAstMdlValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Model field accept Valid Data parameters")
-	public void ASST111b(String Name, String ID, String Type, String Manufacturer, String Location, String Model) throws InterruptedException {
-		extentTest = extent.startTest("ASST111b-Verify if the Asset Model field accept Valid Data parameters");
+	// ASST21-Verify the valid inputs accepted in Model field
+	@Test(dataProvider = "ASST21", dataProviderClass = assetCreationUtility.class, groups = {
+			"Sanity" }, description = "ASST21-Verify the valid inputs accepted in Model field")
+	public void ASST21(String Name, String ID, String Type, String Manufacturer, String Location, String Model)
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST21-Verify the valid inputs accepted in Model field");
 		SoftAssert sa15 = new SoftAssert();
-		assetCreationPage.assetCreationWithModel(Name, ID, Type, Manufacturer, Location, Model);		
-		
-		sa15.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);			
+		assetCreationPage.assetCreationWithModel(Name, ID, Type, Manufacturer, Location, Model);
+
+		sa15.assertEquals(assetCreationPage.UserLoginPopupVisible(), true, 
+				"FAIL: Asset Model field not accepting valid characters");
 		sa15.assertAll();
 	}
 	
 	
-	//ASST112
-	@Test(dataProvider="getAstSizeValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Size field accept Valid Data parameters")
-	public void ASST112(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit) throws InterruptedException {
-		extentTest = extent.startTest("ASST112-Verify if the Asset Size field accept Valid Data parameters");
+	// ASST22-Verify the invalid inputs in Model field
+	@Test(dataProvider = "ASST22", dataProviderClass = assetCreationUtility.class, groups = {
+			"Sanity" }, description = "ASST22-Verify the invalid inputs in Model field")
+	public void ASST22(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String ExpAlrtMsg) throws InterruptedException {
+		extentTest = extent.startTest("ASST22-Verify the invalid inputs in Model field");
+		SoftAssert sa14 = new SoftAssert();
+		assetCreationPage.assetCreationWithModel(Name, ID, Type, Manufacturer, Location, Model);
+		String ActAlertMsg = assetCreationPage.AlertMsg();
+
+		sa14.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Asset Model field accepting Invaid characters");
+		sa14.assertAll();
+	}
+	
+	
+	//ASST24-Verify the valid inputs accepted in Size field
+	@Test(dataProvider="ASST24", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
+			description="ASST24-Verify the valid inputs accepted in Size field")
+	public void ASST24(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit) throws InterruptedException {
+		extentTest = extent.startTest("ASST24-Verify the valid inputs accepted in Size field");
 		SoftAssert sa17 = new SoftAssert();		
 		assetCreationPage.assetCreationWithSize(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
 		
@@ -429,13 +584,11 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	//ASST113 - Verify if the Asset Size text box accepts inputs as numeric
-	//and special characters such as point or comma.
-	//Verify all the validation alert message observed with invalid Data parameters input to the Asset Size field.
-	@Test(dataProvider="getAstSizeInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Size field do not accept In-Valid Data parameters")
-	public void ASST113(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
-		extentTest = extent.startTest("ASST113-Verify if the Asset Model field accept Valid Data parameters");
+	//ASST25-Verify the invalid inputs in Size field
+	@Test(dataProvider="ASST25", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
+			description="ASST25-Verify the invalid inputs in Size field")
+	public void ASST25(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
+		extentTest = extent.startTest("ASST25-Verify the invalid inputs in Size field");
 		SoftAssert sa16 = new SoftAssert();
 		assetCreationPage.assetCreationWithSize(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
 		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
@@ -445,84 +598,11 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	//ASST114
+	//ASST26a-Verify the drop down list values for Size-Units field
 	@Test(groups = {"Sanity"}, 
-			description="Verify if by default the units drop down display as Select")
-	public void ASST114() {
-		extentTest = extent.startTest("ASST114-Verify if by default the units drop down display as Select");
-		SoftAssert sa18 = new SoftAssert();		
-		
-		sa18.assertEquals(assetCreationPage.getAssetSizeUnittext(), "Select", 
-				"Fail: Select is not the default Asset Size Unit selected data");
-		sa18.assertAll();
-	}
-	
-	
-	//ASST115
-	@Test(groups = {"Sanity"}, 
-			description="Verify if the user is able to type in the desired units")
-	public void ASST115() {
-		extentTest = extent.startTest("ASST115 - Verify if the user is able to type in the desired units");
-		SoftAssert sa19 = new SoftAssert();		
-		
-		assetCreationPage.enterAssetSizeUnit("testUnit");
-		sa19.assertEquals(assetCreationPage.getAssetSizeUnittext(), "testUnit", 
-				"Fail: Unable to enter Asset Size Unit data");
-		sa19.assertAll();
-	}
-	
-	
-	//ASST116
-	@Test(groups = {"Sanity"}, 
-			description="Verify if the unit combo box allows only up to 50 character input")
-	public void ASST116() {
-		extentTest = extent.startTest("ASST116 - Verify if the unit combo box allows only up to 50 character input");
-		SoftAssert sa19 = new SoftAssert();	
-		
-		String expectedtxt = "12345678901234567890123456789012345678901234567890a";  //51 Char input
-		System.out.println("count of Asset Size Unit text to be entered: "+expectedtxt.length());
-		
-		assetCreationPage.enterAssetSizeUnit(expectedtxt);
-		String actualtextentered = assetCreationPage.getAssetSizeUnittext();
-		System.out.println("count of Asset Model text entered: "+actualtextentered.length());
-		
-		sa19.assertEquals(actualtextentered.length(), 50, "FAIL: Asset Size Unit accepts more than 50 characters");
-		sa19.assertAll();
-	}
-	
-		
-	//ASST117a
-	@Test(dataProvider="getAstSizeUnitInValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Size Unit field do not accept In-Valid Data parameters")
-	public void ASST117a(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
-		extentTest = extent.startTest("ASST117a - Verify if the Asset Size Unit field do not accept In-Valid Data parameters");
-		SoftAssert sa20 = new SoftAssert();
-		assetCreationPage.assetCreationWithSizeUnit(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
-		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
-		
-		sa20.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);		
-		sa20.assertAll();		
-	}
-	
-	
-	//ASST117b
-	@Test(dataProvider="getAstSizeUnitValidTestData", dataProviderClass=assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Size Unit field accept Valid Data parameters")
-	public void ASST117b(String Name, String ID, String Type, String Manufacturer, String Location, String Size, String SizeUnit) throws InterruptedException {
-		extentTest = extent.startTest("ASST117b - Verify if the Asset Size Unit field accept Valid Data parameters");
-		SoftAssert sa21 = new SoftAssert();
-		assetCreationPage.assetCreationWithSizeUnit(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);		
-		
-		sa21.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);			
-		sa21.assertAll();		
-	}
-	
-	
-	//ASST118
-	@Test(groups = {"Sanity"}, 
-			description="Verify if the drop down box list outs the units used for volumes")
-	public void ASST118() throws InterruptedException {
-		extentTest = extent.startTest("ASST118 - Verify if the drop down box list outs the units used for volumes");
+			description="ASST26a-Verify the drop down list values for Size-Units field")
+	public void ASST26a() throws InterruptedException {
+		extentTest = extent.startTest("ASST26a-Verify the drop down list values for Size-Units field");
 		SoftAssert sa22 = new SoftAssert();
 		
 		try {
@@ -559,108 +639,148 @@ public class assetCreationTest extends BaseClass{
 		}		
 	}
 	
-		
-	//ASST119
+	
+	//ASST26b
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the Manufacturer combo box by default displays the option as Select")
-	public void ASST119() {
-		extentTest = extent.startTest("ASST119 - Verify if the Manufacturer combo box by default displays the option as Select");
-		SoftAssert sa23 = new SoftAssert();
+			description="Verify if by default the units drop down display as Select")
+	public void ASST26b() {
+		extentTest = extent.startTest("ASST26b-Verify if by default the units drop down display as Select");
+		SoftAssert sa18 = new SoftAssert();		
 		
-		sa23.assertEquals(assetCreationPage.getAssetManufacturertext(), "Select", 
-				"FAIL: Select is not the default Asset Manufacturer selected data");
-		sa23.assertAll();
+		sa18.assertEquals(assetCreationPage.getAssetSizeUnittext(), "Select", 
+				"Fail: Select is not the default Asset Size Unit selected data");
+		sa18.assertAll();
 	}
 	
 	
-	//ASST120
+	//ASST26c
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the user is able to type in the manufacturer name")
-	public void ASST120() {
-		extentTest = extent.startTest("ASST120 - Verify if the user is able to type in the manufacturer name");
-		SoftAssert sa24 = new SoftAssert();
-		assetCreationPage.enterManufacturerName("Hybd");
-		assetCreationPage.enterModelName("LTR");
+			description="Verify if the user is able to type in the desired units")
+	public void ASST26c() {
+		extentTest = extent.startTest("ASST26c - Verify if the user is able to type in the desired units");
+		SoftAssert sa19 = new SoftAssert();		
 		
-		
-		sa24.assertEquals(assetCreationPage.getAssetManufacturertext(), "Hybd", "FAIL: Unable to enter "
-				+ "value in the Asset Manufacturer field");
-		sa24.assertAll();
+		assetCreationPage.enterAssetSizeUnit("testUnit");
+		sa19.assertEquals(assetCreationPage.getAssetSizeUnittext(), "testUnit", 
+				"Fail: Unable to enter Asset Size Unit data");
+		sa19.assertAll();
 	}
-		
 	
-	//ASST121
+	
+	//ASST27 -Verify if 50 max character length for Size-Units field
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the Manufacturer name accepts up to 100 characters")
-	public void ASST121() {
-		extentTest = extent.startTest("ASST121 - Verify if the Manufacturer name accepts up to 100 characters");
-		SoftAssert sa25 = new SoftAssert();
+			description="ASST27 -Verify if 50 max character length for Size-Units field")
+	public void ASST27() {
+		extentTest = extent.startTest("ASST27 -Verify if 50 max character length for Size-Units field");
+		SoftAssert sa19 = new SoftAssert();	
 		
-		String expectedtxt = "123456789012345678901234567890123456789012345678901234567890"
-				+ "1234567890123456789012345678901234567890a";  //101 Char input
-		//System.out.println("count of Asset Manufacturer text to be entered: "+expectedtxt.length());
+		String expectedtxt = "12345678901234567890123456789012345678901234567890a";  //51 Char input
+		System.out.println("count of Asset Size Unit text to be entered: "+expectedtxt.length());
 		
-		assetCreationPage.enterManufacturerName(expectedtxt);
-		String actualtextentered = assetCreationPage.getAssetManufacturertext();
-		//System.out.println("count of Asset Manufacturer text entered: "+actualtextentered.length());
+		assetCreationPage.enterAssetSizeUnit(expectedtxt);
+		String actualtextentered = assetCreationPage.getAssetSizeUnittext();
+		System.out.println("count of Asset Model text entered: "+actualtextentered.length());
 		
-		sa25.assertEquals(actualtextentered.length(), 100, "FAIL: Asset Manufacturer accepts more than 100 characters");
-		sa25.assertAll();
+		sa19.assertEquals(actualtextentered.length(), 50, "FAIL: Asset Size Unit accepts more than 50 characters");
+		sa19.assertAll();
 	}
 	
 	
-	//ASST122a
-	@Test(dataProvider = "getAstMakerInValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Manufacturer field do not accept In-Valid Data parameters")
-	public void ASST122a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
-			throws InterruptedException {
-		extentTest = extent.startTest("ASST122a - Verify if the Asset Manufacturer field do not accept In-Valid Data parameters");
-		SoftAssert sa26 = new SoftAssert();
-		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
-		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
+	//ASST28-Verify the valid inputs accepted in Size-Units field
+	@Test(dataProvider = "ASST28", dataProviderClass = assetCreationUtility.class, groups = {
+			"Sanity" }, description = "ASST28-Verify the valid inputs accepted in Size-Units field")
+	public void ASST28(String Name, String ID, String Type, String Manufacturer, String Location, String Size,
+			String SizeUnit) throws InterruptedException {
+		extentTest = extent.startTest("ASST28-Verify the valid inputs accepted in Size-Units field");
+		SoftAssert sa21 = new SoftAssert();
+		assetCreationPage.assetCreationWithSizeUnit(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);
 
-		sa26.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);
-		sa26.assertAll();
+		sa21.assertEquals(assetCreationPage.UserLoginPopupVisible(), true,
+				"Fail: Asset Unit size not accepting valid unit data");
+		sa21.assertAll();
 	}
-	
-	
-	// ASST122b - Verify if Manufacturer text box accepts upper case, lower case, numeric and
-	// special characters like Hyphen, slash -Forward and backward- Underscore and space as input
-	@Test(dataProvider = "getAstMakerValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Manufacturer field accept Valid Data parameters")
-	public void ASST122b(String Name, String ID, String Type, String Manufacturer, String Location)throws InterruptedException {
-		extentTest = extent.startTest("ASST122b- Verify if the Asset Manufacturer field accept Valid Data parameters");
-		SoftAssert sa27 = new SoftAssert();
 
-		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
+	// ASST29-Verify the invalid inputs in Size-Units field
+	@Test(dataProvider = "ASST29", dataProviderClass = assetCreationUtility.class, groups = {
+			"Sanity" }, description = "ASST29-Verify the invalid inputs in Size-Units field")
+	public void ASST29(String Name, String ID, String Type, String Manufacturer, String Location, String Size,
+			String SizeUnit, String ExpAlrtMsg) throws InterruptedException {
+		extentTest = extent.startTest("ASST29-Verify the invalid inputs in Size-Units field");
+		SoftAssert sa20 = new SoftAssert();
+		assetCreationPage.assetCreationWithSizeUnit(Name, ID, Type, Manufacturer, Location, Size, SizeUnit);
+		String ActAlertMsg = assetCreationPage.AlertMsg();
 
-		sa27.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);
-		sa27.assertAll();
+		sa20.assertEquals(ActAlertMsg, ExpAlrtMsg, "Fail: Asset Unit size accepting Invalid unit data");
+		sa20.assertAll();
 	}
 		
-		
-	// ASST123
+	// ASST30a-Verify the Last Validated field drop down
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the Manufacturers names are sorted in alphabetic order")
-	public void ASST123() throws InterruptedException {
-		extentTest = extent.startTest("ASST123 - Verify if the Manufacturers names are sorted in alphabetic order");
-		SoftAssert sa28 = new SoftAssert();
-
-		String[] OriginalList = assetCreationPage.getAssetMakerlist();
-		//System.out.println(Arrays.toString(OriginalList));
-		String[] SortedNewList = assetCreationPage.getAssetMakerSortedlist();
-		//System.out.println(Arrays.toString(SortedNewList));
-
-		sa28.assertEquals(OriginalList, SortedNewList);
-		sa28.assertAll();
+			description="ASST30-Verify the Last Validated drop down field default data")
+	public void ASST30a() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("ASST30-sVerify the Last Validated drop down field default data");
+		SoftAssert sa = new SoftAssert();		
+		
+		TestUtilities tu = new TestUtilities();
+		String expectedDt = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy");
+		//System.out.println("expectedDt: "+expectedDt);
+		
+		String ActualDt = assetCreationPage.getAsstValidationDatetext();
+		//System.out.println(ActualDt);
+		
+		sa.assertEquals(ActualDt, expectedDt, 
+				"Fail: Asset Validation Date field do not reflect the current date");
+		
+		sa.assertAll();
+	}
+	
+	// ASST30b-Verify if after selecting Date and clicking OK button should reflect the updated 
+	//Date in the Last Validated field
+	@Test(groups = {"Sanity"}, 
+			description="ASST30b-Verify if after selecting Date and "
+					+ "clicking OK button should reflect the updated Date in the Last Validated field")
+	public void ASST30b() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("ASST30b-Verify if after selecting Date and "
+				+ "clicking OK button should reflect the updated Date in the Last Validated field");
+		SoftAssert sa = new SoftAssert();
+		
+		String DefaultDate = assetCreationPage.getAsstValidationDatetext();
+		System.out.println("Default Date reflected: "+DefaultDate);
+		
+		
+		assetCreationPage.selectAssetLastVldtDay("02"); //Enter the Day data
+		String ActualDt1 = assetCreationPage.getAsstValidationDatetext();
+		String[] Day = ActualDt1.split("-");
+		assetCreationPage.selectAssetLastVldt_Mnth("09"); //Enter the Month Data
+		String ActualDt2 = assetCreationPage.getAsstValidationDatetext();
+		String[] Month = ActualDt2.split("-");
+		assetCreationPage.selectAssetLastVldt_Yr("2017"); //Enter the Year data
+		String ActualDt3 = assetCreationPage.getAsstValidationDatetext();
+		String[] Year = ActualDt3.split("-");
+		
+		String FinalSelectedDateDate = assetCreationPage.getAsstValidationDatetext();
+		System.out.println("Final Date reflected after selection: "+FinalSelectedDateDate);
+		
+		
+		String[] Dt = FinalSelectedDateDate.split("-");		
+		for (String date : Dt) {
+			System.out.println(date);
+		}
+		
+		sa.assertEquals(FinalSelectedDateDate, Month[0]+"-"+Day[1]+"-"+Year[2], 
+				"Fail: Asset Validation Date field do not reflect the Selected date");
+		
+		sa.assertAll();
 	}
 	
 	
-	// ASST127
+	// ASST31a-Verify the Validation Frequency field: 2 drop downs should be displayed with default 'select'
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the Validation Frequency has 2 combo boxes that display default option as Select")
-	public void ASST127() throws InterruptedException {
-		extentTest = extent.startTest("ASST127 - Verify if the Validation Frequency has 2 combo boxes that display default option as Select");
+			description="ASST31a-Verify the Validation Frequency field: "
+					+ "2 drop downs should be displayed with default 'select'")
+	public void ASST31a() throws InterruptedException {
+		extentTest = extent.startTest("ASST31a-Verify the Validation Frequency field: "
+				+ "2 drop downs should be displayed with default 'select'");
 		SoftAssert sa29 = new SoftAssert();
 		
 		sa29.assertEquals(assetCreationPage.getAssetFreqtext(), "Select", 
@@ -670,16 +790,15 @@ public class assetCreationTest extends BaseClass{
 				"Fail: Select is not the default Asset Frequency Interval field selected data");
 		
 		sa29.assertAll();
-	}
+	}	
 	
 	
-	
-	// ASST128
+	// ASST31b-Verify the Validation Frequency field: The list of numbers should be displayed from 1 to 24
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the First combo box of Validation frequency contains "
+			description="ASST31b: Verify if the First combo box of Validation frequency contains "
 			+ "numbers from 1 to 24 sorted in ascending order")
-	public void ASST128() throws InterruptedException {
-		extentTest = extent.startTest("ASST128 - Verify if the First combo box of Validation frequency "
+	public void ASST31b() throws InterruptedException {
+		extentTest = extent.startTest("ASST31b - Verify if the First combo box of Validation frequency "
 				+ "contains numbers from 1 to 24 sorted in ascending order");
 		SoftAssert sa30 = new SoftAssert();
 		
@@ -696,12 +815,13 @@ public class assetCreationTest extends BaseClass{
 	
 
 	
-	// ASST129
+	// ASST31c-Verify the Validation Frequency field: Below values should be displayed:
+	//Weeks, 	Months, Years
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the second combo box against the Validation Frequency "
+			description="ASST31c: Verify if the second combo box against the Validation Frequency "
 			+ "field lists weeks, months and years")
-	public void ASST129() throws InterruptedException {
-		extentTest = extent.startTest("ASST129- Verify if the second combo box against "
+	public void ASST31c() throws InterruptedException {
+		extentTest = extent.startTest("ASST31c- Verify if the second combo box against "
 				+ "the Validation Frequency field lists weeks, months and years");
 		SoftAssert sa31 = new SoftAssert();
 		
@@ -716,12 +836,12 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	// ASST130a
+	// ASST31d-Verify the Validation Frequency field: The selected values should be reflected in the field
 	@Test(groups = {"Sanity"}, 
-			description="Verify if Validation frequency should be selectable "
+			description="ASST31d: Verify if Validation frequency should be selectable "
 			+ "by touching the available choices")
-	public void ASST130a() throws InterruptedException {
-		extentTest = extent.startTest("ASST130a- Verify if Validation frequency should"
+	public void ASST31d() throws InterruptedException {
+		extentTest = extent.startTest("ASST31d- Verify if Validation frequency should"
 				+ " be selectable by touching the available choices");
 		SoftAssert sa32 = new SoftAssert();
 		
@@ -734,12 +854,12 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	// ASST130b
+	// ASST31e-Verify the Validation Frequency field: The selected values should be reflected in the field
 	@Test(groups = {"Sanity"}, 
-			description="Verify if Validation frequency Interval combobox should be selectable "
+			description="ASST31e: Verify if Validation frequency Interval combobox should be selectable "
 			+ "by touching the available choices")
-	public void ASST130b() throws InterruptedException {
-		extentTest = extent.startTest("ASST130b-Verify if Validation frequency Interval combobox "
+	public void ASST31e() throws InterruptedException {
+		extentTest = extent.startTest("ASST31e-Verify if Validation frequency Interval combobox "
 				+ "should be selectable by touching the available choices");
 		SoftAssert sa33 = new SoftAssert();
 		
@@ -751,92 +871,231 @@ public class assetCreationTest extends BaseClass{
 		sa33.assertAll();
 	}
 	
-	
-	//ASST131
+	//ASST32a-Verify the functionality when the Last validation has expired for frequency Week selection
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the Location combo box by default displays the option as Select")
-	public void ASST131() {
-		extentTest = extent.startTest("ASST131 - Verify if the Location combo box by default displays the option as Select");
-		SoftAssert sa34 = new SoftAssert();
+			description="ASST32a-Verify the functionality when the Last validation has expired", 
+			dataProvider = "ASST32a", dataProviderClass = assetCreationUtility.class)
+	public void ASST32a(String AName, String AID, String AType, String AManufacturer, 
+			String ALocation, String AModel, String ASize, String AUnit, String ALVDt,  
+			String AFreq, String AFreqInt, String ADesc) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("ASST32a-Verify the functionality when the Last validation has expired");
+		SoftAssert sa = new SoftAssert();
 		
-		sa34.assertEquals(assetCreationPage.getAssetLocationtext(), "Select", 
-				"FAIL: Select is not the default Asset Location selected data");
-		sa34.assertAll();
+		TestUtilities tu = new TestUtilities();
+		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy"); 
+		//System.out.println("expectedDt: "+ALVDate);
+		
+		assetCreationPage.assetCreationWithAllFieldEntry(AName, AID, AType, 
+				AManufacturer, ALocation, AModel, ASize, AUnit, ALVDate, AFreq, AFreqInt, ADesc);
+		
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		//assetCreationPage.CloseAlertMsg();
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Fetch the Height & Width of the Asset tile created above
+		String[] AsstDimBeforeLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
+		//for (String hw : AsstDimBeforeLstVldDtChange) {
+		//	System.out.println(hw);
+		}//
+		
+		//Verify if the Asset Tile dimensions(Width) do not change if the Last Validated date 
+		//is within the validation frequency range
+		sa.assertEquals(AsstDimBeforeLstVldDtChange[1], "91", "FAIL: The Asset "
+				+ "Tile width Changed without the Last Validated Date for Asset"
+				+ "was modified to 1 Month back");
+		
+		assetDetailsPage = assetHubPage.click_assetTile(AName);
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		
+		//Changing the Date to just 1 month Back date
+		String[] AstLstVldDate = ALVDate.split("-");
+		int mnth = Integer.parseInt(AstLstVldDate[0]);
+		int newMnth = mnth-1;
+		String NewAstLstVldMnth = Integer.toString(newMnth);
+		
+		String NewAstLstVldDate = NewAstLstVldMnth+"-"+AstLstVldDate[1]+"-"+AstLstVldDate[2];
+		//System.out.println(NewAstLstVldDate);
+		
+		assetCreationPage.selectAssetLastVldt_Mnth(NewAstLstVldMnth);
+		assetCreationPage.clickSaveBtn();
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		assetDetailsPage = assetCreationPage.click_BackBtn();
+		
+		String UpdatedLastVldDt = assetDetailsPage.get_asset_LastValidatedinfo();
+		//System.out.println(UpdatedLastVldDt);
+		
+		//Verify if the updated Last Validated Date is reflected in the corresponding Asset details page
+		sa.assertEquals(UpdatedLastVldDt, NewAstLstVldDate, "FAIL: Last Validated Date for Asset didn't change");
+		
+		assetHubPage = assetDetailsPage.ClickBackBtn();
+		String[] AsstDimAfterLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
+		//for (String hw : AsstDimAfterLstVldDtChange) {
+		//	System.out.println(hw);
+		}//
+		
+		//Verify if the Asset Tile dimensions(Width) gets changed when the Last Validated date 
+		//is outside the validation frequency range
+		sa.assertEquals(AsstDimAfterLstVldDtChange[1], "217", "FAIL: The Asset "
+				+ "Tile width didn't Change after the Last Validated Date for Asset"
+				+ "was modified to 1 Month back");
+
+		sa.assertAll();
 	}
 	
 	
-	//ASST132
+	//ASST32b-Verify the functionality when the Last validation has expired for frequency Month selection
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the user should is able to type in the Location name")
-	public void ASST132() {
-		extentTest = extent.startTest("ASST132 - Verify if the user should is able to type in the Location name");
-		SoftAssert sa35 = new SoftAssert();
+			description="ASST32b-Verify the functionality when the Last validation has expired "
+					+ "for frequency Month selection", 
+			dataProvider = "ASST32b", dataProviderClass = assetCreationUtility.class)
+	public void ASST32b(String AName, String AID, String AType, String AManufacturer, 
+			String ALocation, String AModel, String ASize, String AUnit, String ALVDt,  
+			String AFreq, String AFreqInt, String ADesc) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("ASST32b-Verify the functionality when the Last validation has "
+				+ "expired for frequency Month selection");
+		SoftAssert sa = new SoftAssert();
 		
-		assetCreationPage.enterLocation("KPHB");
-		sa35.assertEquals(assetCreationPage.getAssetLocationtext(), "KPHB", 
-				"FAIL: Unable to type or incorrect data getting enetred into the Location field");
-		sa35.assertAll();
+		TestUtilities tu = new TestUtilities();
+		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy"); 
+		//System.out.println("expectedDt: "+ALVDate);
+		
+		assetCreationPage.assetCreationWithAllFieldEntry(AName, AID, AType, 
+				AManufacturer, ALocation, AModel, ASize, AUnit, ALVDate, AFreq, AFreqInt, ADesc);
+		
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		//assetCreationPage.CloseAlertMsg();
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Fetch the Height & Width of the Asset tile created above
+		String[] AsstDimBeforeLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
+		//for (String hw : AsstDimBeforeLstVldDtChange) {
+			System.out.println(hw);
+		}//
+		
+		//Verify if the Asset Tile dimensions(Width) do not change if the Last Validated date 
+		//is within the validation frequency range
+		sa.assertEquals(AsstDimBeforeLstVldDtChange[1], "91", "FAIL: The Asset "
+				+ "Tile width Changed without the Last Validated Date for Asset"
+				+ "was modified to 1 Month back");
+		
+		assetDetailsPage = assetHubPage.click_assetTile(AName);
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		
+		//Changing the Date to just 1 month Back date
+		String[] AstLstVldDate = ALVDate.split("-");
+		int mnth = Integer.parseInt(AstLstVldDate[0]);
+		int newMnth = mnth-1;
+		String NewAstLstVldMnth = Integer.toString(newMnth);
+		
+		String NewAstLstVldDate = NewAstLstVldMnth+"-"+AstLstVldDate[1]+"-"+AstLstVldDate[2];
+		//System.out.println(NewAstLstVldDate);
+		
+		assetCreationPage.selectAssetLastVldt_Mnth(NewAstLstVldMnth);
+		assetCreationPage.clickSaveBtn();
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		assetDetailsPage = assetCreationPage.click_BackBtn();
+		
+		String UpdatedLastVldDt = assetDetailsPage.get_asset_LastValidatedinfo();
+		//System.out.println(UpdatedLastVldDt);
+		
+		//Verify if the updated Last Validated Date is reflected in the corresponding Asset details page
+		sa.assertEquals(UpdatedLastVldDt, NewAstLstVldDate, "FAIL: Last Validated Date for Asset didn't change");
+		
+		assetHubPage = assetDetailsPage.ClickBackBtn();
+		String[] AsstDimAfterLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
+		//for (String hw : AsstDimAfterLstVldDtChange) {
+			System.out.println(hw);
+		}//
+		
+		//Verify if the Asset Tile dimensions(Width) gets changed when the Last Validated date 
+		//is outside the validation frequency range
+		sa.assertEquals(AsstDimAfterLstVldDtChange[1], "217", "FAIL: The Asset "
+				+ "Tile width didn't Change after the Last Validated Date for Asset"
+				+ "was modified to 1 Month back");
+
+		sa.assertAll();
 	}
 	
 	
-	// ASST133
+	//ASST32c-Verify the functionality when the Last validation has expired for frequency Year selection
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the Location name accepts a character input up to 100")
-	public void ASST133() {
-		extentTest = extent.startTest("ASST133 - Verify if the Location name accepts a character input up to 100");
-		SoftAssert sa36 = new SoftAssert();
+			description="ASST32c-Verify the functionality when the Last validation has expired "
+					+ "for frequency Year selection", 
+			dataProvider = "ASST32c", dataProviderClass = assetCreationUtility.class)
+	public void ASST32c(String AName, String AID, String AType, String AManufacturer, 
+			String ALocation, String AModel, String ASize, String AUnit, String ALVDt,  
+			String AFreq, String AFreqInt, String ADesc) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("ASST32c-Verify the functionality when the Last validation has "
+				+ "expired for frequency Year selection");
+		SoftAssert sa = new SoftAssert();
+		
+		TestUtilities tu = new TestUtilities();
+		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy"); 
+		//System.out.println("expectedDt: "+ALVDate);
+		
+		assetCreationPage.assetCreationWithAllFieldEntry(AName, AID, AType, 
+				AManufacturer, ALocation, AModel, ASize, AUnit, ALVDate, AFreq, AFreqInt, ADesc);
+		
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		//assetCreationPage.CloseAlertMsg();
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Fetch the Height & Width of the Asset tile created above
+		String[] AsstDimBeforeLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
+		//for (String hw : AsstDimBeforeLstVldDtChange) {
+		//	System.out.println(hw);
+		}//
+		
+		//Verify if the Asset Tile dimensions(Width) do not change if the Last Validated date 
+		//is within the validation frequency range
+		sa.assertEquals(AsstDimBeforeLstVldDtChange[1], "91", "FAIL: The Asset "
+				+ "Tile width Changed without the Last Validated Date for Asset"
+				+ "was modified to 1 Month back");
+		
+		assetDetailsPage = assetHubPage.click_assetTile(AName);
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		
+		//Changing the Date to just 1 month Back date
+		String[] AstLstVldDate = ALVDate.split("-");
+		int yr = Integer.parseInt(AstLstVldDate[2]);
+		int newYrMnth = yr-1;
+		String NewAstLstVldYr = Integer.toString(yr);
+		
+		String NewAstLstVldDate = AstLstVldDate[0]+"-"+AstLstVldDate[1]+"-"+NewAstLstVldYr;
+		//System.out.println(NewAstLstVldDate);
+		
+		assetCreationPage.selectAssetLastVldt_Yr(NewAstLstVldYr);
+		assetCreationPage.clickSaveBtn();
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		assetDetailsPage = assetCreationPage.click_BackBtn();
+		
+		String UpdatedLastVldDt = assetDetailsPage.get_asset_LastValidatedinfo();
+		//System.out.println(UpdatedLastVldDt);
+		
+		//Verify if the updated Last Validated Date is reflected in the corresponding Asset details page
+		sa.assertEquals(UpdatedLastVldDt, NewAstLstVldDate, "FAIL: Last Validated Date for Asset didn't change");
+		
+		assetHubPage = assetDetailsPage.ClickBackBtn();
+		String[] AsstDimAfterLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
+		//for (String hw : AsstDimAfterLstVldDtChange) {
+		//	System.out.println(hw);
+		//}
+		
+		//Verify if the Asset Tile dimensions(Width) gets changed when the Last Validated date 
+		//is outside the validation frequency range
+		sa.assertEquals(AsstDimAfterLstVldDtChange[1], "217", "FAIL: The Asset "
+				+ "Tile width didn't Change after the Last Validated Date for Asset"
+				+ "was modified to 1 Month back");
 
-		String expectedtxt = "123456789012345678901234567890123456789012345678901234567890"
-				+ "1234567890123456789012345678901234567890a"; // 101 Char input
-		// System.out.println("count of Asset Location text to be entered:
-		// "+expectedtxt.length());
-
-		assetCreationPage.enterLocation(expectedtxt);
-		String actualtextentered = assetCreationPage.getAssetLocationtext();
-		// System.out.println("count of Asset Location text entered:
-		// "+actualtextentered.length());
-
-		sa36.assertEquals(actualtextentered.length(), 100, "FAIL: Asset Location accepts more than 100 characters");
-		sa36.assertAll();
+		sa.assertAll();
 	}
 		
-		
-	// ASST134
-	@Test(dataProvider = "getAstLocationInValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify if the Asset Location field do not accept In-Valid Data parameters")
-	public void ASST134a(String Name, String ID, String Type, String Manufacturer, String Location, String ExpAlrtMsg)
-			throws InterruptedException {
-		extentTest = extent.startTest("ASST134a - Verify if the Asset Location field do not accept In-Valid Data parameters");
-		SoftAssert sa37 = new SoftAssert();
-
-		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
-		String ActBlankFieldAlertMsg = assetCreationPage.AlertMsg();
-
-		sa37.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);
-		sa37.assertAll();
-	}
 	
-	
-	// ASST134b
-	@Test(dataProvider = "getAstLocationValidTestData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if the Asset Location field accept Valid Data parameters")
-	public void ASST134b(String Name, String ID, String Type, String Manufacturer, String Location)
-			throws InterruptedException {
-		extentTest = extent.startTest("ASST134b- Verify if the Asset Location field accept Valid Data parameters");
-		SoftAssert sa38 = new SoftAssert();
-
-		assetCreationPage.assetCreation(Name, ID, Type, Manufacturer, Location);
-
-		sa38.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);
-		sa38.assertAll();
-	}
-	
-	
-	// ASST135
+	// ASST33-Verify the max character length for Description field
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the description text box accepts input up to 250 characters")
-	public void ASST135() {
-		extentTest = extent.startTest("ASST135 - Verify if the description text box accepts input up to 250 characters");
+			description="ASST33-Verify the max character length for Description field")
+	public void ASST33() {
+		extentTest = extent.startTest("ASST33-Verify the max character length for Description field");
 		SoftAssert sa39 = new SoftAssert();
 
 		String expectedtxt = "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
@@ -853,84 +1112,401 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	// ASST136
+	// ASST34-Verify the inputs accepted in Description field
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the description text box should accept upper case, "
-					+ "lower case, numeric, spaces and special characters")
+			description="ASST34-Verify the inputs accepted in Description field")
 	public void ASST136() throws InterruptedException {
-		extentTest = extent.startTest("ASST136- Verify if the description text box should "
-				+ "accept upper case, lower case, numeric, spaces and special characters");
-		SoftAssert sa40 = new SoftAssert();
+		extentTest = extent.startTest("ASST34-Verify the inputs accepted in Description fields");
+		SoftAssert sa = new SoftAssert();
 		
 		String expectedtxt = "\1aA`~!@#$%^&*()_   +=-|][}{';:.,<>?/";
 		assetCreationPage.assetCreationWithDesc("AssetDesc", "1", "HeatBath", "Deccan", "KPHB", expectedtxt);
-		
-		//sa40.assertEquals(actualtextentered.length(), 250, "FAIL: Asset Description field do not accept special characters");
-		sa40.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);
-		sa40.assertAll();
+	
+
+		sa.assertEquals(assetCreationPage.UserLoginPopupVisible(), true);
+		sa.assertAll();
 	}
 	
 	
-	// ASST143
-	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify the cancel button will discard the entries made at the current screen")
-	public void ASST143(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description) throws InterruptedException {
+	//ASST35-Verify the Browse button functionality for uploading images
+	@Test(groups = {"Sanity"}, dataProvider = "ASST35", dataProviderClass = assetCreationUtility.class,
+			description="ASST35-Verify the Browse button functionality for uploading images")
+	public void ASST35(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description) 
+					throws InterruptedException, ParseException, AWTException, IOException {
+		extentTest = extent.startTest("ASST35-Verify the Browse button functionality for uploading images");
+		SoftAssert sa = new SoftAssert();
 		
-		extentTest = extent.startTest("ASST143 - Verify the cancel button will discard the entries made at the current screen");
-		SoftAssert sa41 = new SoftAssert();		
+		//Add any image to the Asset Image place holder1 using browse button
+		assetCreationPage.click_ImgBrws_Btn();		
+		TestUtilities tu = new TestUtilities();
+		tu.uploadDoc("VRT_Pro.JPG");
+		
+		//Capture the expected Image added to the Asset placeholder 1		
+		assetCreationPage.Capture_AsstImg1("Expected_VRT_Pro_Img_AsstCreation");
+		
+		//Create an asset with required details and the above image
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, 
+				Size, SizeUnit, VldDt, Frequency, FrequencyInterval, Description);
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		
+		//Move to AssetHub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Again select the above Asset created to move to Asset detail page and then click the Edit asset button
+		assetDetailsPage = assetHubPage.click_assetTile(Name);
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		
+		//Capture the actual Image saved to the Asset placeholder 1		
+		assetCreationPage.Capture_AsstImg1("Actual_VRT_Pro_Img_AsstCreation");
+		
+		boolean status_ImgCompare = tu.compareImage("Expected_VRT_Pro_Img_AsstCreation", "Actual_VRT_Pro_Img_AsstCreation");
+		
+		sa.assertEquals(status_ImgCompare, false, "FAIL: The Asset Image saved is not same as what was selected");
+
+		sa.assertAll();
+	}
+	
+	
+	//ASST36-Verify the Camera button functionality for uploading images
+	@Test(groups = {"Sanity"}, dataProvider = "ASST36", dataProviderClass = assetCreationUtility.class,
+			description="ASST36-Verify the Camera button functionality for uploading images")
+	public void ASST36(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description) 
+					throws InterruptedException, ParseException, AWTException, IOException {
+		extentTest = extent.startTest("ASST36-Verify the Camera button functionality for uploading images");
+		SoftAssert sa = new SoftAssert();
+		
+		//Add any image to the Asset Image place holder1 using Camera button
+		assetCreationPage.capture_Camera_Img();		
+		TestUtilities tu = new TestUtilities();
+		
+		//Capture the expected Image added to the Asset placeholder 1		
+		assetCreationPage.Capture_AsstImg1("Expected_Asst36_AsstCreation");
+		
+		//Create an asset with required details and the above image
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, 
+				Size, SizeUnit, VldDt, Frequency, FrequencyInterval, Description);
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		
+		//Move to AssetHub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Again select the above Asset created to move to Asset detail page and then click the Edit asset button
+		assetDetailsPage = assetHubPage.click_assetTile(Name);
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		
+		//Capture the actual Image saved to the Asset placeholder 1		
+		assetCreationPage.Capture_AsstImg1("Actual_Asst36_AsstCreation");
+		
+		boolean status_ImgCompare = tu.compareImage("Expected_Asst36_AsstCreation", "Actual_Asst36_AsstCreation");
+		
+		sa.assertEquals(status_ImgCompare, false, "FAIL: The Asset Image saved is not same as what was captured");
+
+		sa.assertAll();
+	}
+	
+	
+	//ASST37 -Verify the Edit functionality for the image
+	@Test(groups = {"Sanity"}, dataProvider = "ASST37", dataProviderClass = assetCreationUtility.class,
+			description="ASST37 -Verify the Edit functionality for the image")
+	public void ASST37(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description) 
+					throws InterruptedException, ParseException, AWTException, IOException {
+		extentTest = extent.startTest("ASST37 -Verify the Edit functionality for the image");
+		SoftAssert sa = new SoftAssert();
+		
+		//Add any image to the Asset Image place holder1 using browse button
+		assetCreationPage.click_ImgBrws_Btn();		
+		TestUtilities tu = new TestUtilities();
+		tu.uploadDoc("avsLOGO.jpg");
+		
+		//Capture the expected Image added to the Asset placeholder 1		
+		assetCreationPage.Capture_AsstImg1("1stAddedImg_Asst37_AsstCreation");
+		
+		//Create an asset with required details and the above image
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, 
+				Size, SizeUnit, VldDt, Frequency, FrequencyInterval, Description);
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		
+		//Move to AssetHub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Again select the above Asset created to move to Asset detail page and then click the Edit asset button
+		assetDetailsPage = assetHubPage.click_assetTile(Name);
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		
+		//Click the Image1 Place Holder to change the Image using Edit button
+		assetCreationPage.click_Img1_Placeholder_Btn();
+		//Click the Image1 edit button to change image
+		assetCreationPage.click_Img_Placeholder_Edit_Btn();
+		//Add a new image
+		tu.uploadDoc("VRT_Pro.JPG");
+		
+		//Save the asset
+		assetCreationPage.clickSaveBtn();
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		assetDetailsPage = assetCreationPage.click_BackBtn();
+		
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();		
+		
+		
+		//Capture the actual Image saved to the Asset placeholder 1		
+		assetCreationPage.Capture_AsstImg1("2ndAddedImg_Asst37_AsstCreation");
+		
+		boolean status_ImgCompare = tu.compareImage("1stAddedImg_Asst37_AsstCreation", "2ndAddedImg_Asst37_AsstCreation");
+		
+		sa.assertEquals(status_ImgCompare, true, "FAIL: The Asset new Image added/saved is same to one added previously");
+
+		sa.assertAll();
+	}
+	
+	
+	//ASST38 -Verify the Delete functionality for the image
+	@Test(groups = {"Sanity"}, dataProvider = "ASST38", dataProviderClass = assetCreationUtility.class,
+			description="ASST38 -Verify the Delete functionality for the image")
+	public void ASST38(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description) 
+					throws InterruptedException, ParseException, AWTException, IOException {
+		extentTest = extent.startTest("ASST38 -Verify the Delete functionality for the image");
+		SoftAssert sa = new SoftAssert();
+		
+	
+		TestUtilities tu = new TestUtilities();
+		//Capture the expected Image (Blank Place holder w/o image) to the Asset placeholder 1		
+		assetCreationPage.Capture_AsstImg1("Asst38_ExpBlankImg_AsstCreation");
+		
+		//Add any image to the Asset Image place holder1 using browse button
+		assetCreationPage.click_ImgBrws_Btn();	
+		tu.uploadDoc("VRT_Pro.JPG");
+		
+		//Create an asset with required details and the above image
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, 
+				Size, SizeUnit, VldDt, Frequency, FrequencyInterval, Description);
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		
+		//Move to AssetHub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Again select the above Asset created to move to Asset detail page and then click the Edit asset button
+		assetDetailsPage = assetHubPage.click_assetTile(Name);
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		
+		//Click the Image1 Place Holder to change the Image using Edit button
+		assetCreationPage.click_Img1_Placeholder_Btn();
+		//Click the Image1 edit button to change image
+		assetCreationPage.click_Img_Placeholder_Delete_Btn();		
+		
+		//Save the asset
+		assetCreationPage.clickSaveBtn();
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		assetDetailsPage = assetCreationPage.click_BackBtn();
+		
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();		
+		
+		
+		//Capture the actual Image of the Asset placeholder 1 after removing the Image		
+		assetCreationPage.Capture_AsstImg1("Asst38_ActBlankImg__AsstCreation");
+		
+		boolean status_ImgCompare = tu.compareImage("Asst38_ExpBlankImg_AsstCreation", "Asst38_ActBlankImg__AsstCreation");
+		
+		sa.assertEquals(status_ImgCompare, false, "FAIL: The Asset Image is not removed using delete image button");
+		sa.assertAll();
+	}
+	
+	
+	//ASST39-Verify if the images saved in Asset creation screen are displayed in Asset details screen
+	@Test(groups = {"Sanity"}, dataProvider = "ASST39", dataProviderClass = assetCreationUtility.class,
+			description="ASST39-Verify if the images saved in Asset creation screen"
+					+ " are displayed in Asset details screen")
+	public void ASST39(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description) 
+					throws InterruptedException, ParseException, AWTException, IOException {
+		extentTest = extent.startTest("ASST39-Verify if the images saved in Asset creation "
+				+ "screen are displayed in Asset details screen");
+		SoftAssert sa = new SoftAssert();
+		
+		TestUtilities tu = new TestUtilities();
+		//Add any image to the Asset Image place holder1 using browse button
+		assetCreationPage.click_ImgBrws_Btn();	
+		tu.uploadDoc("VRT_Pro.JPG");
+				
+		//Create an asset with required details and the above image
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, 
+				Size, SizeUnit, VldDt, Frequency, FrequencyInterval, Description);
+		assetCreationPage.UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		
+		//Move to AssetHub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		//Again select the above Asset created to move to Asset detail page
+		assetDetailsPage = assetHubPage.click_assetTile(Name);
+
+		//Capture the Actual Image (Asset Place holder1 with image)		
+		assetDetailsPage.Capture_AsstImg("Asst39_ActImg1__AsstDetails");
+
+		//Expected Image Asst39_ExpImg1__AsstDetails is already present in the Test Data folder
+		//which will be compared to the Actual image Asst39_ActImg1__AsstDetails captured.
+		boolean status_ImgCompare1 = tu.compareImage("Asst39_ExpImg1__AsstDetails", "Asst39_ActImg1__AsstDetails");
+		//System.out.println(status_ImgCompare1);
+		
+		//Expecting Image diff=false as same image compared
+		sa.assertEquals(status_ImgCompare1, false, "FAIL: The Asset Image is not displayed in the Asset Details page");
+		sa.assertAll();
+	}
+	
+	
+	//ASST40-Verify the functionality when more than 5 mb size image is selected
+	@Test(groups = {"Sanity"}, 
+			description="ASST40-Verify the functionality when more than 5 mb size image is selected")
+	public void ASST40() 
+					throws InterruptedException, AWTException, IOException {
+		extentTest = extent.startTest("ASST40-Verify the functionality when more than 5 mb size image is selected");
+		SoftAssert sa = new SoftAssert();
+		
+		TestUtilities tu = new TestUtilities();
+		//Add any image to the Asset Image place holder1 using browse button
+		assetCreationPage.click_ImgBrws_Btn();	
+		tu.uploadDoc("GroupCircle.jpg");
+		Thread.sleep(1000);
+		
+		String ExprtMsg = "Select image file with size less than 5 mb";
+		String ActualrtMsg = assetCreationPage.AlertMsg();
+		//System.out.println(ActualrtMsg);
+		
+		//Expecting Image diff=false as same image compared
+		sa.assertEquals(ActualrtMsg, ExprtMsg, "FAIL: The Asset Image with size more than 5m is getting saved");
+		sa.assertAll();
+	}
+	
+	
+	// ASST41-Verify if the Asset details are reflected correctly in Asset Hub screen
+	@Test(groups = {"Sanity"}, dataProvider = "ASST41", dataProviderClass = assetCreationUtility.class,  
+			description = "ASST41-Verify if the Asset details are reflected correctly in Asset Hub screen")
+	public void ASST41(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST41-Verify if the Asset details are reflected correctly in Asset Hub screen");
+		SoftAssert sa = new SoftAssert();
+		
+		//Expected Asset elements (Asset Type, Asset ID, Asset Name) to be edited
+		String[] expectedAssetInfo = {Type,ID,Name};
+		//System.out.println("exp asst info1:"+Arrays.toString(expectedAssetInfo));
+		
+		//Asset creation method
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				VldDt, Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		// Click the Back button in the Asset creation/details page & click the Save message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();		
+				
+		String[] ActualAssetinfo = assetHubPage.assetTile(Name);
+		//for (String str2 : ActualAssetinfo) {
+		//	System.out.println("Act asst info2: "+str2);
+		}//
+
+		sa.assertEquals(ActualAssetinfo, expectedAssetInfo, "Fail: Asset created with wrong information else Not created");
+		sa.assertAll();
+	}
+	
+	
+	// ASST42-Verify if the Asset details are reflected correctly in Asset Details screen
+	@Test(groups = {"Sanity"}, dataProvider = "ASST42", dataProviderClass = assetCreationUtility.class,  
+			description = "ASST42-Verify if the Asset details are reflected correctly in Asset Details screen")
+	public void ASST42(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException, ParseException {
+		extentTest = extent.startTest("ASST42-Verify if the Asset details are reflected correctly in Asset Details screen");
+		SoftAssert sa = new SoftAssert();
+		
+		//Expected Asset elements (Asset Type, Asset ID, Asset Name) to be edited
+		String[] expectedAssetInfo = {ID, Model, Manufacturer, Type, VldDt, Name};
+		//System.out.println("exp asst info1:"+Arrays.toString(expectedAssetInfo));
+		
+		//Asset creation method
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				VldDt, Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		// Click the Back button in the Asset creation/details page & click the Save message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		assetDetailsPage=assetHubPage.click_assetTile(Name);
+
+		String[] act_AssetDetailData = assetDetailsPage.get_assetinfo();
+		//System.out.println(Arrays.toString(act_AssetDetailData));
+
+		sa.assertEquals(act_AssetDetailData, expectedAssetInfo,
+				"FAIL: Mismatch in the Asset data compared between Asset details & Asset creation info");
+		sa.assertAll();
+		
+	}
+	
+	
+	// ASST45-Verify the clear button will discard the entries made during Asset creation
+	@Test(dataProvider = "AssetAllData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
+			description="ASST45-Verify the clear button will discard the entries made during Asset creation")
+	public void ASST45(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description) throws InterruptedException, ParseException {
+		
+		extentTest = extent.startTest("ASST45-Verify the clear button will discard the entries made during Asset creation");
+		SoftAssert sa = new SoftAssert();		
 
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, 
-				Model, Size, SizeUnit, Frequency, FrequencyInterval, Description);
+				Model, Size, SizeUnit, VldDt, Frequency, FrequencyInterval, Description);
 		
 		//Closing the User credential Pop if its visible
 		if (assetCreationPage.UserLoginPopupVisible()) {
 			assetCreationPage.UserLoginPopupClose();
-		}
-		
+		}	
+	
 		//Click the CLear button in the Asset creation/details page
 		assetCreationPage.clickClearBtn();
+		TestUtilities tu = new TestUtilities();
+		String ExpDate = tu.get_CurrentDate_inCertainFormat("MM-dd-YYYY");
+		System.out.println(ExpDate);
 		
 		//Validate all the field reset outputs
-		sa41.assertEquals(assetCreationPage.getAssetName(), "", 
+		sa.assertEquals(assetCreationPage.getAssetName(), "", 
 				"FAIL: Asset Name didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getEqpID(), "", 
+		sa.assertEquals(assetCreationPage.getEqpID(), "", 
 				"FAIL: Asset ID didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetTypetext(), "Select", 
+		sa.assertEquals(assetCreationPage.getAssetTypetext(), "Select", 
 				"FAIL: Asset Type didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetManufacturertext(), "Select", 
+		sa.assertEquals(assetCreationPage.getAssetManufacturertext(), "Select", 
 				"FAIL: Asset Manufacturer didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetLocationtext(), "Select", 
+		sa.assertEquals(assetCreationPage.getAssetLocationtext(), "Select", 
 				"FAIL: Asset Location didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetModeltext(), "", 
+		sa.assertEquals(assetCreationPage.getAssetModeltext(), "", 
 				"FAIL: Asset Model didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetSizetext(), "", 
+		sa.assertEquals(assetCreationPage.getAssetSizetext(), "", 
 				"FAIL: Asset Size didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetSizeUnittext(), "Select", 
+		sa.assertEquals(assetCreationPage.getAssetSizeUnittext(), "Select", 
 				"FAIL: Asset SizeUnit didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetFreqtext(), "Select", 
+		sa.assertEquals(assetCreationPage.getAsstValidationDatetext(), ExpDate,
+				"FAIL: Asset Last Validation Date didn't Clear on clicking the Clear button");		
+		sa.assertEquals(assetCreationPage.getAssetFreqtext(), "Select", 
 				"FAIL: Asset Frequency didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetFreqIntrvltext(), "Select", 
+		sa.assertEquals(assetCreationPage.getAssetFreqIntrvltext(), "Select", 
 				"FAIL: Asset FrequencyInterval didn't Clear on clicking the Clear button");
-		sa41.assertEquals(assetCreationPage.getAssetDescriptiontext(), "", 
+		sa.assertEquals(assetCreationPage.getAssetDescriptiontext(), "", 
 				"FAIL: Asset Description didn't Clear on clicking the Clear button");
 		
-		sa41.assertAll();
+		sa.assertAll();
 	}
 	
 	
-	// ASST144
-	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify if the back button will -prompt as discard the changes- with Yes or No option")
-	public void ASST144(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
+	// ASST46a-Verify the back button functionality in Asset creation screen
+	@Test(dataProvider = "AssetAllData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
+			description="ASST46a-Verify the back button functionality in Asset creation screen")
+	public void ASST46a(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {
 		
-		extentTest = extent.startTest("ASST144 - Verify if the back button will -prompt as discard the changes- with Yes or No option");
+		extentTest = extent.startTest("ASST46a-Verify the back button functionality in Asset creation screen");
 		SoftAssert sa42 = new SoftAssert();
 
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);
+				VldDt, Frequency, FrequencyInterval, Description);
 
 		// Closing the User credential Pop if its visible
 		if (assetCreationPage.UserLoginPopupVisible()) {
@@ -942,23 +1518,22 @@ public class assetCreationTest extends BaseClass{
 
 		sa42.assertEquals(assetCreationPage.discardAlert(), true);
 		sa42.assertAll();
-	}
+	}	
 	
 	
-	
-	// ASST145
-	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
-			description="Verify if No Option is selected and verify if the application allows the user to stay in the same page")
+	// ASST46b-Verify the back button functionality in Asset creation screen
+	@Test(dataProvider = "AssetAllData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
+			description="ASST46b-Verify if No Option is selected and verify if the application allows the user to stay in the same page")
 	public void ASST145(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {
 		
-		extentTest = extent.startTest("ASST145 - Verify if No Option is selected and verify if the "
+		extentTest = extent.startTest("ASST46b - Verify if No Option is selected and verify if the "
 				+ "application allows the user to stay in the same page");
 		SoftAssert sa43 = new SoftAssert();
 
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);
+				VldDt, Frequency, FrequencyInterval, Description);
 
 		// Closing the User credential Pop if its visible
 		if (assetCreationPage.UserLoginPopupVisible()) {
@@ -972,23 +1547,23 @@ public class assetCreationTest extends BaseClass{
 
 		sa43.assertEquals(assetCreationPage.SaveBtn(), true);
 		sa43.assertAll();
-	}
+	}*/
 	
 
 	
-	// ASST146
-	@Test(dataProvider = "getAstALLData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
-			description="Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
-	public void ASST146(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
+	// ASST46c-Verify the back button functionality in Asset creation screen
+	@Test(dataProvider = "AssetAllData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
+			description="ASST46c-Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page")
+	public void ASST46c(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {
 		
-		extentTest = extent.startTest("ASST146 - Verify if option Yes is selected, app discard the "
+		extentTest = extent.startTest("ASST46c - Verify if option Yes is selected, app discard the "
 				+ "changes made and goes back to the Asset Page");
 		SoftAssert sa44 = new SoftAssert();
 
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);
+				VldDt, Frequency, FrequencyInterval, Description);
 
 		// Closing the User credential Pop if its visible
 		if (assetCreationPage.UserLoginPopupVisible()) {
@@ -1002,6 +1577,6 @@ public class assetCreationTest extends BaseClass{
 
 		sa44.assertEquals(assetHubPage.addAst(), true);
 		sa44.assertAll();
-	}*/
+	}
 	
 }

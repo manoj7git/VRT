@@ -96,81 +96,151 @@ public class assetCreationUtility extends BaseClass{
 		String sheetName = "ASST09";
 		Object[][] data = getTestData(sheetName);
 		return data;
+	}	
+
+	@DataProvider(name = "ASST14")
+	public static Object[][] getAstMakerValidTestData() {
+		String sheetName = "ASST14";
+		Object[][] data = getTestData(sheetName);
+		return data;
 	}
 	
-	@DataProvider(name = "getAstMdlInValidTestData")
-	public static Object[][] getAstMdlInValidTestData() {
-		String sheetName = "InvalidAstMdl";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstMdlValidTestData")
-	public static Object[][] getAstMdlValidTestData() {
-		String sheetName = "ValidAstMdl";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstSizeInValidTestData")
-	public static Object[][] getAstSizeInValidTestData() {
-		String sheetName = "InvalidAstSize";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstSizeValidTestData")
-	public static Object[][] getAstSizeValidTestData() {
-		String sheetName = "ValidAstSize";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstSizeUnitInValidTestData")
-	public static Object[][] getAstSizeUnitInValidTestData() {
-		String sheetName = "InvalidAstSizeUnit";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstSizeUnitValidTestData")
-	public static Object[][] getAstSizeUnitValidTestData() {
-		String sheetName = "ValidAstSizeUnit";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstMakerInValidTestData")
+	@DataProvider(name = "ASST15")
 	public static Object[][] getAstMakerInValidTestData() {
-		String sheetName = "InvalidAstMaker";
+		String sheetName = "ASST15";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "getAstMakerValidTestData")
-	public static Object[][] getAstMakerValidTestData() {
-		String sheetName = "ValidAstMaker";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstLocationInValidTestData")
-	public static Object[][] getAstLocationInValidTestData() {
-		String sheetName = "InvalidAstLocation";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "getAstLocationValidTestData")
+	@DataProvider(name = "ASST18")
 	public static Object[][] getAstLocationValidTestData() {
-		String sheetName = "ValidAstLocation";
+		String sheetName = "ASST18";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "getAstALLData")
-	public static Object[][] getAstALLData() {
-		String sheetName = "AllAssetDetails";
+	@DataProvider(name = "ASST19")
+	public static Object[][] getAstLocationInValidTestData() {
+		String sheetName = "ASST19";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+
+	@DataProvider(name = "ASST21")
+	public static Object[][] getAstMdlValidTestData() {
+		String sheetName = "ASST21";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST22")
+	public static Object[][] getAstMdlInValidTestData() {
+		String sheetName = "ASST22";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST24")
+	public static Object[][] getAstSizeValidTestData() {
+		String sheetName = "ASST24";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+
+	@DataProvider(name = "ASST25")
+	public static Object[][] getAstSizeInValidTestData() {
+		String sheetName = "ASST25";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+
+	@DataProvider(name = "ASST28")
+	public static Object[][] getAstSizeUnitValidTestData() {
+		String sheetName = "ASST28";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST29")
+	public static Object[][] getAstSizeUnitInValidTestData() {
+		String sheetName = "ASST29";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST32a")
+	public static Object[][] ASST32a() {
+		String sheetName = "ASST32a";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST32b")
+	public static Object[][] ASST32b() {
+		String sheetName = "ASST32b";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST32c")
+	public static Object[][] ASST32c() {
+		String sheetName = "ASST32c";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST35")
+	public static Object[][] ASST35() {
+		String sheetName = "ASST35";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST36")
+	public static Object[][] ASST36() {
+		String sheetName = "ASST36";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST37")
+	public static Object[][] ASST37() {
+		String sheetName = "ASST37";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST38")
+	public static Object[][] ASST38() {
+		String sheetName = "ASST38";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST39")
+	public static Object[][] ASST39() {
+		String sheetName = "ASST39";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST41")
+	public static Object[][] ASST41() {
+		String sheetName = "ASST41";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASST42")
+	public static Object[][] ASST42() {
+		String sheetName = "ASST42";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}	
+	
+	@DataProvider(name = "AssetAllData")
+	public static Object[][] AssetAllData() {
+		String sheetName = "AssetAllData";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}

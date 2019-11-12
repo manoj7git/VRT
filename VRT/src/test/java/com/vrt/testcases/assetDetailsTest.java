@@ -96,8 +96,8 @@ public class assetDetailsTest extends BaseClass {
 		// Method to Create 1st Asset 
 		assetHubPage=MainHubPage.ClickAssetTile();
 		assetCreationPage = assetHubPage.ClickAddAssetBtn();
-		assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
-				"cu", "5", "Weeks", "1st Asset Creation");
+		//assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
+				//"cu", "5", "Weeks", "1st Asset Creation");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 
 		AppClose();
@@ -306,8 +306,8 @@ public class assetDetailsTest extends BaseClass {
 		// Method to Create 1st Asset 
 		assetHubPage=MainHubPage.ClickAssetTile();
 		assetCreationPage = assetHubPage.ClickAddAssetBtn();
-		assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
-				"cu", "5", "Weeks", "1st Asset Creation");
+		//assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
+			//	"cu", "5", "Weeks", "1st Asset Creation");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage=assetCreationPage.clickBackBtn();
 		assetDetailsPage = assetHubPage.click_assetTile("Asset01");

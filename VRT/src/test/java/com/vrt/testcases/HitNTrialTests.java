@@ -7,6 +7,7 @@ package com.vrt.testcases;
 
 import static org.testng.Assert.assertEquals;
 
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -15,8 +16,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.ClickAction;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -37,7 +41,10 @@ import com.vrt.pages.MainHubPage;
 import com.vrt.pages.UserManagementPage;
 import com.vrt.pages.assetCreationPage;
 import com.vrt.pages.assetHubPage;
+import com.vrt.pages.assetDetailsPage;
 import com.vrt.utility.TestUtilities;
+import com.vrt.utility.assetCreationUtility;
+
 
 public class HitNTrialTests extends BaseClass {
 	
@@ -49,15 +56,16 @@ public class HitNTrialTests extends BaseClass {
 	UserManagementPage UserManagementPage;
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
+	assetDetailsPage assetDetailsPage;
 
-	/*@BeforeClass
+	@BeforeClass
 	private void testsetup() throws IOException {
 		//Rename the cache Asset file (Asset.txt) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
 		
 		//Rename the Asset folder (Asset) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
-	}*/
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+	}
 	
 	
 	//Before All the tests are conducted
@@ -86,15 +94,15 @@ public class HitNTrialTests extends BaseClass {
 		extent.close();
 	}
 	
-	/*@BeforeMethod(alwaysRun=true)
+	@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {		
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		MainLoginPage = new LoginPage();
-		MainHubPage = MainLoginPage.Login(getUN("adminFull"), getPW("adminFull"));
+		MainHubPage = MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
 		//assetCreationPage=assetHubPage.ClickAddAssetBtn();
-	}*/
+	}
 
 	
 	/*// TearDown of the App
@@ -123,71 +131,27 @@ public class HitNTrialTests extends BaseClass {
 	}
 */
 	
-	@Test
-	public void PrivTest() throws InterruptedException, ParseException {
-		
-		String expted = "abcd";
-		String act = "efgh";
-		
+	//ASST36-Verify the Camera button functionality for uploading images
+	@Test()
+	public void ASST36() 
+					throws InterruptedException, ParseException, AWTException, IOException {
+		extentTest = extent.startTest("ASST36-Verify the Camera button functionality for uploading images");
 		SoftAssert sa = new SoftAssert();
-		sa.assertEquals(act, expted);
-		sa.assertEquals(act, expted, "Fail");
-		sa.assertAll();
+		assetDetailsPage=assetHubPage.click_assetTile("ASST41");
 		
-//		if (!expted.equals(act)) {
-//			sa.assertEquals(true, false);
-//			sa.assertAll();
-//		}
-//		else {
-//			sa.assertEquals(true, true);
-//			sa.assertAll();
-//		}
-
-
-
-	}
-	 
-
-/*	@Test
-	public void fetchAssetlist() {
-		List<WebElement> AssetList = driver.findElementByAccessibilityId("ItemGridView")
-				.findElements(By.className("GridViewItem"));
-		System.out.println("Total Assets count: " + AssetList.size());
-
-		for (int i = 0; i < AssetList.size(); i++) {
-			System.out.println("Asset type : " + AssetList.get(i).getText());
-
-			List<WebElement> AssetTileInfo = AssetList.get(i).findElements(By.className("TextBlock"));
-			//System.out.println(AssetTileInfo.size());
-			for (int j = 0; j < AssetTileInfo.size(); j++) {
-				//System.out.println("AssetTileInfo: "+AssetTileInfo.get(j).getText());
-				if (AssetTileInfo.get(j).getText().equals("7")) {
-					System.out.println("AssetTileInfo (AssetName): "+AssetTileInfo.get(j).getText());
-					AssetTileInfo.get(j).click();
-				}
-			}
+		String[] AsstTitle = assetDetailsPage.assetDetail_PageTitle().split(" - ");
+		for (String str2 : AsstTitle) {
+			System.out.println("Act asst info2: " + str2);
 		}
 		
+		//Capture the expected Image added to the Asset placeholder 1		
+		//assetCreationPage.Capture_AsstImg1("Expected_Asst36_AsstCreation");
 		
-	}
-	*/
-	
-	
-	/*@Test
-	public void retryFailTC() {
-		Assert.assertEquals(true, false);		
-	}*/
-	
-	/*@Test
-	public void fetchAssetLocationfilter() throws InterruptedException {
-		extentTest = extent.startTest("fetchAssetLocationfilter");
-		boolean state1 = assetHubPage.assetList_LocationFilter();
-		System.out.println(state1);
+		//sa.assertEquals(status_ImgCompare, false, "FAIL: The Asset Image saved is not same as what was selected");
 
-		
-		Assert.assertEquals(state1, true);	
-	
-	}*/
+		//sa.assertAll();
+	}
+
 	
 
 		
