@@ -2,32 +2,32 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="30690" started-at="2019-11-12T19:44:11 IST" finished-at="2019-11-12T19:44:41 IST">
+  <suite name="Default suite" duration-ms="42388" started-at="2019-11-14T19:44:46 IST" finished-at="2019-11-14T19:45:29 IST">
     <groups>
       <group name="Sanity">
-        <method signature="assetCreationTest.ASST46c(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="ASST46c" class="com.vrt.testcases.assetCreationTest"/>
+        <method signature="assetCreationTest.ASST49(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="ASST49" class="com.vrt.testcases.assetCreationTest"/>
       </group> <!-- Sanity -->
     </groups>
-    <test name="Default test" duration-ms="30690" started-at="2019-11-12T19:44:11 IST" finished-at="2019-11-12T19:44:41 IST">
+    <test name="Default test" duration-ms="42388" started-at="2019-11-14T19:44:46 IST" finished-at="2019-11-14T19:45:29 IST">
       <class name="com.vrt.testcases.assetCreationTest">
-        <test-method status="PASS" signature="AssetCreationSetup()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="AssetCreationSetup" is-config="true" duration-ms="94" started-at="2019-11-12T19:44:11 IST" finished-at="2019-11-12T19:44:11 IST">
+        <test-method status="PASS" signature="AssetCreationSetup()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="AssetCreationSetup" is-config="true" duration-ms="78" started-at="2019-11-14T19:44:46 IST" finished-at="2019-11-14T19:44:46 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- AssetCreationSetup -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="Setup" is-config="true" duration-ms="11318" started-at="2019-11-12T19:44:11 IST" finished-at="2019-11-12T19:44:23 IST">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="Setup" is-config="true" duration-ms="11252" started-at="2019-11-14T19:44:47 IST" finished-at="2019-11-14T19:44:58 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="ASST46c(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="ASST46c" duration-ms="18291" started-at="2019-11-12T19:44:23 IST" description="ASST46c-Verify if option�Yes is selected, app discard the changes made and goes back to the Asset Page" data-provider="AssetAllData" finished-at="2019-11-12T19:44:41 IST">
+        <test-method status="PASS" signature="ASST49(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="ASST49" duration-ms="28498" started-at="2019-11-14T19:44:58 IST" description="ASST49-Verify the count of Assets in main hub page post New Asset creation" data-provider="ASST49" finished-at="2019-11-14T19:45:27 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[ASSTNew]]>
+                <![CDATA[ASST49]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[45]]>
+                <![CDATA[49]]>
               </value>
             </param>
             <param index="2">
@@ -62,7 +62,7 @@
             </param>
             <param index="8">
               <value>
-                <![CDATA[11-11-2019]]>
+                <![CDATA[11-13-2019]]>
               </value>
             </param>
             <param index="9">
@@ -77,25 +77,25 @@
             </param>
             <param index="11">
               <value>
-                <![CDATA[Test Description]]>
+                <![CDATA[Test Description for ASST49]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ASST46c -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="Teardown" is-config="true" duration-ms="47" started-at="2019-11-12T19:44:41 IST" finished-at="2019-11-12T19:44:41 IST">
+        </test-method> <!-- ASST49 -->
+        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="Teardown" is-config="true" duration-ms="32" started-at="2019-11-14T19:45:27 IST" finished-at="2019-11-14T19:45:27 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=ASST46c status=SUCCESS method=assetCreationTest.ASST46c(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9] output={null}]]]>
+                <![CDATA[[TestResult name=ASST49 status=SUCCESS method=assetCreationTest.ASST49(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="endReport" is-config="true" duration-ms="188" started-at="2019-11-12T19:44:41 IST" finished-at="2019-11-12T19:44:41 IST">
+        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="endReport" is-config="true" duration-ms="1781" started-at="2019-11-14T19:45:27 IST" finished-at="2019-11-14T19:45:29 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->

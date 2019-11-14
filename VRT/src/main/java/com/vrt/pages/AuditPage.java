@@ -15,31 +15,29 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import com.vrt.pages.EquipmentPage;
 import com.vrt.base.BaseClass;
 
 public class AuditPage extends BaseClass {
-	
+
 	// FileManagementPage Element definition
 	WebElement Audit_HeadTitle = null;
-	
 
-	
+	//Elements initialization
 	private void initElements() {
-		Audit_HeadTitle = driver.findElementByName("Audit Trail");	
+		Audit_HeadTitle = driver.findElementByName("Audit Trail");
 
 	}
-	
-	AuditPage()
-	{
+
+	AuditPage() {
 		super();
 		initElements();
 
 	}
-	
 
-	//Archive TextBox is Visible
-		public boolean AuditHeadTitleVisible() throws InterruptedException {
-			return IsElementVisibleStatus(Audit_HeadTitle);
-		}	
+	// Archive TextBox is Visible
+	public boolean AuditHeadTitleVisible() throws InterruptedException {
+		return IsElementVisibleStatus(Audit_HeadTitle);
+	}
 }

@@ -6,10 +6,10 @@
       <class name="com.vrt.testcases.assetCreationTest">
         <methods>
           <include name="Teardown"/>
-          <include name="ASST46"/>
           <include name="AssetCreationSetup"/>
           <include name="Setup"/>
           <include name="endReport"/>
+          <include name="ASST49" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.vrt.testcases.assetCreationTest -->
     </classes>

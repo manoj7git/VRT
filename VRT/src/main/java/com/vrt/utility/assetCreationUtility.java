@@ -244,6 +244,13 @@ public class assetCreationUtility extends BaseClass{
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
+	
+	@DataProvider(name = "ASST49")
+	public static Object[][] ASST49() {
+		String sheetName = "ASST49";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
 
 	@DataProvider(name = "tc147")
 	public static Object[][] tc147() {

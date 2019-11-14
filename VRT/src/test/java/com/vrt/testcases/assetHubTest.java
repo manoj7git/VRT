@@ -362,47 +362,7 @@ public class assetHubTest extends BaseClass {
 
 		sa1.assertEquals(ActualAssetinfo, expectedAssetInfo);;
 		sa1.assertAll();
-	}
-	
-	
-	//ASST149_ASST003
-	@Test(groups ={"Regression"}, dataProvider = "tc149", dataProviderClass = TestUtilities.class,  
-			description = "ASST149 - Verify on the main hub page ,if the number of assets "
-					+ "has increased by one, Print screen shot of the main hub")
-	public void ASST149_ASST003(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
-			throws InterruptedException {
-		extentTest = extent.startTest("ASST149_ASST003- Verify on the main hub page ,if the number of "
-				+ "assets has increased by one, Print screen shot of the main hube");
-		SoftAssert sa2 = new SoftAssert();
-		
-		MainHubPage = assetHubPage.ClickBackBtn();
-		int AssetCountInMainHubPage_BeforeNewAssetCreation = Integer.parseInt(MainHubPage.AssetCountInAssetTileOfMainHubPage());
-		System.out.println("AssetCountInMainHubPage_BeforeNewAssetCreation: "+AssetCountInMainHubPage_BeforeNewAssetCreation);
-		
-		assetHubPage=MainHubPage.ClickAssetTile(); //Move to Asset Hub page
-		//Asset creation method
-		assetCreationPage = assetHubPage.ClickAddAssetBtn();
-		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);		
-		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
-		// Click the Back button in the Asset creation/details page & click the Save message if
-		// displayed in order to move to Asset Hub Page
-		assetHubPage = assetCreationPage.clickBackBtn();
-
-		//String AssetCountInAssetHubPage = assetHubPage.assetcount();
-		//System.out.println("Asst count in AsstHubPage:" + AssetCountInAssetHubPage);
-		
-		MainHubPage = assetHubPage.ClickBackBtn();
-		int AssetCountInMainHubPage_afterAssetCreation = Integer.parseInt(MainHubPage.AssetCountInAssetTileOfMainHubPage());
-		System.out.println("AssetCountInMainHubPage_afterAssetCreation: "+AssetCountInMainHubPage_afterAssetCreation);
-
-		//Verify if After asset creation count in the Asset tile info of Main Hub page has increased by 1
-		sa2.assertEquals(AssetCountInMainHubPage_afterAssetCreation, AssetCountInMainHubPage_BeforeNewAssetCreation+1, "FAIL: TC149 -Mismatch in "
-				+ "Asset count compared between Main Hub Page & Asset Hub page");
-		sa2.assertAll();
-	}
-		
+	}		
 	
 	
 	//ASST167

@@ -69,9 +69,9 @@ public class assetCreationTest extends BaseClass{
 		// Rename the User file (NgvUsers.uxx) if exists
 		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		//Rename the cache Asset file (Asset.txt) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
 		/*
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
@@ -896,13 +896,12 @@ public class assetCreationTest extends BaseClass{
 		String[] AsstDimBeforeLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
 		//for (String hw : AsstDimBeforeLstVldDtChange) {
 		//	System.out.println(hw);
-		}//
+		//}
 		
 		//Verify if the Asset Tile dimensions(Width) do not change if the Last Validated date 
 		//is within the validation frequency range
-		sa.assertEquals(AsstDimBeforeLstVldDtChange[1], "91", "FAIL: The Asset "
-				+ "Tile width Changed without the Last Validated Date for Asset"
-				+ "was modified to 1 Month back");
+		sa.assertEquals(AsstDimBeforeLstVldDtChange[1], "91", "FAIL: The Asset Tile width Changed "
+				+ "without the Last Validated Date for Asset was modified to 1 Month back");
 		
 		assetDetailsPage = assetHubPage.click_assetTile(AName);
 		assetCreationPage = assetDetailsPage.click_assetEditBtn();
@@ -931,7 +930,7 @@ public class assetCreationTest extends BaseClass{
 		String[] AsstDimAfterLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
 		//for (String hw : AsstDimAfterLstVldDtChange) {
 		//	System.out.println(hw);
-		}//
+		//}
 		
 		//Verify if the Asset Tile dimensions(Width) gets changed when the Last Validated date 
 		//is outside the validation frequency range
@@ -969,8 +968,8 @@ public class assetCreationTest extends BaseClass{
 		//Fetch the Height & Width of the Asset tile created above
 		String[] AsstDimBeforeLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
 		//for (String hw : AsstDimBeforeLstVldDtChange) {
-			System.out.println(hw);
-		}//
+		//	System.out.println(hw);
+		//}
 		
 		//Verify if the Asset Tile dimensions(Width) do not change if the Last Validated date 
 		//is within the validation frequency range
@@ -1004,8 +1003,8 @@ public class assetCreationTest extends BaseClass{
 		assetHubPage = assetDetailsPage.ClickBackBtn();
 		String[] AsstDimAfterLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
 		//for (String hw : AsstDimAfterLstVldDtChange) {
-			System.out.println(hw);
-		}//
+		//	System.out.println(hw);
+		//}
 		
 		//Verify if the Asset Tile dimensions(Width) gets changed when the Last Validated date 
 		//is outside the validation frequency range
@@ -1044,7 +1043,7 @@ public class assetCreationTest extends BaseClass{
 		String[] AsstDimBeforeLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
 		//for (String hw : AsstDimBeforeLstVldDtChange) {
 		//	System.out.println(hw);
-		}//
+		//}
 		
 		//Verify if the Asset Tile dimensions(Width) do not change if the Last Validated date 
 		//is within the validation frequency range
@@ -1403,7 +1402,7 @@ public class assetCreationTest extends BaseClass{
 		String[] ActualAssetinfo = assetHubPage.assetTile(Name);
 		//for (String str2 : ActualAssetinfo) {
 		//	System.out.println("Act asst info2: "+str2);
-		}//
+		//}
 
 		sa.assertEquals(ActualAssetinfo, expectedAssetInfo, "Fail: Asset created with wrong information else Not created");
 		sa.assertAll();
@@ -1542,13 +1541,12 @@ public class assetCreationTest extends BaseClass{
 
 		// Click the Back button in the Asset creation/details page
 		assetCreationPage.clickBkBtn();
-		//Click the No buttin in the Discard alert message
+		//Click the No button in the Discard alert message
 		assetCreationPage.discardAlertNoBtn();		
 
 		sa43.assertEquals(assetCreationPage.SaveBtn(), true);
 		sa43.assertAll();
-	}*/
-	
+	}	
 
 	
 	// ASST46c-Verify the back button functionality in Asset creation screen
@@ -1560,7 +1558,7 @@ public class assetCreationTest extends BaseClass{
 		
 		extentTest = extent.startTest("ASST46c - Verify if option Yes is selected, app discard the "
 				+ "changes made and goes back to the Asset Page");
-		SoftAssert sa44 = new SoftAssert();
+		SoftAssert sa = new SoftAssert();
 
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
 				VldDt, Frequency, FrequencyInterval, Description);
@@ -1575,8 +1573,95 @@ public class assetCreationTest extends BaseClass{
 		//Click the No button in the Discard alert message
 		assetHubPage = assetCreationPage.discardAlertYesBtn();			
 
-		sa44.assertEquals(assetHubPage.addAst(), true);
-		sa44.assertAll();
+		sa.assertEquals(assetHubPage.addAst(), true);
+		sa.assertAll();
+	}
+	
+	
+	// ASST47-Verify the Save button functionality in Asset creation screen
+	@Test(dataProvider = "AssetAllData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},
+			description="ASST47-Verify the Save button functionality in Asset creation screen")
+	public void ASST47(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException {
+		
+		extentTest = extent.startTest("ASST47-Verify the Save button functionality in Asset creation screen");
+		SoftAssert sa = new SoftAssert();
+
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, 
+				Model, Size, SizeUnit, VldDt, Frequency, FrequencyInterval, Description);
+		
+		//Check if the UN/PW popup is displayed
+		sa.assertEquals(assetCreationPage.UserLoginPopupVisible(), true, 
+				"Fail: Unauthorised access alert message, thus no UN-PW popped up");
+		
+		//Check if entering invalid credentials throws unauthorized alert message
+		UserLoginPopup(getUID("adminFull"), "abcd"); //Enter User Credentials to Save Asset
+		sa.assertEquals(assetCreationPage.AlertMsg(), "Invalid Credential, Please try again", 
+				"Fail: able save asset with Invalid User credentials");
+		assetCreationPage.CloseAlertMsg();
+		
+		//Check if Asset successful saved message displayed using valid User credentials
+		assetCreationPage.clickSaveBtn();		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		sa.assertEquals(assetCreationPage.AlertMsg(), "Data saved successfully", 
+				"Fail: Unauthorised access alert message, thus unable to save asset with Valid User credentials");
+		
+		
+		// Click the Back button in the Asset creation/details page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Expected Asset elements (Asset Type, Asset ID, Asset Name) to be edited
+		String[] expectedAssetInfo = {Type,ID,Name};
+		//System.out.println("exp asst info1:"+Arrays.toString(expectedAssetInfo));
+		
+		String[] ActualAssetinfo = assetHubPage.assetTile(Name);
+		//for (String str2 : ActualAssetinfo) {
+		//	System.out.println("Act asst info2: "+str2);
+		//}
+		
+		//Verify if the Asset created has got correct details reflect as entered during creation
+		sa.assertEquals(ActualAssetinfo, expectedAssetInfo, "Fail: Asset created with wrong information else Not created");
+		sa.assertAll();
+
+	}*/
+	
+	
+	//ASST49-Verify the count of Assets in main hub page post New Asset creation
+	@Test(dataProvider = "ASST49", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"},  
+			description = "ASST49-Verify the count of Assets in main hub page post New Asset creation")
+	public void ASST49(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST49-Verify the count of Assets in main hub page post New Asset creation");
+		SoftAssert sa2 = new SoftAssert();
+		
+		assetHubPage = assetCreationPage.discardAlertYesBtn();		
+		MainHubPage = assetHubPage.ClickBackBtn();
+		int AssetCountInMainHubPage_BeforeNewAssetCreation = Integer.parseInt(MainHubPage.AssetCountInAssetTileOfMainHubPage());
+		//System.out.println("AssetCountInMainHubPage_BeforeNewAssetCreation: "+AssetCountInMainHubPage_BeforeNewAssetCreation);
+		
+		assetHubPage=MainHubPage.ClickAssetTile(); //Move to Asset Hub page
+		//Asset creation method
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				VldDt, Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		// Click the Back button in the Asset creation/details page & click the Save message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+
+		//String AssetCountInAssetHubPage = assetHubPage.assetcount();
+		//System.out.println("Asst count in AsstHubPage:" + AssetCountInAssetHubPage);
+		
+		MainHubPage = assetHubPage.ClickBackBtn();
+		int AssetCountInMainHubPage_afterAssetCreation = Integer.parseInt(MainHubPage.AssetCountInAssetTileOfMainHubPage());
+		//System.out.println("AssetCountInMainHubPage_afterAssetCreation: "+AssetCountInMainHubPage_afterAssetCreation);
+
+		//Verify if After asset creation count in the Asset tile info of Main Hub page has increased by 1
+		sa2.assertEquals(AssetCountInMainHubPage_afterAssetCreation, AssetCountInMainHubPage_BeforeNewAssetCreation+1, "FAIL: ASST49 -Mismatch in "
+				+ "Asset count compared between Main Hub Page & Asset Hub page");
+		sa2.assertAll();
 	}
 	
 }
