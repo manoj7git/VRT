@@ -148,7 +148,7 @@ public class assetCreationTest extends BaseClass{
 	//ASST01-Verify if 25 max characters allowed in Asset name field
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="ASST01-Verify if 25 max characters allowed in Asset name field")
-	public void ASST100() throws InterruptedException {
+	public void ASST01() throws InterruptedException {
 		extentTest = extent.startTest("ASST01-Verify if 25 max characters allowed in Asset name field");
 		SoftAssert sa1 = new SoftAssert();
 		String expectedtxt = "12345678901234567890123456";  //26 Char input
@@ -377,7 +377,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST13- Verify if the Manufacturer name accepts up to 100 characters
 	@Test(groups = { "Sanity" }, description = "Verify if the Manufacturer name accepts up to 100 characters")
-	public void ASST13() {
+	public void ASST13() throws InterruptedException {
 		extentTest = extent.startTest("ASST13 - Verify if the Manufacturer name accepts up to 100 characters");
 		SoftAssert sa25 = new SoftAssert();
 
@@ -473,7 +473,7 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST17-Verify of 100 max character length for Location field
 	@Test(groups = { "Sanity" }, description = "ASST17-Verify of 100 max character length for Location field")
-	public void ASST17() {
+	public void ASST17() throws InterruptedException {
 		extentTest = extent.startTest("ASST17-Verify of 100 max character length for Location field");
 		SoftAssert sa36 = new SoftAssert();
 
@@ -1523,7 +1523,7 @@ public class assetCreationTest extends BaseClass{
 	// ASST46b-Verify the back button functionality in Asset creation screen
 	@Test(dataProvider = "AssetAllData", dataProviderClass = assetCreationUtility.class, groups = {"Sanity"}, 
 			description="ASST46b-Verify if No Option is selected and verify if the application allows the user to stay in the same page")
-	public void ASST145(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+	public void ASST46b(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String VldDt, String Frequency, String FrequencyInterval, String Description)
 			throws InterruptedException {
 		

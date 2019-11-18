@@ -165,12 +165,11 @@ public class assetCreationPage extends BaseClass{
 	}
 	
 	//Enter Manufacturer Name
-	public void enterManufacturerName(String AMN) {
-		clickOn(AssetEditBox.get(3));
-		clickOn(AssetEditBox.get(3));
+	public void enterManufacturerName(String AMN) throws InterruptedException {
+		clickOn(AssetEditBox.get(3));		
 		ClearText(AssetEditBox.get(3));
 		enterText(AssetEditBox.get(3), AMN);
-		//AssetEditBox.get(3).sendKeys(AMN);
+		Thread.sleep(500);
 	}
 	
 	//Fetch default Asset Manufacturer data
@@ -219,12 +218,11 @@ public class assetCreationPage extends BaseClass{
 	}
 	
 	//Enter Location 
-	public void enterLocation(String AL) {
-		clickOn(AssetEditBox.get(1));
+	public void enterLocation(String AL) throws InterruptedException {
 		clickOn(AssetEditBox.get(1));
 		ClearText(AssetEditBox.get(1));
 		enterText(AssetEditBox.get(1), AL);
-		//AssetEditBox.get(1).sendKeys(AL);
+		Thread.sleep(500);
 	}
 	
 	//Fetch default Asset Location data
@@ -307,7 +305,7 @@ public class assetCreationPage extends BaseClass{
 
 		for (int i = 1; i <= 31; i++) {
 			String Date = getAsstValidationDatetext();
-			String[] expDate = Date.split("-");
+			String[] expDate = Date.split("/");
 			//System.out.println(expDate[1]);
 
 			if (expDate[1].equals(Day)) {
@@ -328,7 +326,7 @@ public class assetCreationPage extends BaseClass{
 
 		for (int i = 1; i <= 12; i++) {
 			String Date = getAsstValidationDatetext();
-			String[] expDate = Date.split("-");
+			String[] expDate = Date.split("/");
 			//System.out.println(expDate[0]);
 
 			if (expDate[0].equals(Month)) {
@@ -347,7 +345,7 @@ public class assetCreationPage extends BaseClass{
 		// click_AsstValidationDatePkr_Btn();
 		Actions ac = new Actions(driver);
 		String Date = getAsstValidationDatetext();
-		String[] expDate = Date.split("-");
+		String[] expDate = Date.split("/");
 		//System.out.println(expDate[2]);
 		
 		while (!expDate[2].equals(Yr)) {
@@ -356,7 +354,7 @@ public class assetCreationPage extends BaseClass{
 			ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
 			Thread.sleep(1000);
 			Date = getAsstValidationDatetext();
-			expDate = Date.split("-");
+			expDate = Date.split("/");
 			//System.out.println(expDate[2]);
 		}
 
