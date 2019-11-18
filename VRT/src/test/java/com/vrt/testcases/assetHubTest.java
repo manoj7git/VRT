@@ -56,7 +56,7 @@ public class assetHubTest extends BaseClass {
 	public void AssetCreationSetup() throws InterruptedException, IOException {
 		
 		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html",true);
-		extent.addSystemInfo("VRT Version", "1.0.0.37");
+		extent.addSystemInfo("VRT Version", "1.0.0.41");
 		extent.addSystemInfo("BS Version", "0.6.13");
 		extent.addSystemInfo("Lgr Version", "1.2.6");
 		extent.addSystemInfo("User Name", "Manoj");

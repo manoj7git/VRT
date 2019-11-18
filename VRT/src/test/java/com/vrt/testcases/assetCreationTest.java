@@ -67,13 +67,13 @@ public class assetCreationTest extends BaseClass{
 		extent.addSystemInfo("TestSuiteName", "Asset Creation Test");
 
 		// Rename the User file (NgvUsers.uxx) if exists
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		//Rename the cache Asset file (Asset.txt) if exists
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
-		/*
+		
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
@@ -94,7 +94,7 @@ public class assetCreationTest extends BaseClass{
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);*/
+		Thread.sleep(1000);
 
 	}
 		
@@ -144,7 +144,7 @@ public class assetCreationTest extends BaseClass{
 	//Test Cases
 	//~~~~~~~~~~
 	
-	/*
+	
 	//ASST01-Verify if 25 max characters allowed in Asset name field
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="ASST01-Verify if 25 max characters allowed in Asset name field")
@@ -1058,7 +1058,7 @@ public class assetCreationTest extends BaseClass{
 		String[] AstLstVldDate = ALVDate.split("-");
 		int yr = Integer.parseInt(AstLstVldDate[2]);
 		int newYrMnth = yr-1;
-		String NewAstLstVldYr = Integer.toString(yr);
+		String NewAstLstVldYr = Integer.toString(newYrMnth);
 		
 		String NewAstLstVldDate = AstLstVldDate[0]+"-"+AstLstVldDate[1]+"-"+NewAstLstVldYr;
 		//System.out.println(NewAstLstVldDate);
@@ -1624,7 +1624,7 @@ public class assetCreationTest extends BaseClass{
 		sa.assertEquals(ActualAssetinfo, expectedAssetInfo, "Fail: Asset created with wrong information else Not created");
 		sa.assertAll();
 
-	}*/
+	}
 	
 	
 	//ASST49-Verify the count of Assets in main hub page post New Asset creation
@@ -1659,9 +1659,80 @@ public class assetCreationTest extends BaseClass{
 		//System.out.println("AssetCountInMainHubPage_afterAssetCreation: "+AssetCountInMainHubPage_afterAssetCreation);
 
 		//Verify if After asset creation count in the Asset tile info of Main Hub page has increased by 1
-		sa2.assertEquals(AssetCountInMainHubPage_afterAssetCreation, AssetCountInMainHubPage_BeforeNewAssetCreation+1, "FAIL: ASST49 -Mismatch in "
+		sa2.assertEquals(AssetCountInMainHubPage_afterAssetCreation, AssetCountInMainHubPage_BeforeNewAssetCreation+1, 
+		"FAIL: ASST49 -Mismatch in "
 				+ "Asset count compared between Main Hub Page & Asset Hub page");
 		sa2.assertAll();
+	}
+	
+	
+	//ASST50-Verify the bottom menu options in Asset creation screen
+	@Test(description = "ASST50-Verify the bottom menu options in Asset creation screen")
+	public void ASST50()
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST50-Verify the bottom menu options in Asset creation screen");
+		SoftAssert sa = new SoftAssert();
+		
+		assetCreationPage.Rt_Click_AstCreation_Buttom_AppBar();
+
+		sa.assertEquals(assetCreationPage.check_Home_Buttom_AppBar_Presence(), true, 
+				"FAIL: Home icon/button missing in bottom app bar");
+		sa.assertEquals(assetCreationPage.check_Help_Buttom_AppBar_Presence(), true,
+				"FAIL: Help icon/button missing in bottom app bar");
+		sa.assertEquals(assetCreationPage.check_WndsHelp_Buttom_AppBar_Presence(), true,
+				"FAIL: Windows Help icon/button missing in bottom app bar");
+		sa.assertEquals(assetCreationPage.check_About_Buttom_AppBar_Presence(), true,
+				"FAIL: About icon/button missing in bottom app bar");
+		sa.assertAll();
+	}
+	
+	//ASST51-Verify the home btn functionality in bottom menu options in Asset creation screen
+	@Test(description = "ASST51-Verify the home btn functionality in bottom menu options"
+			+ " in Asset creation screen")
+	public void ASST51()
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST51-Verify the home btn functionality in bottom "
+				+ "menu options in Asset creation screen");
+		SoftAssert sa = new SoftAssert();
+		
+		MainHubPage=assetCreationPage.Click_Home_Icon_AppBar();
+
+		sa.assertEquals(MainHubPage.mainPageTitle(), true, 
+				"FAIL: Clicking Home icon/button in bottom app bar do not redirect to Mains Hub page");
+		sa.assertAll();
+	}
+	
+	//ASST52-Verify the help btn functionality in bottom menu options in Asset creation screen
+	@Test(description = "ASST52-Verify the help btn functionality in bottom menu options "
+			+ "in Asset creation screen")
+	public void ASST52()
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST52-Verify the help btn functionality in bottom "
+				+ "menu options in Asset creation screen");
+		SoftAssert sa = new SoftAssert();
+		
+		assetCreationPage.Click_Help_Icon_AppBar();
+		//System.out.println(assetCreationPage.get_AsstCreation_HelpMenu_HdrText());
+		sa.assertEquals(assetCreationPage.get_AsstCreation_HelpMenu_HdrText(), 
+				"New Asset or Edit Asset", "FAIL: Clicking Help icon/button in bottom app bar"
+						+ "do not display the Asset Creation Help context window");
+		sa.assertAll();
+	}
+	
+	
+	//ASST54-Verify the About btn functionality in bottom menu options in Asset creation screen
+	@Test(description = "ASST54-Verify the About btn functionality in bottom menu options in "
+			+ "Asset creation screen")
+	public void ASST54()
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST54-Verify the About btn functionality in bottom menu "
+				+ "options in Asset creation screen");
+		SoftAssert sa = new SoftAssert();
+		
+		assetCreationPage.Click_About_Icon_AppBar();		
+		sa.assertEquals(assetCreationPage.check_About_wndw_Presence(), 
+				true, "FAIL: Clicking About icon/button in bottom app bar do not display the About window");
+		sa.assertAll();
 	}
 	
 }

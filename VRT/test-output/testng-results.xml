@@ -2,100 +2,35 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="42388" started-at="2019-11-14T19:44:46 IST" finished-at="2019-11-14T19:45:29 IST">
+  <suite name="Default suite" duration-ms="15053" started-at="2019-11-17T20:20:52 IST" finished-at="2019-11-17T20:21:07 IST">
     <groups>
-      <group name="Sanity">
-        <method signature="assetCreationTest.ASST49(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="ASST49" class="com.vrt.testcases.assetCreationTest"/>
-      </group> <!-- Sanity -->
     </groups>
-    <test name="Default test" duration-ms="42388" started-at="2019-11-14T19:44:46 IST" finished-at="2019-11-14T19:45:29 IST">
+    <test name="Default test" duration-ms="15053" started-at="2019-11-17T20:20:52 IST" finished-at="2019-11-17T20:21:07 IST">
       <class name="com.vrt.testcases.assetCreationTest">
-        <test-method status="PASS" signature="AssetCreationSetup()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="AssetCreationSetup" is-config="true" duration-ms="78" started-at="2019-11-14T19:44:46 IST" finished-at="2019-11-14T19:44:46 IST">
+        <test-method status="PASS" signature="AssetCreationSetup()[pri:0, instance:com.vrt.testcases.assetCreationTest@7e2d773b]" name="AssetCreationSetup" is-config="true" duration-ms="90" started-at="2019-11-17T20:20:52 IST" finished-at="2019-11-17T20:20:52 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- AssetCreationSetup -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="Setup" is-config="true" duration-ms="11252" started-at="2019-11-14T19:44:47 IST" finished-at="2019-11-14T19:44:58 IST">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.assetCreationTest@7e2d773b]" name="Setup" is-config="true" duration-ms="13345" started-at="2019-11-17T20:20:52 IST" finished-at="2019-11-17T20:21:05 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="ASST49(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="ASST49" duration-ms="28498" started-at="2019-11-14T19:44:58 IST" description="ASST49-Verify the count of Assets in main hub page post New Asset creation" data-provider="ASST49" finished-at="2019-11-14T19:45:27 IST">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[ASST49]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[49]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[HeatBath]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[AAS]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[HTC]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[VRT]]>
-              </value>
-            </param>
-            <param index="6">
-              <value>
-                <![CDATA[1]]>
-              </value>
-            </param>
-            <param index="7">
-              <value>
-                <![CDATA[cu m]]>
-              </value>
-            </param>
-            <param index="8">
-              <value>
-                <![CDATA[11-13-2019]]>
-              </value>
-            </param>
-            <param index="9">
-              <value>
-                <![CDATA[1]]>
-              </value>
-            </param>
-            <param index="10">
-              <value>
-                <![CDATA[Weeks]]>
-              </value>
-            </param>
-            <param index="11">
-              <value>
-                <![CDATA[Test Description for ASST49]]>
-              </value>
-            </param>
-          </params>
+        <test-method status="PASS" signature="ASST54()[pri:0, instance:com.vrt.testcases.assetCreationTest@7e2d773b]" name="ASST54" duration-ms="1329" started-at="2019-11-17T20:21:05 IST" description="ASST54-Verify the About btn functionality in bottom menu options in Asset creation screen" finished-at="2019-11-17T20:21:07 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ASST49 -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="Teardown" is-config="true" duration-ms="32" started-at="2019-11-14T19:45:27 IST" finished-at="2019-11-14T19:45:27 IST">
+        </test-method> <!-- ASST54 -->
+        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.assetCreationTest@7e2d773b]" name="Teardown" is-config="true" duration-ms="37" started-at="2019-11-17T20:21:07 IST" finished-at="2019-11-17T20:21:07 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=ASST49 status=SUCCESS method=assetCreationTest.ASST49(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9] output={null}]]]>
+                <![CDATA[[TestResult name=ASST54 status=SUCCESS method=assetCreationTest.ASST54()[pri:0, instance:com.vrt.testcases.assetCreationTest@7e2d773b] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.assetCreationTest@2173f6d9]" name="endReport" is-config="true" duration-ms="1781" started-at="2019-11-14T19:45:27 IST" finished-at="2019-11-14T19:45:29 IST">
+        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.assetCreationTest@7e2d773b]" name="endReport" is-config="true" duration-ms="229" started-at="2019-11-17T20:21:07 IST" finished-at="2019-11-17T20:21:07 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->

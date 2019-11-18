@@ -252,32 +252,4 @@ public class assetCreationUtility extends BaseClass{
 		return data;
 	}
 
-	@DataProvider(name = "tc147")
-	public static Object[][] tc147() {
-		String sheetName = "tc147";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "tc149")
-	public static Object[][] tc149() {
-		String sheetName = "tc149";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "tcasst011")
-	public static Object[][] tcasst011() {
-		String sheetName = "tcasst011";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "tcasst014")
-	public static Object[][] tcasst014() {
-		String sheetName = "tcasst014";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
 }

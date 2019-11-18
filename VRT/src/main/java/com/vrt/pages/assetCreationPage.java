@@ -49,6 +49,7 @@ public class assetCreationPage extends BaseClass{
 	WebElement AssetSaveBtn = driver.findElementByName("Save");
 	WebElement AssetClearBtn = driver.findElementByName("Clear");
 	WebElement AssetBackBtn = driver.findElementByAccessibilityId("BackButton");
+
 	
 	
 	//Verify the presence of New Asset Creation text 
@@ -742,6 +743,97 @@ public class assetCreationPage extends BaseClass{
 		
 		return asstCreationinfo;
 	}
+	
+	//Right click on the Asset Creation page to invoke the bottom apps bar
+	public void Rt_Click_AstCreation_Buttom_AppBar() {
+		Actions ac = new Actions(driver);
+		ac.contextClick().build().perform();
+	}
+	
+	//Verify the presence of Home button in the bottom apps bar
+	public boolean check_Home_Buttom_AppBar_Presence() {
+		WebElement bottomMenu_Home_Icon = driver.findElementByAccessibilityId("HomeAppBarButton");
+		return IsElementVisibleStatus(bottomMenu_Home_Icon);
+	}
+	
+	//Verify the presence of Apps Help icon/button in the bottom apps bar
+	public boolean check_Help_Buttom_AppBar_Presence() {
+		WebElement bottomMenu_AppHelp_Icon = driver.findElementByAccessibilityId("HelpAppBarButton");
+		return IsElementVisibleStatus(bottomMenu_AppHelp_Icon);
+	}
+	
+	//Verify the presence of WndsHelp Help icon/button in the bottom apps bar
+	public boolean check_WndsHelp_Buttom_AppBar_Presence() {
+		WebElement bottomMenu_WndsHelp_Icon = driver.findElementByAccessibilityId("WindowsHelpAppBarButton");
+		return IsElementVisibleStatus(bottomMenu_WndsHelp_Icon);
+	}
+	
+	//Verify the presence of About Help icon/button in the bottom apps bar
+	public boolean check_About_Buttom_AppBar_Presence() {
+		WebElement bottomMenu_About_Icon = driver.findElementByAccessibilityId("AboutAppBarButton");
+		return IsElementVisibleStatus(bottomMenu_About_Icon);
+	}
+	
+	//Click on the Home icon of the bottom apps bar to move to Main Hub page
+	public MainHubPage Click_Home_Icon_AppBar() throws InterruptedException {
+		Actions ac = new Actions(driver);
+		ac.contextClick().build().perform();
+		
+		WebElement bottomMenu_Home_Icon = driver.findElementByAccessibilityId("HomeAppBarButton");
+		clickOn(bottomMenu_Home_Icon);
+		Thread.sleep(1000);
+		return new MainHubPage();
+	}
+	
+	//Click on the Help icon of the bottom apps bar to move to Main Hub page
+	public void Click_Help_Icon_AppBar() throws InterruptedException {
+		Actions ac = new Actions(driver);
+		ac.contextClick().build().perform();
+		
+		WebElement bottomMenu_AppHelp_Icon = driver.findElementByAccessibilityId("HelpAppBarButton");
+		clickOn(bottomMenu_AppHelp_Icon);
+		Thread.sleep(1000);
+	}
+	
+	//Click on the WndsHelp icon of the bottom apps bar
+	public void Click_WndsHelp_Icon_AppBar() throws InterruptedException {
+		Actions ac = new Actions(driver);
+		ac.contextClick().build().perform();
+		
+		WebElement bottomMenu_WndsHelp_Icon = driver.findElementByAccessibilityId("WindowsHelpAppBarButton");
+		clickOn(bottomMenu_WndsHelp_Icon);
+		Thread.sleep(1000);		
+	}
+	
+	//Click on the About icon of the bottom apps bar to invoke the ABout window
+	public void Click_About_Icon_AppBar() throws InterruptedException {
+		Actions ac = new Actions(driver);
+		ac.contextClick().build().perform();
+		
+		WebElement bottomMenu_About_Icon = driver.findElementByAccessibilityId("AboutAppBarButton");
+		clickOn(bottomMenu_About_Icon);
+		Thread.sleep(500);
+	}
+	
+	//Get the Asset Creation Help context header text on clicking Help icon of the bottom apps bar
+	public String get_AsstCreation_HelpMenu_HdrText() {
+		WebElement AsstCreation_HelpMenu = driver.findElementByAccessibilityId("helpHeader");
+		return FetchText(AsstCreation_HelpMenu);
+	}
+	
+	//Verify the presence of About window on clicking the ABout icon in the bottom apps bar
+	public boolean check_About_wndw_Presence() {
+		WebElement About_Wndw = driver.findElementByName("About");
+		return IsElementVisibleStatus(About_Wndw);
+	}
+	
+	
+	//Get the Sw version info from the About window on clicking About icon of the bottom apps bar
+	public String get_SWVersion_About_Text() {
+		WebElement SWVersion_About_info = driver.findElementByAccessibilityId("SoftwareVersion");
+		return FetchText(SWVersion_About_info);
+	}
+
 	
 	
 }

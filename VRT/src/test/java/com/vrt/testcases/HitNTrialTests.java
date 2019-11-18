@@ -101,7 +101,7 @@ public class HitNTrialTests extends BaseClass {
 		MainLoginPage = new LoginPage();
 		MainHubPage = MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
-		//assetCreationPage=assetHubPage.ClickAddAssetBtn();
+		assetCreationPage=assetHubPage.ClickAddAssetBtn();
 	}
 
 	
@@ -133,16 +133,11 @@ public class HitNTrialTests extends BaseClass {
 	
 	//ASST36-Verify the Camera button functionality for uploading images
 	@Test()
-	public void ASST36() 
-					throws InterruptedException, ParseException, AWTException, IOException {
+	public void ASST36() {
 		extentTest = extent.startTest("ASST36-Verify the Camera button functionality for uploading images");
 		SoftAssert sa = new SoftAssert();
-		assetDetailsPage=assetHubPage.click_assetTile("ASST41");
+		//assetCreationPage.Rt_click_AsstCreationPage_ButtomAppBar();
 		
-		String[] AsstTitle = assetDetailsPage.assetDetail_PageTitle().split(" - ");
-		for (String str2 : AsstTitle) {
-			System.out.println("Act asst info2: " + str2);
-		}
 		
 		//Capture the expected Image added to the Asset placeholder 1		
 		//assetCreationPage.Capture_AsstImg1("Expected_Asst36_AsstCreation");
