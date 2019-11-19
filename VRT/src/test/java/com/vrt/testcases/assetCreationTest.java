@@ -67,14 +67,14 @@ public class assetCreationTest extends BaseClass{
 		extent.addSystemInfo("TestSuiteName", "Asset Creation Test");
 
 		// Rename the User file (NgvUsers.uxx) if exists
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		//Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
 		
-		/*LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		UserManagementPage = LoginPage.DefaultLogin();
@@ -94,7 +94,7 @@ public class assetCreationTest extends BaseClass{
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);*/
+		Thread.sleep(1000);
 
 	}
 		
@@ -144,7 +144,7 @@ public class assetCreationTest extends BaseClass{
 	//Test Cases
 	//~~~~~~~~~~
 	
-	/*
+	
 	//ASST01-Verify if 25 max characters allowed in Asset name field
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="ASST01-Verify if 25 max characters allowed in Asset name field")
@@ -713,7 +713,8 @@ public class assetCreationTest extends BaseClass{
 		sa20.assertEquals(ActAlertMsg, ExpAlrtMsg, "Fail: Asset Unit size accepting Invalid unit data");
 		sa20.assertAll();
 	}
-	*/	
+	
+	
 	// ASST30a-Verify the Last Validated field drop down
 	@Test(groups = {"Sanity"}, 
 			description="ASST30-Verify the Last Validated drop down field default data")
@@ -747,7 +748,7 @@ public class assetCreationTest extends BaseClass{
 		}
 
 	}
-	/*
+	
 	// ASST30b-Verify if after selecting Date and clicking OK button should reflect the updated 
 	//Date in the Last Validated field
 	@Test(groups = {"Sanity"}, 
@@ -1748,5 +1749,5 @@ public class assetCreationTest extends BaseClass{
 				true, "FAIL: Clicking About icon/button in bottom app bar do not display the About window");
 		sa.assertAll();
 	}
-	*/
+	
 }
