@@ -67,14 +67,14 @@ public class assetCreationTest extends BaseClass{
 		extent.addSystemInfo("TestSuiteName", "Asset Creation Test");
 
 		// Rename the User file (NgvUsers.uxx) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		//Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
 		
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		/*LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		UserManagementPage = LoginPage.DefaultLogin();
@@ -94,7 +94,7 @@ public class assetCreationTest extends BaseClass{
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);
+		Thread.sleep(1000);*/
 
 	}
 		
@@ -144,7 +144,7 @@ public class assetCreationTest extends BaseClass{
 	//Test Cases
 	//~~~~~~~~~~
 	
-	
+	/*
 	//ASST01-Verify if 25 max characters allowed in Asset name field
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="ASST01-Verify if 25 max characters allowed in Asset name field")
@@ -713,7 +713,7 @@ public class assetCreationTest extends BaseClass{
 		sa20.assertEquals(ActAlertMsg, ExpAlrtMsg, "Fail: Asset Unit size accepting Invalid unit data");
 		sa20.assertAll();
 	}
-		
+	*/	
 	// ASST30a-Verify the Last Validated field drop down
 	@Test(groups = {"Sanity"}, 
 			description="ASST30-Verify the Last Validated drop down field default data")
@@ -723,17 +723,31 @@ public class assetCreationTest extends BaseClass{
 		
 		TestUtilities tu = new TestUtilities();
 		String expectedDt = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy");
-		//System.out.println("expectedDt: "+expectedDt);
+		System.out.println("expectedDt: "+expectedDt);
+		String [] expDt =  expectedDt.split("-");
+		String expDay = expDt[1];
+		String expMnth = expDt[0];
+		String expYr = expDt[2];
+		System.out.println("Expected Day: "+expDay+" Expected Month: "+expMnth+" Expected Year: "+expYr);
 		
 		String ActualDt = assetCreationPage.getAsstValidationDatetext();
-		//System.out.println(ActualDt);
-		
-		sa.assertEquals(ActualDt, expectedDt, 
-				"Fail: Asset Validation Date field do not reflect the current date");
-		
-		sa.assertAll();
+		System.out.println("ActualDt: "+ActualDt);
+		if (ActualDt.contains("-")) {
+			String [] ActDt1 = ActualDt.split("-");
+			sa.assertEquals(ActDt1[1], expDay, "Fail: Asset Validation Date field do not reflect the current date");
+			sa.assertEquals(ActDt1[0], expMnth, "Fail: Asset Validation Date field do not reflect the current date");
+			sa.assertEquals(ActDt1[2], expYr, "Fail: Asset Validation Date field do not reflect the current date");
+			sa.assertAll();
+		} else {
+			String [] ActDt2 = ActualDt.split("/");
+			sa.assertEquals(ActDt2[1], expDay, "Fail: Asset Validation Date field do not reflect the current date");
+			sa.assertEquals(ActDt2[0], expMnth, "Fail: Asset Validation Date field do not reflect the current date");
+			sa.assertEquals(ActDt2[2], expYr, "Fail: Asset Validation Date field do not reflect the current date");
+			sa.assertAll();
+		}
+
 	}
-	
+	/*
 	// ASST30b-Verify if after selecting Date and clicking OK button should reflect the updated 
 	//Date in the Last Validated field
 	@Test(groups = {"Sanity"}, 
@@ -1734,5 +1748,5 @@ public class assetCreationTest extends BaseClass{
 				true, "FAIL: Clicking About icon/button in bottom app bar do not display the About window");
 		sa.assertAll();
 	}
-	
+	*/
 }

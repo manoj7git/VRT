@@ -6,9 +6,9 @@
       <class name="com.vrt.testcases.assetCreationTest">
         <methods>
           <include name="Teardown"/>
-          <include name="ASST54"/>
           <include name="AssetCreationSetup"/>
           <include name="Setup"/>
+          <include name="ASST30a"/>
           <include name="endReport"/>
         </methods>
       </class> <!-- com.vrt.testcases.assetCreationTest -->
