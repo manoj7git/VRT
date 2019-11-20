@@ -305,15 +305,32 @@ public class assetCreationPage extends BaseClass{
 
 		for (int i = 1; i <= 31; i++) {
 			String Date = getAsstValidationDatetext();
-			String[] expDate = Date.split("/");
-			//System.out.println(expDate[1]);
+			
+			//The below splitting code is defined, because the date format varies
+			//system to system where its displayed as mm-dd-yyyy or mm/dd/yyyy
+			if (Date.contains("-")) {
+				String[] expDate = Date.split("-");
+				//System.out.println(expDate[1]);
+				
+				if (expDate[1].equals(Day)) {
+					break;
+				}else {
+					click_AsstValidationDatePkr_Btn();
+					ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+					Thread.sleep(500);
+				}
+				
+			} else {
+				String[] expDate = Date.split("/");
+				//System.out.println(expDate[1]);
 
-			if (expDate[1].equals(Day)) {
-				break;
-			}else {
-				click_AsstValidationDatePkr_Btn();
-				ac.sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
-				Thread.sleep(500);
+				if (expDate[1].equals(Day)) {
+					break;
+				}else {
+					click_AsstValidationDatePkr_Btn();
+					ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+					Thread.sleep(500);
+				}
 			}
 		}
 	}
@@ -326,15 +343,32 @@ public class assetCreationPage extends BaseClass{
 
 		for (int i = 1; i <= 12; i++) {
 			String Date = getAsstValidationDatetext();
-			String[] expDate = Date.split("/");
-			//System.out.println(expDate[0]);
+			
+			//The below splitting code is defined, because the date format varies
+			//system to system where its displayed as mm-dd-yyyy or mm/dd/yyyy
+			if (Date.contains("-")) {
+				String[] expDate = Date.split("-");
+				//System.out.println(expDate[0]);
+				
+				if (expDate[0].equals(Month)) {
+					break;
+				}else {
+					click_AsstValidationDatePkr_Btn();
+					ac.sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+					Thread.sleep(500);
+				}
+				
+			} else {
+				String[] expDate = Date.split("/");
+				//System.out.println(expDate[0]);
 
-			if (expDate[0].equals(Month)) {
-				break;
-			}else {
-				click_AsstValidationDatePkr_Btn();			
-				ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
-				Thread.sleep(500);
+				if (expDate[0].equals(Month)) {
+					break;
+				}else {
+					click_AsstValidationDatePkr_Btn();
+					ac.sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+					Thread.sleep(500);
+				}
 			}
 		}
 	}
@@ -345,19 +379,19 @@ public class assetCreationPage extends BaseClass{
 		// click_AsstValidationDatePkr_Btn();
 		Actions ac = new Actions(driver);
 		String Date = getAsstValidationDatetext();
-		String[] expDate = Date.split("/");
-		//System.out.println(expDate[2]);
+		String expDate = Date.substring(Date.length()-4);
+		//String[] expDate = Date.split("/");
+		System.out.println(expDate);
 		
-		while (!expDate[2].equals(Yr)) {
+		while (!expDate.equals(Yr)) {
 			click_AsstValidationDatePkr_Btn();
 			Thread.sleep(1000);
 			ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
 			Thread.sleep(1000);
 			Date = getAsstValidationDatetext();
-			expDate = Date.split("/");
-			//System.out.println(expDate[2]);
+			expDate = Date.substring(Date.length()-4);
+			System.out.println(expDate);
 		}
-
 	}
 	
 	public void selectAssetLastVldDate(String Day, String Month, String Year) throws InterruptedException {

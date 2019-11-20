@@ -168,6 +168,13 @@ public class assetCreationUtility extends BaseClass{
 		return data;
 	}
 	
+	@DataProvider(name = "ASST30b")
+	public static Object[][] ASST30b() {
+		String sheetName = "ASST30b";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
 	@DataProvider(name = "ASST32a")
 	public static Object[][] ASST32a() {
 		String sheetName = "ASST32a";

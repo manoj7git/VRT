@@ -66,15 +66,15 @@ public class assetCreationTest extends BaseClass{
 		extent.addSystemInfo("User Name", "Manoj");
 		extent.addSystemInfo("TestSuiteName", "Asset Creation Test");
 
-		// Rename the User file (NgvUsers.uxx) if exists
+		/*// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		//Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");*/
 		
 		
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		/*LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		UserManagementPage = LoginPage.DefaultLogin();
@@ -94,7 +94,7 @@ public class assetCreationTest extends BaseClass{
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);
+		Thread.sleep(1000);*/
 
 	}
 		
@@ -144,7 +144,7 @@ public class assetCreationTest extends BaseClass{
 	//Test Cases
 	//~~~~~~~~~~
 	
-	
+	/*
 	//ASST01-Verify if 25 max characters allowed in Asset name field
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="ASST01-Verify if 25 max characters allowed in Asset name field")
@@ -713,26 +713,26 @@ public class assetCreationTest extends BaseClass{
 		sa20.assertEquals(ActAlertMsg, ExpAlrtMsg, "Fail: Asset Unit size accepting Invalid unit data");
 		sa20.assertAll();
 	}
-	
+	*/
 	
 	// ASST30a-Verify the Last Validated field drop down
 	@Test(groups = {"Sanity"}, 
-			description="ASST30-Verify the Last Validated drop down field default data")
+			description="ASST30a-Verify the Last Validated drop down field default data")
 	public void ASST30a() throws InterruptedException, ParseException {
-		extentTest = extent.startTest("ASST30-sVerify the Last Validated drop down field default data");
+		extentTest = extent.startTest("ASST30a-Verify the Last Validated drop down field default data");
 		SoftAssert sa = new SoftAssert();		
 		
 		TestUtilities tu = new TestUtilities();
-		String expectedDt = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy");
-		System.out.println("expectedDt: "+expectedDt);
-		String [] expDt =  expectedDt.split("-");
+		String expectedDt = tu.get_CurrentDate_inCertainFormat("MM/dd/yyyy");
+		//System.out.println("expectedDt: "+expectedDt);
+		String [] expDt =  expectedDt.split("/");
 		String expDay = expDt[1];
 		String expMnth = expDt[0];
 		String expYr = expDt[2];
-		System.out.println("Expected Day: "+expDay+" Expected Month: "+expMnth+" Expected Year: "+expYr);
+		//System.out.println("Expected Day: "+expDay+" Expected Month: "+expMnth+" Expected Year: "+expYr);
 		
 		String ActualDt = assetCreationPage.getAsstValidationDatetext();
-		System.out.println("ActualDt: "+ActualDt);
+		//System.out.println("ActualDt: "+ActualDt);
 		if (ActualDt.contains("-")) {
 			String [] ActDt1 = ActualDt.split("-");
 			sa.assertEquals(ActDt1[1], expDay, "Fail: Asset Validation Date field do not reflect the current date");
@@ -751,44 +751,68 @@ public class assetCreationTest extends BaseClass{
 	
 	// ASST30b-Verify if after selecting Date and clicking OK button should reflect the updated 
 	//Date in the Last Validated field
-	@Test(groups = {"Sanity"}, 
+	@Test(groups = {"Sanity"}, dataProvider = "ASST30b", dataProviderClass = assetCreationUtility.class,
 			description="ASST30b-Verify if after selecting Date and "
 					+ "clicking OK button should reflect the updated Date in the Last Validated field")
-	public void ASST30b() throws InterruptedException, ParseException {
+	public void ASST30b(String ExpDate) throws InterruptedException, ParseException {
 		extentTest = extent.startTest("ASST30b-Verify if after selecting Date and "
 				+ "clicking OK button should reflect the updated Date in the Last Validated field");
 		SoftAssert sa = new SoftAssert();
 		
-		String DefaultDate = assetCreationPage.getAsstValidationDatetext();
-		System.out.println("Default Date reflected: "+DefaultDate);
-		
-		
-		assetCreationPage.selectAssetLastVldtDay("02"); //Enter the Day data
-		String ActualDt1 = assetCreationPage.getAsstValidationDatetext();
-		String[] Day = ActualDt1.split("-");
-		assetCreationPage.selectAssetLastVldt_Mnth("09"); //Enter the Month Data
-		String ActualDt2 = assetCreationPage.getAsstValidationDatetext();
-		String[] Month = ActualDt2.split("-");
-		assetCreationPage.selectAssetLastVldt_Yr("2017"); //Enter the Year data
-		String ActualDt3 = assetCreationPage.getAsstValidationDatetext();
-		String[] Year = ActualDt3.split("-");
-		
-		String FinalSelectedDateDate = assetCreationPage.getAsstValidationDatetext();
-		System.out.println("Final Date reflected after selection: "+FinalSelectedDateDate);
-		
-		
-		String[] Dt = FinalSelectedDateDate.split("-");		
-		for (String date : Dt) {
-			System.out.println(date);
-		}
-		
-		sa.assertEquals(FinalSelectedDateDate, Month[0]+"-"+Day[1]+"-"+Year[2], 
-				"Fail: Asset Validation Date field do not reflect the Selected date");
-		
-		sa.assertAll();
+		if (ExpDate.contains("-")) {
+			String[] ExpDt = ExpDate.split("-");
+			assetCreationPage.selectAssetLastVldtDay(ExpDt[1]); //Enter the Day data
+			assetCreationPage.selectAssetLastVldt_Mnth(ExpDt[0]); //Enter the Month Data
+			assetCreationPage.selectAssetLastVldt_Yr(ExpDt[2]); //Enter the Year data
+			
+			String FinalSelectedDateDate = assetCreationPage.getAsstValidationDatetext();
+			//System.out.println("Final Date reflected after selection: "+FinalSelectedDateDate);
+			
+			//The below splitting code is defined, because the date format varies
+			//system to system where its displayed as mm-dd-yyyy or mm/dd/yyyy
+			if (FinalSelectedDateDate.contains("-")) {
+				String [] ActDt1 = FinalSelectedDateDate.split("-");
+				sa.assertEquals(ActDt1[1], ExpDt[1], "Fail: Asset Validation Date field do not reflect the Selected date");
+				sa.assertEquals(ActDt1[0], ExpDt[0], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertEquals(ActDt1[2], ExpDt[2], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertAll();
+			} else {
+				String [] ActDt2 = FinalSelectedDateDate.split("/");
+				sa.assertEquals(ActDt2[1], ExpDt[1], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertEquals(ActDt2[0], ExpDt[0], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertEquals(ActDt2[2], ExpDt[2], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertAll();
+			}
+			
+		} else {
+			String[] ExpDt = ExpDate.split("/");
+			assetCreationPage.selectAssetLastVldtDay(ExpDt[1]); //Enter the Day data
+			assetCreationPage.selectAssetLastVldt_Mnth(ExpDt[0]); //Enter the Month Data
+			assetCreationPage.selectAssetLastVldt_Yr(ExpDt[2]); //Enter the Year data
+			
+			String FinalSelectedDateDate = assetCreationPage.getAsstValidationDatetext();
+			//System.out.println("Final Date reflected after selection: "+FinalSelectedDateDate);
+			
+			//The below splitting code is defined, because the date format varies
+			//system to system where its displayed as mm-dd-yyyy or mm/dd/yyyy
+			if (FinalSelectedDateDate.contains("-")) {
+				String [] ActDt1 = FinalSelectedDateDate.split("-");
+				sa.assertEquals(ActDt1[1], ExpDt[1], "Fail: Asset Validation Date field do not reflect the Selected date");
+				sa.assertEquals(ActDt1[0], ExpDt[0], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertEquals(ActDt1[2], ExpDt[2], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertAll();
+			} else {
+				String [] ActDt2 = FinalSelectedDateDate.split("/");
+				sa.assertEquals(ActDt2[1], ExpDt[1], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertEquals(ActDt2[0], ExpDt[0], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertEquals(ActDt2[2], ExpDt[2], "Fail: Asset Validation Date field do not reflect the current date");
+				sa.assertAll();
+			}
+		}	
+
 	}
 	
-	
+	/*
 	// ASST31a-Verify the Validation Frequency field: 2 drop downs should be displayed with default 'select'
 	@Test(groups = {"Sanity"}, 
 			description="ASST31a-Verify the Validation Frequency field: "
@@ -885,6 +909,8 @@ public class assetCreationTest extends BaseClass{
 
 		sa33.assertAll();
 	}
+	*/
+	
 	
 	//ASST32a-Verify the functionality when the Last validation has expired for frequency Week selection
 	@Test(groups = {"Sanity"}, 
@@ -897,7 +923,7 @@ public class assetCreationTest extends BaseClass{
 		SoftAssert sa = new SoftAssert();
 		
 		TestUtilities tu = new TestUtilities();
-		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy"); 
+		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM/dd/yyyy"); 
 		//System.out.println("expectedDt: "+ALVDate);
 		
 		assetCreationPage.assetCreationWithAllFieldEntry(AName, AID, AType, 
@@ -922,12 +948,12 @@ public class assetCreationTest extends BaseClass{
 		assetCreationPage = assetDetailsPage.click_assetEditBtn();
 		
 		//Changing the Date to just 1 month Back date
-		String[] AstLstVldDate = ALVDate.split("-");
+		String[] AstLstVldDate = ALVDate.split("/");
 		int mnth = Integer.parseInt(AstLstVldDate[0]);
 		int newMnth = mnth-1;
 		String NewAstLstVldMnth = Integer.toString(newMnth);
 		
-		String NewAstLstVldDate = NewAstLstVldMnth+"-"+AstLstVldDate[1]+"-"+AstLstVldDate[2];
+		String ExpNewAstLstVldDate = NewAstLstVldMnth+"/"+AstLstVldDate[1]+"/"+AstLstVldDate[2];
 		//System.out.println(NewAstLstVldDate);
 		
 		assetCreationPage.selectAssetLastVldt_Mnth(NewAstLstVldMnth);
@@ -939,7 +965,7 @@ public class assetCreationTest extends BaseClass{
 		//System.out.println(UpdatedLastVldDt);
 		
 		//Verify if the updated Last Validated Date is reflected in the corresponding Asset details page
-		sa.assertEquals(UpdatedLastVldDt, NewAstLstVldDate, "FAIL: Last Validated Date for Asset didn't change");
+		sa.assertEquals(UpdatedLastVldDt, ExpNewAstLstVldDate, "FAIL: Last Validated Date for Asset didn't change");
 		
 		assetHubPage = assetDetailsPage.ClickBackBtn();
 		String[] AsstDimAfterLstVldDtChange = assetHubPage.assetTile_Dimension(AName);
@@ -956,7 +982,7 @@ public class assetCreationTest extends BaseClass{
 		sa.assertAll();
 	}
 	
-	
+	/*
 	//ASST32b-Verify the functionality when the Last validation has expired for frequency Month selection
 	@Test(groups = {"Sanity"}, 
 			description="ASST32b-Verify the functionality when the Last validation has expired "
@@ -1749,5 +1775,5 @@ public class assetCreationTest extends BaseClass{
 				true, "FAIL: Clicking About icon/button in bottom app bar do not display the About window");
 		sa.assertAll();
 	}
-	
+	*/
 }

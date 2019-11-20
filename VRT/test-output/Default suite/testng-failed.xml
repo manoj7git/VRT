@@ -8,8 +8,8 @@
           <include name="Teardown"/>
           <include name="AssetCreationSetup"/>
           <include name="Setup"/>
-          <include name="ASST30a"/>
           <include name="endReport"/>
+          <include name="ASST30b" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.vrt.testcases.assetCreationTest -->
     </classes>
