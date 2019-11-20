@@ -144,7 +144,7 @@ public class assetCreationTest extends BaseClass{
 	//Test Cases
 	//~~~~~~~~~~
 	
-	/*
+	
 	//ASST01-Verify if 25 max characters allowed in Asset name field
 	@Test(groups = {"Sanity", "Regression"}, 
 			description="ASST01-Verify if 25 max characters allowed in Asset name field")
@@ -713,7 +713,7 @@ public class assetCreationTest extends BaseClass{
 		sa20.assertEquals(ActAlertMsg, ExpAlrtMsg, "Fail: Asset Unit size accepting Invalid unit data");
 		sa20.assertAll();
 	}
-	*/
+	
 	
 	// ASST30a-Verify the Last Validated field drop down
 	@Test(groups = {"Sanity"}, 
@@ -812,7 +812,7 @@ public class assetCreationTest extends BaseClass{
 
 	}
 	
-	/*
+	
 	// ASST31a-Verify the Validation Frequency field: 2 drop downs should be displayed with default 'select'
 	@Test(groups = {"Sanity"}, 
 			description="ASST31a-Verify the Validation Frequency field: "
@@ -909,7 +909,7 @@ public class assetCreationTest extends BaseClass{
 
 		sa33.assertAll();
 	}
-	*/
+	
 	
 	
 	//ASST32a-Verify the functionality when the Last validation has expired for frequency Week selection
@@ -982,7 +982,7 @@ public class assetCreationTest extends BaseClass{
 		sa.assertAll();
 	}
 	
-	/*
+	
 	//ASST32b-Verify the functionality when the Last validation has expired for frequency Month selection
 	@Test(groups = {"Sanity"}, 
 			description="ASST32b-Verify the functionality when the Last validation has expired "
@@ -1775,5 +1775,5 @@ public class assetCreationTest extends BaseClass{
 				true, "FAIL: Clicking About icon/button in bottom app bar do not display the About window");
 		sa.assertAll();
 	}
-	*/
+	
 }
