@@ -48,6 +48,26 @@ public class EquipmentHubPage extends BaseClass {
 					clickOn(irtdbox);
 					return new IRTDHubPage();
 				}
+				
+	// Click AddButton to get Alert message when supervisor does not have default privilege 
+				public void Alert_ClickAddBtn() throws InterruptedException {
+					clickOn(AddButton);
+					Thread.sleep(1000);
+				}
+
+				//Alert message for non default privilege  of supervisor
+				public String AlertMsg() {
+					WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+					return FetchText(Msg);
+					}
+				
+				//Click on back button 
+				public MainHubPage ClickBackBtn() {
+				WebElement backBtn = driver.findElementByAccessibilityId("ArrowGlyph");	
+				clickOn(backBtn);
+				return new MainHubPage();
+				}
+
 
 }
 

@@ -163,7 +163,7 @@ public class BaseClass {
 			LgInOK.click();
 			Thread.sleep(1000);
 		}		
-	} 
+	}
 	
 	//Close the App any time using the Top right Close button 
 	public void AppClose() throws InterruptedException {
@@ -193,20 +193,24 @@ public class BaseClass {
 		HashMap<String, String> UserMap = new HashMap<String, String>();
 		
 		UserMap.put("adminFull", "1:Welcome1@AM");
-		UserMap.put("SysAdmin", "2:Welcome2@AM");
+		UserMap.put("SysAdmin", "E3:Start@1AM");
 		UserMap.put("SysSupervisor", "3:Welcome3@AM");
 		UserMap.put("SysOperator", "4:Welcome4@AM");	
-		
+		UserMap.put("CustoAdmin", "C1:Start@2AM");
+		UserMap.put("CustoSup", "C2:Start@4AM");
+		UserMap.put("CustoOpe", "C3:Start@6AM");
+		UserMap.put("TestAdmin", "2:Start@5AM");
+		UserMap.put("Dsbluser", "1D:Start@1AM");
 		return UserMap;
 	}
 	
 	//Fetch the UserName credentials from the above GetUNCredentials HashMap method
-	public static String getUID(String role) {
+	  public static String getUID(String role) {
 		String UID = getUIDCredentials().get(role).split(":")[0];
 		return UID;
 	}
 	
-	//Fetch the Password credentials from the above GetUNCredentials HashMap method
+ //Fetch the Password credentials from the above GetUNCredentials HashMap method
 	public static String getPW(String role) {
 		String PW = getUIDCredentials().get(role).split(":")[1];
 		return PW;

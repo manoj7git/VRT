@@ -655,7 +655,7 @@ public class assetCreationPage extends BaseClass{
 			String AManufacturer, String ALocation, String AModel, String ASize, String AUnit, String ALVDate,
 			String AFreq, String AFreqInt, String ADesc) throws InterruptedException {
 		
-		String[] AstLstVldDate = ALVDate.split("-");		
+		String[] AstLstVldDate = ALVDate.split("/");		
 		
 		enterAssetName(AName);
 		enterAssetID(AID);
@@ -864,6 +864,25 @@ public class assetCreationPage extends BaseClass{
 	public String get_SWVersion_About_Text() {
 		WebElement SWVersion_About_info = driver.findElementByAccessibilityId("SoftwareVersion");
 		return FetchText(SWVersion_About_info);
+	}
+	
+	// Edit Asset header Title is displaying..
+	public boolean IsEditAssetscreenDisplayed() {
+		WebElement EAHeaderText = driver.findElementByName("Edit Asset");
+		return IsElementEnabledStatus(EAHeaderText);
+	}
+
+	// Click on Camera Icon for Asset Image
+	public void click_CameraIcon() throws InterruptedException {
+		WebElement CameraIcon = driver.findElementByAccessibilityId("CameraImage");
+		clickOn(CameraIcon);
+
+	}
+
+	// Camera On Header Title is Visible ...
+	public boolean CameraOnTitleVisible() {
+		WebElement IsCameraOn = driver.findElementByName("Camera");
+		return IsElementVisibleStatus(IsCameraOn);
 	}
 
 	

@@ -50,7 +50,7 @@ public class assetHubTest extends BaseClass {
 	assetCreationPage assetCreationPage;
 	assetDetailsPage assetDetailsPage;
 	
-	
+
 	//Before All the tests are conducted
 	@BeforeTest
 	public void AssetCreationSetup() throws InterruptedException, IOException {

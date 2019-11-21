@@ -91,7 +91,7 @@ public class setup_SensorConfigTest extends BaseClass{
 			assetHubPage=MainHubPage.ClickAssetTile();
 			assetCreationPage = assetHubPage.ClickAddAssetBtn();
 			assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
-					"cu", "5", "Weeks", "1st Asset Creation");
+					"cu", "11/20/2019", "5", "Weeks", "1st Asset Creation");
 			UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 
 			AppClose();

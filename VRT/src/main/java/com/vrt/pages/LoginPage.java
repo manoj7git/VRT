@@ -109,6 +109,13 @@ public class LoginPage extends BaseClass {
 		Thread.sleep(1000);
 	}
 	
+	// click login button to navigate to MainHubPage
+	public MainHubPage ClickonLoginBtn() throws InterruptedException {
+		clickOn(MainLoginBtn);
+		Thread.sleep(1000);
+		return new MainHubPage();
+	}
+	
 	//Verify the InvalidLoginAlertmsgPresence...")
 	public boolean InvalidLoginAlertmsgPresence() 
 	{
@@ -273,9 +280,14 @@ public class LoginPage extends BaseClass {
 		MainLoginPW.sendKeys("3");
 		MainLoginBtn.click();
 	}
-	//Alert message for entering deleted users credentials
 	
+	//Alert message for entering deleted users credentials	
 	public String Deleteduser_AlertMsg() {
+		WebElement LogMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return FetchText(LogMsg);
+	}
+	
+	public String AlertMsg() {
 		WebElement LogMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(LogMsg);
 	}

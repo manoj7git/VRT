@@ -91,7 +91,7 @@ public class setup_defineSetupTest extends BaseClass{
 		assetHubPage=MainHubPage.ClickAssetTile();
 		assetCreationPage = assetHubPage.ClickAddAssetBtn();
 		assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
-				"cu", "5", "Weeks", "1st Asset Creation");
+				"cu", "11/20/2019", "5", "Weeks", "1st Asset Creation");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 
 		AppClose();
@@ -290,7 +290,7 @@ public class setup_defineSetupTest extends BaseClass{
 		//System.out.println(AssetIDTxtinSetup);		
 		defineSetupPage.click_defineSetupPage_backBtn();
 		assetDetailsPage=defineSetupPage.click_YesofAlert_msg();
-		assetCreationPage = assetDetailsPage.click_AssetEditBtn();
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
 		String AssetIDTxtinAssetEditPage = assetCreationPage.getEqpID();
 		//System.out.println(AssetIDTxtinAssetEditPage);
 

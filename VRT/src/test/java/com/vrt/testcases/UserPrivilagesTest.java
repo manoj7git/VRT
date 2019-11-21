@@ -32,7 +32,7 @@ import com.vrt.pages.AuditPage;
 import com.vrt.pages.assetHubPage;
 import com.vrt.pages.assetCreationPage;
 import com.vrt.pages.assetDetailsPage;
-
+import com.vrt.pages.Setup_defineSetupPage;
 
 
 
@@ -55,18 +55,19 @@ public class UserPrivilagesTest extends BaseClass {
 	assetHubPage assetHubPage;
 	assetCreationPage assetCreationPage;
 	assetDetailsPage assetDetailsPage;
+	Setup_defineSetupPage Setup_defineSetupPage;
 	@BeforeTest
 	public void UserCreationSetup() throws InterruptedException, IOException {
 
 		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ExtentReport.html", true);
-		extent.addSystemInfo("VRT Version", "1.0.0.37");
-		extent.addSystemInfo("BS Version", "0.6.13");
-		extent.addSystemInfo("Lgr Version", "1.2.6");
-		extent.addSystemInfo("User Name", "Manoj");
-		extent.addSystemInfo("TestSuiteName", "Asset Creation Test");
+		extent.addSystemInfo("VRT Version", "1.0.0.39");
+		extent.addSystemInfo("BS Version", "0.6.19");
+		extent.addSystemInfo("Lgr Version", "1.2.9");
+		extent.addSystemInfo("User Name", "Ruchika");
+		extent.addSystemInfo("TestSuiteName", "User Privilages Test");
 
 		// Rename the User file (NgvUsers.uxx) if exists
-		/*renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+	renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -74,20 +75,54 @@ public class UserPrivilagesTest extends BaseClass {
 		UserManagementPage = LoginPage.DefaultLogin();
 		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"),
 				getPW("adminFull"), "FullAdmin", "12345678", "abc@gmail.com");
+		
+		//ADMIN user creation
+
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.clickAnyUserinUserList("User1");
-		UserManagementPage.clickPrivRunQual();
-		UserManagementPage.clickPrivCreateEditAsset();
-		UserManagementPage.clickPrivCreateEditSetup();
-		UserManagementPage.clickPrivRunCal();
-		UserManagementPage.ClickNewUserSaveButton();
+		UserManagementPage.ClickNewUser();
+		UserManagementPage.UMCreation_MandatoryFields("Eqp3", getUID("SysAdmin"), "1Start@1AM", "1Start@1AM",
+				"AdminNew", "System Administrator");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		MainHubPage = UserManagementPage.ClickBackButn();
-
-		AppClose();
-		Thread.sleep(1000); */
-
+		LoginPage = MainHubPage.UserSignOut();
+		Thread.sleep(1000);
+		LoginPage.EnterUserID("E3");
+		LoginPage.EnterUserPW("1Start@1AM");
+		LoginPage.ClickLoginBtn();
+		MainHubPage = LoginPage.EnterNewPWtext("Start@1AM");
+		LoginPage=MainHubPage.UserSignOut();
+		
+		// SUPERVISOR user creation (ADMN071)
+		
+		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		UserManagementPage.ClickNewUser();
+		UserManagementPage.UMCreation_MandatoryFields("Sup1", getUID("SysSupervisor"), "3Welcome3@AM", "3Welcome3@AM","Supervisor", "Supervisor");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		MainHubPage = UserManagementPage.ClickBackButn();
+		LoginPage = MainHubPage.UserSignOut();
+		Thread.sleep(1000);
+		LoginPage.EnterUserID("3");
+		LoginPage.EnterUserPW("3Welcome3@AM");
+		LoginPage.ClickLoginBtn();
+		MainHubPage = LoginPage.EnterNewPWtext("Welcome3@AM");
+		LoginPage = MainHubPage.UserSignOut();
+		
+// OPERATOR user creation (ADMN096)
+		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		UserManagementPage.ClickNewUser();
+		UserManagementPage.UMCreation_MandatoryFields("Ope1", getUID("SysOperator"), "4Welcome4@AM", "4Welcome4@AM","Operator", "Operator");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		MainHubPage = UserManagementPage.ClickBackButn();
+		LoginPage = MainHubPage.UserSignOut();
+		Thread.sleep(1000);
+		LoginPage.EnterUserID("4");
+		LoginPage.EnterUserPW("4Welcome4@AM");
+		LoginPage.ClickLoginBtn();
+		MainHubPage = LoginPage.EnterNewPWtext("Welcome4@AM");
+		LoginPage = MainHubPage.UserSignOut();		
 }
 
 // After All the tests are conducted
@@ -104,8 +139,8 @@ public class UserPrivilagesTest extends BaseClass {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
-		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
-		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		//MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		//UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 	}
 
 	@AfterMethod(alwaysRun = true)
@@ -137,105 +172,128 @@ public class UserPrivilagesTest extends BaseClass {
 
 		driver.quit();
 	}
-	//ADMN198.1- Verify if Administrator is able to access the default privilege-Create_Edit Equipment
-	/*@Test(groups = { "Regression" }, description ="Verify if Administrator is able to access the default privilege-Create_Edit Equipment"
+	// ADMN046
+
+		@Test(groups = { "Regression" }, description = "Verify the default privileges for Administrator")
+		public void ADMN046() throws Exception {
+			extentTest = extent.startTest("ADMN046-Verify the default privileges for Administrator");
+            MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+            UserManagementPage = MainHubPage.ClickAdminTile_UMpage(); 
+			UserManagementPage.ClickNewUser();
+			UserManagementPage.select_UserType("System Administrator");
+			Thread.sleep(1000);
+			SoftAssert sa1 = new SoftAssert();
+			sa1.assertEquals(UserManagementPage.Adminstatus(), true, "FAIL:Adminstatus Not Checked");
+			sa1.assertEquals(UserManagementPage.CreateAndEditEquipmentstatus(), true, "FAIL: CreateAndEditEquipmentstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.CreateReportsstatus(), true, "FAIL: CreateReportsstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.CreatePassFailtemplatestatus(), true, "FAIL:CreatePassFailtemplatestatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.Audittrailstatus(), true, "FAIL: Audittrailstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.DeleteAssetsstatus(), true, "FAIL: DeleteAssetsstatus Not Checked");
+			sa1.assertEquals(UserManagementPage.DeleteSetupstatus(), true, "FAIL: DeleteSetupstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.DeleteEquipmentstatus(), true, "FAIL:DeleteEquipmentstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.DeleteStudyFilesReportsstatus(), true, "FAIL: DeleteStudyFilesReportsstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.EditPassFailtemplatestatus(), true, "FAIL:EditPassFailtemplatestatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.CopyFilesReportsstatus(), true, "FAIL:CopyFilesReportsstatus Not Checked");
+			sa1.assertEquals(UserManagementPage.Archivedatastatus(), true, "FAIL: Archivedatastatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.CameraAccessstatus(), true, "FAIL:CameraAccessstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.ManualSyncstatus(), true, "FAIL:ManualSyncstatus CheckBox Not Checked");
+			sa1.assertEquals(UserManagementPage.Deletepassfailtemplatestatus(), true, "FAIL:Deletepassfailtemplatestatus CheckBox Not Checked");
+			sa1.assertAll();
+		}
+
+	// ADMN047
+		@Test(groups = { "Regression" }, description = "Verify the non- default privileges for Administrator")
+		public void ADMN047() throws Exception {
+			extentTest = extent.startTest("ADMN047-Verify the non- default privileges for Administrator");
+			MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+	        UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+			UserManagementPage.ClickNewUser();
+			UserManagementPage.select_UserType("System Administrator");
+			SoftAssert sa = new SoftAssert();
+			sa.assertEquals(UserManagementPage.CreaeteEditAssetPrivstatus(), false, "FAIL: CheckBox Checked");
+			sa.assertEquals(UserManagementPage.RunQualificationstatus(), false, "FAIL: CheckBox Checked");
+			sa.assertEquals(UserManagementPage.RunCalibrationstatus(), false, "FAIL: CheckBox Checked");
+			sa.assertEquals(UserManagementPage.PrivCreateEditSetupstatus(), false, "FAIL: CheckBox Checked");
+
+		}
+	/*	
+	//ADMN048
+	@Test(groups = { "Regression" }, description ="Verify if Administrator is able to access the default privilege-Create Equipment"
 	  ) public void ADMN198b() throws InterruptedException, ParseException,
 	  IOException, AWTException { extentTest = extent.
-	  startTest("ADMN198b_Verify if Administrator is able to access the default privilege-Create_Edit Equipment");
-	  SoftAssert s1 = new SoftAssert(); 
-	  UserManagementPage.ClickNewUser();
-	  UserManagementPage.UMCreation_MandatoryFields("Eqp3", getUID("SysAdmin"), "1Start@1AM", "1Start@1AM","AdminNew", "System Administrator"); 
-	  UserLoginPopup(getUID("adminFull"),getPW("adminFull")); 
-	  MainHubPage = UserManagementPage.ClickBackButn();
-	  LoginPage = MainHubPage.UserSignOut();
-	  Thread.sleep(1000);
-	  LoginPage.EnterUserID("E3");
-	  LoginPage.EnterUserPW("1Start@1AM");
-	  LoginPage.ClickLoginBtn();
-	  MainHubPage = LoginPage.EnterNewPWtext("Start@1AM");
+	  startTest("ADMN198b_Verify if Administrator is able to access the default privilege-Create Equipment");
+	  SoftAssert sa = new SoftAssert(); 
+	  MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 	  EquipmentHubPage = MainHubPage.ClickEquipmentTile();
-	  EquipmentPage=EquipmentHubPage.ClickAddButton();
-	  EquipmentPage.EqipCreation_MandatoryFields("15","22","IRTD");
+	  EquipmentPage = EquipmentHubPage.ClickAddButton();
+	  EquipmentPage.EqipCreation_MandatoryFields("213","35","IRTD");
 	  UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
-		  //UserLoginPopup("E3","3"); 
-	  String ExpAlrtMsg = "Equipment  \"15\"  Created successfully."; String ActAlertMsg =
-	  EquipmentPage.AlertMsg(); s1.assertEquals(ActAlertMsg,ExpAlrtMsg,"FAIL: Alert message Not Matched"); s1.assertAll();		 
-} */
-	// ADMN198.6
-	/*@Test(groups = {"Regression" }, 
-			description = "Verify if Administrator is able to access the default privilege-Delete Equipment")
-	public void ADMN198c() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent
-				.startTest("ADMN198c_Verify if Administrator is able to access the default privilege-Delete Equipment");
-		SoftAssert s2 = new SoftAssert();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		Thread.sleep(1000);
-		LoginPage = new LoginPage();
+	  String ExpAlrtMsg = "Equipment  \"213\"  Created successfully."; 
+	  String ActAlertMsg = EquipmentPage.AlertMsg(); 
+	  sa.assertEquals(ActAlertMsg,ExpAlrtMsg,"FAIL: Equipment should be created successfully");
+	  sa.assertAll();		 
+} 
+	//ADMN048A
+		@Test(dependsOnMethods = "ADMN048",groups = {"Regression" },description = "Verify if Administrator is able to access the default privilege Edit Equipment")
+		public void ADMN048A() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN198a_Verify if Administrator is able to access the default privilege Edit Equipment");
+			SoftAssert sa = new SoftAssert();
+			MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+			EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+			IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
+			IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("213");
+			IRTDDetailspage.EditIRTDEquip("Editing");
+			UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
+			String ExpAlrtMsg = "Saved Successfully";
+			String ActAlertMsg = EquipmentHubPage.AlertMsg();
+			sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Saved Successfully message should be displayed");
+			sa.assertAll();
+			 }
+		
+	// ADMN064
+	@Test(dependsOnMethods = "ADMN048",groups = {"Regression" },description = "Verify if Administrator is able to access the default privilege-Delete Equipment")
+	public void ADMN064() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN064_Verify if Administrator is able to access the default privilege-Delete Equipment");
+		SoftAssert sa = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
-		// IRTDHubPage.Click_IrtdSerialNo("600");
-		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("13");
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("213");
 		IRTDDetailspage.clickDeleteEquipmentIcon();
-		s2.assertEquals(IRTDDetailspage.IRTD_DeletePopupWindow(), true, "FAIL: No pop up present");	
+		sa.assertEquals(IRTDDetailspage.IRTD_DeletePopupWindow(), true, "FAIL:IRTD_Delete Popup Window should present");	
 		IRTDDetailspage.ClickYesBtn();
 		UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
 		System.out.println("user deleted");
-	}*/
-	//ADMN198.1-a- Verify if Administrator is able to access the default privilege Edit Equipment
-	/*@Test(groups = {"Regression" }, 
-			description = "Verify if Administrator is able to access the default privilege Edit Equipment")
-	public void ADMN198a() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent.startTest("ADMN198a_Verify if Administrator is able to access the default privilege Edit Equipment");
-		//SoftAssert s3 = new SoftAssert();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		Thread.sleep(1000);
-		LoginPage = new LoginPage();
-		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
-		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
-		EquipmentPage=EquipmentHubPage.ClickAddButton();
-		EquipmentPage.EqipCreation_MandatoryFields("904","303","IRTD");
-		UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
-		EquipmentHubPage=EquipmentPage.ClickBackBtn();
-		 IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
-		 IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("904");
-		 IRTDDetailspage.EditIRTDEquip("Editing");
-		 }*/
-	//ADMN198.10
-		/*@Test(groups = {"Regression" }, 
+	}
+	
+	//ADMN049
+		@Test(groups = {"Regression" }, 
 				description = "Verify if Administrator is able to access the default privilege-Archive")
-		public void ADMN198_10() throws InterruptedException, ParseException, IOException, AWTException {
-			extentTest = extent.startTest("ADMN198_10_Verify if Administrator is able to access the default privilege-Archive");
-			SoftAssert s4 = new SoftAssert();
-			LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-			Thread.sleep(1000);
-			LoginPage = new LoginPage();
+		public void ADMN049() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN049-Verify if Administrator is able to access the default privilege-Archive");
+			SoftAssert sa = new SoftAssert();
 			MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 			FileManagementPage = MainHubPage.ClickFileManagementTitle();
 			FileManagementPage.ClickArchiveBtn();
 			UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
-			s4.assertEquals(FileManagementPage.ArchiveTextBoxVisible(), true, "FAIL: Texxt box not present");
-	}*/
-	//ADMN198.11-Verify if Administrator is able to access the default privilege-SyncIn	
-		/*@Test(groups = {"Regression" }, 
-				description = "Verify if Administrator is able to access the default privilege-SyncIn")
-		public void ADMN198_11() throws InterruptedException, ParseException, IOException, AWTException {
-			extentTest = extent.startTest("ADMN198_11_Verify if Administrator is able to access the default privilege-SyncIn");
-			SoftAssert s4 = new SoftAssert();
-			LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-			Thread.sleep(1000);
-			LoginPage = new LoginPage();
+			sa.assertEquals(FileManagementPage.ArchiveTextBoxVisible(), true, "FAIL: Archive window should be Visible");
+	}
+//ADMN050	
+		@Test(groups = {"Regression" },description = "Verify if Administrator is able to access the default privilege-SyncIn")
+		public void ADMN050() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN050_Verify if Administrator is able to access the default privilege-SyncIn");
+			SoftAssert sa = new SoftAssert();
 			MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 			FileManagementPage = MainHubPage.ClickFileManagementTitle();
 			FileManagementPage.ClickSyncInBtn();
 			UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
-			s4.assertEquals(FileManagementPage.SyncInTextBoxVisible(), true, "FAIL: Texxt box not present");
-	}*/
-		//ADMN198.11a-Verify if Administrator is able to access the default privilege-SyncOut
-		/*@Test(groups = {"Regression" }, 
+			sa.assertEquals(FileManagementPage.SyncInTextBoxVisible(), true, "FAIL:Sync In TextBox should be Visible");
+	}
+//ADMN050A
+		@Test(groups = {"Regression" }, 
 				description = "Verify if Administrator is able to access the default privilege-SyncOut")
-		public void ADMN198_11a() throws InterruptedException, ParseException, IOException, AWTException {
-			extentTest = extent.startTest("ADMN198_11a_Verify if Administrator is able to access the default privilege-SyncOut");
+		public void ADMN050A() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN050A_Verify if Administrator is able to access the default privilege-SyncOut");
 			SoftAssert s5 = new SoftAssert();
 			LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 			Thread.sleep(1000);
@@ -244,108 +302,578 @@ public class UserPrivilagesTest extends BaseClass {
 			FileManagementPage = MainHubPage.ClickFileManagementTitle();
 			FileManagementPage.ClickSyncOutBtn();
 			UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
-			s5.assertEquals(FileManagementPage.SyncOutTextBoxVisible(), true, "FAIL: Text box not present");
-	}*/
-		//ADMN198.13
-	/*@Test(groups = {"Regression" }, description = "Verify if Administrator is able to access the default privilege-Access Audit Trail")
-	    public void ADMN198_13() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent.startTest("ADMN198_113-Verify if Administrator is able to access the default privilege-Access Audit Trail");
-		SoftAssert s6 = new SoftAssert();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		Thread.sleep(1000);
-		LoginPage = new LoginPage();
+			s5.assertEquals(FileManagementPage.SyncOutTextBoxVisible(), true, "FAIL: Sync Out window not present");
+	}
+//ADMN052
+	@Test(groups = {"Regression" }, description = "Verify if Administrator is able to access the default privilege-Access Audit Trail")
+	    public void ADMN052() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN052-Verify if Administrator is able to access the default privilege-Access Audit Trail");
+		SoftAssert sa = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 		AuditPage = MainHubPage.ClickAuditTitle();
-		s6.assertEquals(AuditPage.AuditHeadTitleVisible(), true, "FAIL: Title not present");
-	}*/
-	//ADMN198.14-Verify if Administrator is able to access the default privilege-Camera Access
-	/*@Test(groups = {"Regression" }, 
-			description = "Verify if Administrator is able to access the default privilege-Camera Access")
-	public void ADMN198_14() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent.startTest("ADMN198_14_Verify if Administrator is able to access the default privilege-Camera Access");
-		SoftAssert s7 = new SoftAssert();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		Thread.sleep(1000);
-		LoginPage = new LoginPage();
+		sa.assertEquals(AuditPage.AuditHeadTitleVisible(), true, "FAIL: Title not present");
+		}
+//ADMN053
+	@Test(groups = {"Regression" },description = "Verify if Administrator is able to access the default privilege-Camera Access")
+	   public void ADMN053() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN053_Verify if Administrator is able to access the default privilege-Camera Access");
+		SoftAssert sa = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 		UserManagementPage.clickAnyUserinUserList("Eqp3");
-		//System.out.println("CLICKED ON EQIP3");
 		UserManagementPage.click_UserImageTile();
 		UserManagementPage.click_CameraIcon();
-		s7.assertEquals(UserManagementPage.CameraOnTitleVisible(), true, "FAIL: Title not present");	
-	}	*/
+		sa.assertEquals(UserManagementPage.CameraOnTitleVisible(), true, "FAIL:Camera window should be Visible");	
+	}	
 	
-//ADMN198.15-Verify Administrator is unable to access the non-default privilege-Create Asset	
-	/*@Test(groups = {"Regression" }, 
-			description = "Verify Administrator is unable to access the non-default privilege-Create Asset")
-	public void ADMN198_15() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent.startTest("ADMN198_15_Verify Administrator is unable to access the non-default privilege-Create Asset");
-		SoftAssert s8 = new SoftAssert();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		LoginPage = new LoginPage();
+//ADMN054	
+	@Test(groups = {"Regression" },description = "Verify Administrator is unable to access the non-default privilege-Create Asset")
+	    public void ADMN054() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN054-Verify Administrator is unable to access the non-default privilege-Create Asset");
+		SoftAssert sa = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 		assetHubPage = MainHubPage.ClickAssetTile();
 		assetHubPage.Click_AddButton();
 		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
 		String ActAlertMsg = assetHubPage.AlertMsg();
-		s8.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
-		s8.assertAll();
-	}*/
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:User should be unable to access the non-default privilege-Create Asse");
+		sa.assertAll();
+	}
 	
-	//ADMN198_15a: Verify Administrator is unable to access the non-default privilege-Edit Asset
-	/*@Test(groups = {"Regression" }, 
-			description = "Verify Administrator is unable to access the non-default privilege-Edit Asset")
-	public void ADMN198_15a() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent.startTest("ADMN198_15a_Verify Administrator is unable to access the non-default privilege Edit Asset");
-		SoftAssert s9 = new SoftAssert();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		LoginPage = new LoginPage();
+//ADMN054A
+ 
+	@Test(groups = {"Regression" },description = "Verify Administrator is unable to access the non-default privilege-Edit Asset")
+	public void ADMN054A() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN054A_Verify Administrator is unable to access the non-default privilege Edit Asset");
+		SoftAssert sa = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
 		assetCreationPage = assetHubPage.Click_AddAssetButton();
-		assetCreationPage.assetCreation("Altrt","506","HeatBath","HYdd","Ind");
+		assetCreationPage.assetCreation("Ast1","6001","HeatBath","HYdd","Ind");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = assetCreationPage.clickBackBtn();
 		MainHubPage = assetHubPage.clickBackBtn();
 		LoginPage = MainHubPage.UserSignOut();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		  Thread.sleep(1000);
-			MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
-			assetHubPage = MainHubPage.ClickAssetTile();
-			assetDetailsPage=assetHubPage.click_assetTile("Altrt");
-			assetDetailsPage.click_assetEditBtn_alrt();	
-			String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
-			String ActAlertMsg = assetDetailsPage.AlertMsg();
-			s9.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
-			s9.assertAll();
-}*/
+		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+		assetDetailsPage=assetHubPage.click_assetTile("Ast1");
+		assetDetailsPage.click_assetEditBtn_alrt();	
+		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+		String ActAlertMsg = assetDetailsPage.AlertMsg();
+		
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
+		sa.assertAll();
+}
+//ADMN062
+	@Test(dependsOnMethods = "ADMN054A",groups = {"Regression" },description = "Verify if Administrator is able to access the default privilege-Delete Assets")
+	public void ADMN062() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN062-Verify if Administrator is able to access the default privilege-Delete Assets");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+		assetDetailsPage = assetHubPage.click_assetTile("Ast1");	
+		assetDetailsPage.DeleteAssert();
+		UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
+		sa.assertEquals(assetDetailsPage.Deletepopupwindow(), true, "FAIL:Delete popup window should be Visible");
+	}
+		
 	
-	//ADMN198.16-Verify Administrator is unable to access the non-default privilege-Create Setups
+//ADMN055
 	@Test(groups = {"Regression" }, 
 			description = "Verify Administrator is unable to access the non-default privilege-Create Setups")
-	public void ADMN198_16() throws InterruptedException, ParseException, IOException, AWTException {
-		extentTest = extent.startTest("ADMN198_16_Verify Administrator is unable to access the non-default privilege-Create Setups");
-		SoftAssert s10 = new SoftAssert();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		LoginPage = new LoginPage();
+	public void ADMN055() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN055-Verify Administrator is unable to access the non-default privilege-Create Setups");
+		SoftAssert sa = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
 		assetCreationPage = assetHubPage.Click_AddAssetButton();
-		assetCreationPage.assetCreation("Clim","509","HeatBath","HYdd","Ind");
+		assetCreationPage.assetCreation("set1","7001","HeatBath","HYdd","Ind");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = assetCreationPage.clickBackBtn();
 		MainHubPage = assetHubPage.clickBackBtn();
 		LoginPage = MainHubPage.UserSignOut();
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		  Thread.sleep(1000);
-			MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+        assetDetailsPage=assetHubPage.click_assetTile("set1");
+		assetDetailsPage.click_NewStupCreateBtn_alert();
+		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+		String ActAlertMsg = assetDetailsPage.AlertMsg();
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: user should be unable to access the non-default privilege-Create Setups");
+		sa.assertAll();
+	}
+	
+//ADMN072
+	@Test(groups = { "Regression" }, description ="ADMN072-Verify default privileges  for Supervisor User") public void ADMN072() throws InterruptedException, ParseException,
+			  IOException, AWTException { extentTest = extent.startTest("ADMN072-Verify default privileges  for Supervisor User"); 
+			  MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+			  UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+			  UserManagementPage.ClickNewUser();
+			  UserManagementPage.select_UserType("Supervisor");
+			  SoftAssert sa = new SoftAssert();
+			// Validate check boxes are checked
+			  sa.assertEquals(UserManagementPage.CreaeteEditAssetPrivstatus(), true, "FAIL:CreaeteEditAssetPrivstatus should Checked");
+			  sa.assertEquals(UserManagementPage.CreaeteEditSetupstatus(), true, "FAIL:CreaeteEditSetupstatus should Checked");
+			  sa.assertEquals(UserManagementPage.CreateReportsstatus(), true, "FAIL :CreateReportsstatus should Checked");
+			  sa.assertEquals(UserManagementPage.Audittrailstatus(), true, "FAIL: Audittrailstatus should Checked");
+			  sa.assertEquals(UserManagementPage.RunQualificationstatus(), true, "FAIL: RunQualificationstatus should Checked");
+			  sa.assertEquals(UserManagementPage.RunCalibrationstatus(), true, "FAIL: RunCalibrationstatus should Checked");
+			  sa.assertEquals(UserManagementPage.ManualSyncstatus(), true, "FAIL: ManualSyncstatus should Checked");
+			  sa.assertEquals(UserManagementPage.CameraAccessstatus(), true, "FAIL:CameraAccessstatus should Checked");
+			  sa.assertAll();
+	}
+	//ADMN073
+	@Test(groups = { "Regression" }, description = "Verify the non- default privileges  for Supervisor User")
+	public void ADMN073() throws Exception {
+		extentTest = extent.startTest("ADMN073-Verify the non- default privileges  for Supervisor User");
+		 MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		  UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		  UserManagementPage.ClickNewUser();
+		  UserManagementPage.select_UserType("Supervisor");
+		  SoftAssert sa = new SoftAssert();
+		// Validate check boxes are not checked
+		  sa.assertEquals(UserManagementPage.Adminstatus(), false, "FAIL:Adminstatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.CreateAndEditEquipmentstatus(), false, "FAIL:CreateAndEditEquipmentstatus CheckBox should not be Checked");
+		  sa.assertEquals(UserManagementPage.CreatePassFailtemplatestatus(), false, "FAIL: CreatePassFailtemplatestatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteAssetsstatus(), false, "FAIL:DeleteAssetsstatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteSetupstatus(), false,  "FAIL: DeleteSetupstatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteEquipmentstatus(), false, "FAIL:DeleteEquipmentstatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteStudyFilesReportsstatus(), false, "FAIL:DeleteStudyFilesReportsstatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.EditPassFailtemplatestatus(), false, "FAIL: EditPassFailtemplatestatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.CopyFilesReportsstatus(), false, "FAIL:CopyFilesReportsstatus checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.Archivedatastatus(), false, "FAIL:Archivedatastatus CheckBox checkbox should not be Checked");
+		  sa.assertEquals(UserManagementPage.Deletepassfailtemplatestatus(), false,  "FAIL: Deletepassfailtemplatestatus checkbox should not be Checked");
+		
+	}
+	//ADMN074
+	@Test(groups = {"Regression" }, 
+			description = "Verify if Supervisor is able to access the default privilege-Create Assets")
+	public void ADMN074() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN074-Verify if Supervisor is able to access the default privilege-Create Assets");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+		assetCreationPage=assetHubPage.Click_AddAssetButton();
+		assetCreationPage.assetCreation("Ayahoo1","4001","HeatBath","HYdd","Ind");
+		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		String ExpMsg = "Data saved successfully";
+		String ActMsg = assetCreationPage.AlertMsg();
+		sa.assertEquals(ActMsg, ExpMsg, "FAIL:Data saved successfully alert msg should be displayed ");
+		sa.assertAll();
+}
+//ADMN074A
+		@Test(groups = {"Regression" },description = "Verify if Supervisor is able to access the default privilege-Edit Assets")
+	public void ADMN074A() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN074A-Verify if Supervisor is able to access the default privilege-Edit Access");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+		assetDetailsPage=assetHubPage.click_assetTile("Ayahoo1");
+		assetCreationPage=assetDetailsPage.click_assetEditBtn();
+			sa.assertEquals(assetCreationPage.IsEditAssetscreenDisplayed(),true, "FAIL:EditAssetscreen should be Displayed");
+			sa.assertAll();
+	}
+//	ADMN078
+		@Test(dependsOnMethods = "ADMN074",groups = {"Regression" }, 
+				description = "Verify Supervisor is unable to access the non-default privilege-Delete Asset")
+		public void ADMN078() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN078-Verify Supervisor is unable to access the non-default privilege-Delete Asset");
+			SoftAssert sa = new SoftAssert();
+			MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
 			assetHubPage = MainHubPage.ClickAssetTile();
-			assetDetailsPage=assetHubPage.click_assetTile("Clim");
+			assetDetailsPage=assetHubPage.click_assetTile("Ayahoo1");
+			assetDetailsPage.DeleteAssert();
+			UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
+			String ExpAlrtMsg = "User do not have permission to perform this operation";
+			String ActAlertMsg = assetDetailsPage.AlertMsg();
+			sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:Supervisor should be unable to access- Delete Asset");
+			sa.assertAll();
+		}
+//ADMN075
+	@Test(groups = {"Regression" }, 
+			description = "Verify if Supervisor is able to access the default privilege-Audit Trail")
+	public void ADMN075() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN202_c-Verify if Supervisor is able to access the default privilege-Audit Trail");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		AuditPage = MainHubPage.ClickAuditTitle();
+		sa.assertEquals(AuditPage.AuditHeadTitleVisible(), true, "FAIL: Title not present");
+		}
+	
+//	ADMN076
+	@Test(dependsOnMethods = "ADMN074",groups = {"Regression" }, 
+			description = "Verify if Supervisor is able to access the default privilege-Camera Access")
+	public void ADMN076() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN076-Verify if Supervisor is able to access the default privilege-Camera Access");
+		SoftAssert s14 = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+        assetDetailsPage=assetHubPage.click_assetTile("Ayahoo1");
+		assetCreationPage=assetDetailsPage.click_assetEditBtn();
+        assetCreationPage.click_CameraIcon();
+        s14.assertEquals(assetCreationPage.CameraOnTitleVisible(), true, "FAIL:CameraOn window should be Visible");
+			
+	}
+	
+//ADMN077
+	@Test(groups = {"Regression" }, 
+			description = "Verify Supervisor is unable to access the non-default privilege-Create Equipment")
+	public void ADMN077() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN077:Verify Supervisor is unable to access the non-default privilege-Create Equipment");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+	    EquipmentHubPage.Alert_ClickAddBtn();
+	    String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+		String ActAlertMsg = EquipmentHubPage.AlertMsg();
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Supervisor should not able to Create Equipment");
+		sa.assertAll();
+}
+//ADMN077A
+	@Test(groups = {"Regression" }, 
+			description = "Verify Supervisor is unable to access the non-default privilege-Edit Equipment")
+	public void ADMN077A() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN077-Verify Supervisor is unable to access the non-default privilege-Create Equipment");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+		EquipmentPage = EquipmentHubPage.ClickAddButton();
+		EquipmentPage.EqipCreation_MandatoryFields("200a", "2000", "IRTD");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		EquipmentHubPage = EquipmentPage.ClickBackBtn();
+		MainHubPage = EquipmentHubPage.ClickBackBtn();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("200a");
+		IRTDDetailspage.EditIRTDEquip("Editing");
+		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+		String ActAlertMsg = EquipmentHubPage.AlertMsg();
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
+		sa.assertAll();
+		}
+	
+//ADMN080
+	@Test(dependsOnMethods = "ADMN077A",groups = {"Regression" },description = "Verify Supervisor is unable to access the non-default privilege-Delete Equipments")
+	public void ADMN080() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN080:Verify Supervisor is unable to access the non-default privilege-Delete Equipments");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("200a");
+		IRTDDetailspage.clickDeleteEquipmentIcon();
+		IRTDDetailspage.ClickYesBtn();
+		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		String ExpAlrtMsg = "User do not have permission to perform this operation";
+		String ActAlertMsg = IRTDDetailspage.AlertMsg();
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:Supervisor should be unable to access Delete Equipments");
+		sa.assertAll();
+		}
+	
+//ADMN083
+	@Test(groups = {"Regression" }, 
+			description = "Verify Supervisor is unable to access the non-default privilege-Archive data")
+	public void ADMN083() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN083-Verify Supervisor is unable to access the non-default privilege-Archive data");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		FileManagementPage = MainHubPage.ClickFileManagementTitle();
+		FileManagementPage.ClickArchiveBtn();
+		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		String ExpAlrtMsg = "User do not have permission to perform this operation";
+		String ActAlertMsg = FileManagementPage.AlertMsg();
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Supervisor should be unable to access Archive data");
+		sa.assertAll();
+	}
+	//ADMN084
+		@Test(groups = {"Regression" },description = "Verify if Supervisor user is unable to access Admin")
+		public void ADMN084() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN084-Verify if Supervisor is unable to access the non-default privilege-Admin");
+			SoftAssert sa = new SoftAssert();
+			MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+			MainHubPage.ClickAdminTile();
+			String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+			String ActAlertMsg = MainHubPage.AlertMsg();
+			sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Supervisor should be unable to access the non-default privilege-Admin");
+			sa.assertAll();
+			}
+ //ADMN086
+	@Test(dependsOnMethods = "ADMN074",groups = {"Regression" },description = "Verify if Supervisor is able to access the default privilege-Create Setups")
+	     public void ADMN086() throws InterruptedException, ParseException, IOException, AWTException {
+		 extentTest = extent.startTest("ADMN086-_Verify if Supervisor is able to access the default privilege-Create Setups");
+		 SoftAssert sa = new SoftAssert();
+			MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+			assetHubPage = MainHubPage.ClickAssetTile();
+			assetDetailsPage=assetHubPage.click_assetTile("Ayahoo1");
+			Setup_defineSetupPage= assetDetailsPage.click_NewStupCreateBtn();
+			sa.assertEquals(Setup_defineSetupPage.defineSetupPage_state(), true, "FAIL: set up page should be displayed");	
+			
+	}
+	//ADMN094
+	@Test(groups = {"Regression" },description = "Verify if Supervisor is able to access the default privilege-SyncIn")
+	    public void ADMN094() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN094_Verify if Supervisor is able to access the default privilege-SyncIn");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		FileManagementPage = MainHubPage.ClickFileManagementTitle();
+		FileManagementPage.ClickSyncInBtn();
+		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		sa.assertEquals(FileManagementPage.SyncInTextBoxVisible(), true, "FAIL: SyncIn TextBox should be Visible ");
+}
+	//ADMN094A
+	@Test(groups = {"Regression" },description = "Verify if Supervisor is able to access the default privilege-SyncOut")
+	public void ADMN094A() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN094A_Verify if Supervisor is able to access the default privilege-SyncOut");
+		SoftAssert s22 = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		FileManagementPage = MainHubPage.ClickFileManagementTitle();
+		FileManagementPage.ClickSyncOutBtn();
+		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
+		s22.assertEquals(FileManagementPage.SyncOutTextBoxVisible(), true, "FAIL: SyncOut TextBox should be Visible ");
+} 
+*/
+//ADMN097
+	@Test(groups = { "Regression" }, description = "Verify default privileges  for Operator User")
+	public void ADMN097() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN097-Verify default privileges  for Operator User");
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		UserManagementPage.ClickNewUser();
+		UserManagementPage.select_UserType("Operator");
+		SoftAssert sa = new SoftAssert();
+		// Validate check boxes are checked
+		sa.assertEquals(UserManagementPage.CreaeteEditAssetPrivstatus(), true,"FAIL: CreaeteEditAssetPrivstatus should be Checked");
+		sa.assertEquals(UserManagementPage.CreateReportsstatus(), true, "FAIL: CreateReportsstatus should be Checked");
+		sa.assertEquals(UserManagementPage.Audittrailstatus(), true, "FAIL: Audittrailstatus should be Checked");
+		sa.assertEquals(UserManagementPage.RunQualificationstatus(), true,"FAIL: RunQualificationstatus should be Checked");
+		sa.assertEquals(UserManagementPage.RunCalibrationstatus(), true,"FAIL: RunCalibrationstatus should be Checked");
+		sa.assertEquals(UserManagementPage.CameraAccessstatus(), true, "FAIL: CameraAccessstatus should be Checked");
+	}
+	//ADMN098
+	@Test(groups = { "Regression" }, description = "Verify non-default privileges  for Operator User")
+	public void ADMN098() throws Exception {
+		extentTest = extent.startTest("ADMN098-Verify non-default privileges  for Operator User");
+
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		  UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
+		  UserManagementPage.ClickNewUser();
+		  UserManagementPage.select_UserType("Operator");
+		  SoftAssert sa = new SoftAssert();
+		// Validate check boxes are not checked
+		  sa.assertEquals(UserManagementPage.Adminstatus(), false, "FAIL:Adminstatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.CreateAndEditEquipmentstatus(), false, "FAIL:CreateAndEditEquipmentstatus CheckBox should not be Checked");
+		  sa.assertEquals(UserManagementPage.CreatePassFailtemplatestatus(), false, "FAIL: CreatePassFailtemplatestatus CheckBox should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteAssetsstatus(), false, "FAIL:DeleteAssetsstatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteSetupstatus(), false,  "FAIL:DeleteSetupstatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteEquipmentstatus(), false, "FAIL:DeleteEquipmentstatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.DeleteStudyFilesReportsstatus(), false, "FAIL:DeleteStudyFilesReportsstatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.EditPassFailtemplatestatus(), false, "FAIL:EditPassFailtemplatestatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.CopyFilesReportsstatus(), false, "FAIL: CopyFilesReportsstatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.Archivedatastatus(), false, "FAIL: Archivedatastatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.ManualSyncstatus(), true, "FAIL: ManualSyncstatus should not be Checked");
+		  sa.assertEquals(UserManagementPage.Deletepassfailtemplatestatus(), false,  "FAIL: Deletepassfailtemplatestatus should not be Checked");
+		}
+
+//ADMN099
+	@Test(groups = {"Regression" }, description = "Verify if Operator is able to access the default privilege-Create  Assets")
+	public void ADMN099() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN099-Verify if Operator is able to access the default privilege-Create  Assets");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+		assetCreationPage = assetHubPage.Click_AddAssetButton();
+		assetCreationPage.assetCreation("oppo1", "1011", "HeatBath", "HYdd", "Ind");
+		UserLoginPopup(getUID("SysOperator"), getPW("SysOperator"));
+		String ExpMsg = "Data saved successfully";
+		String ActMsg = assetCreationPage.AlertMsg();
+		sa.assertEquals(ActMsg, ExpMsg, "FAIL: Alert message Not Matched");
+		sa.assertAll();
+	}
+
+//ADMN100
+	@Test(dependsOnMethods = "ADMN099", groups = {"Regression" }, description = "Verify if Operator is able to access the default privilege-Edit Assets")
+	public void ADMN100() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN100-Verify if Operator is able to access the default privilege-Edit  Assets");
+		SoftAssert s = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+		assetDetailsPage = assetHubPage.click_assetTile("oppo1");
+		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		s.assertEquals(assetCreationPage.IsEditAssetscreenDisplayed(), true, "FAIL:User should be able to access the default privilege-Edit Assets");
+		s.assertAll();
+		}
+	//ADMN100 To ADMN104 should test manually(Report TCs)
+	
+//ADMN105
+		@Test(dependsOnMethods = "ADMN099", groups = {"Regression" },description = "Verify if Operator is able to access the default privilege-Camera access")
+		public void ADMN105() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN105-Verify if Operator is able to access the default privilege-Camera access");
+			SoftAssert s = new SoftAssert();
+			MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+			assetHubPage = MainHubPage.ClickAssetTile();
+			assetDetailsPage = assetHubPage.click_assetTile("oppo1");
+			assetCreationPage=assetDetailsPage.click_assetEditBtn();
+	        assetCreationPage.click_CameraIcon();
+	        s.assertEquals(assetCreationPage.CameraOnTitleVisible(), true, "FAIL: Operator should be able to access Camera access");
+		} 
+		
+//ADMN106
+	@Test(dependsOnMethods = "ADMN099", groups = {"Regression" }, description = "Verify if Operator is unable to access the non-default privilege-Delete Assets")
+	public void ADMN106() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN106-Verify if Operator is unable to access the non-default privilege-Delete Assets");
+		SoftAssert s = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		assetHubPage = MainHubPage.ClickAssetTile();
+		assetDetailsPage = assetHubPage.click_assetTile("oppo1");
+		assetDetailsPage.DeleteAssert();
+		UserLoginPopup(getUID("SysOperator"), getPW("SysOperator"));
+		String ExpAlrtMsg = "User do not have permission to perform this operation";
+		String ActAlertMsg = assetDetailsPage.AlertMsg();
+		s.assertEquals(ActAlertMsg, ExpAlrtMsg,"FAIL: User is unable to access Delete Assets");
+		s.assertAll();
+	}
+	//ADMN116A
+	
+		@Test(dependsOnMethods = "ADMN099",groups = {
+				"Regression" }, description = "Verify  Operator is unable to access the non-default privilege-Create Setups")
+		public void ADMN116A() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN116A- Verify Operator is unable to access the non-default privilege-Create Setups");
+			SoftAssert s = new SoftAssert();
+			MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+			assetHubPage = MainHubPage.ClickAssetTile();
+			assetDetailsPage = assetHubPage.click_assetTile("oppo1");
 			assetDetailsPage.click_NewStupCreateBtn_alert();
 			String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
 			String ActAlertMsg = assetDetailsPage.AlertMsg();
-			s10.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
-			s10.assertAll();
+			s.assertEquals(ActAlertMsg, ExpAlrtMsg,"FAIL: User Is able to access the non-default privilege-Delete Assets");
+			s.assertAll();
+		}
+	
+//ADMN107	
+	@Test(groups = {"Regression" }, description = "Verify if Operator is  unable to access the non-default privilege-Archive data")
+	public void ADMN107() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN107-Verify if Operator is  unable to access the non-default privilege-Archive data");
+		SoftAssert s = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		FileManagementPage = MainHubPage.ClickFileManagementTitle();
+		FileManagementPage.ClickArchiveBtn();
+		UserLoginPopup(getUID("SysOperator"), getPW("SysOperator"));
+		String ExpAlrtMsg = "User do not have permission to perform this operation";
+		String ActAlertMsg = FileManagementPage.AlertMsg();
+		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:Operator should be unable to access Archive data");
+		s.assertAll();
 	}
+	
+//ADMN108
+	
+	@Test(groups = {"Regression" },description = "Verify if Operator is unable to access the non-default privilege-Admin")
+	public void ADMN108() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN108-Verify if Operator is unable to access the non-default privilege-Admin");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		MainHubPage.ClickAdminTile();
+		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+		String ActAlertMsg = MainHubPage.AlertMsg();
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:Operator should not be able to access Admin");
+		sa.assertAll();
+	} 
+	
+//ADMN109
+	
+	@Test(groups = {"Regression" },description = "Verify if Operator is able to access the non-default privilege-Manual syncIn")
+		    public void ADMN109() throws InterruptedException, ParseException, IOException, AWTException {
+			extentTest = extent.startTest("ADMN109-Verify if Operator is able to access the non-default privilege-Manual syncIn");
+			SoftAssert s = new SoftAssert();
+			MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+			FileManagementPage = MainHubPage.ClickFileManagementTitle();
+			FileManagementPage.ClickSyncInBtn();
+			UserLoginPopup(getUID("SysOperator"), getPW("SysOperator"));
+			String ExpAlrtMsgForSyncIn = "User do not have permission to perform this operation";
+			String ActAlertMsgForSyncIn = FileManagementPage.AlertMsg();
+			s.assertEquals(ExpAlrtMsgForSyncIn, ActAlertMsgForSyncIn,"FAIL: Operator is able to access the non-default privilege-Manual sync In");
+	}
+	
+//ADMN109A
+		@Test(groups = {"Regression" },description = "Verify if Operator is able to access the non-default privilege-Manual syncOut")
+	    public void ADMN109A() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN109A-Verify if Operator is able to access the non-default privilege-Manual syncOut");
+		SoftAssert s = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		FileManagementPage = MainHubPage.ClickFileManagementTitle();
+		FileManagementPage.ClickSyncInBtn();
+		UserLoginPopup(getUID("SysOperator"), getPW("SysOperator"));
+		String ExpAlrtMsgForSyncOut = "User do not have permission to perform this operation";
+		String ActAlertMsgForSyncOut = FileManagementPage.AlertMsg();
+		s.assertEquals(ExpAlrtMsgForSyncOut, ActAlertMsgForSyncOut,"FAIL: Operator is able to access the non-default privilege-Manual syncOut");
+		}
+		
+//ADMN115
+	@Test(groups = {"Regression" }, description = "Verify if Operator is able to access the default privilege-Access Audit trail")
+	public void ADMN115() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN115-Verify if Operator is able to access the default privilege-Access Audit trail");
+		SoftAssert s = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		AuditPage = MainHubPage.ClickAuditTitle();
+		s.assertEquals(AuditPage.AuditHeadTitleVisible(), true, "FAIL:Operator should be able to access Audit trail");
+	}
+	
+//ADMN117
+	@Test(groups = {"Regression" },description = "Verify if Operator is able to access the non-default privilege-Create- Equipments")
+	public void ADMN117() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN117-Verify if Operator is able to access the non-default privilege-Create- Equipments");
+		SoftAssert s = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+	    EquipmentHubPage.Alert_ClickAddBtn();
+	    String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+		String ActAlertMsg = EquipmentHubPage.AlertMsg();
+		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User is able to create Equipment ");
+		s.assertAll();
 }
+//ADMN117A
+	@Test(groups = {"Regression" }, 
+			description = "Verify if Operator is able to access the non-default privilege-Edit Equipments")
+	public void ADMN117A() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN117A-Verify if Operator is able to access the non-default privilege-Edit Equipments");
+		SoftAssert s = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+		EquipmentPage = EquipmentHubPage.ClickAddButton();
+		EquipmentPage.EqipCreation_MandatoryFields("450", "460A", "IRTD");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		EquipmentHubPage = EquipmentPage.ClickBackBtn();
+		MainHubPage = EquipmentHubPage.ClickBackBtn();
+		LoginPage = MainHubPage.UserSignOut();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("450");
+		IRTDDetailspage.EditIRTDEquip("Editing");
+		UserLoginPopup(getUID("SysOperator"), getPW("SysOperator"));
+		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
+		String ActAlertMsg = EquipmentHubPage.AlertMsg();
+		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:");
+		s.assertAll();
+	}
+	
+//ADMN118
+	
+	@Test(dependsOnMethods = "ADMN117A",groups = {"Regression" },description = "Verify if Operator is unable to access the non-default privilege-Delete Equipments")
+	public void ADMN118() throws InterruptedException, ParseException, IOException, AWTException {
+		extentTest = extent.startTest("ADMN118-Verify if Operator is unable to access the non-default privilege-Delete Equipments");
+		SoftAssert sa = new SoftAssert();
+		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("450");
+		IRTDDetailspage.clickDeleteEquipmentIcon();
+		IRTDDetailspage.ClickYesBtn();
+		UserLoginPopup(getUID("SysOperator"), getPW("SysOperator"));
+		String ExpAlrtMsg = "User do not have permission to perform this operation";
+		String ActAlertMsg = IRTDDetailspage.AlertMsg();
+		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:Operator should be unable to access Delete Equipments");
+		sa.assertAll();
+		}
+	
+	}

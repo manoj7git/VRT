@@ -329,8 +329,19 @@ public class assetDetailsPage extends BaseClass {
 	public void Capture_AsstImg(String Img_Name) throws IOException {		
 		TestUtilities tu = new TestUtilities();
 		tu.capture_element_screenshot(driver, AssetHub_ImgHldr, "TestData", Img_Name);
-	}
+	}	
 	
+	// Click on Delete Icon
+	public void DeleteAssert() {
+		WebElement DeleteIcon = driver.findElementByAccessibilityId("DeleteAssetsButton");
+		clickOn(DeleteIcon);
+	}
+
+	//Verify delete pop up window displayed
+	public boolean Deletepopupwindow() {
+		WebElement dp = driver.findElementByAccessibilityId("Popup Window");
+		return IsElementVisibleStatus(dp);
+	}
 	
 
 }
