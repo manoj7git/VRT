@@ -42,4 +42,10 @@ public class AuditPage extends BaseClass {
 		public boolean AuditHeadTitleVisible() throws InterruptedException {
 			return IsElementVisibleStatus(Audit_HeadTitle);
 		}	
+		
+// Fetch the alert message when a user does not have privilege to access
+		public String AlertMsg() {
+			WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+			return FetchText(Msg);
+		}
 }

@@ -381,7 +381,7 @@ public class assetCreationPage extends BaseClass{
 		String Date = getAsstValidationDatetext();
 		String expDate = Date.substring(Date.length()-4);
 		//String[] expDate = Date.split("/");
-		System.out.println(expDate);
+		//System.out.println(expDate);
 		
 		while (!expDate.equals(Yr)) {
 			click_AsstValidationDatePkr_Btn();
@@ -390,7 +390,7 @@ public class assetCreationPage extends BaseClass{
 			Thread.sleep(1000);
 			Date = getAsstValidationDatetext();
 			expDate = Date.substring(Date.length()-4);
-			System.out.println(expDate);
+			//System.out.println(expDate);
 		}
 	}
 	

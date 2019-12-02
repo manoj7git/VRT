@@ -18,10 +18,14 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.vrt.base.BaseClass;
 
+import org.openqa.selenium.JavascriptExecutor;
+
 public class UserManagementPage extends BaseClass {
 
 	// UserManagement Page Element definition
 	WebElement UMHeaderText = driver.findElementByName("User Management");
+	WebElement PreferencesHeaderText = driver.findElementByAccessibilityId("PreferencesButton");
+	WebElement PoliciesHeaderText = driver.findElementByAccessibilityId("PoliciesButton");
 	WebElement NewUserUMBtn = driver.findElementByAccessibilityId("NewUserButton");
 	WebElement UNUMField = driver.findElementByAccessibilityId("NameTextBox");
 	WebElement UserIDUMField = driver.findElementByAccessibilityId("UserIDTextBox");
@@ -63,7 +67,7 @@ public class UserManagementPage extends BaseClass {
 	WebElement DeletePassFailTemplate = driver.findElementByAccessibilityId("DeleteTemplateCheckBox");
 
 	// Scroll Bar
-	WebElement ScrollDown = driver.findElementByAccessibilityId("VerticalSmallIncrease");
+	//WebElement ScrollDown = driver.findElementByAccessibilityId("VerticalSmallIncrease");
 
 	// For Disable check box
 	WebElement DisableCheckbox = driver.findElementByAccessibilityId("DisableUserCheckBox");
@@ -71,12 +75,23 @@ public class UserManagementPage extends BaseClass {
 	// For User list
 	WebElement UsersListButton = driver.findElementByAccessibilityId("PrintUsersListButton");
 
+	
 	/*----------------------
 	Methods of UserManagement Page
 	------------------------*/
 	// Check if UserManagement page is displayed
 	public boolean IsUMscreenDisplayed() {
 		return IsElementEnabledStatus(UMHeaderText);
+	}
+	
+	// Check if Preferences tab is Enabled
+	public boolean IsPreferenceTab_Enabled() {
+		return IsElementEnabledStatus(PreferencesHeaderText);
+	}
+	
+	// Check if policies tab is Enabled
+	public boolean IspoliciesTab_Enabled() {
+		return IsElementEnabledStatus(PoliciesHeaderText);
 	}
 
 	public boolean IsNewUserBtnPresence() {
@@ -388,7 +403,6 @@ public class UserManagementPage extends BaseClass {
 		clickOn(CreaeteEditEquipPriv);
 		clickOn(CreateReports);
 		clickOn(CreatePassFailTemplate);
-		clickOn(AuditTrail);
 		clickOn(RunQualification);
 		clickOn(DeleteAssets);
 		clickOn(DeleteSetup);
@@ -403,6 +417,21 @@ public class UserManagementPage extends BaseClass {
 		clickOn(DeletePassFailTemplate);
 		// Thread.sleep(1000);
 	}
+	
+//Scroll down and click on AuditTrail
+	
+	public void ClkAuditTrail() throws InterruptedException, AWTException {
+		
+		WebElement scrollbar = driver.findElementByAccessibilityId("VerticalSmallIncrease");
+		clickOn(scrollbar);
+		clickOn(scrollbar);
+		clickOn(scrollbar);
+		
+		clickOn(AuditTrail);
+		Thread.sleep(500);
+		
+	}
+	
 
 	// check/select Create/Edit Asset Privilege checkbox
 	public void clickPrivCreateEditAsset() throws InterruptedException {
@@ -515,7 +544,7 @@ public class UserManagementPage extends BaseClass {
 	public void click_UserImageTile() throws InterruptedException {
 		WebElement UserImgTileBtn = driver.findElementByAccessibilityId("UserImage");
 		clickOn(UserImgTileBtn);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 	}
 
 	// Click the Browse button under User Image tile
@@ -529,7 +558,7 @@ public class UserManagementPage extends BaseClass {
 	public void click_CameraIcon() throws InterruptedException {
 		WebElement CameraIcon = driver.findElementByAccessibilityId("CameraImage");
 		clickOn(CameraIcon);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 	}
 
 	// Camera On Header Title is Visible ...
@@ -537,7 +566,6 @@ public class UserManagementPage extends BaseClass {
 		WebElement IsCameraOn = driver.findElementByName("Camera");
 		return IsElementVisibleStatus(IsCameraOn);
 	}
-	// AccessibilityText
 
 	// Upload images methods
 	public void upload_UserImage(String filename) throws AWTException, IOException, InterruptedException {

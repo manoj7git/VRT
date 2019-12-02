@@ -117,6 +117,24 @@ public class assetDetailsPage extends BaseClass {
 		return IsElementVisibleStatus(Asset_QualTile);
 	}
 	
+  // click on the Qual tile
+		public void click_QualTile() {
+			clickOn(Asset_QualTile);	
+		}
+		
+	//Click on delete icon from the qualsection
+		public void QualStudy_Delete() {
+	WebElement Deletestudy = driver.findElementByAccessibilityId("DeleteButton");
+			clickOn(Deletestudy);	
+		}
+		
+	// Check the presence of Delete Popup Window
+		public boolean DeletePopupWindowVisible() {
+			WebElement Deletewindow = driver.findElementByAccessibilityId("Popup Window");
+			return IsElementVisibleStatus(Deletewindow);
+		}
+		
+		
 	// Get the Qual count data form the Setup tile
 	public String qualTile_countdata() {
 		return FetchText(QualTile_Count);
@@ -125,6 +143,23 @@ public class assetDetailsPage extends BaseClass {
 	// Check the presence of Reports tile
 	public boolean reportsTile_state() {
 		return IsElementVisibleStatus(Asset_ReportsTile);
+	}
+	
+	// click on the Reports tile
+	public void Click_reportsTile() {
+		clickOn(Asset_ReportsTile);
+	}
+	
+	// click on the qualification sub section from Reports tile
+		public void Click_QualUnderReport() {
+			WebElement QualUnderReport = driver.findElementByAccessibilityId("QualificationReportsButton");
+			clickOn(QualUnderReport);
+		}
+	
+	//Click on delete icon from QualReport under Reports tile
+	public void Report_Delete() {
+		WebElement Deletequalreport = driver.findElementByAccessibilityId("DeleteButton");
+		clickOn(Deletequalreport);
 	}
 	
 	// Get the Reports count data form the Setup tile

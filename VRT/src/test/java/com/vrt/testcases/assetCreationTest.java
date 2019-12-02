@@ -15,8 +15,11 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -56,30 +59,31 @@ public class assetCreationTest extends BaseClass{
 	
 	
 	//Ensure the User has got rights to create Assets
-	@BeforeTest
+	//@BeforeTest
+	@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException, IOException {
 		
-		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html",true);
-		extent.addSystemInfo("VRT Version", "1.0.0.37");
-		extent.addSystemInfo("BS Version", "0.6.13");
-		extent.addSystemInfo("Lgr Version", "1.2.6");
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport"+"_assetCreationTest"+".html",true);
+		extent.addSystemInfo("VRT Version", "1.0.0.41");
+		extent.addSystemInfo("BS Version", "0.6.26");
+		extent.addSystemInfo("Lgr Version", "1.3.2");
 		extent.addSystemInfo("User Name", "Manoj");
 		extent.addSystemInfo("TestSuiteName", "Asset Creation Test");
 
-		/*// Rename the User file (NgvUsers.uxx) if exists
+		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
-		//Rename the cache Asset file (Asset.txt) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
-		//Rename the Asset folder (Asset) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");*/
+		// Rename the cache Asset file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+		// Rename the Asset folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
 		
-		/*LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		UserManagementPage = LoginPage.DefaultLogin();
-		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"), getPW("adminFull"), "FullAdmin",
-				"12345678", "abc@gmail.com");
+		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"),
+				getPW("adminFull"), "FullAdmin", "12345678", "abc@gmail.com");
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 		UserManagementPage.clickAnyUserinUserList("User1");
@@ -94,12 +98,13 @@ public class assetCreationTest extends BaseClass{
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);*/
+		Thread.sleep(1000);
 
 	}
 		
 	//After All the tests are conducted
-	@AfterTest
+	//@AfterTest
+	@AfterClass
 	public void endReport(){
 		extent.flush();
 		extent.close();
@@ -640,9 +645,9 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	//ASST26b
+	//ASST26b-Verify if by default the units drop down display as Select
 	@Test(groups = {"Sanity"}, 
-			description="Verify if by default the units drop down display as Select")
+			description="ASST26b-Verify if by default the units drop down display as Select")
 	public void ASST26b() {
 		extentTest = extent.startTest("ASST26b-Verify if by default the units drop down display as Select");
 		SoftAssert sa18 = new SoftAssert();		
@@ -653,9 +658,9 @@ public class assetCreationTest extends BaseClass{
 	}
 	
 	
-	//ASST26c
+	//ASST26c-Verify if the user is able to type in the desired units
 	@Test(groups = {"Sanity"}, 
-			description="Verify if the user is able to type in the desired units")
+			description="ASST26c-Verify if the user is able to type in the desired units")
 	public void ASST26c() {
 		extentTest = extent.startTest("ASST26c - Verify if the user is able to type in the desired units");
 		SoftAssert sa19 = new SoftAssert();		
@@ -996,7 +1001,7 @@ public class assetCreationTest extends BaseClass{
 		SoftAssert sa = new SoftAssert();
 		
 		TestUtilities tu = new TestUtilities();
-		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy"); 
+		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM/dd/yyyy"); 
 		//System.out.println("expectedDt: "+ALVDate);
 		
 		assetCreationPage.assetCreationWithAllFieldEntry(AName, AID, AType, 
@@ -1022,12 +1027,12 @@ public class assetCreationTest extends BaseClass{
 		assetCreationPage = assetDetailsPage.click_assetEditBtn();
 		
 		//Changing the Date to just 1 month Back date
-		String[] AstLstVldDate = ALVDate.split("-");
+		String[] AstLstVldDate = ALVDate.split("/");
 		int mnth = Integer.parseInt(AstLstVldDate[0]);
 		int newMnth = mnth-1;
 		String NewAstLstVldMnth = Integer.toString(newMnth);
 		
-		String NewAstLstVldDate = NewAstLstVldMnth+"-"+AstLstVldDate[1]+"-"+AstLstVldDate[2];
+		String NewAstLstVldDate = NewAstLstVldMnth+"/"+AstLstVldDate[1]+"/"+AstLstVldDate[2];
 		//System.out.println(NewAstLstVldDate);
 		
 		assetCreationPage.selectAssetLastVldt_Mnth(NewAstLstVldMnth);
@@ -1070,7 +1075,7 @@ public class assetCreationTest extends BaseClass{
 		SoftAssert sa = new SoftAssert();
 		
 		TestUtilities tu = new TestUtilities();
-		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM-dd-yyyy"); 
+		String ALVDate = tu.get_CurrentDate_inCertainFormat("MM/dd/yyyy"); 
 		//System.out.println("expectedDt: "+ALVDate);
 		
 		assetCreationPage.assetCreationWithAllFieldEntry(AName, AID, AType, 
@@ -1096,12 +1101,12 @@ public class assetCreationTest extends BaseClass{
 		assetCreationPage = assetDetailsPage.click_assetEditBtn();
 		
 		//Changing the Date to just 1 month Back date
-		String[] AstLstVldDate = ALVDate.split("-");
+		String[] AstLstVldDate = ALVDate.split("/");
 		int yr = Integer.parseInt(AstLstVldDate[2]);
 		int newYrMnth = yr-1;
 		String NewAstLstVldYr = Integer.toString(newYrMnth);
 		
-		String NewAstLstVldDate = AstLstVldDate[0]+"-"+AstLstVldDate[1]+"-"+NewAstLstVldYr;
+		String NewAstLstVldDate = AstLstVldDate[0]+"/"+AstLstVldDate[1]+"/"+NewAstLstVldYr;
 		//System.out.println(NewAstLstVldDate);
 		
 		assetCreationPage.selectAssetLastVldt_Yr(NewAstLstVldYr);

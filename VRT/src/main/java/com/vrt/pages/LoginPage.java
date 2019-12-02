@@ -15,7 +15,7 @@ public class LoginPage extends BaseClass {
 	//Main Login Page Element definition	
 	WebElement ProductName = driver.findElementByName("ValProbe RT System");	
 	WebElement MainLoginUID = driver.findElementByAccessibilityId("LoginIDTextBox");
-	WebElement MainLoginPW = driver.findElementByAccessibilityId("PasswordTextBox");
+	WebElement MainLoginPW = driver.findElementByAccessibilityId("PasswordTextBox");	
 	WebElement MainLoginBtn = driver.findElementByAccessibilityId("LoginButton");
 	WebElement MainLoginCnclBtn = driver.findElementByAccessibilityId("CancelButton");
 
@@ -26,7 +26,7 @@ public class LoginPage extends BaseClass {
 	------------------------*/
 	
 	//Launch of Main App with Login page...")
-	public boolean LaunchAppLoginScreen() 
+	public boolean Is_VRTAppLoginScreen_Displayed() 
 	{		
 		return IsElementEnabledStatus(MainLoginUID);		 
 	}
@@ -198,7 +198,7 @@ public class LoginPage extends BaseClass {
 		return new MainHubPage();
 	}
 	
-	//Login method for User OTHER THAN Kaye/411...")
+//Login method for User OTHER THAN Kaye/411...")
 	public MainHubPage Login(String UID, String PW) throws InterruptedException 
 	{		
 		EnterUserID(UID);
@@ -207,6 +207,15 @@ public class LoginPage extends BaseClass {
 		Thread.sleep(1000);	
 		
 		return new MainHubPage();
+	}
+	
+//Login method for invalid user
+	public void InvalidLogin(String UID, String PW) throws InterruptedException 
+	{		
+		EnterUserID(UID);
+		EnterUserPW(PW);
+		ClickLoginBtn();
+		Thread.sleep(1000);	
 	}
 	
 	//Login method for User OTHER THAN Kaye/411... to verify authentication failures")
@@ -291,4 +300,12 @@ public class LoginPage extends BaseClass {
 		WebElement LogMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(LogMsg);
 	}
+	
+	public String UserBlocked_PopUp_Msg() {
+		WebElement LogMsg = driver.findElementByAccessibilityId("Content_String");
+		return FetchText(LogMsg);
+	}
+	
+	
+
 }

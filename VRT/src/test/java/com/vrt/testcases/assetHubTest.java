@@ -10,8 +10,10 @@ import java.util.Arrays;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 //import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -28,7 +30,7 @@ import com.vrt.pages.assetHubPage;
 import com.vrt.pages.assetDetailsPage;
 
 import com.vrt.utility.TestUtilities;
-
+import com.vrt.utility.assetCreationUtility;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -52,7 +54,8 @@ public class assetHubTest extends BaseClass {
 	
 
 	//Before All the tests are conducted
-	@BeforeTest
+	//@BeforeTest
+	@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException, IOException {
 		
 		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html",true);
@@ -63,13 +66,13 @@ public class assetHubTest extends BaseClass {
 		extent.addSystemInfo("TestSuiteName", "AssetHubTest");
 
 		//Rename the User file (NgvUsers.uxx) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");		
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");		
 		//Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		/*LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		UserManagementPage = LoginPage.DefaultLogin();
@@ -89,11 +92,12 @@ public class assetHubTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);
+		Thread.sleep(1000);*/
 	}
 
 	//After All the tests are conducted
-	@AfterTest
+	//@AfterTest
+	@AfterClass
 	public void endReport_releaseMomory(){
 		extent.flush();
 		extent.close();
@@ -135,44 +139,43 @@ public class assetHubTest extends BaseClass {
 		driver.quit();
 	}
 
-	//ASST001
-	@Test(groups = {"Sanity", "Regression"}, description = "ASST001-Verify if selecting the Assets "
-			+ "tile from the main hub page , user is navigated to the Asset Details screen")
-	public void ASST001() throws InterruptedException {
-		extentTest = extent.startTest("ASST001-Verify if selecting the Assets "
-				+ "tile from the main hub page , user is navigated to the Asset Details screen");
-		SoftAssert sa1 = new SoftAssert();
+/*	//ASSTHB001-Verify if selecting the Assets tile from the main hub page , 
+	//user is navigated to the Asset Details screen
+	@Test(groups = {"Sanity", "Regression"}, description = "ASSTHB001-Verify if selecting "
+			+ "the Assets tile from the main hub page , user is navigated to the Asset Details screen")
+	public void ASSTHB001() throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB001-Verify if selecting the Assets tile from "
+				+ "the main hub page , user is navigated to the Asset Details screen");
+		SoftAssert sa = new SoftAssert();
 
-		sa1.assertEquals(assetHubPage.assetPageTitle(), "Assets",
+		sa.assertEquals(assetHubPage.assetPageTitle(), "Assets",
 				"FAIL: TC-ASST001 -Incorrect Asset Page title or landed into incorrect Page");
-		sa1.assertAll();	
+		sa.assertAll();	
 	}	
 	
 	
-	// ASST002
-	@Test(groups = {"Regression"}, description = "ASST002-Verify if with  fresh installation,"
-			+ " no assets should be displayed")
-	public void ASST002() throws InterruptedException {
-		extentTest = extent.startTest("ASST002-Verify if with  fresh installation," + 
-				" no assets should be displayed");
-		SoftAssert sa2 = new SoftAssert();
+	// ASSTHB002-Verify if with  fresh installation, no assets should be displayed
+	@Test(groups = {"Regression"}, description = "ASSTHB002-Verify if with  "
+			+ "fresh installation, no assets should be displayed")
+	public void ASSTHB002() throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB002-Verify if with  "
+				+ "fresh installation, no assets should be displayed");
+		SoftAssert sa = new SoftAssert();
 
-		sa2.assertEquals(assetHubPage.assetcount(), "0",
+		sa.assertEquals(assetHubPage.assetcount(), "0",
 				"FAIL: TC-ASST002 -Already assets present in the system which "
 				+ "suggests its not an Fresh Installation may have been upgraded");
-		sa2.assertAll();
+		sa.assertAll();
 	}
 	
-	
-	//ASST003 TC = ASST149 below
-	
-	
-	//ASST004
-	@Test(groups = {"Regression"}, description = "ASST004-Verify if Predefined Sort Options namely -Type,"
-			+ "Manufacturer and Location are present")
-	public void ASST004() throws InterruptedException {
-		extentTest = extent.startTest("ASST004-Verify if Predefined Sort Options namely -Type,"
-			+ "Manufacturer and Location are present");
+
+	// ASSTHB003-Verify if Predefined Sort Options namely -Type, 
+	//Manufacturer and Location are present
+	@Test(groups = {"Regression"}, description = "ASSTHB003-Verify if Predefined Sort "
+			+ "Options namely -Type, Manufacturer and Location are present")
+	public void ASSTHB003() throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB003-Verify if Predefined Sort Options "
+				+ "namely -Type, Manufacturer and Location are present");
 		SoftAssert sa3 = new SoftAssert();
 
 		sa3.assertEquals(assetHubPage.typeFilterBtnstate(), true, "FAIL: TC-ASST004 -Type FIlter is absent from the Assethub Page");
@@ -182,11 +185,12 @@ public class assetHubTest extends BaseClass {
 	}
 	
 	
-	//ASST005
-	@Test(groups = {"Regression"}, description = "ASST005-Verify  if Add New and Search -magnifier Icons"
+	//ASSTHB004-ASSTHB004-Verify  if Add New and Search -magnifier Icons
+	//are present at the right top corner of the assets page
+	@Test(groups = {"Regression"}, description = "ASSTHB004-Verify  if Add New and Search -magnifier Icons"
 	 +"are present at the right top corner of the assets page")
-	public void ASST005() throws InterruptedException {
-		extentTest = extent.startTest("ASST005-Verify  if Add New and Search -magnifier Icons"
+	public void ASSTHB004() throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB004-Verify  if Add New and Search -magnifier Icons"
 	 +"are present at the right top corner of the assets page");
 		SoftAssert sa4 = new SoftAssert();
 
@@ -197,10 +201,12 @@ public class assetHubTest extends BaseClass {
 	}
 		
 	
-	//ASST006
-	@Test(groups = {"Regression"}, description = "ASST006-Verify  if clicking on New icon opens a New Asset creation page")
-	public void ASST006() throws InterruptedException {
-		extentTest = extent.startTest("ASST006-Verify  if clicking on New icon opens a New Asset creation page");
+	//ASSTHB005- Verify  if clicking on New icon opens a New Asset creation page
+	@Test(groups = {"Regression"}, description = "ASSTHB005-Verify  if clicking "
+			+ "on New icon opens a New Asset creation page")
+	public void ASSTHB005() throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB005-Verify  if clicking on New icon "
+				+ "opens a New Asset creation page");
 		SoftAssert sa5 = new SoftAssert();
 		
 		assetCreationPage=assetHubPage.ClickAddAssetBtn();
@@ -211,59 +217,125 @@ public class assetHubTest extends BaseClass {
 	}
 	
 	
-	//ASST007
-	@Test(groups = {"Regression"}, description = "ASST007-Verify if clicking on Back Button"
-			+ " at the left top to return to main Hub page")
-	public void ASST007() throws InterruptedException {
-		extentTest = extent.startTest("ASST007-Verify if clicking on Back Button"
-			+ " at the left top to return to main Hub page");
-		SoftAssert sa6 = new SoftAssert();
+	//ASSTHB006a-Verify the search functionality in Asset hub page
+	@Test(dataProvider="ASSTHB006a", dataProviderClass=assetCreationUtility.class,
+			groups = {"Regression"},  description = "ASSTHB006a-Verify the seacrh "
+			+ "fucntionality in Asset hub page")
+	public void ASSTHB006a(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, 
+			String Description) throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB006a-Verify the seacrh fucntionality in Asset hub page");
+		SoftAssert sa = new SoftAssert();
+		
+		//Asset creation method
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				VldDT, Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		
+		// Click the Back button in the Asset creation/details page & click the Save message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Expected search Asset elements(Asset Type, Asset ID, Asset Name) info
+		String[] expectedAssetInfo = {Type,ID,Name};
+		//System.out.println("exp asst info"+Arrays.toString(expectedAssetInfo));
+
+		assetHubPage.click_serachAstBtn();
+		if (assetHubPage.searchAstTxtfiled_state()) {
+			assetHubPage.enter_serachAsttxt(Name);
+		}
+		
+		assetHubPage.click_serachAstBtn();
+		assetHubPage.click_serachAstBtn();		
+
+		//Verify if only One asset is displayed based on Search criteria
+		sa.assertEquals(assetHubPage.asset_Count(), 1, "FAIL: Serach Asset not found");
+		
+		String[] ActualAssetinfo = assetHubPage.assetTile(Name);
+		//System.out.println("Actual asst info:"+Arrays.toString(ActualAssetinfo));	
+
+		//Verify if the expected Asset info is same as the searched Asset info
+		sa.assertEquals(ActualAssetinfo, expectedAssetInfo,
+				"FAIL: ASSTHB006a- Mismatch in the searched Asset & display asset details");
+		sa.assertAll();
+	}
+
+	
+	//ASSTHB006b-Verify the search functionality in Asset hub page
+	@Test(dataProvider="ASSTHB006b", dataProviderClass=assetCreationUtility.class, groups = {"Regression"},  
+			description = "ASSTHB006b-Verify if No record found"
+			+ " message displayed if incorrect Asset Name entered in the Search"
+			+ "Functionality of Asset hub page")
+	public void ASSTHB006b(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, 
+			String Description) throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB006b-Verify if No record found" 
+				+" message displayed if incorrect Asset Name entered in the Search"  
+				+"Functionality of Asset hub page");
+		SoftAssert sa = new SoftAssert();
+		
+		//Asset creation method
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				VldDT, Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		
+		// Click the Back button in the Asset creation/details page & click the Save message if
+		// displayed in order to move to Asset Hub Page
+		assetHubPage = assetCreationPage.clickBackBtn();
+		
+		//Expected search Asset elements(Asset Type, Asset ID, Asset Name) info
+		//String[] expectedAssetInfo = {Type,ID,Name};
+		//System.out.println("exp asst info"+Arrays.toString(expectedAssetInfo));
+
+		assetHubPage.click_serachAstBtn();
+		if (assetHubPage.searchAstTxtfiled_state()) {
+			assetHubPage.enter_serachAsttxt("1"+Name);
+		}		
+		//System.out.println(assetHubPage.asset_Count());		
+		
+		//Verify if only One asset is displayed based on Search criteria
+		sa.assertEquals(assetHubPage.asset_Count(), 0, "FAIL:Some random Asset information found");
+		sa.assertEquals(assetHubPage.NoRecordFoundMsg(), "No record found", 
+				"Fail: Some random Asset information found");
+		sa.assertAll();
+	}
+	
+	
+	//ASSTHB007-Verify if clicking on Back Button at the left top to return to main Hub page
+	@Test(groups = {"Regression"}, description = "ASSTHB007-Verify if clicking on Back "
+			+ "Button at the left top to return to main Hub page")
+	public void ASSTHB007() throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB007-Verify if clicking on Back "
+				+ "Button at the left top to return to main Hub page");
+		SoftAssert sa = new SoftAssert();
 		
 		MainHubPage=assetHubPage.ClickBackBtn();
 
-		sa6.assertEquals(MainHubPage.mainPageTitle(), true, "FAIL: TC-ASST007 -Landed "
+		sa.assertEquals(MainHubPage.mainPageTitle(), true, "FAIL: TC-ASSTHB007 -Landed "
 				+ "to Wrong page instead of Main Hub page");				
-		sa6.assertAll();
-	}
-	
-
-	//ASST008
-	@Test(groups = {"Sanity", "Regression"}, description = "ASST008-Verify if the help section in the "
-			+ "Asset hub page is displayed by clicking Help icon")
-	public void ASST008() throws InterruptedException {
-		extentTest = extent.startTest("ASST008-Verify if the help section in the "
-			+ "Asset hub page is displayed by clicking Help icon");
-		SoftAssert sa7 = new SoftAssert();
-		
-		assetHubPage.rightclickonAssetPageTitle();
-		assetHubPage.clickHelpIcon();
-
-		sa7.assertEquals(assetHubPage.is_assetHubHelpWindow_Displayed(), true, "FAIL: TC-ASST008 -AssetHub Help"
-				+ "window did not appear or wrong Help window displayed");				
-		sa7.assertAll();
-	}
-	
-		
-	//ASST009 = Manual Test	
-	//ASST010 = ASST006	
+		sa.assertAll();
+	}*/
 	
 	
-	//ASST011
-	@Test(groups = {"Regression"}, dataProvider = "tcasst011", dataProviderClass = TestUtilities.class,
-			description = "ASST011-Verify if click on the Type filter user is able to "
-					+ "filter all the assets correctly by Asset Type")
-	public void ASST011(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description) 
+	//ASSTHB008-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type
+	@Test(dataProvider="ASSTHB008", dataProviderClass=assetCreationUtility.class, groups = {"Regression"}, 
+			description = "ASSTHB008-Verify if click on the Type filter user is able to filter all the assets "
+					+ "correctly by Asset Type")
+	public void ASSTHB008(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, String Description) 
 					throws InterruptedException {
-		extentTest = extent.startTest("ASST011-Verify if click on the Type filter user is able to "
-					+ "filter all the assets correctly by Asset Type");
+		extentTest = extent.startTest("ASSTHB008-Verify if click on the Type filter user is able to filter all "
+				+ "the assets correctly by Asset Type");
 		SoftAssert sa8 = new SoftAssert();
 		
 		//Asset creation method
 		assetCreationPage = assetHubPage.ClickAddAssetBtn();
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);		
+				VldDT, Frequency, FrequencyInterval, Description);		
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
+		
 		// Click the Back button in the Asset creation/details page & click the Save message if
 		// displayed in order to move to Asset Hub Page
 		assetHubPage = assetCreationPage.clickBackBtn();
@@ -272,135 +344,86 @@ public class assetHubTest extends BaseClass {
 		boolean state = assetHubPage.assetList_TypeFilter();
 		System.out.println(state);
 
-		sa8.assertEquals(state, true, "FAIL: TC-ASST011 -Type filter is not working in the Asset Hub page");				
+		sa8.assertEquals(state, true, "FAIL: TC-ASSTHB008 -Type filter is not working in the Asset Hub page");				
 		sa8.assertAll();
 	}
-
-	
-	//ASST012 = Not Valid	
-	//ASST013 = Not Valid
 	
 	
-	//ASST014
-	@Test(groups = { "Regression" }, description = "ASST014-Verify if click on the Manufacturer filter"
-			+ " user is able to filter all the assets correctly by Asset Manufacturer")
-	public void ASST014()
+	//ASSTHB009-Verify if click on the Manufacturer Filter user is able to filter all the assets correctly by Asset Manufacturer
+	@Test(dependsOnMethods = "ASSTHB008", groups = { "Regression" }, description = "ASSTHB009-Verify if "
+			+ "click on the Manufacturer Filter user is able to filter all the assets correctly by Asset Manufacturer")
+	public void ASSTHB009()
 			throws InterruptedException, IOException {
-		extentTest = extent.startTest("ASST014-Verify if click on the Manufacturer filter"
-			+ " user is able to filter all the assets correctly by Asset Manufacturer");
+		extentTest = extent.startTest("ASSTHB009-Verify if click on the Manufacturer Filter user is able to filter "
+				+ "all the assets correctly by Asset Manufacturer");
 		SoftAssert sa9 = new SoftAssert();
 
 		// Check for the Asset Filter method
 		boolean state = assetHubPage.assetList_ManufacturerFilter();
 		System.out.println(state);
 
-		sa9.assertEquals(state, true, "FAIL: TC-ASST014 -Manufacturer filter is not working in the Asset Hub page");
+		sa9.assertEquals(state, true, "FAIL: TC-ASSTHB009 -Manufacturer filter is not working in the Asset Hub page");
 		sa9.assertAll();
 	}
 	
 	
-	//ASST015
-	@Test(groups = { "Regression" }, description = "ASST015-Verify if click on the Location filter user"
-					+ " is able to filter all the assets correctly by Asset Location")
-	public void ASST015()
+	//ASSTHB010-Verify if click on the Location type , User is able to filter all the assets correctly by Asset Location type
+	@Test(groups = { "Regression" }, description = "ASSTHB010-Verify if click on the Location type , User is able to "
+			+ "filter all the assets correctly by Asset Location type")
+	public void ASSTHB010()
 			throws InterruptedException, IOException {
-		extentTest = extent.startTest("ASST015-Verify if click on the Location filter user" + 
-				" is able to filter all the assets correctly by Asset Location");
+		extentTest = extent.startTest("ASSTHB010-Verify if click on the Location type , User is able to filter all "
+				+ "the assets correctly by Asset Location type");
 		SoftAssert sa10 = new SoftAssert();
 
 		// Check for the Asset Filter method
 		boolean state = assetHubPage.assetList_LocationFilter();
 		System.out.println(state);
 
-		sa10.assertEquals(state, true, "FAIL: TC-ASST015 -Location filter is not working in the Asset Hub page");
+		sa10.assertEquals(state, true, "FAIL: TC-ASSTHB010 -Location filter is not working in the Asset Hub page");
 		sa10.assertAll();
-	}	
-
+	}
 	
-	// ASST147
-	@Test(groups ={"Sanity", "Regression"}, dataProvider = "tc147", dataProviderClass = TestUtilities.class,  
-			description = "Verify all the changes made to the asset are displayed correctly at Asset Hub Page")
-	public void ASST147(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description)
-			throws InterruptedException {
-		extentTest = extent.startTest("ASST147-Verify all the changes made to the asset are displayed"
-				+ " correctly at Asset Hub Page");
-		SoftAssert sa1 = new SoftAssert();
+	//ASSTHB011-Verify if the help section in the Asset hub page is displayed by clicking Help icon
+	@Test(groups = {"Sanity", "Regression"}, description = "ASSTHB011-Verify if the help section in the "
+			+ "Asset hub page is displayed by clicking Help icon")
+	public void ASSTHB011() throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB011-Verify if the help section in the "
+			+ "Asset hub page is displayed by clicking Help icon");
+		SoftAssert sa7 = new SoftAssert();
+		
+		assetHubPage.rightclickonAssetPageTitle();
+		assetHubPage.clickHelpIcon();
+
+		sa7.assertEquals(assetHubPage.is_assetHubHelpWindow_Displayed(), true, "FAIL: TC-ASSTHB011 -AssetHub Help"
+				+ "window did not appear or wrong Help window displayed");				
+		sa7.assertAll();
+	}
+	
+	
+	//ASSTHB012-Verify 25 assets are created with each categories model, size, manufacturer,Location and Type
+	@Test(dataProvider="ASSTHB012", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
+			description = "ASSTHB012-Verify 25 assets are created with each "
+			+ "categories model, size, manufacturer,Location and Type")
+	public void ASSTHB012(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, String Description)
+					throws InterruptedException {
+		extentTest = extent.startTest("ASSTHB012-Verify 25 assets are created with each categories model, "
+				+ "size, manufacturer,Location and Type");
+		SoftAssert sa = new SoftAssert();
 		
 		//Asset creation method
 		assetCreationPage = assetHubPage.ClickAddAssetBtn();
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);		
+				VldDT, Frequency, FrequencyInterval, Description);		
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
-		// Click the Back button in the Asset creation/details page & click the Save message if
-		// displayed in order to move to Asset Hub Page
-		assetHubPage = assetCreationPage.clickBackBtn();
-		
-		assetDetailsPage=assetHubPage.click_assetTile(Name);
-		assetCreationPage=assetDetailsPage.click_assetEditBtn();		
-		
-		
-		//Expected Asset elements (Asset Type, Asset ID, Asset Name) to be edited
-		String[] expectedAssetInfo = {"Sterilizer","147b","Asset147b"};
-		//System.out.println("exp asst info1:"+Arrays.toString(expectedAssetInfo));
-		
-		//Change/Update the Asset Name,ID & Type info
-		assetCreationPage.enterAssetName(expectedAssetInfo[2]);
-		assetCreationPage.enterAssetID(expectedAssetInfo[1]);
-		assetCreationPage.SelectAssetType(expectedAssetInfo[0]);
-		assetCreationPage.clickSaveBtn();
-		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
-		//Move back to Asset Hub Page		
-		assetDetailsPage = assetCreationPage.click_BackBtn();
-		assetHubPage = assetDetailsPage.ClickBackBtn();	
-				
-		String[] ActualAssetinfo = assetHubPage.assetTile(expectedAssetInfo[2]);
-		//System.out.println("Actual asst info1:"+Arrays.toString(ActualAssetinfo));
-		for (String str2 : ActualAssetinfo) {
-			System.out.println("Act asst info2: "+str2);
-		}
 
-		sa1.assertEquals(ActualAssetinfo, expectedAssetInfo);;
-		sa1.assertAll();
-	}		
-	
-	
-	//ASST167
-	@Test(groups = {"Regression"},  description = "ASST167 - Verify if clicking on Search icon opens a search text box")
-	public void ASST167() throws InterruptedException {
-		extentTest = extent.startTest("ASST167- Verify if clicking on Search icon opens a search text box");
-		SoftAssert sa2 = new SoftAssert();
-		
-		//Expected search Asset elements(Asset Type, Asset ID, Asset Name) info
-		String[] expectedAssetInfo = {"HeatBath","149","Asset149"};
-		//System.out.println("exp asst info"+Arrays.toString(expectedAssetInfo));
-
-		assetHubPage.click_serachAstBtn();
-		if (assetHubPage.searchAstTxtfiled_state()) {
-			assetHubPage.enter_serachAsttxt("Asset149");
-		}
-		
-		assetHubPage.click_serachAstBtn();
-		assetHubPage.click_serachAstBtn();		
-
-		//Verify if only One asset is displayed based on Search criteria
-		sa2.assertEquals(assetHubPage.asset_Count(), 1, "FAIL: Serach Asset not found");
-		
-		String[] ActualAssetinfo = assetHubPage.assetTile("Asset149");
-		//System.out.println("Actual asst info:"+Arrays.toString(ActualAssetinfo));	
-
-		//Verify if the expected Asset info is same has the searched Asset info
-		sa2.assertEquals(ActualAssetinfo, expectedAssetInfo,
-				"FAIL: ASST167- Mismatch in the searched Asset & display asset");
-		sa2.assertAll();
+		/*sa.assertEquals(assetHubPage.is_assetHubHelpWindow_Displayed(), true, "FAIL: TC-ASSTHB011 -AssetHub Help"
+				+ "window did not appear or wrong Help window displayed");				
+		sa.assertAll();*/
 	}
-	
-	
-	//ASST169 = ASST011
-	//ASST173 = Not Valid
-	//ASST174 = Not Valid
-	//ASST175 = ASST014
-	//ASST176 = ASST015
+
+
 	
 
 }

@@ -10,12 +10,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -23,7 +20,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 import io.appium.java_client.windows.WindowsDriver;
 
@@ -201,6 +197,7 @@ public class BaseClass {
 		UserMap.put("CustoOpe", "C3:Start@6AM");
 		UserMap.put("TestAdmin", "2:Start@5AM");
 		UserMap.put("Dsbluser", "1D:Start@1AM");
+		UserMap.put("Newuser", "1N:Start@7AM");
 		return UserMap;
 	}
 	

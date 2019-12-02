@@ -9,24 +9,24 @@ package com.vrt.testcases;
 import java.io.IOException;
 
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-//import com.vrt.Listners.AllureReportListner;
-import com.vrt.base.BaseClass;
-import com.vrt.utility.TestUtilities;
-import com.vrt.pages.LoginPage;
-import com.vrt.pages.MainHubPage;
-import com.vrt.pages.UserManagementPage;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+//import com.vrt.Listners.AllureReportListner;
+import com.vrt.base.BaseClass;
+import com.vrt.pages.LoginPage;
+import com.vrt.pages.MainHubPage;
+import com.vrt.pages.UserManagementPage;
+import com.vrt.utility.TestUtilities;
 
 
 public class LoginTest extends BaseClass{
@@ -39,7 +39,8 @@ public class LoginTest extends BaseClass{
 	UserManagementPage UserManagementPage;
 	
 	//Before All the tests are conducted
-	@BeforeTest
+	@BeforeClass
+	//@BeforeTest
 	private void setExtent() throws IOException {
 		
 		// Rename the User file (NgvUsers.uxx) if exists
@@ -49,17 +50,18 @@ public class LoginTest extends BaseClass{
 		//Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
-		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html",true);
-		extent.addSystemInfo("VRT Version", "1.0.0.37");
-		extent.addSystemInfo("BS Version", "0.6.13");
-		extent.addSystemInfo("Lgr Version", "1.2.6");
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport"+"_LoginTest"+".html",true);
+		extent.addSystemInfo("VRT Version", "1.0.0.41");
+		extent.addSystemInfo("BS Version", "0.6.26");
+		extent.addSystemInfo("Lgr Version", "1.3.1");
 		extent.addSystemInfo("User Name", "Manoj");
 		extent.addSystemInfo("TestSuiteName", "LoginTest");
 
 	}
 	
 	//After All the tests are conducted
-	@AfterTest
+	//@AfterTest
+	@AfterClass
 	public void endReport(){
 		extent.flush();
 		extent.close();
@@ -97,66 +99,99 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify if user can log into "
-			+ "the Kaye Application after installation with default Kaye/411 credentials")
+	/********
+	Test Cases
+	*********/
+	
+	
+	//LOGIN_001- Verify if user can log into the Kaye Application after 
+	//installation with default provided credentials
+	@Test(groups = {"Regression"}, description="LOGIN_001- Verify if user can log "
+			+ "into the Kaye Application after installation with default provided credentials")
 	public void LOGIN_001() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_001");
-		//String result = "";
-		//String exception = null;
-		SoftAssert sa1 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_001- Verify if user can log into the Kaye Application"
+				+ " after installation with default provided credentials");
+
+		SoftAssert sa = new SoftAssert();
 		UserManagementPage = MainLoginPage.DefaultLogin();
 
-		sa1.assertEquals(UserManagementPage.IsUMscreenDisplayed(), true, "FAIL: Unable to Login"
+		sa.assertEquals(UserManagementPage.IsUMscreenDisplayed(), true, "FAIL: Unable to Login"
 				+" with defualt Kaye/411 login credentials");
 		
-		sa1.assertAll();
+		sa.assertAll();
 	}
 	
+	
+	//LOGIN_001b-Verify that Policies,Preferences screens are disabled for login with First installation
+	@Test(groups = {"Regression"}, description="LOGIN_001b-Verify that Policies,Preferences screens "
+			+ "are disabled for login with First installation")
+	public void LOGIN_001b() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_001b-Verify that Policies,Preferences screens are disabled"
+				+ " for login with First installation");
 
-	@Test(groups = {"Regression", "Sanity"},description="Verify if clicking on the "
-			+ "Kaye application tab opens the Login Screen of the application")
-	public void LOGIN_002() throws Exception {		
-		extentTest = extent.startTest("LOGIN_002");
-		SoftAssert sa2 = new SoftAssert();
+		SoftAssert sa = new SoftAssert();
+		UserManagementPage = MainLoginPage.DefaultLogin();
+
+		sa.assertEquals(UserManagementPage.IsPreferenceTab_Enabled(), false, 
+				"FAIL: Preference tab appears to be Enabled");
+		sa.assertEquals(UserManagementPage.IspoliciesTab_Enabled(), false, 
+				"FAIL: Policies tab appears to be Enabled");
 		
-		boolean state = MainLoginPage.LaunchAppLoginScreen();
+		sa.assertAll();
+	}
+	
+	
+	//LOGIN_002- Verify if clicking on the Kaye application tab opens the Login Screen of the application
+	@Test(groups = {"Regression", "Sanity"},description="LOGIN_002- Verify if clicking on the Kaye "
+			+ "application tab opens the Login Screen of the application")
+	public void LOGIN_002() throws Exception {		
+		extentTest = extent.startTest("LOGIN_002- Verify if clicking on the Kaye application tab opens "
+				+ "the Login Screen of the application");
+		SoftAssert sa = new SoftAssert();
+		
+		boolean state = MainLoginPage.Is_VRTAppLoginScreen_Displayed();
 				
-		sa2.assertEquals(state, true, "FAIL: VRT App either didn't launch" 
+		sa.assertEquals(state, true, "FAIL: VRT App either didn't launch" 
 		+" or Launched but not into LOGIN SCREEN");
 		
-		sa2.assertAll();		
+		sa.assertAll();		
 	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify  the contents of the Kaye application Login Screen ")
+	//LOGIN_003- Verify  the contents of the Kaye application Login Screen
+	@Test(groups = {"Regression"}, description="LOGIN_003- Verify  the contents of the Kaye application "
+			+ "Login Screen")
 	public void LOGIN_003() throws Exception {	
-		extentTest = extent.startTest("LOGIN_003");
-		SoftAssert sa3 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_003- Verify  the contents of the Kaye application "
+				+ "Login Screen");
+		SoftAssert sa = new SoftAssert();
 		//Validate Product Name
 		String expectedAppName = "ValProbe RT System";
 		//String ActualAppName = MainLoginPage.AppName();
-		sa3.assertEquals(MainLoginPage.AppName(), expectedAppName, "FAIL: Invalid Product Name displayed");
+		sa.assertEquals(MainLoginPage.AppName(), expectedAppName, "FAIL: Invalid Product Name displayed");
 		
 		// Validate presence of UserID text field
-		sa3.assertEquals(MainLoginPage.UserIDFieldPresence(), true, "FAIL: No UID field present");
+		sa.assertEquals(MainLoginPage.UserIDFieldPresence(), true, "FAIL: No UID field present");
 		
 		//Validate for Password text field presence
-		sa3.assertEquals(MainLoginPage.UserPWFieldPresence(), true, "FAIL: No PW field present");
+		sa.assertEquals(MainLoginPage.UserPWFieldPresence(), true, "FAIL: No PW field present");
 		
 		//Validate for Login Button presence
-		sa3.assertEquals(MainLoginPage.LoginBtnPresence(), true, "FAIL: LOGIN button is not Present");
+		sa.assertEquals(MainLoginPage.LoginBtnPresence(), true, "FAIL: LOGIN button is not Present");
 		
 		// Check for CANCEL Button presence
-		sa3.assertEquals(MainLoginPage.CancelBtnPresence(), true, "FAIL: CANCEL button is not displayed");
+		sa.assertEquals(MainLoginPage.CancelBtnPresence(), true, "FAIL: CANCEL button is not displayed");
 				
-		sa3.assertAll();
+		sa.assertAll();
 	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify if the input data in the "
-			+ "Password field is displayed as astrisk")
+	//LOGIN_004- Verify if the input data in the Password field is displayed as asterisk
+	@Test(groups = {"Regression"}, description="LOGIN_004- Verify if the input data in the"
+			+ " Password field is displayed as asterisk")
 	public void LOGIN_004() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_004");
+		extentTest = extent.startTest("LOGIN_004- Verify if the input data in the Password "
+				+ "field is displayed as asterisk");
 		SoftAssert sa4 = new SoftAssert();
 		
 		MainLoginPage.EnterUserPW("abc");
@@ -168,10 +203,13 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = {"Regression", "Sanity"}, description="Verify if user can login into "
-			+ "the application by entering UserID and Password (Create 1st User) and then clicking on Login button")
+	//LOGIN_005- Verify if user can login into the application by entering UserID and 
+	//Password and then clicking on Login button
+	@Test(groups = {"Regression", "Sanity"}, description="LOGIN_005- Verify if user can login into the "
+			+ "application by entering UserID and Password and then clicking on Login button")
 	public void LOGIN_005() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_005");
+		extentTest = extent.startTest("LOGIN_005- Verify if user can login into the application by "
+				+ "entering UserID and Password and then clicking on Login button");
 		SoftAssert sa5 = new SoftAssert();
 		
 		//Login using Default Kaye/411
@@ -190,30 +228,33 @@ public class LoginTest extends BaseClass{
 	}
 
 	
-/*	@Test(groups = "Regression", description="Verify if the Cancel button resets "
-			+ "the UserId and Password fields to Null")
-	public void LOGIN_006() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_006");
-		SoftAssert sa6 = new SoftAssert();
-		
-		MainLoginPage.EnterUserID("a");
-		MainLoginPage.EnterUserPW("abc");
-		MainLoginPage.ClickCancelBtn();
-		Thread.sleep(1000);
-		
-		String UIDtxt= MainLoginPage.GetTextUserIDField();
-		String PWtxt = MainLoginPage.GetTextUserPWField();
-				
-		sa6.assertEquals(UIDtxt, "", "FAIL: Cancel button unable to clear the UserID field");
-		sa6.assertEquals(PWtxt, "", "FAIL: Cancel button unable to clear the Password field");	
-		
-		sa6.assertAll();
-	}*/
+//	@Test(groups = "Regression", description="Verify if the Cancel button resets "
+//			+ "the UserId and Password fields to Null")
+//	public void LOGIN_006() throws InterruptedException {
+//		extentTest = extent.startTest("LOGIN_006");
+//		SoftAssert sa6 = new SoftAssert();
+//		
+//		MainLoginPage.EnterUserID("a");
+//		MainLoginPage.EnterUserPW("abc");
+//		MainLoginPage.ClickCancelBtn();
+//		Thread.sleep(1000);
+//		
+//		String UIDtxt= MainLoginPage.GetTextUserIDField();
+//		String PWtxt = MainLoginPage.GetTextUserPWField();
+//				
+//		sa6.assertEquals(UIDtxt, "", "FAIL: Cancel button unable to clear the UserID field");
+//		sa6.assertEquals(PWtxt, "", "FAIL: Cancel button unable to clear the Password field");	
+//		
+//		sa6.assertAll();
+//	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify if user is not allowed to login with invalid credentials")
+	//LOGIN_007- Verify if user is not allowed to login with invalid credentials
+	@Test(groups = {"Regression"}, description="LOGIN_007- Verify if user is not allowed to "
+			+ "login with invalid credentials")
 	public void LOGIN_007() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_007");
+		extentTest = extent.startTest("LOGIN_007- Verify if user is not allowed to login "
+				+ "with invalid credentials");
 		SoftAssert sa7 = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("a");
@@ -227,10 +268,13 @@ public class LoginTest extends BaseClass{
 	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify if user is not allowed to "
-			+ "login if the UserId or Password field is left blank")
+	//LOGIN_008- Verify if user is not allowed to login if the UserId or Password 
+	//field is left blank
+	@Test(groups = {"Regression"}, description="LOGIN_008- Verify if user is not "
+			+ "allowed to login if the UserId or Password field is left blank")
 	public void LOGIN_008() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_008");
+		extentTest = extent.startTest("LOGIN_008- Verify if user is not allowed to "
+				+ "login if the UserId or Password field is left blank");
 		SoftAssert sa8 = new SoftAssert();
 		
 		sa8.assertEquals(MainLoginPage.LoginBtnEnablestatus(), false, "FAIL: Login button enabled"
@@ -240,10 +284,13 @@ public class LoginTest extends BaseClass{
 	}
 		
 	
-	@Test(groups = {"Regression"}, description="Verify if the application closes on three unsuccessful login attempts")
+	//LOGIN_009- Verify if the application closes on three unsuccessful login attempts
+	@Test(groups = {"Regression"}, description="LOGIN_009- Verify if the application "
+			+ "closes on three unsuccessful login attempts")
 	public void LOGIN_009() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_009");
-		SoftAssert sa9 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_009- Verify if the application closes on three "
+				+ "unsuccessful login attempts");
+		SoftAssert sa = new SoftAssert();
 		
 		MainLoginPage.EnterUserID("1");
 		MainLoginPage.EnterUserPW("123");
@@ -255,66 +302,95 @@ public class LoginTest extends BaseClass{
 		MainLoginPage.EnterUserPW("123");
 		MainLoginPage.ClickLoginBtn();
 		
-		sa9.assertEquals(MainLoginPage.LaunchAppLoginScreen(), false, "FAIL: App does not SHUTDOWN "
+		sa.assertEquals(MainLoginPage.Is_VRTAppLoginScreen_Displayed(), false, "FAIL: App does not SHUTDOWN "
 				+"on entering 3 times INVALID User Credentials");
-		sa9.assertAll();
+		sa.assertAll();
 	}
 
 	
-	@Test(groups = {"Regression"}, description="Verify if the first created admin user "
-			+ "is not allowed to change his password during first login instance after user creation")
+	//LOGIN_010- Verify if the first created admin user is not forced to change his 
+	//password during first login instance after user creation
+	@Test(groups = {"Regression"}, description="LOGIN_010- Verify if the first created "
+			+ "admin user is not forced to change his password during first login instance after user creation")
 	public void LOGIN_010() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_010");
-		SoftAssert sa10 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_010- Verify if the first created admin user is "
+				+ "not forced to change his password during first login instance after user creation");
+		SoftAssert sa = new SoftAssert();
 		
 		MainLoginPage.EnterUserID(getUID("adminFull"));
 		MainLoginPage.EnterUserPW("Welcome1@AM");
 		
-		sa10.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: The 1st User is "
-		+"allowed to Change its PW on 1st time Login");
-		sa10.assertAll();		
+		sa.assertEquals(MainLoginPage.NewPWFieldPresence(), false, "FAIL: The 1st User is "
+		+"forced to Change its PW on 1st time Login");
+		sa.assertAll();		
 	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox "
-			+ "is in enabled state during consecutive logins by the first admin user")
+	//LOGIN_011- Verify if the Change Password tick-box is in Enabled state during first time login 
+	//after creating the first admin user
+	@Test(groups = {"Regression"}, description="LOGIN_011- Verify if the Change Password tickbox is in "
+			+ "Enabled state during first time login after creating the first admin user")
+	public void LOGIN_011() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_011- Verify if the Change Password tickbox is in Enabled state "
+				+ "during first time login after creating the first admin user");
+		SoftAssert sa = new SoftAssert();
+		
+		MainLoginPage.EnterUserID(getUID("adminFull"));
+		MainLoginPage.EnterUserPW("Welcome1@AM");
+		
+		sa.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: The 1st User is "
+		+"Not allowed to Change its PW on 1st time Login");
+		sa.assertAll();		
+	}
+
+	
+	//LOGIN_012- Verify if the Change Password tickbox is in enabled state during consecutive 
+	//logins by the first admin user
+	@Test(groups = {"Regression"}, description="LOGIN_012- Verify if the Change Password tickbox"
+			+ " is in enabled state during consecutive logins by the first admin user")
 	public void LOGIN_012() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_012");
-		SoftAssert sa11 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_012- Verify if the Change Password tickbox is "
+				+ "in enabled state during consecutive logins by the first admin user");
+		SoftAssert sa = new SoftAssert();
 		
 		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		MainLoginPage=MainHubPage.UserSignOut();
 		MainLoginPage.EnterUserID(getUID("adminFull"));
 		MainLoginPage.EnterUserPW(getPW("adminFull"));
 		
-		sa11.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: The 1st User is "
+		sa.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: The 1st User is "
 		+"NOT allowed to Change its PW with Change PW option in disbaled state");
-		sa11.assertAll();	
+		sa.assertAll();	
 	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify if checking the "
-			+ "Change Password tickbox allows the user to change his password")
+	//LOGIN_013- Verify if checking the Change Password tickbox allows the user to change his password
+	@Test(groups = {"Regression"}, description="LOGIN_013- Verify if checking the Change Password"
+			+ " tickbox allows the user to change his password")
 	public void LOGIN_013() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_013");
-		SoftAssert sa12 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_013- Verify if checking the Change Password tickbox "
+				+ "allows the user to change his password");
+		SoftAssert sa = new SoftAssert();
 		
 		MainLoginPage.EnterUserID(getUID("adminFull"));
 		MainLoginPage.EnterUserPW(getPW("adminFull"));
 		MainLoginPage.ClickChangePWCheckbox();
 		MainLoginPage.ClickLoginBtn();
 
-		sa12.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: New PW field "
+		sa.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: New PW field "
 				+ "is not enabled/displayed to Change PW");
-		sa12.assertAll();
+		sa.assertAll();
 	}
 	
 	
-	@Test(groups = {"Regression"}, description="Verify if unchecking the "
+	//LOGIN_014- Verify if unchecking the Change Password tickbox restricts the user 
+	//from changing his password
+	@Test(groups = {"Regression"}, description="LOGIN_014- Verify if unchecking the "
 			+ "Change Password tickbox restricts the user from changing his password")
 	public void LOGIN_014() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_014");
-		SoftAssert sa13 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_014- Verify if unchecking the Change "
+				+ "Password tickbox restricts the user from changing his password");
+		SoftAssert sa = new SoftAssert();
 		
 		MainLoginPage.EnterUserID(getUID("adminFull"));
 		MainLoginPage.EnterUserPW(getPW("adminFull"));
@@ -325,36 +401,61 @@ public class LoginTest extends BaseClass{
 		try {
 			MainLoginPage.ClickChangePWCheckbox();
 			
-			sa13.assertEquals(MainLoginPage.NewPWFieldPresence(), false, "FAIL: New PW field is enabled/displayed to Change PW"
+			sa.assertEquals(MainLoginPage.NewPWFieldPresence(), false, "FAIL: New PW field is enabled/displayed to Change PW"
 					+ " even if the Change PW checkbox is unchecked");
-			sa13.assertAll();
+			sa.assertAll();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 	}
+
 	
-	
-	@Test(groups = {"Regression"}, description="Verify if user can change "
-			+ "the password by entering new password and clicking on the OK button")
+	//LOGIN_015- Verify if user can change the password by entering new password and clicking on the OK button
+	@Test(groups = {"Regression"}, description="LOGIN_015- Verify if user can change the password "
+			+ "by entering new password and clicking on the OK button")
 	public void LOGIN_015() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_015");
-		SoftAssert sa14 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_015- Verify if user can change the password by "
+				+ "entering new password and clicking on the OK button");
+		SoftAssert sa = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.ChangeNewPW(getUID("adminFull"), getPW("adminFull"), "Welcome2@AM");
+		//Login using very 1st User credentials
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 		
-		sa14.assertEquals(MainHubPage.LoggedinUserName(), "User1", "FAIL: Password did not change for the User");
-		sa14.assertAll();
+		//Create the 2nd Admin User
+		UserManagementPage.CreateAdminUser(getUID("adminFull"), getPW("adminFull"), "AdminUser2", getUID("CustoAdmin"), 
+				"Welcome1@AM", "CustoAdmin", "123456789", "abc@gmail.com");
+		MainHubPage=UserManagementPage.ClickBackButn();
+		MainLoginPage=MainHubPage.UserSignOut();
+		
+		MainLoginPage.LoginEntry(getUID("CustoAdmin"), "Welcome1@AM");
+		MainLoginPage.ClickLoginBtn();
+		//Change the forced password
+		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("Welcome1@AM"));
+		MainHubPage.UserSignOut();
+		
+		MainLoginPage.LoginEntry(getUID("CustoAdmin"), "Welcome1@AM");
+		//Click the Change password option
+		MainLoginPage.ClickChangePWCheckbox();
+		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("CustoAdmin"));
+		MainLoginPage.ClickLoginBtn();		
+		
+		sa.assertEquals(MainHubPage.LoggedinUserName(), "AdminUser2", "FAIL: Password did not change for the User");
+		sa.assertAll();
 	}
 		
 	
-	@Test(groups = {"Regression"}, description="Verify if clicking on the Cancel button"
+	//LOGIN_016- Verify if clicking on the Cancel button in the Change password field 
+	//restores the previous password
+	@Test(groups = {"Regression"}, description="LOGIN_016- Verify if clicking on the Cancel button"
 			+ " in the Change password field restores the previous password")
 	public void LOGIN_016() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_016");
-		SoftAssert sa15 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_016- Verify if clicking on the Cancel button in the "
+				+ "Change password field restores the previous password");
+		SoftAssert sa = new SoftAssert();
 		
-		MainLoginPage.LoginEntry(getUID("adminFull"), "Welcome2@AM");
+		MainLoginPage.LoginEntry(getUID("adminFull"), getPW("adminFull"));
 		MainLoginPage.ClickChangePWCheckbox();
 		MainLoginPage.ClickLoginBtn();
 		MainLoginPage.enterNewPW("Welcome3@AM");
@@ -364,54 +465,82 @@ public class LoginTest extends BaseClass{
 		
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
-		MainLoginPage= new LoginPage();
-		
-		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
+		MainLoginPage= new LoginPage();		
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 
-		sa15.assertEquals(MainHubPage.LoggedinUserName(), "User1", "FAIL: Cancel button"
+		sa.assertEquals(MainHubPage.LoggedinUserName(), "User1", "FAIL: Cancel button"
 				+ " at New PW change did not work as intended");
-		sa15.assertAll();
+		sa.assertAll();
 	}
 	
 	
-	//A Sys Admin User created
-	@Test(groups = {"Regression", "Sanity"}, description="Verify if subsequent users created "
-			+ "are forced to change their password during first login instance")
-	public void LOGIN_017_018() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_017_18");
-		SoftAssert sa16 = new SoftAssert();
+	//LOGIN_017- Verify if subsequent users created are forced to change their password during first login instance
+	@Test(groups = {"Regression", "Sanity"}, description="LOGIN_017- Verify if subsequent users created are "
+			+ "forced to change their password during first login instance")
+	public void LOGIN_017() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_017- Verify if subsequent users created are forced to change "
+				+ "their password during first login instance");
+		SoftAssert sa = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
-		UserManagementPage.CreateAdminUser(getUID("adminFull"), "Welcome2@AM", "User2", getUID("SysAdmin"), "Welcome1@AM", "SysAdmin", "123456789", "user1@aas.com");
+		UserManagementPage.CreateAdminUser(getUID("adminFull"), getPW("adminFull"), "User2", 
+				getUID("SysAdmin"), "Welcome1@AM", "SysAdmin", "123456789", "user1@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
 		MainLoginPage.LoginEntry(getUID("SysAdmin"), "Welcome1@AM");
 		MainLoginPage.ClickLoginBtn();
-		
-		sa16.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: A New User created"
-				+ " is not forced to change PW on logging in for 1st time with ChangePWCheck box in Enabled state and in Unchecked state");
-		sa16.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: A New User created" 
+
+		sa.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: A New User created" 
 				+ " is not forced to change PW on logging in for 1st time with New PW field in Disabled/Invisible state");
-				
-		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("SysAdmin"));
-		MainHubPage.UserSignOut();
-		sa16.assertAll();
+
+		sa.assertAll();
 	}
 	
-	//A Sys Supervisor User created	
-	@Test(groups = {"Regression"}, description="Verify if the Change Password tickbox"
-			+ " is in enabled state during furthur login attempts by the subsequent users")
-	public void LOGIN_019() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_019");
-		SoftAssert sa17 = new SoftAssert();
+	
+	//LOGIN_018- Verify if the Change Password tickbox is in disabled state during first  
+	//login instance for subsequent users
+	@Test(groups = {"Regression", "Sanity"}, description="LOGIN_018- Verify if the "
+			+ "Change Password tickbox is in disabled state during first  login instance for subsequent users")
+	public void LOGIN_018() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_018- Verify if the Change Password tickbox is in "
+				+ "disabled state during first  login instance for subsequent users");
+		SoftAssert sa = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
-		UserManagementPage.CreateSupervisorUser(getUID("adminFull"), "Welcome2@AM", "User3", getUID("SysSupervisor"), "Welcome1@AM", "SysSupervisor", "123456789", "user2@aas.com");
+		UserManagementPage.CreateAdminUser(getUID("adminFull"), getPW("adminFull"), "User18", 
+				getUID("TestAdmin"), "Welcome1@AM", "TestAdmin", "123456789", "user18@aas.com");
+		MainHubPage=UserManagementPage.ClickBackButn();
+		MainLoginPage=MainHubPage.UserSignOut();
+		
+		MainLoginPage.LoginEntry(getUID("TestAdmin"), "Welcome1@AM");
+		MainLoginPage.ClickLoginBtn();
+		
+		sa.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: A New User created"
+				+ " is not forced to change PW on logging in for 1st time with ChangePWCheck box "
+				+ "in Enabled state and in Unchecked state");
+
+		sa.assertAll();
+	}
+	
+	//LOGIN_019- Verify if the Change Password tickbox is in enabled state during further login 
+	//attempts by the subsequent users	
+	@Test(groups = {"Regression"}, description="LOGIN_019- Verify if the Change Password "
+			+ "tickbox is in enabled state during furthur login attempts by the subsequent users")
+	public void LOGIN_019() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_019- Verify if the Change Password tickbox is in "
+				+ "enabled state during furthur login attempts by the subsequent users");
+		SoftAssert sa = new SoftAssert();
+		
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
+		
+		UserManagementPage.CreateSupervisorUser(getUID("adminFull"), getPW("adminFull"), "User3", 
+				getUID("SysSupervisor"), "Welcome1@AM", "SysSupervisor", "123456789", "user2@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
@@ -421,22 +550,26 @@ public class LoginTest extends BaseClass{
 		MainLoginPage=MainHubPage.UserSignOut();
 		MainLoginPage.LoginEntry(getUID("SysSupervisor"), getPW("SysSupervisor"));
 
-		sa17.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: ChangePWCheck box "
+		sa.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), true, "FAIL: ChangePWCheck box "
 				+ "appear to be in Disable state");
-		sa17.assertAll();	
+		sa.assertAll();	
 	}
 	
-	//A Sys Operator User created	
-	@Test(groups = {"Regression"}, description="Verify if a user"
-			+ " is forced to change his password while login, if his password has been changed by the admin user")
+	
+	//LOGIN_020- Verify if a user is forced to change his password while login, 
+	//if his password has been changed by the admin user	
+	@Test(groups = {"Regression"}, description="LOGIN_020- Verify if a user is "
+			+ "forced to change his password while login, if his password has been changed by the admin user")
 	public void LOGIN_020() throws InterruptedException {
-		extentTest = extent.startTest("LOGIN_020");
-		SoftAssert sa18 = new SoftAssert();
+		extentTest = extent.startTest("LOGIN_020- Verify if a user is forced to change his password while login,"
+				+ " if his password has been changed by the admin user");
+		SoftAssert sa = new SoftAssert();
 		
-		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
 		
-		UserManagementPage.CreateOperatorUser(getUID("adminFull"), "Welcome2@AM", "User4", getUID("SysOperator"), "Welcome1@AM", "SysOperator", "123456789", "user8@aas.com");
+		UserManagementPage.CreateOperatorUser(getUID("adminFull"), getPW("adminFull"), 
+				"User4", getUID("SysOperator"), "Welcome1@AM", "SysOperator", "123456789", "user8@aas.com");
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
@@ -445,29 +578,97 @@ public class LoginTest extends BaseClass{
 		MainHubPage=MainLoginPage.EnterNewPWtext("Welcome2@AM"); //User8 forced to Rest PW
 		MainLoginPage=MainHubPage.UserSignOut();
 		
-		MainHubPage=MainLoginPage.Login(getUID("adminFull"), "Welcome2@AM");
-		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
-		
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();		
 		UserManagementPage.clickAnyUserinUserList("User4");
-		UserManagementPage.enterNewUserPW("Welcome3@AM");
-		UserManagementPage.enterNewUserConfPW("Welcome3@AM");
+		UserManagementPage.enterNewUserPW(getPW("SysSupervisor"));
+		UserManagementPage.enterNewUserConfPW(getPW("SysSupervisor"));
 		UserManagementPage.ClickTitlefield();
 		UserManagementPage.ClickNewUserSaveButton();
-		UserLoginPopup(getUID("adminFull"), "Welcome2@AM");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		
 		MainHubPage=UserManagementPage.ClickBackButn();
 		MainLoginPage=MainHubPage.UserSignOut();
 		
 		MainLoginPage.LoginEntry(getUID("SysOperator"), getPW("SysSupervisor"));
 		MainLoginPage.ClickLoginBtn();
 
-		sa18.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: User is NOT "
+		sa.assertEquals(MainLoginPage.ChangePWCheckBoxEnableStatus(), false, "FAIL: User is NOT "
 				+ "forced to change his password while login, if his password has been changed by the admin user");
-		sa18.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: User is NOT " 
+		sa.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: User is NOT " 
 				+ " forced to change his password while login with New PW field in Disabled/Invisible state");
 		
 		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("SysOperator"));
 		MainHubPage.UserSignOut();
-		sa18.assertAll();
-	}		
+		sa.assertAll();
+	}
 
+	
+	//LOGIN_021- Verify if a Disabled user is not allowed to login to the system	
+	@Test(groups = {"Regression"}, description="LOGIN_021- Verify if a Disabled user "
+			+ "is not allowed to login to the system")
+	public void LOGIN_021() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_021- Verify if a Disabled user is not allowed "
+				+ "to login to the system");
+		SoftAssert sa = new SoftAssert();
+		
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
+		
+		UserManagementPage.CreateOperatorUser(getUID("adminFull"), getPW("adminFull"), 
+				"Dsbluser", getUID("Dsbluser"), getPW("Dsbluser"), "Operator", "123456789", "user8@aas.com");
+		MainHubPage=UserManagementPage.ClickBackButn();
+		MainLoginPage=MainHubPage.UserSignOut();
+		
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();		
+		UserManagementPage.clickAnyUserinUserList("Dsbluser");
+		//Click on the disable checkbox
+		UserManagementPage.Select_DisableUserCheckBox();
+		UserManagementPage.ClickNewUserSaveButton();
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		MainHubPage=UserManagementPage.ClickBackButn();
+		MainLoginPage=MainHubPage.UserSignOut();
+		
+		MainLoginPage.LoginEntry(getUID("Dsbluser"), getPW("Dsbluser"));
+		MainLoginPage.ClickLoginBtn();
+		
+		String expAlertMsg = "User account has been disabled, please contact administrator";
+
+
+		sa.assertEquals(MainLoginPage.AlertMsg(), expAlertMsg, "FAIL: User is not Disabled");
+		sa.assertAll();
+	}
+	
+	
+	//LOGIN_022- Verify if on 3 unsuccessful login attempts with the same UserId, 
+	//the User account is blocked	
+	@Test(groups = {"Regression"}, description="LOGIN_022- Verify if on 3 unsuccessful "
+			+ "login attempts with the same UserId, the User account is blocked")
+	public void LOGIN_022() throws InterruptedException {
+		extentTest = extent.startTest("LOGIN_022- Verify if on 3 unsuccessful login "
+				+ "attempts with the same UserId, the User account is blocked");
+		SoftAssert sa = new SoftAssert();
+		
+		MainHubPage=MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		UserManagementPage=MainHubPage.ClickAdminTile_UMpage();
+		
+		UserManagementPage.CreateSupervisorUser(getUID("adminFull"), getPW("adminFull"), 
+				"CustoSup", getUID("CustoSup"), getPW("CustoSup"), "Supervisor", "123456789", "CustoSup@aas.com");
+		MainHubPage=UserManagementPage.ClickBackButn();
+		MainLoginPage=MainHubPage.UserSignOut();
+		
+		//Enter wrong PW for the above user created
+		MainHubPage=MainLoginPage.Login(getUID("CustoSup"), "a");
+		MainLoginPage.ClickLoginBtn();
+		MainLoginPage.ClickLoginBtn();
+		MainLoginPage.ClickLoginBtn();
+		
+		String expAlertMsg = "User account has been disabled, please contact administrator";
+
+
+		sa.assertEquals(MainLoginPage.UserBlocked_PopUp_Msg(), expAlertMsg, "FAIL: User is not Disabled");
+		sa.assertAll();
+	}
+	
 }

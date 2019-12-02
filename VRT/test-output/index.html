@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Default_suite">
-              <span class="suite-name border-failed">Default suite</span>
+              <span class="suite-name border-passed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
-                    <span>C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1321693521\testng-customsuite.xml</span>
+                    <span>C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1440885474\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -91,21 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
-                  </li>
-                  <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
-                    </span>
-                    <div class="method-list-content failed suite-Default_suite">
-                      <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.assetCreationTest" hash-for-method="ASST30b(10/19/2017)">ASST30b(10/19/2017)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content failed suite-Default_suite -->
+                    <span class="method-stats">2 methods,   2 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -116,7 +102,12 @@
                     <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.assetCreationTest" hash-for-method="ASST30a">ASST30a</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.LoginTest" hash-for-method="LOGIN_001">LOGIN_001</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.LoginTest" hash-for-method="LOGIN_001b">LOGIN_001b</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Default_suite -->
@@ -131,73 +122,28 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-failed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
-              <span class="class-name">com.vrt.testcases.assetCreationTest</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="ASST30b(10/19/2017)">
-                  </a> <!-- ASST30b(10/19/2017) -->
-                  <span class="method-name">ASST30b</span>
-                  <span class="parameters">(10/19/2017)</span>
-                  <div class="stack-trace">java.lang.AssertionError: The following asserts failed:
-	Fail: Asset Validation Date field do not reflect the Selected date expected [19] but found [08],
-	Fail: Asset Validation Date field do not reflect the current date expected [10] but found [04]
-	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:47)
-	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:31)
-	at com.vrt.testcases.assetCreationTest.ASST30b(assetCreationTest.java:803)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
-	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
-	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
-	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.util.ArrayList.forEach(ArrayList.java:1257)
-	at org.testng.TestRunner.privateRun(TestRunner.java:770)
-	at org.testng.TestRunner.run(TestRunner.java:591)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:402)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:396)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:355)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:304)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1180)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1102)
-	at org.testng.TestNG.runSuites(TestNG.java:1032)
-	at org.testng.TestNG.run(TestNG.java:1000)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-
-</div> <!-- stack-trace -->
-                  <em>
-(ASST30b-Verify if after selecting Date and clicking OK button should reflect the updated Date in the Last Validated field)                  </em>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-failed -->
           <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.vrt.testcases.assetCreationTest</span>
+              <span class="class-name">com.vrt.testcases.LoginTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="ASST30a">
-                  </a> <!-- ASST30a -->
-                  <span class="method-name">ASST30a</span>
+                  <a name="LOGIN_001">
+                  </a> <!-- LOGIN_001 -->
+                  <span class="method-name">LOGIN_001</span>
                   <em>
-(ASST30a-Verify the Last Validated drop down field default data)                  </em>
+(LOGIN_001- Verify if user can log into the Kaye Application after installation with default provided credentials)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="LOGIN_001b">
+                  </a> <!-- LOGIN_001b -->
+                  <span class="method-name">LOGIN_001b</span>
+                  <em>
+(LOGIN_001b-Verify that Policies,Preferences screens are disabled for login with First installation)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -205,7 +151,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1321693521\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1440885474\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -214,7 +160,7 @@
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.vrt.testcases.assetCreationTest&quot;/&gt;
+      &lt;class name=&quot;com.vrt.testcases.LoginTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -239,14 +185,14 @@
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="test-group">
-              <span class="test-group-name">Sanity</span>
+              <span class="test-group-name">Regression</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">ASST30a</span>
+                <span class="method-in-group-name">LOGIN_001</span>
                 <br/>
               </div> <!-- method-in-group -->
               <div class="method-in-group">
-                <span class="method-in-group-name">ASST30b</span>
+                <span class="method-in-group-name">LOGIN_001b</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -268,18 +214,18 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'ASST30b')
-data.setCell(0, 2, 'com.vrt.testcases.assetCreationTest')
-data.setCell(0, 3, 91630);
+data.setCell(0, 1, 'LOGIN_001')
+data.setCell(0, 2, 'com.vrt.testcases.LoginTest')
+data.setCell(0, 3, 6347);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'ASST30a')
-data.setCell(1, 2, 'com.vrt.testcases.assetCreationTest')
-data.setCell(1, 3, 31);
+data.setCell(1, 1, 'LOGIN_001b')
+data.setCell(1, 2, 'com.vrt.testcases.LoginTest')
+data.setCell(1, 3, 6346);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 12 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -305,41 +251,39 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.vrt.testcases.assetCreationTest</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">AssetCreationSetup</span>
+              <div class="chronological-class-name">com.vrt.testcases.LoginTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setExtent</span>
                 <span class="method-start">0 ms</span>
-              </div> <!-- configuration-test before -->
+              </div> <!-- configuration-class before -->
               <div class="configuration-method before">
                 <span class="method-name">Setup</span>
-                <span class="method-start">94 ms</span>
+                <span class="method-start">159 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">ASST30a</span>
-                <span class="method-start">12762 ms</span>
+                <span class="method-name">LOGIN_001</span>
+                <span class="method-start">5906 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">Teardown([TestResult name=ASST30a status=SUCCESS method=assetCreationTest.ASST30a()[pri:0, instance:com.vrt.t...)</span>
-                <span class="method-start">12793 ms</span>
+                <span class="method-name">Teardown([TestResult name=LOGIN_001 status=SUCCESS method=LoginTest.LOGIN_001()[pri:0, instance:com.vrt.testc...)</span>
+                <span class="method-start">12254 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">Setup</span>
-                <span class="method-start">13553 ms</span>
+                <span class="method-start">12293 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">ASST30b(10/19/2017)</span>
-                <span class="method-start">24522 ms</span>
+                <span class="method-name">LOGIN_001b</span>
+                <span class="method-start">15557 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">Teardown([TestResult name=ASST30b status=FAILURE method=assetCreationTest.ASST30b(java.lang.String)[pri:0, in...)</span>
-                <span class="method-start">116167 ms</span>
+                <span class="method-name">Teardown([TestResult name=LOGIN_001b status=SUCCESS method=LoginTest.LOGIN_001b()[pri:0, instance:com.vrt.tes...)</span>
+                <span class="method-start">21904 ms</span>
               </div> <!-- configuration-method after -->
-              <div class="configuration-test after">
+              <div class="configuration-class after">
                 <span class="method-name">endReport</span>
-                <span class="method-start">116261 ms</span>
-              </div> <!-- configuration-test after -->
+                <span class="method-start">21945 ms</span>
+              </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

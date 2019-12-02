@@ -53,106 +53,74 @@ public class userManagementUtility extends BaseClass{
 	// Data Providers
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//ADMIN module related Test Data reference
+	//UM module related Test Data reference
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	@DataProvider(name = "tcADMN124")
-	public static Object[][] tcADMN124() {
-		String sheetName = "tcADMN124";
+	
+	@DataProvider(name = "tcADMN008")
+	public static Object[][] ADMN008() {
+		String sheetName = "tcADMN008";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "tcADMN125")
-	public static Object[][] tcADMN125() {
-		String sheetName = "tcADMN125";
+	@DataProvider(name = "tcADMN009")
+	public static Object[][] ADMN009() {
+		String sheetName = "tcADMN009";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	@DataProvider(name = "tcADMN010")
+	public static Object[][] ADMN010() {
+		String sheetName = "tcADMN010";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
 
-	@DataProvider(name = "tcADMN125a")
-	public static Object[][] tcADMN125a() {
-		String sheetName = "tcADMN125a";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "tcADMN129")
-	public static Object[][] tcADMN129() {
-		String sheetName = "tcADMN129";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-
-	@DataProvider(name = "tcADMN129a")
-	public static Object[][] tcADMN129a() {
-		String sheetname = "tcADMN129a";
+	@DataProvider(name = "tcADMN012")
+	public static Object[][] ADMN012() {
+		String sheetname = "tcADMN012";
 		Object[][] data = getTestData(sheetname);
 		return data;
 	}
 
-	@DataProvider(name = "tcADMN133")
-	public static Object[][] tcADMN133() {
-		String sheetname = "tcADMN133";
-		Object[][] data = getTestData(sheetname);
+	@DataProvider(name = "tcADMN021")
+	public static Object[][] ADMN021() {
+		String sheetName = "tcADMN021";
+		Object[][] data = getTestData(sheetName);
 		return data;
 	}
-
-	@DataProvider(name = "tcADMN134")
-	public static Object[][] tcADMN134() {
-		String sheetname = "tcADMN134";
-		Object[][] data = getTestData(sheetname);
-		return data;
-	}
-
-	@DataProvider(name = "tcADMN146")
-	public static Object[][] tcADMN146() {
-		String sheetname = "tcADMN146";
+	
+	@DataProvider(name = "tcADMN022")
+	public static Object[][] ADMN022() {
+		String sheetname = "tcADMN022";
 		Object[][] data = getTestData(sheetname);
 		return data;
 	}
 	
-	@DataProvider(name="tcADMN146a")
-	public static Object[][] tcADMN146a() {
-		String sheetname = "tcADMN146a";
+	@DataProvider(name="tcADMN025")
+	public static Object[][] ADMN025() {
+		String sheetname = "tcADMN025";
 		 Object[][] data = getTestData(sheetname);
 		 return data;
 	}
-	
-	@DataProvider(name="tcADMN147a")
-	public static Object[][] tcADMN147a() {
-		String sheetname = "tcADMN147a";
+	@DataProvider(name="tcADMN026")
+	public static Object[][] ADMN026() {
+		String sheetname = "tcADMN026";
 		 Object[][] data = getTestData(sheetname);
 		 return data;
 	}
-	@DataProvider(name="tcADMN150")
-	public static Object[][] tcADMN150() {
-		String sheetname = "tcADMN150";
+	@DataProvider(name="tcADMN028")
+	public static Object[][] ADMN028() {
+		String sheetname = "tcADMN028";
 		 Object[][] data = getTestData(sheetname);
 		 return data;
 	}
-	@DataProvider(name="tcADMN150a")
-	public static Object[][] tcADMN150a() {
-		String sheetname = "tcADMN150a";
-		 Object[][] data = getTestData(sheetname);
-		 return data;
-	}
-	@DataProvider(name="tcADMN159")
-	public static Object[][] tcADMN159() {
-		String sheetname = "tcADMN159";
-		 Object[][] data = getTestData(sheetname);
-		 return data;
-	}
-	@DataProvider(name="tcADMN160")
-	public static Object[][] tcADMN160() {
-		String sheetname = "tcADMN160";
+	@DataProvider(name="tcADMN029")
+	public static Object[][] ADMN029() {
+		String sheetname = "tcADMN029";
 		 Object[][] data = getTestData(sheetname);
 		 return data;
 	}
 
-	@DataProvider(name="tcADMN188a")
-	public static Object[][] tcADMN188a() {
-		String sheetname = "tcADMN188a";
-		 Object[][] data = getTestData(sheetname);
-		 return data;
-	}
 }
+

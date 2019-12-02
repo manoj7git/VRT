@@ -65,6 +65,7 @@ public class assetHubPage extends BaseClass{
 		LocationBtn = null;
 		BackBtn = null;
 		SearchBtn = null;
+		
 	}
 	
 	//Get the Asset Page title
@@ -485,7 +486,7 @@ public class assetHubPage extends BaseClass{
 		clickOn(AddAssetButton);
 		return new assetCreationPage();
 	}
-	//Click on ADD(+) icon for non default priviligae  of ADMIN
+	//Click on ADD(+) icon for non default privilege  of ADMIN
 	
 		public void Click_AddButton()
 		{
@@ -502,6 +503,12 @@ public class assetHubPage extends BaseClass{
 		clickOn(AssetHub_BackButton);
 		Thread.sleep(1000);
 		return new MainHubPage();
+	}
+	
+	public String NoRecordFoundMsg() throws InterruptedException {
+		WebElement Msg = driver.findElementByName("No record found");
+		Thread.sleep(1000);
+		return FetchText(Msg);
 	}
 
 	
