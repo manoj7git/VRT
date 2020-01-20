@@ -46,16 +46,15 @@ public class setup_defineSetupTest extends BaseClass{
 
 	// Before All the tests are conducted
 	@BeforeTest
-	public void AssetCreationSetup() throws InterruptedException, IOException {		
+	public void setup_defineSetup_PreRequisites() throws InterruptedException, IOException {		
 
-		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ExtentReport.html", true);
-		extent.addSystemInfo("VRT Version", "1.0.0.37");
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport"+"_Setup_defineSetupTest.html", true);
 		extent.addSystemInfo("BS Version", "0.6.13");
 		extent.addSystemInfo("Lgr Version", "1.2.6");
-		extent.addSystemInfo("User Name", "Manoj");
-		extent.addSystemInfo("TestSuiteName", "AssetHubTest");
+		extent.addSystemInfo("User Name", "Ruchika");
+		extent.addSystemInfo("TestSuiteName", "Setup_DefineSetupTest");
 
-		// Rename the User file (NgvUsers.uxx) if exists
+		// Rename the User file (NgvUsers.uxx) if exists		
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		// Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
@@ -69,7 +68,7 @@ public class setup_defineSetupTest extends BaseClass{
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
-
+		extent.addSystemInfo("VRT Version", LoginPage.get_SWVersion_About_Text());
 		// Method to Create Very 1st User with All privilege
 		UserManagementPage=LoginPage.DefaultLogin();
 		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"),
@@ -96,7 +95,7 @@ public class setup_defineSetupTest extends BaseClass{
 
 		AppClose();
 		Thread.sleep(1000);
-
+		
 	}
 
 	// After All the tests are conducted
@@ -148,12 +147,12 @@ public class setup_defineSetupTest extends BaseClass{
 		driver.quit();
 	}
 	
-	
+/*	
 	// Test Cases
 	// 01-SET002
 	@Test(groups = {
 			"Regression" }, description = "SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active")
-	public void SET002() throws InterruptedException {
+	public void ESET001() throws InterruptedException {
 		extentTest = extent
 				.startTest("SET 002-UI_Verify if on Asset Details  page the _Setups_ tile is active");
 		SoftAssert sa = new SoftAssert();
@@ -167,36 +166,11 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// 02-SET009
-	@Test(groups = {
-			"Regression" }, description = "SET 009- UI_Verify if the setup name created in the _Define Setup_ page is "
-					+ "displayed at the top left of the Sensors Configuration page when click on the next tab at Define Setup")
-	public void SET009() throws InterruptedException {
-		extentTest = extent
-				.startTest("SET 009- UI_Verify if the setup name created in the _Define Setup_ page is displayed at the top "
-						+ "left of the Sensors Configuration page when click on the next tab at Define Setup");
-		SoftAssert sa = new SoftAssert();
-		
-		String SetupNameEntered = defineSetupPage.get_defineSetupPage_setupName();
-		//System.out.println(SetupNameEntered);
-		defineSetupPage.click_defineSetupPage_SensorCountField();
-		defineSetupPage.enter_defineSetupPage_SensorCount("1");
-		SensorConfigPage=defineSetupPage.click_defineSetupPage_nxtBtn();
-		String SetupNameDisplayed = SensorConfigPage.get_SensorConfigurationPage_titletext();
-		//System.out.println(SetupNameDisplayed);
-		
-
-		sa.assertEquals(SetupNameEntered, SetupNameDisplayed, 
-				"FAIL: SET 009-Setup Name not displayed in the header of Sensor Config page of Setup");
-		sa.assertAll();
-	}
-	
-	
 	// 03-SET010
 	@Test(groups = {
 			"Regression" }, description = "SET 010- UI_Verify if _New Setup_, _Type of Asset_ , _Equipment Name_ is "
 					+ "displayed at the top left of the Define Setup page when clicked on _ (+) New_ button in Asset details page.")
-	public void SET010() throws InterruptedException {
+	public void ESET002() throws InterruptedException {
 		extentTest = extent
 				.startTest("SET 010- UI_Verify if _New Setup_, _Type of Asset_ , _Equipment Name_ is displayed at the top left of the "
 						+ "Define Setup page when clicked on _ (+) New_ button in Asset details page.");
@@ -232,7 +206,7 @@ public class setup_defineSetupTest extends BaseClass{
 	@Test(groups = {
 			"Sanity", "Regression" }, description = "SET 011- UI_Verify if _Setup Name_ (mandatory field) "
 					+ "is displayed in the _Define Setup_ screen.")
-	public void SET011() throws InterruptedException {
+	public void ESET003() throws InterruptedException {
 		extentTest = extent
 				.startTest("SET 011- UI_Verify if _Setup Name_ (mandatory field) is displayed "
 						+ "in the _Define Setup_ screen.");
@@ -257,7 +231,7 @@ public class setup_defineSetupTest extends BaseClass{
 	@Test(groups = {
 			"Sanity", "Regression" }, description = "SET 012- UI_Verify if  _Number of Sensors _ (mandatory field)"
 					+ " is displayed in the _Define Setup_ screen.")
-	public void SET012() throws InterruptedException {
+	public void ESET004() throws InterruptedException {
 		extentTest = extent
 				.startTest("SET 012- UI_Verify if  _Number of Sensors _ (mandatory field) is displayed "
 						+ "in the _Define Setup_ screen.");
@@ -277,34 +251,13 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// 06-SET013
-	@Test(groups = {
-			"Sanity", "Regression" }, description = "SET 013- UI_Verify if  _ Asset ID_ (prepoluted field) "
-					+ "is displayed in the _Define Setup_ screen.")
-	public void SET013() throws InterruptedException {
-		extentTest = extent
-				.startTest("SET 013-Verify if Asset ID (prepoluted field) is displayed in the _Define Setup_ screen.");
-		SoftAssert sa = new SoftAssert();
-		
-		String AssetIDTxtinSetup = defineSetupPage.get_AssetID_text();
-		//System.out.println(AssetIDTxtinSetup);		
-		defineSetupPage.click_defineSetupPage_backBtn();
-		assetDetailsPage=defineSetupPage.click_YesofAlert_msg();
-		assetCreationPage = assetDetailsPage.click_assetEditBtn();
-		String AssetIDTxtinAssetEditPage = assetCreationPage.getEqpID();
-		//System.out.println(AssetIDTxtinAssetEditPage);
-
-		sa.assertEquals(AssetIDTxtinAssetEditPage, AssetIDTxtinSetup, 
-				"FAIL: SET 013-Asset ID field Data do not match with the actual Asset ID created");
-		sa.assertAll();
-	}
 	
 	
-	// 07-SET017
+	// 07-ESET017
 	@Test(groups = {
 			"Sanity", "Regression" }, description = "'SET 017-UI_Verify if the setup name field, "
 					+ "by default is displayed as current date and 24 hour time format DD-MMM-YYYY HH-MM-SS")
-	public void SET017() throws InterruptedException, ParseException {
+	public void ESET005() throws InterruptedException, ParseException {
 		extentTest = extent
 				.startTest("'SET 017-UI_Verify if the setup name field, by default is displayed "
 						+ "as current date and 24 hour time format DD-MMM-YYYY HH-MM-SS");
@@ -335,15 +288,13 @@ public class setup_defineSetupTest extends BaseClass{
 	}
 	
 	
-	// 08-SET019
+	// SET003
 	@Test(groups = {
-			"Sanity", "Regression" }, dataProvider="SET019", dataProviderClass=setupCreationUtility.class,
-					description = "SET 019-UI_Verify if the setup name text field allows up to "
-					+ "35 character input that comprises of alphanumeric, special characters -,_,: and space.")
-	public void SET019(Object ...dataProvider) throws InterruptedException, ParseException {
+			"Sanity", "Regression" }, dataProvider="SET003", dataProviderClass=setupCreationUtility.class,
+					description = "Verify that max 35 characters are allowed in Setup name field")
+	public void SET003(Object ...dataProvider) throws InterruptedException, ParseException {
 		extentTest = extent
-				.startTest("SET 019-UI_Verify if the setup name text field allows up to 35 character input that "
-						+ "comprises of alphanumeric, special characters -,_,: and space.");
+				.startTest("SET003-Verify that max 35 characters are allowed in Setup name field");
 		SoftAssert sa = new SoftAssert();
 		
 		String SetUpName = (String) dataProvider[0];
@@ -358,22 +309,43 @@ public class setup_defineSetupTest extends BaseClass{
 		SensorConfigPage=defineSetupPage.click_defineSetupPage_nxtBtn();
 		
 		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration", 
-				"FAIL:SET 019- Setup Name do not accept the Valid characters ");
+				"FAIL: Max 35 characters are allowed in Setup name field");
 				
 		sa.assertAll();
-
 	}
 	
-	
-	// 09-SET020
+//SET004-Verify the valid inputs accepted in Setup name field
+
 	@Test(groups = {
-			"Regression" }, dataProvider="SET020", dataProviderClass=setupCreationUtility.class,
-					description = "SET 019-UI_Verify if the setup name text field do not allow "
-							+ "invalid data except alphanumeric, special characters -,_,: and space.")
-	public void SET020(Object ...dataProvider) throws InterruptedException, ParseException {
-		extentTest = extent
-				.startTest("SET020-UI_Verify if the setup name text field do not allow invalid data "
-						+ "except alphanumeric, special characters -,_,: and space.");
+			"Regression" }, dataProvider = "SET004", dataProviderClass = setupCreationUtility.class, description = "SET 004-Verify the valid inputs accepted in Setup name field")
+	   public void SET004(Object... dataProvider) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SET 004-Verify the valid inputs accepted in Setup name file");
+		SoftAssert sa = new SoftAssert();
+		
+		String SetUpName = (String) dataProvider[0];
+		System.out.println(SetUpName);
+		String SensorNumb = (String) dataProvider[1];		
+			
+		defineSetupPage.clear_defineSetupPage_setupName();
+		defineSetupPage.enter_defineSetupPage_setupName(SetUpName);
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
+		SensorConfigPage=defineSetupPage.click_defineSetupPage_nxtBtn();
+		
+		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration", 
+				"FAIL: Setup Name do not accept other characters except space,-,_,?,. and : ");
+				
+		sa.assertAll();
+	}
+
+	
+	// SET 005
+	@Test(groups = {"Regression" }, dataProvider="SET020", dataProviderClass=setupCreationUtility.class,
+					description = "Verify the invalid inputs not accepted in Setup name field")
+						
+	public void SET005(Object ...dataProvider) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SET005-Verify the invalid inputs not accepted in Setup name field");
 		SoftAssert sa = new SoftAssert();
 		
 		String SetUpName = (String) dataProvider[0];
@@ -389,22 +361,39 @@ public class setup_defineSetupTest extends BaseClass{
 		defineSetupPage.click_defineSetupPage_nxtBtn();
 		
 		sa.assertEquals(defineSetupPage.get_ButtomBarAlertmsg_txt(), ErrorAlertMsg, 
-				"FAIL:SET020- Setup Name accepts the In-Valid characters ");	
+				"FAIL: Setup Name do not accept other characters except space,-,_,?,. and : ");
 				
 		sa.assertAll();
 
 	}
 	
+	// SET007-Verify that the header on the top left will be changed to the entered
+
+	@Test(groups = { "Regression" }, description = "Verify that the header on the top left will be changed to the entered")
+
+	public void SET007() throws InterruptedException {
+		extentTest = extent.startTest("SET007-Verify that the header on the top left will be changed to the entered");
+		SoftAssert sa = new SoftAssert();
+		String SetupNameEntered = defineSetupPage.get_defineSetupPage_setupName();
+//System.out.println(SetupNameEntered);
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.enter_defineSetupPage_SensorCount("1");
+		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
+		String SetupNameDisplayed = SensorConfigPage.get_SensorConfigurationPage_titletext();
+//System.out.println(SetupNameDisplayed);
+
+		sa.assertEquals(SetupNameEntered, SetupNameDisplayed,
+				"FAIL: SET007-Setup Name not displayed in the header of Sensor Config page of Setup");
+		sa.assertAll();
+	}
 	
-	// 10-SET024
-	@Test(groups = {
-			"Sanity", "Regression" }, dataProvider="SET024", dataProviderClass=setupCreationUtility.class,
-					description = "SET 024-UI_Verify if the _Number of Sensors_ text box is editable and allows "
-							+ "only numeric up to 3 digits. i.e. from 1 to 300")
-	public void SET024(Object ...dataProvider) throws InterruptedException, ParseException {
+	
+	//SET008
+	@Test(groups = {"Sanity", "Regression" }, dataProvider="SET008", dataProviderClass=setupCreationUtility.class,
+					description = "SET008-Verify that max 3 characters are allowed in No of Max Sensors field")
+	public void SET008(Object ...dataProvider) throws InterruptedException, ParseException {
 		extentTest = extent
-				.startTest("SET 024-UI_Verify if the _Number of Sensors_ text box is editable and allows only "
-						+ "numeric up to 3 digits. i.e. from 1 to 300");
+				.startTest("SET008-Verify that max 3 characters are allowed in No of Max Sensors field i.e. from 1 to 300");
 		SoftAssert sa = new SoftAssert();
 		
 		String SensorNumb = (String) dataProvider[0];	
@@ -416,20 +405,40 @@ public class setup_defineSetupTest extends BaseClass{
 		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
 		
 		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration", 
-				"FAIL:SET024- Setup Sensor Count field do NOT accept the Valid data ");		
-		
+				"FAIL:SET008 - Setup Sensor Count field should accept the data max 3 characters i.e from 1 to 300 ");		
 		sa.assertAll();
 
 	}
 	
+	//SET009-Verify the valid inputs accepted in No. of Max Sensors field
+	@Test(groups = { "Sanity",
+			"Regression" }, dataProvider = "SET009", dataProviderClass = setupCreationUtility.class, description = "Verify the valid inputs accepted in No. of Max Sensors field")
+	public void SET009(Object... dataProvider) throws InterruptedException, ParseException {
+		extentTest = extent.startTest(
+				"SET009-Verify the valid inputs accepted in No. of Max Sensors field");
+		SoftAssert sa = new SoftAssert();
+
+		String SensorNumb = (String) dataProvider[0];
+		System.out.println(SensorNumb);
+
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
+		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
+
+		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration",
+				"FAIL:SET009 - Setup Sensor Count field should accept the Valid data ");
+		sa.assertAll();
+
+	}
 	
-	// 11-SET025
+	// SET010
 	@Test(groups = {
-			"Regression" }, dataProvider="SET025", dataProviderClass=setupCreationUtility.class,
-					description = "SET 025-UI_Verify if _Number of Sensors_ field can accept only numeric values.")
-	public void SET025(Object ...dataProvider) throws InterruptedException, ParseException {
+			"Regression" }, dataProvider="SET010", dataProviderClass=setupCreationUtility.class,
+					description = "SET010-Verify the invalid inputs not accepted in No. of Max Sensors field")
+	public void SET010(Object ...dataProvider) throws InterruptedException, ParseException {
 		extentTest = extent
-				.startTest("SET 025-UI_Verify if _Number of Sensors_ field can accept only numeric values.");
+				.startTest("SET010-Verify the invalid inputs not accepted in No. of Max Sensors field");
 		SoftAssert sa = new SoftAssert();
 		
 		String SensorNumb = (String) dataProvider[0];	
@@ -441,23 +450,87 @@ public class setup_defineSetupTest extends BaseClass{
 		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
 		defineSetupPage.click_defineSetupPage_nxtBtn();
 		
-		sa.assertEquals(defineSetupPage.get_ButtomBarAlertmsg_txt(), ErrorAlertMsg, "FAIL:SET020- Setup "
-				+ "Sensor Count field accepts the In-Valid characters");		
+		sa.assertEquals(defineSetupPage.get_ButtomBarAlertmsg_txt(), ErrorAlertMsg, "FAIL:SET010- Setup Sensor Count field should not accepts the In-Valid characters");		
 				
 		sa.assertAll();
 
 	}
 	
 	
-	// 12-SET026a
-	@Test(groups = {
-			"Regression" }, dataProvider="SET026a", dataProviderClass=setupCreationUtility.class,
-					description = "SET 026-UI_Verify if _SOP Protocol Number_ field  can accept upto 50 characters that comprises"
-							+ " of alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).")
-	public void SET026a(Object ...dataProvider) throws InterruptedException, ParseException {
+	//SET011-Verify that max 300 sensors should be allowed in No. of Max Sensors field
+	@Test(groups = { "Regression" }, description = "Verify that max 300 sensors should be allowed in No. of Max Sensors field")
+
+	public void SET011() throws InterruptedException {
+		extentTest = extent.startTest("SET011-Verify that max 300 sensors should be allowed in No. of Max Sensors field");
+		SoftAssert sa = new SoftAssert();
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.enter_defineSetupPage_SensorCount("20112");
+		String SensorcountEntered = defineSetupPage.get_Sensorcount_text();
+		defineSetupPage.click_defineSetupPage_commentsField();
+        Thread.sleep(1000);
+		String SensorcountDisplayed = defineSetupPage.get_Sensorcount_text();
+		sa.assertEquals(SensorcountEntered,SensorcountDisplayed,
+				"FAIL: SET012-Setup Name not displayed in the header of Sensor Config page of Setup");
+		sa.assertAll();
+	}
+
+	//SET012
+	@Test(groups = { "Regression" }, description = "SET012-Verify that when more than 300 is entered in No. of Max Sensors field, the count is rounded off to 300")
+
+	public void SET012() throws InterruptedException {
+		extentTest = extent.startTest("SET012-Verify that when more than 300 is entered in No. of Max Sensors field, the count is rounded off to 300");
+		SoftAssert sa = new SoftAssert();
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.enter_defineSetupPage_SensorCount("301");
+		String SensorcountEntered = defineSetupPage.get_Sensorcount_text();
+		defineSetupPage.click_defineSetupPage_commentsField();
+        Thread.sleep(1000);
+		String SensorcountDisplayed = defineSetupPage.get_Sensorcount_text();
+		sa.assertEquals(SensorcountEntered,SensorcountDisplayed,
+				"FAIL: SET012- the count should rounded off to 300   ");
+		sa.assertAll();
+	}
+	
+	*/
+	//SET013
+	
+	@Test(groups = {"Sanity", "Regression" }, description = "Verify that Asset ID field is prepopulated and disabled,Grayed out in Define setup screen")
+	public void SET013() throws InterruptedException {
+		extentTest = extent.startTest("SET013-Verify that Asset ID field is prepopulated and disabled,Grayed out in Define setup screen");
+		SoftAssert sa = new SoftAssert();
+		System.out.println(defineSetupPage.AssetIDEnable());
+		sa.assertEquals(defineSetupPage.AssetIDEnable(), false, "FAIL:AssetID should be in disable");
+	    sa.assertAll();
+	}
+	
+/*	
+	//SET014
+		@Test(groups = {"Sanity", "Regression" }, description = "Verify that when edited the Asset ID in edit assets screen, it is reflected correctly in Define setup screen")
+		public void SET014() throws InterruptedException {
+			extentTest = extent
+					.startTest("SET014-Verify that when edited the Asset ID in edit assets screen, it is reflected correctly in Define setup screen");
+			SoftAssert sa = new SoftAssert();
+			
+			String AssetIDTxtinSetup = defineSetupPage.get_AssetID_text();
+			System.out.println(AssetIDTxtinSetup);		
+			defineSetupPage.click_defineSetupPage_backBtn();
+			assetDetailsPage=defineSetupPage.click_YesofAlert_msg();
+			assetCreationPage = assetDetailsPage.click_assetEditBtn();
+			String AssetIDTxtinAssetEditPage = assetCreationPage.getEqpID();
+			System.out.println(AssetIDTxtinAssetEditPage);
+
+			sa.assertEquals(AssetIDTxtinAssetEditPage, AssetIDTxtinSetup, 
+					"FAIL: SET 013-Asset ID field Data do not match with the actual Asset ID created");
+			sa.assertAll();
+		}
+	
+// SET015
+	@Test(groups = {"Regression" }, dataProvider="SET015", dataProviderClass=setupCreationUtility.class,
+					description = "Verify that max 50 characters are allowed in SOP Protocol field")
+							
+	public void SET015(Object ...dataProvider) throws InterruptedException, ParseException {
 		extentTest = extent
-				.startTest("SET 026-UI_Verify if _SOP Protocol Number_ field  can accept upto 50 characters that comprises of "
-						+ "alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).");
+				.startTest("SET015-Verify that max 50 characters are allowed in SOP Protocol field");
 		SoftAssert sa = new SoftAssert();
 		
 		String SensorNumb = (String) dataProvider[0];	
@@ -473,21 +546,45 @@ public class setup_defineSetupTest extends BaseClass{
 		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
 		
 		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration", 
-				"FAIL:SET026a- Setup SOP field do NOT accept the Valid data ");	
+				"FAIL:SET015-Setup SOP field do NOT accept more than 50 characters data ");	
+		sa.assertAll();
+
+	}
+	
+	//SET016-Verify the valid inputs accepted in SOP Protocol field
+	
+	@Test(groups = {"Regression" }, dataProvider = "SET016", dataProviderClass = setupCreationUtility.class, description = "Verify the valid inputs accepted in SOP Protocol field")
+
+	public void SET016(Object... dataProvider) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SET016-Verify the valid inputs accepted in SOP Protocol field");
+		SoftAssert sa = new SoftAssert();
+
+		String SensorNumb = (String) dataProvider[0];
+		String SOP = (String) dataProvider[1];
+		System.out.println(SOP);
+
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
+		defineSetupPage.click_defineSetupPage_SOPField();
+		defineSetupPage.clear_defineSetupPage_SOP();
+		defineSetupPage.enter_defineSetupPage_SOP(SOP);
+		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
+
+		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration",
+				"FAIL:SET015-Setup SOP field should accept the valid data ");
 		sa.assertAll();
 
 	}
 	
 	
-	// 13-SET026b
+// SET017-Verify the invalid inputs not accepted in SOP Protocol field
 	@Test(groups = {
-			"Regression" }, dataProvider="SET026b", dataProviderClass=setupCreationUtility.class,
-					description = "SET 026-UI_Verify if _SOP Protocol Number_ field  can accept upto 50 characters that comprises"
-							+ " of alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).")
-	public void SET026b(Object ...dataProvider) throws InterruptedException, ParseException {
-		extentTest = extent
-				.startTest("SET 026-UI_Verify if _SOP Protocol Number_ field  can accept upto 50 characters that comprises of "
-						+ "alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).");
+			"Regression" }, dataProvider="SET017", dataProviderClass=setupCreationUtility.class,
+					description = "Verify the invalid inputs not accepted in SOP Protocol field")
+							
+	public void SET017(Object ...dataProvider) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SET017-Verify the invalid inputs not accepted in SOP Protocol field");
 		SoftAssert sa = new SoftAssert();
 		
 		String SensorNumb = (String) dataProvider[0];	
@@ -504,21 +601,17 @@ public class setup_defineSetupTest extends BaseClass{
 		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
 		
 		sa.assertEquals(defineSetupPage.get_ButtomBarAlertmsg_txt(), ErrorAlertMsg, 
-				"FAIL: SET026b- Setup SOP field accepts In-Valid data ");
+				"FAIL: SET017-Verify the invalid inputs not accepted in SOP Protocol field");
 		sa.assertAll();
 
 	}
 	
 	
-	// 14-SET027a
-	@Test(groups = { "Sanity",
-			"Regression" }, dataProvider = "SET027a", dataProviderClass = setupCreationUtility.class,
-			description = "SET 027-UI_Verify if _Load Description_ field  can accept upto 50 characters that comprises"
-					+ " of alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).")
+	// SET018
+	@Test(groups = { "Sanity","Regression" }, dataProvider = "SET018", dataProviderClass = setupCreationUtility.class,
+			description = "SET018-Verify that max 50 characters are allowed in Load Description field")
 	public void SET027a(String SensorNumb, String LD) throws InterruptedException, ParseException {
-		extentTest = extent.startTest(
-				"SET 027-UI_Verify if _Load Description_ field  can accept upto 50 characters that comprises of "
-						+ "alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).");
+		extentTest = extent.startTest("SET018-Verify that max 50 characters are allowed in Load Description field");
 		SoftAssert sa = new SoftAssert();
 
 		defineSetupPage.click_defineSetupPage_SensorCountField();
@@ -530,22 +623,38 @@ public class setup_defineSetupTest extends BaseClass{
 		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
 
 		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration",
-				"FAIL: SET027a- Setup Load Description field do NOT accept the Valid data ");
+				"FAIL:SET018 - Setup Load Description field should allow max 50 characters ");
+		sa.assertAll();
+
+	}
+
+ // SET019
+	@Test(groups = { "Sanity","Regression" }, dataProvider = "SET019", dataProviderClass = setupCreationUtility.class,
+			description = "SET019-Verify the valid inputs accepted in Load Description field")
+	public void SET019(String SensorNumb, String LD) throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SET019-Verify the valid inputs accepted in Load Description field");
+		SoftAssert sa = new SoftAssert();
+
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
+		defineSetupPage.click_defineSetupPage_LoadDescField();
+		defineSetupPage.clear_defineSetupPage_LoadDesc();
+		defineSetupPage.enter_defineSetupPage_LoadDesc(LD);
+		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
+
+		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration",
+				"FAIL:SET019 - Verify the valid inputs accepted in Load Description field ");
 		sa.assertAll();
 
 	}
 		
-		
-	// 15-SET027b
-	@Test(groups = {
-			"Regression" }, dataProvider = "SET027b", dataProviderClass = setupCreationUtility.class, 
-					description = "SET 027-UI_Verify if _Load Description_ field  can accept upto 50 characters that comprises"
-					+ " of alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).")
-	public void SET027b(String SensorNumb, String LD, String ErrorAlertMsg)
+	// SET020
+	@Test(groups = {"Regression" }, dataProvider = "SET020", dataProviderClass = setupCreationUtility.class,description = "Verify the invalid inputs not accepted in Load Description field")
+	public void SET020(String SensorNumb, String LD, String ErrorAlertMsg)
 			throws InterruptedException, ParseException {
 		extentTest = extent.startTest(
-				"SET027b-UI_Verify if _Load Description_ field  can accept upto 50 characters that comprises of "
-						+ "alphanumeric and special character like hyphen, underscore, space, Slash (Forward  and backward ).");
+				"SET020-Verify the invalid inputs not accepted in Load Description field");
 		SoftAssert sa = new SoftAssert();
 
 		defineSetupPage.click_defineSetupPage_SensorCountField();
@@ -557,20 +666,42 @@ public class setup_defineSetupTest extends BaseClass{
 		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
 
 		sa.assertEquals(defineSetupPage.get_ButtomBarAlertmsg_txt(), ErrorAlertMsg,
-				"FAIL: SET027b- Setup Load Description field accepts In-Valid data ");
+				"FAIL: SET020 - Setup Load Description field should not accepts In-Valid data ");
 		sa.assertAll();
 
 	}
 	
-	// 16-SET028a
-	@Test(groups = { "Sanity",
-			"Regression" }, dataProvider = "SET028", dataProviderClass = setupCreationUtility.class,
-			description = "SET 028-UI_Verify if the _Comments_ field accepts up to 25 characters input "
-					+ "that comprises of alphanumeric and unlimited special characters.")
-	public void SET028a(String SensorNumb, String Cmnt) throws InterruptedException, ParseException {
+	
+// SET021
+
+	@Test(groups = {
+			"Regression" }, description = "Verify that max 25 characters are allowed in Comments field")
+	public void SET021() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SET021-Verify that max 25 characters are allowed in Comments field");
+		SoftAssert sa = new SoftAssert();
+
+		String expectedtxt = "1234567890123456789012345a"; // 26 Char input
+
+		defineSetupPage.click_defineSetupPage_SensorCountField();
+		defineSetupPage.clear_defineSetupPage_SensorCount();
+		defineSetupPage.enter_defineSetupPage_SensorCount("1");
+		defineSetupPage.click_defineSetupPage_commentsField();
+		defineSetupPage.clear_defineSetupPage_comments();
+		defineSetupPage.enter_defineSetupPage_comments(expectedtxt);
+		String actualtextentered = defineSetupPage.get_defineSetupPage_comments_txtData();
+
+		sa.assertEquals(actualtextentered.length(), 25,
+				"FAIL: SET021- Setup Comment field  should not accepts more than 25 Character ");
+		sa.assertAll();
+
+	}
+ //SET022
+	
+	@Test(groups = { "Sanity","Regression" }, dataProvider = "SET022", dataProviderClass = setupCreationUtility.class,
+			description = "SET022-Verify the valid inputs accepted in Comments field")
+	public void SET022(String SensorNumb, String Cmnt) throws InterruptedException, ParseException {
 		extentTest = extent.startTest(
-				"SET 028-UI_Verify if the _Comments_ field accepts up to 25 characters input that "
-				+ "comprises of alphanumeric and unlimited special characters.");
+				"SET022-Verify the inputs accepted in Comments field");
 		SoftAssert sa = new SoftAssert();
 
 		defineSetupPage.click_defineSetupPage_SensorCountField();
@@ -582,65 +713,32 @@ public class setup_defineSetupTest extends BaseClass{
 		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
 
 		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration",
-				"FAIL: SET028- Setup Comment field do NOT accept the Valid data ");
+				"FAIL: SET022-valid inputs should be accepted in Comments field ");
 		sa.assertAll();
-
 	}
 		
-		
-	// 17-SET028b
-	@Test(groups = { "Regression" }, description = "SET 028-UI_Verify if the _Comments_ field accepts up to 25 characters input")
-	public void SET028b()
-			throws InterruptedException, ParseException {
-		extentTest = extent.startTest(
-				"SET 028-UI_Verify if the _Comments_ field accepts up to 25 characters input");
-		SoftAssert sa = new SoftAssert();
-
-		String expectedtxt = "1234567890123456789012345a";  //26 Char input
-		
-		defineSetupPage.click_defineSetupPage_SensorCountField();
-		defineSetupPage.clear_defineSetupPage_SensorCount();
-		defineSetupPage.enter_defineSetupPage_SensorCount("1");
-		defineSetupPage.click_defineSetupPage_commentsField();
-		defineSetupPage.clear_defineSetupPage_comments();
-		defineSetupPage.enter_defineSetupPage_comments(expectedtxt);
-		String actualtextentered = defineSetupPage.get_defineSetupPage_comments_txtData();
-
-		sa.assertEquals(actualtextentered.length(), 25,
-				"FAIL: SET028b- Setup Comment field accepts more than 25 Character ");
-		sa.assertAll();
-
-	}
-	
-	
-	// 18-SET029
+	//SET026
 	@Test(groups = { "Sanity", "Regression" }, 
-			description = "SET 029- Fnc_Verify if clicking on the back button pops up a warning message, "
-					+ "You are about to lose your changes. Do you want to continue_ with Yes and No buttons.")
-	public void SET029() throws InterruptedException, ParseException {
+			description = "SET026-Verify that on click of back button, user is navigated back to asset details screen with confirmation")
+	public void SET026() throws InterruptedException, ParseException {
 		extentTest = extent.startTest(
-				"SET 029- Fnc_Verify if clicking on the back button pops up a warning message, _You are about to "
-				+ "lose your changes. Do you want to continue_ with Yes and No buttons.");
+				"SET026-Verify that on click of back button, user is navigated back to asset details screen with confirmation_ with Yes and No buttons.");
 		SoftAssert sa = new SoftAssert();
-
 		defineSetupPage.click_defineSetupPage_backBtn();
-		
 
 		sa.assertEquals(defineSetupPage.visible_AlertMsg_state(), true,
-				"FAIL: SET029- No ALert message displayed on clicking the Setup Back Button");
+				"FAIL: SET026- ALert message should be displayed on clicking the Setup Back Button");
 		sa.assertAll();
 
 	}
 	
 	
-	// 19-SET030
+	//SET026A
 	@Test(groups = { "Sanity", "Regression" }, 
-			description = "SET 030- Fnc_Verify if clicking on _Yes_ discards the changes made "
-					+ "and bring application back to Assets details page")
-	public void SET030() throws InterruptedException, ParseException {
+			description = "SET026A-Verify that on click of Yes button, user is navigated back to asset details screen with confirmation")
+	public void SET026A() throws InterruptedException, ParseException {
 		extentTest = extent.startTest(
-				"SET 030- Fnc_Verify if clicking on _Yes_ discards the changes made and bring "
-				+ "application back to Assets details page");
+				"SET026A-Verify that on click of yes button, user is navigated back to asset details screen with confirmation");
 		SoftAssert sa = new SoftAssert();
 
 		defineSetupPage.click_defineSetupPage_backBtn();
@@ -648,18 +746,17 @@ public class setup_defineSetupTest extends BaseClass{
 		
 
 		sa.assertEquals(assetDetailsPage.get_Setupheader_txt(), "Setups",
-				"FAIL: SET030- Acknowledging the ALert message displayed on clicking the Setup Back Button"
-				+ "do not take one to the Asset Details page");
+				"FAIL: SET026A- it should take one to the Asset Details page");
 		sa.assertAll();
 
 	}
 	
 	
-	// 20-SET031
+	// SET026B
 	@Test(groups = { "Regression" }, 
-			description = "SET 031-Fnc_Verify if clicking on _No_ allows the user to stay in the current page")
-	public void SET031() throws InterruptedException, ParseException {
-		extentTest = extent.startTest("SET 031-Fnc_Verify if clicking on _No_ allows the user to stay in the current page.");
+			description = "SET026B - Verify if clicking on _No_ allows the user to stay in the current page")
+	public void SET026B() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SET026B - Verify if clicking on _No_ allows the user to stay in the current page.");
 		SoftAssert sa = new SoftAssert();
 
 		defineSetupPage.click_defineSetupPage_backBtn();
@@ -667,12 +764,109 @@ public class setup_defineSetupTest extends BaseClass{
 		
 
 		sa.assertEquals(defineSetupPage.defineSetupPage_state(), true,
-				"FAIL: SET031- Clicking No to the ALert message displayed on clicking the Setup Back Button"
-				+ "do not retain in the Define Setup Page");
+				"FAIL: SET026B- licking on No should allows the user to stay in the current page");
 		sa.assertAll();
 
 	}
 	
+	//SET027
+	@Test(groups = { "Sanity", "Regression" }, 
+			description = "Verify that on click of Sensor Configuration navigator, navigates user to Sensor Configuration screen")
+	public void SET027() throws InterruptedException, ParseException {
+		extentTest = extent.startTest(
+				"SET027-Verify that on click of Sensor Configuration navigator, navigates user to Sensor Configuration screen");
+		SoftAssert sa = new SoftAssert();
+		
+		defineSetupPage.enter_defineSetupPage_SensorCount("2");
+		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
+		
+		sa.assertEquals(SensorConfigPage.sensorConfigPage_state(), true,
+				"FAIL: SET027- On click of Sensor Configuration button, user should navigate to Sensor Configuration screen");
+		sa.assertAll();
 
+	}
+	
+	//SET029
+		@Test(description = "Verify the bottom menu options displayed in Define setup screen")
+		public void SET029()
+				throws InterruptedException {
+			extentTest = extent.startTest("SET029-Verify the bottom menu options displayed in Define setup screen");
+			SoftAssert sa = new SoftAssert();
+			
+			defineSetupPage.Rt_Click_AstCreation_Buttom_AppBar();
 
+			sa.assertEquals(defineSetupPage.check_Home_Buttom_AppBar_Presence(), true, 
+					"FAIL: Home icon/button missing in bottom app bar");
+			sa.assertEquals(defineSetupPage.check_Help_Buttom_AppBar_Presence(), true,
+					"FAIL: Help icon/button missing in bottom app bar");
+			sa.assertEquals(defineSetupPage.check_WndsHelp_Buttom_AppBar_Presence(), true,
+					"FAIL: Windows Help icon/button missing in bottom app bar");
+			sa.assertEquals(defineSetupPage.check_About_Buttom_AppBar_Presence(), true,
+					"FAIL: About icon/button missing in bottom app bar");
+			sa.assertAll();
+		}
+
+	
+	// SET030-Verify that on-click of home btn in bottom menu options is navigated to main hub page
+	
+	@Test(description = "Verify that on-click of home btn in bottom menu options is navigated to main hub page")
+	    public void SET030() throws InterruptedException {
+		extentTest = extent.startTest(
+				"SET030-Verify that on-click of home btn in bottom menu options is navigated to main hub page");
+		SoftAssert sa = new SoftAssert();
+		
+		MainHubPage = defineSetupPage.Click_Home_Icon_AppBar();
+
+		sa.assertEquals(MainHubPage.mainPageTitle(), true,
+				"FAIL: Clicking Home icon/button in bottom app bar should be  redirect to Mains Hub page");
+		sa.assertAll();
+	}
+	
+	//SET031-Verify that on-click of help btn in bottom menu options displays information about the Define setup screen
+	
+	@Test(description = "SET031-Verify the help btn functionality in bottom menu options "
+			+ "in Asset creation screen")
+	public void SET031()
+			throws InterruptedException {
+		extentTest = extent.startTest("ASST52-Verify the help btn functionality in bottom "
+				+ "menu options in Asset creation screen");
+		SoftAssert sa = new SoftAssert();
+		
+		defineSetupPage.Click_Help_Icon_AppBar();
+		//System.out.println(defineSetupPage.get_AsstCreation_HelpMenu_HdrText());
+		sa.assertEquals(defineSetupPage.get_setupdefine_HelpMenu_HdrText(), 
+				"Define Setup", "FAIL: Clicking Help icon/button in bottom app bar should  display the setup define Help context window");
+		sa.assertAll();
+	}
+	
+	//SET032-Verify that on-click of windows help btn in bottom menu options generates a PDF with information
+		@Test(description = "SET032-Verify the help btn functionality in bottom menu options "
+				+ "in Asset creation screen")
+		public void SET032()
+				throws InterruptedException {
+			extentTest = extent.startTest("SET032-Verify the help btn functionality in bottom "
+					+ "menu options in Asset creation screen");
+			SoftAssert sa = new SoftAssert();
+			
+			defineSetupPage.Click_WndsHelp_Icon_AppBar();
+			//System.out.println(defineSetupPage.get_AsstCreation_HelpMenu_HdrText());
+			defineSetupPage.check_openfile_window_Presence();
+			sa.assertAll();
+		}
+	
+	//SET033
+		@Test(description = "Verify that on-click of About btn in bottom menu options displays the software version and the console IP address")
+		public void SET033()
+				throws InterruptedException {
+			extentTest = extent.startTest("SET033-Verify that on-click of About btn in bottom menu options displays the software version and the console IP address");
+			SoftAssert sa = new SoftAssert();
+			
+			defineSetupPage.Click_About_Icon_AppBar();		
+			sa.assertEquals(defineSetupPage.check_About_wndw_Presence(), 
+					true, "FAIL: Clicking About icon/button in bottom app bar do not display the About window");
+			sa.assertAll();
+		}
+		
+	*/	
+	
 }

@@ -7,7 +7,7 @@ package com.vrt.testcases;
 
 import org.testng.TestNG;
 
-import com.vrt.Listners.AllureReportListner;
+import com.vrt.Listners.ExtentReporterNG;
 
 public class testRunner {
 	
@@ -16,13 +16,13 @@ public class testRunner {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		
-		AllureReportListner ar = new AllureReportListner();
+		ExtentReporterNG er = new ExtentReporterNG();
 
 		testng = new TestNG();
 		//testng.setTestClasses(new Class[] {assetCreationTest.class});
 		//testng.setTestClasses(new Class[] {LoginTest.class});
 		testng.setTestClasses(new Class[] {assetHubTest.class});
-		testng.addListener(ar);
+		testng.addListener(er);
 		testng.run();	
 		
 	}

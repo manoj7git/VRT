@@ -109,4 +109,9 @@ public class MainHubPage extends BaseClass {
 		Thread.sleep(1000);
 		return new AuditPage();
 	}
+	// Click the Audit Title
+		public void Alert_AuditTitle() throws InterruptedException {
+			clickOn(AuditTitle);
+			Thread.sleep(1000);
+		}
 }

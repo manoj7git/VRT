@@ -59,7 +59,6 @@ public class assetDetailsTest extends BaseClass {
 	public void AssetCreationSetup() throws InterruptedException, IOException {
 
 		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ExtentReport.html", true);
-		extent.addSystemInfo("VRT Version", "1.0.0.39");
 		extent.addSystemInfo("BS Version", "0.6.18");
 		extent.addSystemInfo("Lgr Version", "1.2.9");
 		extent.addSystemInfo("User Name", "Manoj");
@@ -75,7 +74,7 @@ public class assetDetailsTest extends BaseClass {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
-
+		extent.addSystemInfo("VRT Version", LoginPage.get_SWVersion_About_Text());
 		// Method to Create Very 1st User with All privilege
 		UserManagementPage=LoginPage.DefaultLogin();
 		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"),

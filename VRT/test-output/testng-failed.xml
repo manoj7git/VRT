@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test thread-count="5" name="Default test(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [UMRegressionSuite]">
+  <test thread-count="5" name="UMTestRegression(failed)">
     <classes>
-      <class name="com.vrt.testcases.assetHubTest">
+      <class name="com.vrt.testcases.customized_UserPrivilagesTest">
         <methods>
-          <include name="ASSTHB012" invocation-numbers="1 3 5 7 9 11 13 15 17 19 21 23 24"/>
-          <include name="Teardown"/>
-          <include name="AssetCreationSetup"/>
-          <include name="endReport_releaseMomory"/>
+          <include name="endReport"/>
+          <include name="UserCreationSetup"/>
           <include name="Setup"/>
+          <include name="Teardown"/>
+          <include name="CADMN1"/>
         </methods>
-      </class> <!-- com.vrt.testcases.assetHubTest -->
+      </class> <!-- com.vrt.testcases.customized_UserPrivilagesTest -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- UMTestRegression(failed) -->
+</suite> <!-- Failed suite [UMRegressionSuite] -->

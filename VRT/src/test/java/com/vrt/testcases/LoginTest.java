@@ -41,7 +41,7 @@ public class LoginTest extends BaseClass{
 	//Before All the tests are conducted
 	@BeforeClass
 	//@BeforeTest
-	private void setExtent() throws IOException {
+	private void setUp() throws IOException, InterruptedException {
 		
 		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
@@ -51,9 +51,14 @@ public class LoginTest extends BaseClass{
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
 		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport"+"_LoginTest"+".html",true);
-		extent.addSystemInfo("VRT Version", "1.0.0.41");
-		extent.addSystemInfo("BS Version", "0.6.26");
-		extent.addSystemInfo("Lgr Version", "1.3.1");
+		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		Thread.sleep(1000);
+		MainLoginPage = new LoginPage();
+		extent.addSystemInfo("VRT Version", MainLoginPage.get_SWVersion_About_Text());
+		AppClose();
+		Thread.sleep(1000);
+		extent.addSystemInfo("BS Version", "0.6.32");
+		extent.addSystemInfo("Lgr Version", "1.3.4");
 		extent.addSystemInfo("User Name", "Manoj");
 		extent.addSystemInfo("TestSuiteName", "LoginTest");
 
@@ -306,7 +311,7 @@ public class LoginTest extends BaseClass{
 				+"on entering 3 times INVALID User Credentials");
 		sa.assertAll();
 	}
-
+	
 	
 	//LOGIN_010- Verify if the first created admin user is not forced to change his 
 	//password during first login instance after user creation
@@ -318,11 +323,36 @@ public class LoginTest extends BaseClass{
 		SoftAssert sa = new SoftAssert();
 		
 		MainLoginPage.EnterUserID(getUID("adminFull"));
-		MainLoginPage.EnterUserPW("Welcome1@AM");
+		MainLoginPage.EnterUserPW(getPW("adminFull"));
 		
-		sa.assertEquals(MainLoginPage.NewPWFieldPresence(), false, "FAIL: The 1st User is "
-		+"forced to Change its PW on 1st time Login");
-		sa.assertAll();		
+		MainHubPage=MainLoginPage.ClickonLoginBtn();
+		if (MainHubPage.mainPageTitle()) {
+			System.out.println(MainHubPage.mainPageTitle());
+			sa.assertEquals(true, true, 
+					"FAIL: Very 1st User Forced to change PW instaed of redirecting to Main Hub Page");
+			sa.assertAll();
+		}else {
+			sa.assertEquals(false, true, 
+					"FAIL: Very 1st User Forced to change PW instaed of redirecting to Main Hub Page");
+			sa.assertAll();
+		}	
+		
+		sa.assertAll();
+		
+		
+/*		try {
+			MainLoginPage.ClickLoginBtn();
+			//MainLoginPage.ClickChangePWCheckbox();
+			if (!MainLoginPage.NewPWFieldPresence()) {
+				sa.assertEquals(MainLoginPage.NewPWFieldPresence(), false, "FAIL: New PW field is enabled/displayed to Change PW"
+						+ " even if the Change PW checkbox is unchecked");
+				sa.assertAll();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+	
 	}
 	
 	
@@ -597,9 +627,7 @@ public class LoginTest extends BaseClass{
 				+ "forced to change his password while login, if his password has been changed by the admin user");
 		sa.assertEquals(MainLoginPage.NewPWFieldPresence(), true, "FAIL: User is NOT " 
 				+ " forced to change his password while login with New PW field in Disabled/Invisible state");
-		
-		MainHubPage=MainLoginPage.EnterNewPWtext(getPW("SysOperator"));
-		MainHubPage.UserSignOut();
+
 		sa.assertAll();
 	}
 

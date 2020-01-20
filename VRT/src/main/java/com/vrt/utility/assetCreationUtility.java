@@ -286,5 +286,12 @@ public class assetCreationUtility extends BaseClass{
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
+	
+	@DataProvider(name = "testAsset")
+	public static Object[][] testAsset() {
+		String sheetName = "testAsset";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
 
 }

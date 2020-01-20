@@ -13,7 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- <aspectj.version>1.8.10</aspectj.version> -->
+		<!-- <aspectj.version>1.8.10</aspectj.version > -->
 	</properties>
 
 	<build>
@@ -23,17 +23,24 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
 				<configuration>
-				<testFailureIgnore>true</testFailureIgnore>
-					<suiteXmlFiles>					
+					<testFailureIgnore>true</testFailureIgnore>
+					<suiteXmlFiles>
 						<!-- <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile> -->
-						<suiteXmlFile>src/test/resources/RegressionTest.xml</suiteXmlFile>
+						<!-- <suiteXmlFile>src/test/resources/RegressionTest.xml</suiteXmlFile> -->
+						<suiteXmlFile>src/test/resources/UMRegressionTest.xml</suiteXmlFile>
 					</suiteXmlFiles>
-					<!-- <argLine> -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar" 
-						</argLine> -->
-				</configuration>
-				<!-- <dependencies> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> 
-					<version>${aspectj.version}</version> </dependency> </dependencies> -->
 
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
 			</plugin>
 		</plugins>
 

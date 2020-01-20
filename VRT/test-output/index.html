@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
-                    <span>C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1440885474\testng-customsuite.xml</span>
+                    <span>C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1853797492\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -59,7 +59,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="group-Default_suite">
-                    <span>1 group</span>
+                    <span>2 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -102,12 +102,12 @@
                     <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.LoginTest" hash-for-method="LOGIN_001">LOGIN_001</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.UserManagementTest" hash-for-method="ADMN006">ADMN006</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.LoginTest" hash-for-method="LOGIN_001b">LOGIN_001b</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="com.vrt.testcases.UserManagementTest" hash-for-method="ADMN031">ADMN031</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Default_suite -->
@@ -125,25 +125,25 @@
           <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.vrt.testcases.LoginTest</span>
+              <span class="class-name">com.vrt.testcases.UserManagementTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="LOGIN_001">
-                  </a> <!-- LOGIN_001 -->
-                  <span class="method-name">LOGIN_001</span>
+                  <a name="ADMN006">
+                  </a> <!-- ADMN006 -->
+                  <span class="method-name">ADMN006</span>
                   <em>
-(LOGIN_001- Verify if user can log into the Kaye Application after installation with default provided credentials)                  </em>
+(ADMN006-Verify that new user button is enabled)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="LOGIN_001b">
-                  </a> <!-- LOGIN_001b -->
-                  <span class="method-name">LOGIN_001b</span>
+                  <a name="ADMN031">
+                  </a> <!-- ADMN031 -->
+                  <span class="method-name">ADMN031</span>
                   <em>
-(LOGIN_001b-Verify that Policies,Preferences screens are disabled for login with First installation)                  </em>
+(Verify Invalid validation for Photo field)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -151,7 +151,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1440885474\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\manoj.ghadei\AppData\Local\Temp\testng-eclipse--1853797492\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -160,7 +160,7 @@
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default suite&quot;&gt;
   &lt;test thread-count=&quot;5&quot; verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.vrt.testcases.LoginTest&quot;/&gt;
+      &lt;class name=&quot;com.vrt.testcases.UserManagementTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -188,11 +188,19 @@
               <span class="test-group-name">Regression</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">LOGIN_001</span>
+                <span class="method-in-group-name">ADMN006</span>
                 <br/>
               </div> <!-- method-in-group -->
               <div class="method-in-group">
-                <span class="method-in-group-name">LOGIN_001b</span>
+                <span class="method-in-group-name">ADMN031</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">Sanity</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">ADMN006</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -214,18 +222,18 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'LOGIN_001')
-data.setCell(0, 2, 'com.vrt.testcases.LoginTest')
-data.setCell(0, 3, 6347);
+data.setCell(0, 1, 'ADMN031')
+data.setCell(0, 2, 'com.vrt.testcases.UserManagementTest')
+data.setCell(0, 3, 6969);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'LOGIN_001b')
-data.setCell(1, 2, 'com.vrt.testcases.LoginTest')
-data.setCell(1, 3, 6346);
+data.setCell(1, 1, 'ADMN006')
+data.setCell(1, 2, 'com.vrt.testcases.UserManagementTest')
+data.setCell(1, 3, 50);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 12 seconds</span>
+              <span class="suite-total-time">Total running time: 7 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -251,38 +259,38 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.vrt.testcases.LoginTest</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.vrt.testcases.UserManagementTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setExtent</span>
+                <span class="method-name">UserCreationSetup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
                 <span class="method-name">Setup</span>
-                <span class="method-start">159 ms</span>
+                <span class="method-start">41707 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">LOGIN_001</span>
-                <span class="method-start">5906 ms</span>
+                <span class="method-name">ADMN006</span>
+                <span class="method-start">52983 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">Teardown([TestResult name=LOGIN_001 status=SUCCESS method=LoginTest.LOGIN_001()[pri:0, instance:com.vrt.testc...)</span>
-                <span class="method-start">12254 ms</span>
+                <span class="method-name">Teardown([TestResult name=ADMN006 status=SUCCESS method=UserManagementTest.ADMN006()[pri:0, instance:com.vrt....)</span>
+                <span class="method-start">53035 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">Setup</span>
-                <span class="method-start">12293 ms</span>
+                <span class="method-start">53066 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">LOGIN_001b</span>
-                <span class="method-start">15557 ms</span>
+                <span class="method-name">ADMN031</span>
+                <span class="method-start">63458 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">Teardown([TestResult name=LOGIN_001b status=SUCCESS method=LoginTest.LOGIN_001b()[pri:0, instance:com.vrt.tes...)</span>
-                <span class="method-start">21904 ms</span>
+                <span class="method-name">Teardown([TestResult name=ADMN031 status=SUCCESS method=UserManagementTest.ADMN031()[pri:0, instance:com.vrt....)</span>
+                <span class="method-start">70428 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">endReport</span>
-                <span class="method-start">21945 ms</span>
+                <span class="method-start">70453 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

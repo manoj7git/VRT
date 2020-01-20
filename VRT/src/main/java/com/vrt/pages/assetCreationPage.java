@@ -297,7 +297,7 @@ public class assetCreationPage extends BaseClass{
 		return FetchText(AssetLstVldtdDate);		
 	}
 	
-	// Select Asset Last Validate Date data other than current Date
+	// Select Asset Last Validate Day data other than current Day
 	public void selectAssetLastVldtDay(String Day) throws InterruptedException {
 
 		//click_AsstValidationDatePkr_Btn();
@@ -305,18 +305,19 @@ public class assetCreationPage extends BaseClass{
 
 		for (int i = 1; i <= 31; i++) {
 			String Date = getAsstValidationDatetext();
+			//System.out.println(Date);
 			
 			//The below splitting code is defined, because the date format varies
 			//system to system where its displayed as mm-dd-yyyy or mm/dd/yyyy
 			if (Date.contains("-")) {
-				String[] expDate = Date.split("-");
+				String[] expDate = Date.split("-");				
 				//System.out.println(expDate[1]);
 				
 				if (expDate[1].equals(Day)) {
 					break;
 				}else {
 					click_AsstValidationDatePkr_Btn();
-					ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+					ac.sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
 					Thread.sleep(500);
 				}
 				
@@ -329,7 +330,7 @@ public class assetCreationPage extends BaseClass{
 				}else {
 					click_AsstValidationDatePkr_Btn();
 					ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
-					Thread.sleep(500);
+					Thread.sleep(500);					
 				}
 			}
 		}
@@ -354,7 +355,7 @@ public class assetCreationPage extends BaseClass{
 					break;
 				}else {
 					click_AsstValidationDatePkr_Btn();
-					ac.sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
+					ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
 					Thread.sleep(500);
 				}
 				
@@ -427,16 +428,18 @@ public class assetCreationPage extends BaseClass{
 		clickOn(AssetFrqBtn);
 		//System.out.println("---"+AF);
 		List<WebElement> Combobxlist = driver.findElementsByClassName("ComboBoxItem");
-		System.out.println(Combobxlist.size());
+		//System.out.println(Combobxlist.size());
 		Actions ac = new Actions(driver);
 		
 		for (int i = 0; i < Combobxlist.size(); i++) {
 			ac.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.RETURN).build().perform();			
-			if (FetchText(AssetFrqBtn).contains(AF)) {				
+			if (FetchText(AssetFrqBtn).contains(AF)) {
+				//ac.sendKeys(Keys.TAB).sendKeys(Keys.RETURN).build().perform();
 				break;
 			}			
-		}
-		clickOn(AssetSizeTxtBox);
+		}		
+		ac.sendKeys(Keys.TAB).sendKeys(Keys.RETURN).build().perform();
+		ac.sendKeys(Keys.TAB).sendKeys(Keys.RETURN).build().perform();
 	}
 	
 	//Fetch the Asset Frequency text
@@ -445,11 +448,11 @@ public class assetCreationPage extends BaseClass{
 	}
 	
 	//Select Asset Frequency Interval
-	public void selectAssetFreqIntrvl(String FI) throws InterruptedException {
+	public void selectAssetFreqIntrvl(String FI) throws InterruptedException {		
 		clickOn(AssetFrqIntrvlBtn);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		List<WebElement> Combobxlist = driver.findElementsByClassName("ComboBoxItem");
-		System.out.println(Combobxlist.size());
+		//System.out.println(Combobxlist.size());
 		Actions ac = new Actions(driver);
 		
 		for (int i = 0; i < Combobxlist.size(); i++) {
@@ -458,6 +461,7 @@ public class assetCreationPage extends BaseClass{
 				break;
 			}			
 		}
+		ac.sendKeys(Keys.TAB).sendKeys(Keys.RETURN).build().perform();
 	}
 	
 	//Fetch the Asset Frequency Interval text
@@ -655,7 +659,10 @@ public class assetCreationPage extends BaseClass{
 			String AManufacturer, String ALocation, String AModel, String ASize, String AUnit, String ALVDate,
 			String AFreq, String AFreqInt, String ADesc) throws InterruptedException {
 		
-		String[] AstLstVldDate = ALVDate.split("/");		
+		String[] AstLstVldDate = ALVDate.split("/");
+		//System.out.println(AstLstVldDate[1]);
+		//System.out.println(AstLstVldDate[0]);
+		//System.out.println(AstLstVldDate[2]);
 		
 		enterAssetName(AName);
 		enterAssetID(AID);

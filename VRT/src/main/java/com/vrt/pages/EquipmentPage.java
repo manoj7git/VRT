@@ -49,6 +49,8 @@ public class EquipmentPage extends BaseClass {
 		ClearText(ModelNumber);
 		enterText(ModelNumber, MNum);
 	}
+	
+	
 	// Select Equipment Type
 	
 		public void select_EquipmentType(String Etype) throws InterruptedException {
@@ -106,19 +108,31 @@ public class EquipmentPage extends BaseClass {
 			return IsElementVisibleStatus(LgInPopup);
 		}
 				
-//Enter Mandatory fields and create Equipment
-		public void EqipCreation_MandatoryFields(String EID, String EMnum,String Etype)throws InterruptedException {
-			enterNewEquipmentID(EID);
-			enterNewModelNumber(EMnum);
-			select_EquipmentType(Etype);
-			ClickSaveButton();
-		}
+	//Enter Mandatory fields and create Equipment
+	public void EqipCreation_MandatoryFields(String EID, String EMnum, String Etype) throws InterruptedException {
+		enterNewEquipmentID(EID);
+		select_EquipmentType(Etype);
+		enterNewModelNumber(EMnum);
+		ClickSaveButton();
+	}
+	
+	// Enter Mandatory fields and create BS Equipment
+	public void BaseStation_EqipCreation_MandatoryFields(String EID, String EMnum, String McAddress) throws InterruptedException {
+		enterNewEquipmentID(EID);
+		enterNewModelNumber(EMnum);
+		select_EquipmentType("Base Station");
+		WebElement BS_McAdd = driver.findElementByAccessibilityId("MacAddressTextBox");
+		ClearText(BS_McAdd);
+		enterText(BS_McAdd, McAddress);
+		ClickSaveButton();
+	}
+		
 //Click on back button 
-				public EquipmentHubPage ClickBackBtn() {
-				WebElement backBtn = driver.findElementByAccessibilityId("ArrowGlyph");	
-				clickOn(backBtn);
-				return new EquipmentHubPage();
-				}
+	public EquipmentHubPage ClickBackBtn() {
+		WebElement backBtn = driver.findElementByAccessibilityId("ArrowGlyph");
+		clickOn(backBtn);
+		return new EquipmentHubPage();
+	}
 
 		
 }

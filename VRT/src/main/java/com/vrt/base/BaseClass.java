@@ -24,6 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.appium.java_client.windows.WindowsDriver;
 
 
+
 public class BaseClass {
 	
 	//Declare the Windows Driver and make it Public/Static to be used throughout the classes
@@ -33,14 +34,16 @@ public class BaseClass {
 
 	// Launch App/Setup Configuration Function
 	//Initialize Windows Driver
-	public static void LaunchApp(String Url) {
+	public static void LaunchApp(String Url) throws InterruptedException {
 		try {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
-			capabilities.setCapability("app", Url);
-			
-			driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
+			capabilities.setCapability("deviceName", "WindowsPC");
+            capabilities.setCapability("app", Url);
+            capabilities.setCapability("ms:waitForAppLaunch", "10");
+	
+            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);			
 			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			tdriver.set(driver);
 
 		} catch (MalformedURLException e) {
@@ -128,7 +131,7 @@ public class BaseClass {
 	public boolean IsElementVisibleStatus(WebElement element) {
 		boolean status = false;
 		try {
-			status=checkingVisibilityOfElement(element, 5).isDisplayed();
+			status=checkingVisibilityOfElement(element, 10).isDisplayed();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}			
@@ -198,6 +201,7 @@ public class BaseClass {
 		UserMap.put("TestAdmin", "2:Start@5AM");
 		UserMap.put("Dsbluser", "1D:Start@1AM");
 		UserMap.put("Newuser", "1N:Start@7AM");
+		UserMap.put("Delrprt", "5:Start@5AM");
 		return UserMap;
 	}
 	

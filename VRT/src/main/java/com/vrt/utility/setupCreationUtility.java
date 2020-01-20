@@ -55,13 +55,81 @@ public class setupCreationUtility extends BaseClass{
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//SETUP Creation module related Test Data reference
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@DataProvider(name = "SET003")
+	public static Object[][] SET003() {
+		String sheetName = "SET003";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET004")
+	public static Object[][] SET004() {
+		String sheetName = "SET004";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET005")
+	public static Object[][] SET005() {
+		String sheetName = "SET005";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET008")
+	public static Object[][] SET008() {
+		String sheetName = "SET008";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET009")
+	public static Object[][] SET009() {
+		String sheetName = "SET009";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET010")
+	public static Object[][] SET010() {
+		String sheetName = "SET010";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET015")
+	public static Object[][] SET015() {
+		String sheetName = "SET015";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET016")
+	public static Object[][] SET016() {
+		String sheetName = "SET016";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET017")
+	public static Object[][] SET017() {
+		String sheetName = "SET017";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SET018")
+	public static Object[][] SET018() {
+		String sheetName = "SET018";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
 	@DataProvider(name = "SET019")
 	public static Object[][] SET019() {
 		String sheetName = "SET019";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
-	
 	@DataProvider(name = "SET020")
 	public static Object[][] SET020() {
 		String sheetName = "SET020";
@@ -69,51 +137,9 @@ public class setupCreationUtility extends BaseClass{
 		return data;
 	}
 	
-	@DataProvider(name = "SET024")
-	public static Object[][] SET024() {
-		String sheetName = "SET024";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-	
-	@DataProvider(name = "SET025")
-	public static Object[][] SET025() {
-		String sheetName = "SET025";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-	
-	@DataProvider(name = "SET026a")
-	public static Object[][] SET026a() {
-		String sheetName = "SET026a";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-	
-	@DataProvider(name = "SET026b")
-	public static Object[][] SET026b() {
-		String sheetName = "SET026b";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-	
-	@DataProvider(name = "SET027a")
-	public static Object[][] SET027a() {
-		String sheetName = "SET027a";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-	
-	@DataProvider(name = "SET027b")
-	public static Object[][] SET027b() {
-		String sheetName = "SET027b";
-		Object[][] data = getTestData(sheetName);
-		return data;
-	}
-	
-	@DataProvider(name = "SET028")
-	public static Object[][] SET028() {
-		String sheetName = "SET028";
+	@DataProvider(name = "SET022")
+	public static Object[][] SET022() {
+		String sheetName = "SET022";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}

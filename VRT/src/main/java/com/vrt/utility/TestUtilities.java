@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
@@ -42,7 +43,7 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
 public class TestUtilities extends BaseClass {
 	
-	
+	//Convert any type of Date input to a specific MM-dd-yyyy date format
 	public String convert_StringDate_to_ActualDate_inCertainFormat(String dt) throws ParseException {
 		SimpleDateFormat formating = new SimpleDateFormat("dd MMM yyyy");
 		String dateinString = dt;
@@ -54,11 +55,27 @@ public class TestUtilities extends BaseClass {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 		String strDate = formatter.format(date);
-		// System.out.println("Date Format with MM-d-yyyy : "+strDate);
+		// System.out.println("Date Format with MM-dd-yyyy : "+strDate);
 		return strDate;
 	}
 	
-	//Rqd Date format MM-dd-YYYY = 12-31-2019
+	//Convert any type of Date input to a specific MM/dd/yyyy date format
+	public String convert_StringDate_to_ActualDate_inCertainFormat2(String dt) throws ParseException {
+		SimpleDateFormat formating = new SimpleDateFormat("dd MMM yyyy");
+		String dateinString = dt;
+		// System.out.println(dateString);
+		Date date = formating.parse(dateinString);
+
+		// System.out.println(date);
+		// System.out.println(formating.format(date));
+
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		String strDate = formatter.format(date);
+		// System.out.println("Date Format with MM/dd/yyyy : "+strDate);
+		return strDate;
+	}
+	
+	//get_CurrentDate_inCertainFormat:Rqd Date format MM-dd-YYYY = 12-31-2019 or MM/dd/YYYY = 12/31/2019
 	public String get_CurrentDate_inCertainFormat(String dtFormat) throws ParseException {
 		SimpleDateFormat formating = new SimpleDateFormat(dtFormat);		
 		Date date = new Date();
@@ -165,7 +182,7 @@ public class TestUtilities extends BaseClass {
 		return destination;
 	}
 	
-	// Upload Documents method under Asset details page
+	// Upload Documents method 
 	public void uploadDoc(String filename) throws AWTException, IOException, InterruptedException{
 
 		// switch to the file upload window
@@ -187,5 +204,50 @@ public class TestUtilities extends BaseClass {
 		driver.switchTo().activeElement();
 		Thread.sleep(500);
 	}
+	
+	//Fetch back Date based on subtracting # of weeks
+	public String getBackDate_weeks(int noOfWeeks) throws IOException {
+	    //create Calendar instance
+	    Calendar now = Calendar.getInstance();
+	    int Cyear = now.get(Calendar.YEAR);
+	    int Cday = now.get(Calendar.DAY_OF_MONTH);
+	    int Cmonth = now.get(Calendar.MONTH)+1;
+	    String CrntDt = (Cmonth<10?("0"+Cmonth):(Cmonth))+"/"+(Cday<10?("0"+Cday):(Cday))+"/"+Cyear;
+	    //System.out.println("Current date : " +CrntDt);
+	    
+	    //Subtract week from current date
+	    now =Calendar.getInstance();
+	    now.add(Calendar.WEEK_OF_YEAR,-noOfWeeks);
+	    int Byear = now.get(Calendar.YEAR);
+	    int Bday = now.get(Calendar.DAY_OF_MONTH);
+	    int Bmonth = now.get(Calendar.MONTH)+1;
+	    String bckDt = (Bmonth<10?("0"+Bmonth):(Bmonth))+"/"+(Bday<10?("0"+Bday):(Bday))+"/"+Byear;
+	    //System.out.println("date before " +noOfWeeks+ " week(s) : " +bckDt);
+	    return bckDt;
+	  }
+	
+	//Fetch future Date based on adding # of week(s)
+	public String getFutureDate_weeks(int noOfWeeks) throws IOException {
+	    //create Calendar instance
+	    Calendar now = Calendar.getInstance();
+	    int Cyear = now.get(Calendar.YEAR);
+	    int Cday = now.get(Calendar.DAY_OF_MONTH);
+	    int Cmonth = now.get(Calendar.MONTH)+1;
+	    String CrntDt = (Cmonth<10?("0"+Cmonth):(Cmonth))+"/"+(Cday<10?("0"+Cday):(Cday))+"/"+Cyear;
+	    //System.out.println("Current date : " +CrntDt);
+	    
+	    //Add week from current date
+	    now =Calendar.getInstance(); 
+	    now.add(Calendar.WEEK_OF_YEAR,+noOfWeeks);
+	    int Byear = now.get(Calendar.YEAR);
+	    int Bday = now.get(Calendar.DAY_OF_MONTH);
+	    int Bmonth = now.get(Calendar.MONTH)+1;
+	    String futrDt = (Bmonth<10?("0"+Bmonth):(Bmonth))+"/"+(Bday<10?("0"+Bday):(Bday))+"/"+Byear;
+	    //System.out.println("date after " +noOfWeeks+ " week(s) : " +futrDt);
+	    return futrDt;
+	  }
+	 
+	  
+	
 
 }

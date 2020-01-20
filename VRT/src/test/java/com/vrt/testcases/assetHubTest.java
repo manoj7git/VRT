@@ -58,23 +58,24 @@ public class assetHubTest extends BaseClass {
 	@BeforeClass
 	public void AssetCreationSetup() throws InterruptedException, IOException {
 		
-		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html",true);
-		extent.addSystemInfo("VRT Version", "1.0.0.41");
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/assetHubTest.html",true);
 		extent.addSystemInfo("BS Version", "0.6.13");
 		extent.addSystemInfo("Lgr Version", "1.2.6");
 		extent.addSystemInfo("User Name", "Manoj");
 		extent.addSystemInfo("TestSuiteName", "AssetHubTest");
 
 		//Rename the User file (NgvUsers.uxx) if exists
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");		
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");		
 		//Rename the cache Asset file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 
-		/*LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		
+		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
+		extent.addSystemInfo("VRT Version", LoginPage.get_SWVersion_About_Text());
 		UserManagementPage = LoginPage.DefaultLogin();
 		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"), getPW("adminFull"), "FullAdmin",
 				"12345678", "abc@gmail.com");
@@ -92,7 +93,7 @@ public class assetHubTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		AppClose();
-		Thread.sleep(1000);*/
+		Thread.sleep(1000);
 	}
 
 	//After All the tests are conducted
@@ -137,9 +138,11 @@ public class assetHubTest extends BaseClass {
 		extent.endTest(extentTest); //ending test and ends the current test and prepare to create html report		
 		
 		driver.quit();
+		driver = null;
 	}
 
-/*	//ASSTHB001-Verify if selecting the Assets tile from the main hub page , 
+	
+	//ASSTHB001-Verify if selecting the Assets tile from the main hub page , 
 	//user is navigated to the Asset Details screen
 	@Test(groups = {"Sanity", "Regression"}, description = "ASSTHB001-Verify if selecting "
 			+ "the Assets tile from the main hub page , user is navigated to the Asset Details screen")
@@ -218,9 +221,9 @@ public class assetHubTest extends BaseClass {
 	
 	
 	//ASSTHB006a-Verify the search functionality in Asset hub page
-	@Test(dataProvider="ASSTHB006a", dataProviderClass=assetCreationUtility.class,
-			groups = {"Regression"},  description = "ASSTHB006a-Verify the seacrh "
-			+ "fucntionality in Asset hub page")
+	@Test(groups = {"Regression"},  description = "ASSTHB006a-Verify the seacrh fucntionality "
+			+ "in Asset hub page", 
+			dataProvider="ASSTHB006a", dataProviderClass=assetCreationUtility.class)
 	public void ASSTHB006a(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
 			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, 
 			String Description) throws InterruptedException {
@@ -261,7 +264,7 @@ public class assetHubTest extends BaseClass {
 		sa.assertAll();
 	}
 
-	
+		
 	//ASSTHB006b-Verify the search functionality in Asset hub page
 	@Test(dataProvider="ASSTHB006b", dataProviderClass=assetCreationUtility.class, groups = {"Regression"},  
 			description = "ASSTHB006b-Verify if No record found"
@@ -316,7 +319,7 @@ public class assetHubTest extends BaseClass {
 		sa.assertEquals(MainHubPage.mainPageTitle(), true, "FAIL: TC-ASSTHB007 -Landed "
 				+ "to Wrong page instead of Main Hub page");				
 		sa.assertAll();
-	}*/
+	}
 	
 	
 	//ASSTHB008-Verify if click on the Type filter user is able to filter all the assets correctly by Asset Type
@@ -350,7 +353,7 @@ public class assetHubTest extends BaseClass {
 	
 	
 	//ASSTHB009-Verify if click on the Manufacturer Filter user is able to filter all the assets correctly by Asset Manufacturer
-	@Test(dependsOnMethods = "ASSTHB008", groups = { "Regression" }, description = "ASSTHB009-Verify if "
+	@Test(groups = { "Regression" }, description = "ASSTHB009-Verify if "
 			+ "click on the Manufacturer Filter user is able to filter all the assets correctly by Asset Manufacturer")
 	public void ASSTHB009()
 			throws InterruptedException, IOException {
@@ -378,7 +381,7 @@ public class assetHubTest extends BaseClass {
 
 		// Check for the Asset Filter method
 		boolean state = assetHubPage.assetList_LocationFilter();
-		System.out.println(state);
+		//System.out.println(state);
 
 		sa10.assertEquals(state, true, "FAIL: TC-ASSTHB010 -Location filter is not working in the Asset Hub page");
 		sa10.assertAll();
@@ -399,31 +402,6 @@ public class assetHubTest extends BaseClass {
 				+ "window did not appear or wrong Help window displayed");				
 		sa7.assertAll();
 	}
-	
-	
-	//ASSTHB012-Verify 25 assets are created with each categories model, size, manufacturer,Location and Type
-	@Test(dataProvider="ASSTHB012", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
-			description = "ASSTHB012-Verify 25 assets are created with each "
-			+ "categories model, size, manufacturer,Location and Type")
-	public void ASSTHB012(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, String Description)
-					throws InterruptedException {
-		extentTest = extent.startTest("ASSTHB012-Verify 25 assets are created with each categories model, "
-				+ "size, manufacturer,Location and Type");
-		SoftAssert sa = new SoftAssert();
-		
-		//Asset creation method
-		assetCreationPage = assetHubPage.ClickAddAssetBtn();
-		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				VldDT, Frequency, FrequencyInterval, Description);		
-		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
-
-		/*sa.assertEquals(assetHubPage.is_assetHubHelpWindow_Displayed(), true, "FAIL: TC-ASSTHB011 -AssetHub Help"
-				+ "window did not appear or wrong Help window displayed");				
-		sa.assertAll();*/
-	}
-
-
 	
 
 }

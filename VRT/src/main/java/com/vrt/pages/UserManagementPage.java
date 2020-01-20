@@ -65,13 +65,8 @@ public class UserManagementPage extends BaseClass {
 	WebElement ManualSync = driver.findElementByAccessibilityId("ManualSyncCheckBox");
 	WebElement CameraAccess = driver.findElementByAccessibilityId("CamerAccessCheckbox");
 	WebElement DeletePassFailTemplate = driver.findElementByAccessibilityId("DeleteTemplateCheckBox");
-
-	// Scroll Bar
-	//WebElement ScrollDown = driver.findElementByAccessibilityId("VerticalSmallIncrease");
-
 	// For Disable check box
 	WebElement DisableCheckbox = driver.findElementByAccessibilityId("DisableUserCheckBox");
-
 	// For User list
 	WebElement UsersListButton = driver.findElementByAccessibilityId("PrintUsersListButton");
 
@@ -193,6 +188,11 @@ public class UserManagementPage extends BaseClass {
 		enterText(TitleUMField, Title);
 		Thread.sleep(1000);
 	}
+	
+	// Fetch Title text
+	public String get_UserTitle() {
+		return FetchText(TitleUMField);
+	}
 
 	// Enter Title text
 	public void ClickTitlefield() {
@@ -201,7 +201,7 @@ public class UserManagementPage extends BaseClass {
 
 	// Select UserType
 	public void select_UserType(String Utype) throws InterruptedException {
-		System.out.println(Utype);
+		//System.out.println(Utype);
 		clickOn(UserTypeUMDropDown);
 		Thread.sleep(1000);
 		WebElement UMAdministrator1 = driver.findElementByName("System Administrator");
@@ -229,7 +229,7 @@ public class UserManagementPage extends BaseClass {
 	// Click the UserType Drop down List
 	public void ClickUserTypeDropDown() throws InterruptedException {
 		clickOn(UserTypeUMDropDown);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 	}
 
 	// Select Sys Admin from the UserType drop-down list
@@ -339,13 +339,13 @@ public class UserManagementPage extends BaseClass {
 
 		UserLoginPopup(UID, PW);
 
-		WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		/*WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		if (IsElementVisibleStatus(SaveAlertmsg)) {
 			String NewUsertext = SaveAlertmsg.getText();
 			if (NewUsertext.contains(NewUN)) {
 				System.out.println("New Supervisor User " + NewUN + " is created successfuly");
 			}
-		}
+		}*/
 	}
 
 	// Create a New Operator User
@@ -365,13 +365,13 @@ public class UserManagementPage extends BaseClass {
 
 		UserLoginPopup(UID, PW);
 
-		WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		/*WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		if (IsElementVisibleStatus(SaveAlertmsg)) {
 			String NewUsertext = SaveAlertmsg.getText();
 			if (NewUsertext.contains(NewUN)) {
 				System.out.println("New Operator User " + NewUN + " is created successfuly");
 			}
-		}
+		}*/
 	}
 
 	// Select/Click any User in the UserList Panel
@@ -415,12 +415,13 @@ public class UserManagementPage extends BaseClass {
 		clickOn(ManualSync);
 		clickOn(CameraAccess);
 		clickOn(DeletePassFailTemplate);
+		ClkAuditTrail();
 		// Thread.sleep(1000);
 	}
 	
 //Scroll down and click on AuditTrail
 	
-	public void ClkAuditTrail() throws InterruptedException, AWTException {
+	public void ClkAuditTrail() throws InterruptedException {
 		
 		WebElement scrollbar = driver.findElementByAccessibilityId("VerticalSmallIncrease");
 		clickOn(scrollbar);
@@ -432,7 +433,16 @@ public class UserManagementPage extends BaseClass {
 		
 	}
 	
-
+//Scroll down and click on AuditTrail
+	
+	public void ClkscrollBar_down() throws InterruptedException, AWTException {
+		
+		WebElement scrollbar = driver.findElementByAccessibilityId("VerticalSmallIncrease");
+		clickOn(scrollbar);
+		clickOn(scrollbar);
+		clickOn(scrollbar);
+	}
+	
 	// check/select Create/Edit Asset Privilege checkbox
 	public void clickPrivCreateEditAsset() throws InterruptedException {
 		clickOn(UMAssetPriv);

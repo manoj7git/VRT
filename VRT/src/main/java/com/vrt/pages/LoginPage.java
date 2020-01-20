@@ -6,6 +6,8 @@
 package com.vrt.pages;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 import com.vrt.base.BaseClass;
 
 //import io.qameta.allure.Step;
@@ -13,7 +15,7 @@ import com.vrt.base.BaseClass;
 public class LoginPage extends BaseClass {
 
 	//Main Login Page Element definition	
-	WebElement ProductName = driver.findElementByName("ValProbe RT System");	
+	WebElement ProductName = driver.findElementByName("ValProbe RT System");
 	WebElement MainLoginUID = driver.findElementByAccessibilityId("LoginIDTextBox");
 	WebElement MainLoginPW = driver.findElementByAccessibilityId("PasswordTextBox");	
 	WebElement MainLoginBtn = driver.findElementByAccessibilityId("LoginButton");
@@ -231,6 +233,8 @@ public class LoginPage extends BaseClass {
 	//Login method using Kaye/411")
 	public UserManagementPage DefaultLogin() throws InterruptedException 
 	{	
+		MainLoginUID.click();
+		MainLoginUID.click();
 		MainLoginUID.sendKeys("Kaye");
 		MainLoginPW.sendKeys("411");
 		MainLoginBtn.click();
@@ -304,6 +308,21 @@ public class LoginPage extends BaseClass {
 	public String UserBlocked_PopUp_Msg() {
 		WebElement LogMsg = driver.findElementByAccessibilityId("Content_String");
 		return FetchText(LogMsg);
+	}
+	
+	//Get the Sw version info from the About window on clicking About icon of the bottom apps bar
+	public String get_SWVersion_About_Text() throws InterruptedException {
+		Actions ac = new Actions(driver);
+		ac.contextClick().build().perform();
+		
+		WebElement bottomMenu_About_Icon = driver.findElementByAccessibilityId("AboutAppBarButton");
+		clickOn(bottomMenu_About_Icon);
+		Thread.sleep(500);
+		WebElement SWVersion_About_info = driver.findElementByAccessibilityId("SoftwareVersion");
+		
+		String[] SWVer = FetchText(SWVersion_About_info).split(":");
+		
+		return SWVer[1];
 	}
 	
 	

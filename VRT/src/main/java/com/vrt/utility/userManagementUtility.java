@@ -53,9 +53,8 @@ public class userManagementUtility extends BaseClass{
 	// Data Providers
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//UM module related Test Data reference
+	//ADMIN module related Test Data reference
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
 	@DataProvider(name = "tcADMN008")
 	public static Object[][] ADMN008() {
 		String sheetName = "tcADMN008";
@@ -72,6 +71,12 @@ public class userManagementUtility extends BaseClass{
 	@DataProvider(name = "tcADMN010")
 	public static Object[][] ADMN010() {
 		String sheetName = "tcADMN010";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	@DataProvider(name = "tcADMN011")
+	public static Object[][] ADMN011() {
+		String sheetName = "tcADMN011";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}

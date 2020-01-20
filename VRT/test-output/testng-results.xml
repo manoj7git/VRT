@@ -2,62 +2,65 @@
 <testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="22310" started-at="2019-12-01T23:05:05 IST" finished-at="2019-12-01T23:05:27 IST">
+  <suite name="Default suite" duration-ms="70687" started-at="2020-01-20T17:41:59 IST" finished-at="2020-01-20T17:43:10 IST">
     <groups>
+      <group name="Sanity">
+        <method signature="UserManagementTest.ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN006" class="com.vrt.testcases.UserManagementTest"/>
+      </group> <!-- Sanity -->
       <group name="Regression">
-        <method signature="LoginTest.LOGIN_001()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="LOGIN_001" class="com.vrt.testcases.LoginTest"/>
-        <method signature="LoginTest.LOGIN_001b()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="LOGIN_001b" class="com.vrt.testcases.LoginTest"/>
+        <method signature="UserManagementTest.ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN006" class="com.vrt.testcases.UserManagementTest"/>
+        <method signature="UserManagementTest.ADMN031()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN031" class="com.vrt.testcases.UserManagementTest"/>
       </group> <!-- Regression -->
     </groups>
-    <test name="Default test" duration-ms="22310" started-at="2019-12-01T23:05:05 IST" finished-at="2019-12-01T23:05:27 IST">
-      <class name="com.vrt.testcases.LoginTest">
-        <test-method status="PASS" signature="setExtent()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="setExtent" is-config="true" duration-ms="150" started-at="2019-12-01T23:05:05 IST" finished-at="2019-12-01T23:05:05 IST">
+    <test name="Default test" duration-ms="70687" started-at="2020-01-20T17:41:59 IST" finished-at="2020-01-20T17:43:10 IST">
+      <class name="com.vrt.testcases.UserManagementTest">
+        <test-method status="PASS" signature="UserCreationSetup()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="UserCreationSetup" is-config="true" duration-ms="41695" started-at="2020-01-20T17:41:59 IST" finished-at="2020-01-20T17:42:41 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setExtent -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="Setup" is-config="true" duration-ms="5746" started-at="2019-12-01T23:05:05 IST" finished-at="2019-12-01T23:05:11 IST">
+        </test-method> <!-- UserCreationSetup -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Setup" is-config="true" duration-ms="11275" started-at="2020-01-20T17:42:41 IST" finished-at="2020-01-20T17:42:52 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="LOGIN_001()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="LOGIN_001" duration-ms="6347" started-at="2019-12-01T23:05:11 IST" description="LOGIN_001- Verify if user can log into the Kaye Application after installation with default provided credentials" finished-at="2019-12-01T23:05:17 IST">
+        <test-method status="PASS" signature="ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN006" duration-ms="50" started-at="2020-01-20T17:42:52 IST" description="ADMN006-Verify that new user button is enabled" finished-at="2020-01-20T17:42:52 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- LOGIN_001 -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="Teardown" is-config="true" duration-ms="38" started-at="2019-12-01T23:05:17 IST" finished-at="2019-12-01T23:05:17 IST">
+        </test-method> <!-- ADMN006 -->
+        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Teardown" is-config="true" duration-ms="29" started-at="2020-01-20T17:42:52 IST" finished-at="2020-01-20T17:42:52 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=LOGIN_001 status=SUCCESS method=LoginTest.LOGIN_001()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b] output={null}]]]>
+                <![CDATA[[TestResult name=ADMN006 status=SUCCESS method=UserManagementTest.ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="Setup" is-config="true" duration-ms="3264" started-at="2019-12-01T23:05:17 IST" finished-at="2019-12-01T23:05:20 IST">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Setup" is-config="true" duration-ms="10392" started-at="2020-01-20T17:42:52 IST" finished-at="2020-01-20T17:43:02 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="LOGIN_001b()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="LOGIN_001b" duration-ms="6346" started-at="2019-12-01T23:05:20 IST" description="LOGIN_001b-Verify that Policies,Preferences screens are disabled for login with First installation" finished-at="2019-12-01T23:05:27 IST">
+        <test-method status="PASS" signature="ADMN031()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN031" duration-ms="6969" started-at="2020-01-20T17:43:02 IST" description="Verify Invalid validation for Photo field" finished-at="2020-01-20T17:43:09 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- LOGIN_001b -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="Teardown" is-config="true" duration-ms="40" started-at="2019-12-01T23:05:27 IST" finished-at="2019-12-01T23:05:27 IST">
+        </test-method> <!-- ADMN031 -->
+        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Teardown" is-config="true" duration-ms="24" started-at="2020-01-20T17:43:09 IST" finished-at="2020-01-20T17:43:09 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=LOGIN_001b status=SUCCESS method=LoginTest.LOGIN_001b()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b] output={null}]]]>
+                <![CDATA[[TestResult name=ADMN031 status=SUCCESS method=UserManagementTest.ADMN031()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.LoginTest@7e2d773b]" name="endReport" is-config="true" duration-ms="346" started-at="2019-12-01T23:05:27 IST" finished-at="2019-12-01T23:05:27 IST">
+        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="endReport" is-config="true" duration-ms="217" started-at="2020-01-20T17:43:09 IST" finished-at="2020-01-20T17:43:10 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->
-      </class> <!-- com.vrt.testcases.LoginTest -->
+      </class> <!-- com.vrt.testcases.UserManagementTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

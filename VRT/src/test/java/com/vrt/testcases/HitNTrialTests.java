@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class HitNTrialTests extends BaseClass {
 	public ExtentReports extent;
 	public ExtentTest extentTest;
 	
-	LoginPage MainLoginPage;
+	LoginPage LoginPage;
 	MainHubPage MainHubPage;
 	UserManagementPage UserManagementPage;
 	assetHubPage assetHubPage;
@@ -60,9 +61,10 @@ public class HitNTrialTests extends BaseClass {
 
 	@BeforeClass
 	private void testsetup() throws IOException {
+		//Rename the User file (NgvUsers.uxx) if exists
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");		
 		//Rename the cache Asset file (Asset.txt) if exists
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
-		
+		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
 		//Rename the Asset folder (Asset) if exists
 		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 	}
@@ -94,15 +96,15 @@ public class HitNTrialTests extends BaseClass {
 		extent.close();
 	}
 	
-	@BeforeMethod(alwaysRun=true)
+	/*@BeforeMethod(alwaysRun=true)
 	public void Setup() throws InterruptedException {		
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");			
 		Thread.sleep(1000);
-		MainLoginPage = new LoginPage();
-		MainHubPage = MainLoginPage.Login(getUID("adminFull"), getPW("adminFull"));
+		LoginPage = new LoginPage();
+		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
-		assetCreationPage=assetHubPage.ClickAddAssetBtn();
-	}
+		assetHubPage.waitforAssetHubPageLoad();
+	}*/
 
 	
 	/*// TearDown of the App
@@ -128,42 +130,33 @@ public class HitNTrialTests extends BaseClass {
 		}		
 		extent.endTest(extentTest); //ending test and ends the current test and prepare to create html report
 		driver.quit();
-	}
-*/
-	
-	//ASST36-Verify the Camera button functionality for uploading images
-	@Test()
-	public void ASST36() {
-		extentTest = extent.startTest("ASST36-Verify the Camera button functionality for uploading images");
-		SoftAssert sa = new SoftAssert();
-		//assetCreationPage.Rt_click_AsstCreationPage_ButtomAppBar();
-		
-		
-		//Capture the expected Image added to the Asset placeholder 1		
-		//assetCreationPage.Capture_AsstImg1("Expected_Asst36_AsstCreation");
-		
-		//sa.assertEquals(status_ImgCompare, false, "FAIL: The Asset Image saved is not same as what was selected");
-
-		//sa.assertAll();
-	}
-
-	
-
-		
-	/*@Test (dataProvider = "tcasst014", dataProviderClass = TestUtilities.class,
-			description="check the behaviour issue of the Asset creation")
-	public void fetchAssettypelist(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String Frequency, String FrequencyInterval, String Description) throws InterruptedException {
-		//Asset creation method
-		assetCreationPage = assetHubPage.ClickAddAssetBtn();
-		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
-				Frequency, FrequencyInterval, Description);		
-		UserLoginPopup(getUN("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset
-		// Click the Back button in the Asset creation/details page & click the Save message if
-		// displayed in order to move to Asset Hub Page
-		assetHubPage = assetCreationPage.clickBackBtn();	
 	}*/
+
 	
+	/*//Create 25 assets
+	@Test(dataProvider="testAsset", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
+			description = "Create 25 assets"
+			+ "categories model, size, manufacturer,Location and Type")
+	public void ASSTHB012a(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, String Description)
+					throws InterruptedException, ParseException {
+		extentTest = extent.startTest("Create 25 assets");
+		
+		//Forcibly creating the Assets with Last Validated data as Current date
+		//irrespective of what data is provided in the Excel sheet. 
+		//Just to save time in the date selection picker thereby reducing the time for creating assets 
+		//for any random Lst Vldt Date
+		TestUtilities tu = new TestUtilities();
+		String crntDate = tu.get_CurrentDate_inCertainFormat("MM/dd/YYYY");
+		
+		
+		//Asset creation method
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();		
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				crntDate, Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset		
+		
+	}*/
 
 
 	/*
@@ -188,20 +181,17 @@ public class HitNTrialTests extends BaseClass {
 	}
 	*/
 	
-/*	@Test (description="Check for File renaming")
-	public void renameFile2() throws IOException {
-		//Rename the User file (NgvUsers.uxx) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+	@Test (description="get Last Week Date")
+	public void getLastWeekDate() throws IOException {
+		TestUtilities tu = new TestUtilities();
+		String bkDt = tu.getBackDate_weeks(53);
+		System.out.println("Back date: " +bkDt);
 		
-		//Rename the cache Asset file (Asset.txt) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
-		
-		//Rename the Asset folder (Asset) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
-		
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		//tu.getFutureDate_weeks(1);
+	  }
+	
 				
-	}*/
+	
 	
 	
 /*	@Test

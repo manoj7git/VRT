@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UMRegressionSuite" parallel="false">
+	<test thread-count="5" name="UMTestRegression">
+		<classes>
+			<class name="com.vrt.testcases.UserManagementTest" />
+			<class name="com.vrt.testcases.UserPrivilagesTest" />
+			<class name="com.vrt.testcases.customized_UserPrivilagesTest" />
+			
+			
+		</classes>
+	</test> <!-- assetDetailsTestSanity -->
+</suite> <!-- assetDetailsTestSuite -->

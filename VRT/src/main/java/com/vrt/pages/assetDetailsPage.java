@@ -101,6 +101,10 @@ public class assetDetailsPage extends BaseClass {
 	public String setupTile_countdata() {
 		return FetchText(SetupTile_Count);
 	}
+	 // click on the setup tile
+	public void click_SetupTile() {
+		clickOn(Asset_SetupTile);	
+	}
 	
 	// Check the enable state of Initiate Qual button under Setup tile
 	public boolean InitiateQualBtn_state() {
@@ -123,7 +127,7 @@ public class assetDetailsPage extends BaseClass {
 		}
 		
 	//Click on delete icon from the qualsection
-		public void QualStudy_Delete() {
+		public void Delete_study_report() {
 	WebElement Deletestudy = driver.findElementByAccessibilityId("DeleteButton");
 			clickOn(Deletestudy);	
 		}
@@ -155,13 +159,18 @@ public class assetDetailsPage extends BaseClass {
 			WebElement QualUnderReport = driver.findElementByAccessibilityId("QualificationReportsButton");
 			clickOn(QualUnderReport);
 		}
-	
-	//Click on delete icon from QualReport under Reports tile
-	public void Report_Delete() {
-		WebElement Deletequalreport = driver.findElementByAccessibilityId("DeleteButton");
-		clickOn(Deletequalreport);
-	}
-	
+		
+	// click on the Pass/Fail sub section from Reports tile
+				public void Click_PassFailReport() {
+					WebElement PassFailReport = driver.findElementByAccessibilityId("PassFailReportsButton");
+					clickOn(PassFailReport);
+				}
+				
+	// click on the setup sub section from Reports tile
+				public void Click_SetupUnderReport() {
+					WebElement SetupUnderReport = driver.findElementByAccessibilityId("SetupReportsButton");
+					clickOn(SetupUnderReport);
+				}
 	// Get the Reports count data form the Setup tile
 	public String reportsTile_countdata() {
 		return FetchText(ReportsTile_Count);
