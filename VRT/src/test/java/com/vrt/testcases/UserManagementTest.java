@@ -1,8 +1,3 @@
-/**
- * @author ruchika.behura
- *
- */
-
 package com.vrt.testcases;
 
 import java.awt.AWTException;
@@ -42,6 +37,7 @@ import com.vrt.pages.FileManagementPage;
 public class UserManagementTest extends BaseClass {
 	public ExtentReports extent;
 	public ExtentTest extentTest;
+	TestUtilities tu = new TestUtilities();
 
 	// Initialization of the Pages
 	LoginPage LoginPage;
@@ -58,7 +54,7 @@ public class UserManagementTest extends BaseClass {
 	FileManagementPage FileManagementPage;
 	static String un = "User1";
 
-	//@BeforeTest
+	// @BeforeTest
 	@BeforeClass
 	public void UserCreationSetup() throws InterruptedException, IOException {
 
@@ -72,9 +68,11 @@ public class UserManagementTest extends BaseClass {
 
 		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
-		
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+        renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "VRTEquipments");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Equipment.txt");
+
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
@@ -97,17 +95,14 @@ public class UserManagementTest extends BaseClass {
 		Thread.sleep(1000);
 	}
 
-	
 	// After All the tests are conducted
-	//@AfterTest
+	// @AfterTest
 	@AfterClass
 	public void endReport() {
 		extent.flush();
 		extent.close();
-		System.out.println("left AT in UMTest");
 	}
-	
-	
+
 	// Before Method
 	@BeforeMethod(alwaysRun = true)
 	public void Setup() throws InterruptedException {
@@ -116,9 +111,9 @@ public class UserManagementTest extends BaseClass {
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		System.out.println("left BM in UMTest");
 	}
 
+	//TearDown-AftrMethod
 	@AfterMethod(alwaysRun = true)
 	public void Teardown(ITestResult result) throws IOException {
 		if (result.getStatus() == ITestResult.FAILURE) {
@@ -144,15 +139,13 @@ public class UserManagementTest extends BaseClass {
 
 		}
 		extent.endTest(extentTest); // ending test and ends the current test and prepare to create html report
-
 		driver.quit();
-
 	}
 
-// ADMN001 to ADMN005 covered in login class
+	// ADMN001 to ADMN005 covered in login class
 
 	
-// ADMN006
+	// ADMN006
 	@Test(groups = { "Sanity", "Regression" }, description = "ADMN006-Verify that new user button is enabled")
 	public void ADMN006() throws Exception {
 		extentTest = extent.startTest("ADMN006-Verify that new user button is enabled");
@@ -164,9 +157,8 @@ public class UserManagementTest extends BaseClass {
 		sa2.assertEquals(state, true, "FAIL: New User Button Not Available");
 		sa2.assertAll();
 	}
-	
-	
-// ADMN007
+
+	// ADMN007
 	@Test(groups = { "Regression" }, description = "Verify if select the New User button and "
 			+ "check if a form to fill in the Name, User ID, Password, Confirm Password, Title, User Type, "
 			+ "Phone, Email and Assigning privileges is opened up for entries.")
@@ -213,7 +205,7 @@ public class UserManagementTest extends BaseClass {
 
 	}
 
-// ADMN008
+	// ADMN008
 	@Test(dataProvider = "tcADMN008", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "ADMN124-Verify if mandatory fields are marked on the user management screen-Name, "
 					+ "User ID, Password, Confirm Password, Title and User Type")
@@ -239,8 +231,8 @@ public class UserManagementTest extends BaseClass {
 		sa4.assertEquals(ActBlankFieldAlertMsg, ExpAlrtMsg);
 		sa4.assertAll();
 	}
-	
-// ADMN009
+
+	// ADMN009
 	@Test(dataProvider = "tcADMN009", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs allowed for User Name Field at User Management screen")
 
@@ -263,8 +255,8 @@ public class UserManagementTest extends BaseClass {
 		sa5.assertEquals(UserManagementPage.UserLoginPopupVisible(), true);
 		sa5.assertAll();
 	}
-	
-// ADMN009A
+
+	// ADMN009A
 	@Test(groups = {
 			"Regression" }, description = "Verify Name field at User Management screen accepts maximum of 35 characters")
 	public void ADMN009A() throws InterruptedException {
@@ -274,16 +266,18 @@ public class UserManagementTest extends BaseClass {
 		SoftAssert sa6 = new SoftAssert();
 		UserManagementPage.ClickNewUser();
 		String expectedtxt = "123456789A123456789A123456789012345Z"; // 36 Char input
-		//System.out.println("count of User Name text entered: " + expectedtxt.length());
+		// System.out.println("count of User Name text entered: " +
+		// expectedtxt.length());
 		UserManagementPage.enterNewUserName(expectedtxt);
 		String actualtextentered = UserManagementPage.GetUserNametext();
-		//System.out.println("count of User Name text to be entered: " + actualtextentered.length());
+		// System.out.println("count of User Name text to be entered: " +
+		// actualtextentered.length());
 
 		sa6.assertEquals(actualtextentered.length(), 35, "FAIL: Username field accepts more than 35 characters");
 		sa6.assertAll();
 	}
-	
-// ADMN010
+
+	// ADMN010
 	@Test(dataProvider = "tcADMN010", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Invalid inputs allowed  for User Name Field at User Management screen")
 
@@ -303,18 +297,19 @@ public class UserManagementTest extends BaseClass {
 		UserManagementPage.ClickNewUser();
 
 		UserManagementPage.UMCreation_MandatoryFields(Name, UserID, Password, ConfirmPassword, Title, UserType);
+		// UserManagementPage.ClickNewUserSaveButton();
 		String ActInvalidFieldAlertMsg = UserManagementPage.AlertMsg();
 
 		sa7.assertEquals(ActInvalidFieldAlertMsg, ExpAlrtMsg, "FAIL: Not Matched");
 		sa7.assertAll();
 	}
-	
 
-// ADMN011
+	// ADMN011
 	@Test(dataProvider = "tcADMN011", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Valid inputs allowed for User ID Field at User management screen")
 
-	public void ADMN011(String Name, String UserID, String Password, String ConfirmPassword, String Title, String UserType) throws InterruptedException {
+	public void ADMN011(String Name, String UserID, String Password, String ConfirmPassword, String Title,
+			String UserType) throws InterruptedException {
 		extentTest = extent
 				.startTest("ADMN011-Verify Valid inputs allowed for User ID Field at User management screen");
 
@@ -327,9 +322,8 @@ public class UserManagementTest extends BaseClass {
 		sa9.assertEquals(UserManagementPage.UserLoginPopupVisible(), true);
 		sa9.assertAll();
 	}
-	
-	
-// ADMN011A
+
+	// ADMN011A
 	@Test(groups = {
 			"Regression" }, description = "Verify User ID field at User Management screen accepts maximum of 16 characters")
 	public void ADMN011A() throws InterruptedException {
@@ -348,7 +342,7 @@ public class UserManagementTest extends BaseClass {
 		sa10.assertAll();
 	}
 
-// ADMN012
+	// ADMN012
 	@Test(dataProvider = "tcADMN012", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify Invalid inputs allowed for User ID Field at User management screen")
 
@@ -373,9 +367,8 @@ public class UserManagementTest extends BaseClass {
 		sa8.assertEquals(ActInvalidUIDAlertMsg, ExpAlrtMsg, "FAIL: Not Matched");
 		sa8.assertAll();
 	}
-	
 
-//ADMN013
+	//ADMN013
 	@Test(groups = { "Regression" }, description = "Verify Unique user ID functionality at User management screen")
 
 	public void ADMN013() throws InterruptedException {
@@ -392,10 +385,8 @@ public class UserManagementTest extends BaseClass {
 		sa11.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User ID Field do not accept unique data");
 		sa11.assertAll();
 	}
-	
-	
-	
-	// ADMN014	
+
+	// ADMN014
 	@Test(groups = { "Regression" }, description = "Verify Unique user Name functionality at User management screen")
 
 	public void ADMN014() throws InterruptedException {
@@ -409,8 +400,7 @@ public class UserManagementTest extends BaseClass {
 		sa12.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User NAme should be unique");
 		sa12.assertAll();
 	}
-	
-	
+
 	// ADMN014A
 	@Test(groups = { "Regression" }, description = "Verify Save button before/After entering value to password field")
 
@@ -431,7 +421,6 @@ public class UserManagementTest extends BaseClass {
 		sa13.assertEquals(UserManagementPage.IsSaveButtonEnable(), true, "Fail:Save Button Must be Enable");
 		sa13.assertAll();
 	}
-	
 
 	// ADMN014B
 	@Test(groups = {
@@ -452,10 +441,9 @@ public class UserManagementTest extends BaseClass {
 		sa14.assertEquals(UserManagementPage.IsSaveButtonEnable(), true, "Fail:Save Button Must be Enable");
 		sa14.assertAll();
 	}
-	
-	//Tc ADMN015 to ADMN018 will be cover in policies module
-	
-	
+
+	// Tc ADMN015 to ADMN018 will be cover in policies module
+
 	// ADMN019
 	@Test(groups = {
 			"Regression" }, description = "Verify the password mismatch functionality in User Management Screen")
@@ -479,8 +467,7 @@ public class UserManagementTest extends BaseClass {
 		sa15.assertEquals(UserManagementPage.IsSaveButtonEnable(), false);
 		sa15.assertAll();
 	}
-	
-	
+
 	// ADMN020
 	@Test(groups = { "Regression" }, description = "Verify the save btn is disable when both password and"
 			+ "confirm password are not entered in User Management Screen")
@@ -496,13 +483,13 @@ public class UserManagementTest extends BaseClass {
 		sa16.assertEquals(UserManagementPage.IsSaveButtonEnable(), false, "Save Button Should be Disable");
 		sa16.assertAll();
 	}
-	
 
 	// ADMN021
 	@Test(dataProvider = "tcADMN021", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs allowed for Title field validations")
 
-	public void ADMN021(String Name, String UserID, String Password, String ConfirmPassword, String Title, String UserType) throws InterruptedException {
+	public void ADMN021(String Name, String UserID, String Password, String ConfirmPassword, String Title,
+			String UserType) throws InterruptedException {
 		extentTest = extent.startTest("ADMN021-Verify the Valid inputs allowed for Title field validations");
 
 		SoftAssert s18 = new SoftAssert();
@@ -513,33 +500,31 @@ public class UserManagementTest extends BaseClass {
 		s18.assertEquals(UserManagementPage.UserLoginPopupVisible(), true);
 		s18.assertAll();
 	}
-	
 
 	// ADMN021a
-	@Test(groups = {"Regression" }, 
-			description = "Verify the Valid inputs-Max Char allowed for Title field validations")
+	@Test(groups = {
+			"Regression" }, description = "Verify the Valid inputs-Max Char allowed for Title field validations")
 
 	public void ADMN021a() throws InterruptedException {
 		extentTest = extent.startTest("ADMN021a-Verify the Valid inputs-Max Char allowed for Title field validations");
-		
+
 		SoftAssert sa = new SoftAssert();
 		UserManagementPage.ClickNewUser();
 
-		String expectedvalue = "12345678901234567890123456789012345678901234567890b"; // 51 Char input		
+		String expectedvalue = "12345678901234567890123456789012345678901234567890b"; // 51 Char input
 		UserManagementPage.enterNewUserTitle(expectedvalue);
 		String actualvalueentered = UserManagementPage.get_UserTitle();
 
 		sa.assertEquals(actualvalueentered.length(), 50, "FAIL:Username field accepts more than 50 characters");
 		sa.assertAll();
 	}
-	
-	
-	// ADMN022	
+
+	// ADMN022
 	@Test(dataProvider = "tcADMN022", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Invalid inputs not allowed for Title field validations")
 
-	public void ADMN022(String Name, String UserID, String Password, String ConfirmPassword, 
-			String Title, String UserType, String ExpAlrtMsg) throws InterruptedException {
+	public void ADMN022(String Name, String UserID, String Password, String ConfirmPassword, String Title,
+			String UserType, String ExpAlrtMsg) throws InterruptedException {
 		extentTest = extent.startTest("ADMN022-Verify the Invalid inputs not allowed for Title field validations");
 
 		SoftAssert sa = new SoftAssert();
@@ -551,12 +536,10 @@ public class UserManagementTest extends BaseClass {
 		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message should be displayed");
 		sa.assertAll();
 	}
-	
-	
+
 	// ADMN023-This TC Can be tested while testing user privileges
 
 	// ADMN024
-
 	@Test(groups = { "Regression" }, description = "Verify the Invalid inputs for User type field validations")
 
 	public void ADMN024() throws InterruptedException {
@@ -575,7 +558,6 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN025
-
 	@Test(dataProvider = "tcADMN025", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Valid inputs for Phone number field")
 
@@ -601,7 +583,6 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN026
-
 	@Test(dataProvider = "tcADMN026", dataProviderClass = userManagementUtility.class, groups = {
 			"Regression" }, description = "Verify the Invalid inputs for Phone number field")
 
@@ -699,10 +680,9 @@ public class UserManagementTest extends BaseClass {
 		UserManagementPage.ClickNewUser();
 		UserManagementPage.click_UserImageTile();
 		UserManagementPage.click_UploadBrowseBtn();
-		UserManagementPage.upload_UserImage("UserimageValid");
+		UserManagementPage.upload_UserImage("UserimageValid.jpg");
 		System.out.println("Image Uploaded Successfully");
 	}
-	
 
 	// ADMN031
 	@Test(groups = { "Regression" }, description = "Verify Invalid validation for Photo field")
@@ -719,11 +699,8 @@ public class UserManagementTest extends BaseClass {
 				"FAIL:Alert message should be displayed as-Select image file with size less than 5 mb ");
 		sa22.assertAll();
 	}
-	
 
-	
-// ADMN032
-
+	// ADMN032
 	@Test(groups = { "Regression" }, description = "Verify the Disable User Account check Box validations")
 	public void ADMN032() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN032-Verify the Disable User Account check Box validations");
@@ -734,9 +711,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-	
-// ADMN032A
-
+	// ADMN032A
 	@Test(groups = { "Regression" }, description = "Verify Application should not allow to login with disable User id")
 	public void ADMN032A() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN032A-Verify Application should not allow to login with disable User id ");
@@ -745,8 +720,8 @@ public class UserManagementTest extends BaseClass {
 		UserManagementPage.ClickNewUser();
 		UserManagementPage.UMPrivilages("dsbl1", getUID("Dsbluser"), "Start@1AM", "Start@1AM", "AdminNew",
 				"System Administrator");
-		//UserManagementPage.clickPrivCreateEditAsset();
-		//UserManagementPage.clickPrivCreateEditSetup();
+		// UserManagementPage.clickPrivCreateEditAsset();
+		// UserManagementPage.clickPrivCreateEditSetup();
 		UserManagementPage.ClickNewUserSaveButton();
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		MainHubPage = UserManagementPage.ClickBackButn();
@@ -766,10 +741,8 @@ public class UserManagementTest extends BaseClass {
 		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User Should Not be Allowed To Login");
 		sa.assertAll();
 	}
-	
-	
-//ADMN033
 
+	//ADMN033
 	@Test(groups = { "Regression" }, description = "Verify if a user can not disable his own account")
 	public void ADMN033() throws InterruptedException {
 		extentTest = extent.startTest("ADMN033-Verify if a user can not disable his own account");
@@ -782,8 +755,8 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 	
-
-//ADMN034
+	
+	//ADMN034
 	@Test(groups = { "Regression" }, description = "Verify the functionality when disabled user credentials "
 			+ "are given in authentication window of Equipment-Logger details screen")
 	public void ADMN034() throws InterruptedException {
@@ -791,7 +764,7 @@ public class UserManagementTest extends BaseClass {
 				+ "authentication window of Equipment-Logger details screen");
 		SoftAssert sa = new SoftAssert();
 		UserManagementPage.ClickNewUser();
-		UserManagementPage.UMCreation_MandatoryFields("ADMN034", "034", "Start@1AM", "Start@1AM", "AdminNew",
+		UserManagementPage.UMCreation_MandatoryFields("ADMN034", getUID("Dsbluser"), getPW("Dsbluser"), getPW("Dsbluser"), "AdminNew",
 				"System Administrator");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 
@@ -801,32 +774,31 @@ public class UserManagementTest extends BaseClass {
 		UserManagementPage.Select_DisableUserCheckBox();
 		UserManagementPage.ClickNewUserSaveButton();
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		//tu.click_Close_alertmsg();
 		MainHubPage = UserManagementPage.ClickBackButn();
 
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		EquipmentPage = EquipmentHubPage.ClickAddButton();
-		EquipmentPage.BaseStation_EqipCreation_MandatoryFields("ADMN034", "102", "ADMN034");
-		UserLoginPopup("034", "Start@1AM");
+		EquipmentPage.BaseStation_EqipCreation_MandatoryFields("Base Station", "ADMN034", "102", "ADMN034");
+		UserLoginPopup(getUID("Dsbluser"), getPW("Dsbluser"));
 		String ExpAlrtMsg = "User account has been disabled, please contact administrator";
 		String ActAlertMsg = EquipmentPage.AlertMsg();
 		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Disable user should not be able to create equipments");
 		sa.assertAll();
 	}
 	
-
 	
-	//ADMN034A
-	@Test(groups = {"Regression" }, description = "ADMN034A-Verify the functionality when disabled "
+	// ADMN034A
+	@Test(groups = { "Regression" }, description = "ADMN034A-Verify the functionality when disabled "
 			+ "user credentials are given in authentication window of Edit Equipment")
 	public void ADMN034A() throws InterruptedException {
-		extentTest = extent.startTest(
-				"ADMN034A-Verify the functionality when disabled user credentials are "
+		extentTest = extent.startTest("ADMN034A-Verify the functionality when disabled user credentials are "
 				+ "given in authentication window of Edit Equipment");
 		SoftAssert sa = new SoftAssert();
 		MainHubPage = UserManagementPage.ClickBackButn();
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		EquipmentPage = EquipmentHubPage.ClickAddButton();
-		EquipmentPage.EqipCreation_MandatoryFields("102B", "202", "IRTD");
+		EquipmentPage.EqipCreation_MandatoryFields("IRTD", "102B", "202");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		EquipmentHubPage = EquipmentPage.ClickBackBtn();
 		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
@@ -834,18 +806,20 @@ public class UserManagementTest extends BaseClass {
 		IRTDDetailspage.EditIRTDEquip("test");
 		UserLoginPopup(getUID("Dsbluser"), getPW("Dsbluser"));
 		String ExpAlrtMsg = "User account has been disabled, please contact administrator";
-		String ActAlertMsg = IRTDDetailspage.AlertMsg();
+		String ActAlertMsg = tu.get_AlertMsg_text();
 		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:  Disable user should not be able to edit equipments");
 		sa.assertAll();
 	}
 
-	//dependsOnMethods = { "ADMN032A", "ADMN034A" }
+	// dependsOnMethods = { "ADMN032A", "ADMN034A" }
 	// ADMN034B
-	@Test( groups = {
-			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of delete Equipment")
+	@Test(groups = {
+			"Regression" }, description = "Verify the functionality when disabled user credentials are given in "
+					+ "authentication window of delete Equipment")
 	public void ADMN034B() throws InterruptedException {
 		extentTest = extent.startTest(
-				"ADMN034B-Verify the functionality when disabled user credentials are given in authentication window of delete Equipment");
+				"ADMN034B-Verify the functionality when disabled user credentials are given in authentication "
+				+ "window of delete Equipment");
 		SoftAssert sa = new SoftAssert();
 		MainHubPage = UserManagementPage.ClickBackButn();
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
@@ -855,14 +829,15 @@ public class UserManagementTest extends BaseClass {
 		IRTDDetailspage.ClickYesBtn();
 		UserLoginPopup(getUID("Dsbluser"), getPW("Dsbluser"));
 		String ExpAlrtMsg = "User account has been disabled, please contact administrator";
-		String ActAlertMsg = IRTDDetailspage.AlertMsg();
+		String ActAlertMsg = tu.get_AlertMsg_text();
 		sa.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL:  Disable user should not be able to delete equipments");
 		sa.assertAll();
 	}
-
-//ADMN036
-	//dependsOnMethods = "ADMN032A"
-	@Test( groups = {
+	
+	
+	//ADMN036
+	// dependsOnMethods = "ADMN032A"
+	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of Assets screen")
 	public void ADMN036() throws InterruptedException {
 		extentTest = extent.startTest(
@@ -880,8 +855,8 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN036A
-	//dependsOnMethods = "ADMN032A",
-	@Test( groups = {
+	// dependsOnMethods = "ADMN032A",
+	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of Edit in Assets screen")
 	public void ADMN036A() throws InterruptedException {
 		extentTest = extent.startTest(
@@ -904,8 +879,8 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN036B
-	//dependsOnMethods = { "ADMN032A", "ADMN036A" },
-	@Test( groups = {
+	// dependsOnMethods = { "ADMN032A", "ADMN036A" },
+	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of delete Assets screen")
 	public void ADMN036B() throws InterruptedException {
 		extentTest = extent.startTest(
@@ -922,7 +897,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN042
+	//ADMN042
 	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of Admin screen-Create")
 	public void ADMN042() throws InterruptedException {
@@ -939,7 +914,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN042A
+	//ADMN042A
 	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of Admin screen-Edit")
 	public void ADMN042A() throws InterruptedException {
@@ -955,7 +930,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN042B
+	//ADMN042B
 	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of Admin screen-Delete")
 	public void ADMN042B() throws InterruptedException {
@@ -972,8 +947,8 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN043
-	//dependsOnMethods = "ADMN032A",
-	@Test( groups = {
+	// dependsOnMethods = "ADMN032A",
+	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of File Management screen")
 	public void ADMN043() throws InterruptedException {
 		extentTest = extent.startTest(
@@ -990,8 +965,8 @@ public class UserManagementTest extends BaseClass {
 	}
 
 	// ADMN043A
-	//dependsOnMethods = "ADMN032A",
-	@Test( groups = {
+	// dependsOnMethods = "ADMN032A",
+	@Test(groups = {
 			"Regression" }, description = "Verify the functionality when disabled user credentials are given in authentication window of File Management screen")
 	public void ADMN043A() throws InterruptedException {
 		extentTest = extent.startTest(
@@ -1007,7 +982,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-// ADMN044
+	// ADMN044
 	@Test(groups = { "Regression" }, description = "Verify User Creation for an Administator User")
 	public void ADMN044() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN044-Verify User Creation for an Administrator User");
@@ -1036,10 +1011,9 @@ public class UserManagementTest extends BaseClass {
 
 	}
 
-// ADMN045
-	//dependsOnMethods = "ADMN044",
-	@Test( groups = {
-			"Regression" }, description = "ADMN045-Verify Reset pwd functionality for second user-Admin")
+	// ADMN045
+	// dependsOnMethods = "ADMN044",
+	@Test(groups = { "Regression" }, description = "ADMN045-Verify Reset pwd functionality for second user-Admin")
 	public void ADMN045() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN045-Verify Reset pwd functionality for second user-Admin");
 		MainHubPage = UserManagementPage.ClickBackButn();
@@ -1058,8 +1032,8 @@ public class UserManagementTest extends BaseClass {
 		sa25.assertAll();
 	}
 
-// ADMN045A
-	//dependsOnMethods = { "ADMN044", "ADMN045" }, 
+	// ADMN045A
+	// dependsOnMethods = { "ADMN044", "ADMN045" },
 	@Test(groups = {
 			"Regression" }, description = "Verify user should not be able to login with the Pre-Reset password")
 	public void ADMN045A() throws InterruptedException, ParseException, IOException, AWTException {
@@ -1075,47 +1049,39 @@ public class UserManagementTest extends BaseClass {
 		sa26.assertEquals(ActAlert, ExptedAlert,
 				"FAIL:Invalid Credential, Please try again message should be displayed");
 		sa26.assertAll();
-	}
+	}	
 	
-
-//ADMN069
+	//ADM046 - ADM068 TC's: Refer UserPrivilegesTest Script
+	
+	//ADMN069
 	@Test(groups = { "Regression" }, description = "Verify mandatory login for a new user before saving any changes")
-	public void ADMN069() throws InterruptedException, ParseException, IOException, AWTException {
-		
+	public void ADMN069() throws InterruptedException {
+
 		extentTest = extent.startTest("ADMN069-Verify mandatory login for a new user before saving any changes");
 		SoftAssert s = new SoftAssert();
+		UserManagementPage.CreateAdminUser(getUID("adminFull"), getPW("adminFull"), "NewU1", getUID("Newuser"), getPW("Newuser"), "Admin",
+				"12324", "abc@gmail.com");
+		UserManagementPage.click_Close_alertmsg();
 		UserManagementPage.ClickNewUser();
-		UserManagementPage.UMPrivilages("NewU1", getUID("Newuser"), "Start@7AM", "Start@7AM", "AdminNew",
-				"System Administrator");
-		//UserManagementPage.clickPrivCreateEditAsset();
-		//UserManagementPage.clickPrivCreateEditSetup();
-		UserManagementPage.ClickNewUserSaveButton();
-		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));		
-		UserManagementPage.ClickNewUser();
-		UserManagementPage.UMCreation_MandatoryFields("TestX", "11X", "1Start@1AM", "1Start@1AM", "Admin", "Operator");
-		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
+		UserManagementPage.CreateOperatorUser(getUID("Newuser"), getPW("Newuser"), "TestX", "ADMN069", "ADMN069", "Operator", "12324", "abc@gmail.com");
 		String ExptedAlert = "Please login the system at least once";
-		String ActAlert = UserManagementPage.AlertMsg();		
+		String ActAlert = UserManagementPage.AlertMsg();
 		s.assertEquals(ActAlert, ExptedAlert, "FAIL: Alert message should be displayed");
 		s.assertAll();
-	}
+	}	
+
 	
-	
-	
-	//ADMN069A
+	// ADMN069A
 	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Equipment Creation")
 	public void ADMN069A() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest(
 				"ADMN069A-Verify mandatory login for a new user before saving any changes-Equipment Creation");
-		UserManagementPage.ClickNewUser();
-		UserManagementPage.UMCreation_MandatoryFields("ADMN069A", "69A", "1Start@1AM", "1Start@1AM", "Admin", "Operator");
-		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		MainHubPage = UserManagementPage.ClickBackButn();
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		EquipmentPage = EquipmentHubPage.ClickAddButton();
-		EquipmentPage.BaseStation_EqipCreation_MandatoryFields("ADMN069A", "20A", "ADMN069A");
-		UserLoginPopup("69A", "1Start@1AM");
+		EquipmentPage.BaseStation_EqipCreation_MandatoryFields("Base Station", "ADMN069A", "20A", "ADMN069A");
+		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
 		String ExptedAlert = "Please login the system at least once";
 		String ActAlert = EquipmentPage.AlertMsg();
 		SoftAssert s = new SoftAssert();
@@ -1123,10 +1089,9 @@ public class UserManagementTest extends BaseClass {
 		s.assertAll();
 	}
 
-	
-//ADMN069B
-	//dependsOnMethods = "ADMN034A",
-	@Test( groups = {
+	//ADMN069B
+	// dependsOnMethods = "ADMN034A",
+	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Equipment Edit")
 	public void ADMN069B() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
@@ -1134,23 +1099,23 @@ public class UserManagementTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		EquipmentPage = EquipmentHubPage.ClickAddButton();
-		EquipmentPage.EqipCreation_MandatoryFields("1022B", "2202", "IRTD");
+		EquipmentPage.EqipCreation_MandatoryFields("IRTD", "ADMN069B", "2202");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		EquipmentHubPage = EquipmentPage.ClickBackBtn();
 		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
-		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("1022B");
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("ADMN069B");
 		IRTDDetailspage.EditIRTDEquip("test");
 		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
 		String ExptedAlert = "Please login the system at least once";
-		String ActAlert = IRTDDetailspage.AlertMsg();
+		String ActAlert = tu.get_AlertMsg_text();
 		SoftAssert s = new SoftAssert();
 		s.assertEquals(ActAlert, ExptedAlert,
 				"FAIL: Alert message should be displayed as Please login the system at least once ");
 		s.assertAll();
 	}
 
-//ADMN069C
-	//dependsOnMethods = "ADMN034A", 
+	//ADMN069C
+	// dependsOnMethods = "ADMN034A",
 	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Equipment Delete")
 	void ADMN069C() throws InterruptedException {
@@ -1160,18 +1125,19 @@ public class UserManagementTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
-		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("102B");
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("ADMN069B");
 		IRTDDetailspage.clickDeleteEquipmentIcon();
 		IRTDDetailspage.ClickYesBtn();
 		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
 		String ExpAlrtMsg = "Please login the system at least once";
-		String ActAlertMsg = IRTDDetailspage.AlertMsg();
+		String ActAlertMsg = tu.get_AlertMsg_text();
 		sa.assertEquals(ActAlertMsg, ExpAlrtMsg,
 				"FAIL: Alert message should be displayed as Please login the system at least once ");
 		sa.assertAll();
 	}
-
-//ADMN069D
+	
+		
+	//ADMN069D
 	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Aseert Creation")
 	public void ADMN069D() throws InterruptedException {
@@ -1179,7 +1145,7 @@ public class UserManagementTest extends BaseClass {
 				.startTest("ADMN069D-Verify mandatory login for a new user before saving any changes-Aseert Creation");
 		SoftAssert sa = new SoftAssert();
 		MainHubPage = UserManagementPage.ClickBackButn();
-		assetHubPage = MainHubPage.ClickAssetTile();
+		assetHubPage = MainHubPage.ClickAssetTile();		
 		assetCreationPage = assetHubPage.Click_AddAssetButton();
 		assetCreationPage.assetCreation("NWAst2", "201A", "HeatBath", "HYdd", "Ind");
 		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
@@ -1190,9 +1156,9 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN069E
-	//dependsOnMethods = "ADMN036A",
-	@Test( groups = {
+	//ADMN069E
+	// dependsOnMethods = "ADMN036A",
+	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Aseert Edit")
 	public void ADMN069E() throws InterruptedException {
 		extentTest = extent
@@ -1200,8 +1166,13 @@ public class UserManagementTest extends BaseClass {
 		SoftAssert sa = new SoftAssert();
 		MainHubPage = UserManagementPage.ClickBackButn();
 		assetHubPage = MainHubPage.ClickAssetTile();
-		assetDetailsPage = assetHubPage.click_assetTile("DUAst3");
+		assetCreationPage = assetHubPage.Click_AddAssetButton();
+		assetCreationPage.assetCreation("NWAst2", "201A", "HeatBath", "HYdd", "Ind");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		assetHubPage = assetCreationPage.clickBackBtn();
+		assetDetailsPage = assetHubPage.click_assetTile("NWAst2");
 		assetCreationPage = assetDetailsPage.click_assetEditBtn();
+		assetCreationPage.enterModelName("abc");
 		assetCreationPage.clickSaveBtn();
 		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
 		String ExpAlrtMsg = "Please login the system at least once";
@@ -1211,9 +1182,9 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN069F
-	//dependsOnMethods = "ADMN036A",
-	@Test( groups = {
+	//ADMN069F
+	// dependsOnMethods = "ADMN036A",
+	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Aseert Delete")
 	public void ADMN069F() throws InterruptedException {
 		extentTest = extent
@@ -1221,7 +1192,7 @@ public class UserManagementTest extends BaseClass {
 		SoftAssert sa = new SoftAssert();
 		MainHubPage = UserManagementPage.ClickBackButn();
 		assetHubPage = MainHubPage.ClickAssetTile();
-		assetDetailsPage = assetHubPage.click_assetTile("DUAst3");
+		assetDetailsPage = assetHubPage.click_assetTile("NWAst2");
 		assetDetailsPage.DeleteAssert();
 		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
 		String ExpAlrtMsg = "Please login the system at least once";
@@ -1230,8 +1201,9 @@ public class UserManagementTest extends BaseClass {
 				"FAIL: Alert message should be displayed as Please login the system at least once");
 		sa.assertAll();
 	}
-
-//ADMN069G
+	
+	
+	//ADMN069G
 	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Admin screen-Edit")
 	public void ADMN069G() throws InterruptedException {
@@ -1248,7 +1220,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN069H
+	//ADMN069H
 	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Admin screen-Delete")
 	public void ADMN069H() throws InterruptedException {
@@ -1265,7 +1237,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN069I
+	//ADMN069I
 	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-File Management screen")
 	public void ADMN069I() throws InterruptedException {
@@ -1283,7 +1255,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//ADMN069J
+	//ADMN069J
 	@Test(groups = {
 			"Regression" }, description = "Verify mandatory login for a new user before saving any changes-Admin screen-Delete File Management screen")
 	public void ADMN069J() throws InterruptedException {
@@ -1300,11 +1272,11 @@ public class UserManagementTest extends BaseClass {
 				"FAIL: Alert message should be displayed as Please login the system at least once");
 		sa.assertAll();
 	}
-
-//ADMN126
-	//dependsOnMethods = { "ADMN044", "ADMN045" }, 
-	@Test(groups = {
-			"Regression" }, description = "Verify the delete button functionality in user management screen")
+	
+	
+	//ADMN126
+	// dependsOnMethods = { "ADMN044", "ADMN045" },
+	@Test(groups = { "Regression" }, description = "Verify the delete button functionality in user management screen")
 	public void ADMN126() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN126-Verify the delete btn functionality in user mgmt screen");
 		SoftAssert s27 = new SoftAssert();
@@ -1315,10 +1287,9 @@ public class UserManagementTest extends BaseClass {
 		s27.assertAll();
 	}
 
-//ADMN126A
-	//dependsOnMethods = { "ADMN044", "ADMN045" }, 
-	@Test(groups = {
-			"Regression" }, description = "Verify NO button functionality from the Delete confirmation pop-up")
+	//ADMN126A
+	// dependsOnMethods = { "ADMN044", "ADMN045" },
+	@Test(groups = { "Regression" }, description = "Verify NO button functionality from the Delete confirmation pop-up")
 	public void ADMN126A() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN126A-Verify NO button functionality from the Delete confirmation pop-up");
 		SoftAssert sa28 = new SoftAssert();
@@ -1333,10 +1304,9 @@ public class UserManagementTest extends BaseClass {
 		sa28.assertAll();
 	}
 
-//ADMN127
-	//dependsOnMethods = { "ADMN044", "ADMN045" },
-	@Test( groups = {
-			"Regression" }, description = "Verify user is able to delete the selected account")
+	//ADMN127
+	// dependsOnMethods = { "ADMN044", "ADMN045" },
+	@Test(groups = { "Regression" }, description = "Verify user is able to delete the selected account")
 	public void ADMN127() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN127-Verify user is able to delete the selected account");
 		SoftAssert sa29 = new SoftAssert();
@@ -1360,8 +1330,8 @@ public class UserManagementTest extends BaseClass {
 		sa29.assertAll();
 	}
 
-//ADMN128
-	//dependsOnMethods = { "ADMN044", "ADMN045", "ADMN127" }, 
+	//ADMN128
+	// dependsOnMethods = { "ADMN044", "ADMN045", "ADMN127" },
 	@Test(groups = {
 			"Regression" }, description = "Verify the deleted user should not be able to login to the application")
 	public void ADMN128() throws InterruptedException, ParseException, IOException, AWTException {
@@ -1376,9 +1346,9 @@ public class UserManagementTest extends BaseClass {
 		sa30.assertAll();
 	}
 
-//ADMN129
-	//dependsOnMethods = { "ADMN044", "ADMN045", "ADMN127" },
-	@Test( groups = {
+	//ADMN129
+	// dependsOnMethods = { "ADMN044", "ADMN045", "ADMN127" },
+	@Test(groups = {
 			"Regression" }, description = "ADMN129-Verify Create a new user by Entering already deleted  User ID ")
 	public void ADMN129() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("ADMN129-Verify Create a new user by Entering already deleted  User ID ");
@@ -1393,7 +1363,7 @@ public class UserManagementTest extends BaseClass {
 		s31.assertAll();
 	}
 
-//ADMN132
+	//ADMN132
 	@Test(groups = { "Regression" }, description = "Verify the cancel button functionality")
 	public void ADMN132() throws InterruptedException {
 		extentTest = extent.startTest("ADMN132-Verify the cancel button functionality");
@@ -1405,5 +1375,4 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 	
-
 }

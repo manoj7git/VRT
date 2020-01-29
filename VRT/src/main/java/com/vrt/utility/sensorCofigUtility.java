@@ -235,6 +235,7 @@ public class sensorCofigUtility extends BaseClass{
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
+	
 	@DataProvider(name = "TcSC064")
 	public static Object[][] SC064() {
 		String sheetName = "TcSC064";

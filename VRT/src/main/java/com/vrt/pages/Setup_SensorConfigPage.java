@@ -72,7 +72,7 @@ public class Setup_SensorConfigPage extends BaseClass {
 	}
 	
 	
-	// click GroupSensors_btn to navigate Group Sensors page(less number of sensor config)
+	// click GroupSensors_btn to navigate Group Sensors page click YES (less number of sensor config)
 	
 	public GroupSensorspage Click_nextbtn_GroupSensors() {
 		clickOn(GroupSensors_btn);
@@ -81,7 +81,16 @@ public class Setup_SensorConfigPage extends BaseClass {
 		return new GroupSensorspage();
 	}
 	
-	// Get the Sensor Configuration page title text
+	//Fetch the alert text message for the less number of sensor configure
+	
+	public boolean Is_lessnumberSenAlertBox_Visible()
+	{
+		clickOn(GroupSensors_btn);	
+		 WebElement alert_text = driver.findElementByName("Less number of sensors are configured than the defined/added number of sensors. Is this Intentional ?");
+		 return IsElementVisibleStatus(alert_text);
+	}
+	
+// Get the Sensor Configuration page title text
 	public String get_SensorConfigurationPage_titletext() {
 		return FetchText(SensorConfigPageHeaderTxt);
 	}
@@ -272,6 +281,12 @@ public class Setup_SensorConfigPage extends BaseClass {
 		Tmpsenr.get(0).click();	
 	}
 	
+	//Get sensor text
+	public String get_sensortext() {
+		List<WebElement> senrList = driver.findElementByName("VRT.DataObjects.DataContracts.VRTSensors").findElements(By.className("TextBlock"));
+		return FetchText(senrList.get(0));
+	}
+	
 	//click 2nd sensor from Temperature filter
 		public void Click_Temp_sensor2() {
 			//WebElement temp_senr = driver.findElementByName("Sensor 1");
@@ -304,7 +319,6 @@ public class Setup_SensorConfigPage extends BaseClass {
 			
 		}
 		
-		
 		//click Multiple sensors from Humidity filter
 				public void Click_Hmd_sensor_Multi() {
 					//WebElement temp_senr = driver.findElementByName("Sensor 1");
@@ -313,7 +327,14 @@ public class Setup_SensorConfigPage extends BaseClass {
 					Hmdsenr.get(1).click();
 					Hmdsenr.get(2).click();
 					
-				}
+				}	
+	/*//Fetch humidity sensor text
+				public String get_Hmd_sensortext() {
+					List<WebElement> Hmdsenr = driver.findElementByName("VRT.DataObjects.DataContracts.VRTSensors").findElements(By.className("TextBlock"));
+					//List<WebElement> Hmdsenr = driver.findElementsByClassName("TextBlock");
+					Hmdsenr.get(0).click();
+					return FetchText(Hmdsenr.get(0));
+				}*/
 				
 	// Is Humidity filters sensors label visible
 	public boolean Humidity_filters() {
@@ -441,9 +462,10 @@ public class Setup_SensorConfigPage extends BaseClass {
 	}
 	
 	//click on assign button
-	public void Click_assignBtn() {
+	public void Click_assignBtn() throws InterruptedException {
 		WebElement AssignButton_clk = driver.findElementByAccessibilityId("AssignButton");
 		clickOn(AssignButton_clk);
+		Thread.sleep(500);
 	}
 
 	// Is Description Button_state Enable
@@ -451,6 +473,7 @@ public class Setup_SensorConfigPage extends BaseClass {
 		WebElement DescriptionButton_state = driver.findElementByAccessibilityId("DescriptionButton");
 		return IsElementEnabledStatus(DescriptionButton_state);
 	}
+	
 	
   // Fetch the sensor type text
 	public String get_Sensortype_text() {
@@ -472,7 +495,13 @@ public class Setup_SensorConfigPage extends BaseClass {
 		clickOn(tempInlist);
 	}
 	
-	
+	//Click on Humidity from sensor type
+		public void Click_Sensortype_Hmd() {
+			WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+			clickOn(Sensortype_field);
+			WebElement HmdInlist = driver.findElementByName("Humidity     (%RH)");
+			clickOn(HmdInlist);
+		}	
 	
 	 
 	// Is Temp visible under sensor type drop down list

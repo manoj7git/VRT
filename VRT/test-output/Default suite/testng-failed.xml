@@ -5,11 +5,11 @@
     <classes>
       <class name="com.vrt.testcases.customized_UserPrivilagesTest">
         <methods>
+          <include name="CADMN5"/>
           <include name="endReport"/>
           <include name="UserCreationSetup"/>
           <include name="Setup"/>
           <include name="Teardown"/>
-          <include name="CADMN1"/>
         </methods>
       </class> <!-- com.vrt.testcases.customized_UserPrivilagesTest -->
     </classes>

@@ -46,18 +46,18 @@ public class IRTDHubPage extends BaseClass {
 			
 			List<WebElement> IrtdList =  driver.findElementByAccessibilityId("loggersGrid").findElements(By.className("GridViewItem"));
 			//List<WebElement> IrtdSerial =  driver.findElementByName("Serial No: ").findElements(By.className("TextBlock"));
-			System.out.println("Total IRTD Equipments created: " + IrtdList.size());
+			//System.out.println("Total IRTD Equipments created: " + IrtdList.size());
                          
 			// Loop for the different serial number created
 			for (int i = 0; i < IrtdList.size(); i++) {
-				System.out.println("serial number : " + IrtdList.get(i).getText());
+				//System.out.println("serial number : " + IrtdList.get(i).getText());
 
 				List<WebElement> IRTDTileInfoList = IrtdList.get(i).findElements(By.className("TextBlock"));
-				System.out.println(" IRTD tile info count: " + IRTDTileInfoList.size());
+				//System.out.println(" IRTD tile info count: " + IRTDTileInfoList.size());
 
 				// Fetch all the contents of the Asset tile
 				for (int j = 0; j < IRTDTileInfoList.size(); j++) {
-					System.out.println("AssetTileInfo: "+IRTDTileInfoList.get(j).getText());
+					//System.out.println("AssetTileInfo: "+IRTDTileInfoList.get(j).getText());
 
 					if (IRTDTileInfoList.get(j).getText().contains(SN)) {
 						clickOn(IRTDTileInfoList.get(j));

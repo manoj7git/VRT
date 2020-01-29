@@ -54,7 +54,7 @@ public class EquipmentPage extends BaseClass {
 	// Select Equipment Type
 	
 		public void select_EquipmentType(String Etype) throws InterruptedException {
-			System.out.println(Etype);
+			//System.out.println(Etype);
 			clickOn(EquipmentTypeUMDropDown);
 			Thread.sleep(1000);
 			
@@ -63,7 +63,7 @@ public class EquipmentPage extends BaseClass {
 			WebElement EPVRTLogger = driver.findElementByName("VRT Logger");
 			WebElement EPAVS = driver.findElementByName("AVS");
 			WebElement EPIRTD = driver.findElementByName("IRTD");
-			WebElement EPBath = driver.findElementByName("Bath");
+			WebElement EPBath = driver.findElementByName("Calibration Bath");
 			WebElement EPBaseStation = driver.findElementByName("Base Station");
 			
 			if (Etype.equals(EPSelect.getText())) {
@@ -109,18 +109,18 @@ public class EquipmentPage extends BaseClass {
 		}
 				
 	//Enter Mandatory fields and create Equipment
-	public void EqipCreation_MandatoryFields(String EID, String EMnum, String Etype) throws InterruptedException {
-		enterNewEquipmentID(EID);
+	public void EqipCreation_MandatoryFields(String Etype,String EID,String EMnum) throws InterruptedException {
 		select_EquipmentType(Etype);
+		enterNewEquipmentID(EID);
 		enterNewModelNumber(EMnum);
 		ClickSaveButton();
 	}
 	
 	// Enter Mandatory fields and create BS Equipment
-	public void BaseStation_EqipCreation_MandatoryFields(String EID, String EMnum, String McAddress) throws InterruptedException {
+	public void BaseStation_EqipCreation_MandatoryFields(String Etype, String EID, String EMnum, String McAddress) throws InterruptedException {
+		select_EquipmentType(Etype);
 		enterNewEquipmentID(EID);
 		enterNewModelNumber(EMnum);
-		select_EquipmentType("Base Station");
 		WebElement BS_McAdd = driver.findElementByAccessibilityId("MacAddressTextBox");
 		ClearText(BS_McAdd);
 		enterText(BS_McAdd, McAddress);

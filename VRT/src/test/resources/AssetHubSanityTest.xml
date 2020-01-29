@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AssetHubSuite" parallel="false">
-
-<!-- 	<listeners>
-		<listener class-name="com.vrt.Listners.ExtentReporterNG" />
-		<listener class-name="com.vrt.Listners.AllureReportListner" />
-		<listener class-name="com.vrt.Listners.RetryTransformer" />
-	</listeners> -->
+	<listeners>		
+		<listener class-name="com.vrt.Listners.ExtentReporterNG" ></listener>
+		<listener class-name="com.vrt.Listners.RetryTransformer" ></listener>
+	</listeners>
 
 	<test name="AssetHubSanityTest">
 	
@@ -17,7 +15,7 @@
 		</groups> -->
 		
 		<classes>
-			<class name="com.vrt.testcases.assetHubTest" />
+			<class name="com.vrt.testcases.assetHubTest" ></class>
 		</classes>
 	</test> <!-- AssetHubSanityTest -->
 </suite> <!-- AssetHubSuite -->

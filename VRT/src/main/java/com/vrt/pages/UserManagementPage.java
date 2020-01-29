@@ -42,7 +42,7 @@ public class UserManagementPage extends BaseClass {
 	WebElement UMQualPriv = driver.findElementByAccessibilityId("QualificationExecutionCheckBox");
 	WebElement UMCalPriv = driver.findElementByAccessibilityId("CalibrationExecutionCheckBox");
 
-	WebElement SaveUMBtn = driver.findElementByName("Save");
+	WebElement SaveUMBtn = driver.findElementByAccessibilityId("SaveButton");
 	WebElement CancelUMBtn = driver.findElementByName("Cancel");
 
 	// User Privilege element definition
@@ -65,8 +65,13 @@ public class UserManagementPage extends BaseClass {
 	WebElement ManualSync = driver.findElementByAccessibilityId("ManualSyncCheckBox");
 	WebElement CameraAccess = driver.findElementByAccessibilityId("CamerAccessCheckbox");
 	WebElement DeletePassFailTemplate = driver.findElementByAccessibilityId("DeleteTemplateCheckBox");
+
+	// Scroll Bar
+	//WebElement ScrollDown = driver.findElementByAccessibilityId("VerticalSmallIncrease");
+
 	// For Disable check box
 	WebElement DisableCheckbox = driver.findElementByAccessibilityId("DisableUserCheckBox");
+
 	// For User list
 	WebElement UsersListButton = driver.findElementByAccessibilityId("PrintUsersListButton");
 
@@ -270,7 +275,6 @@ public class UserManagementPage extends BaseClass {
 	// Click Save button
 	public void ClickNewUserSaveButton() throws InterruptedException {
 		clickOn(SaveUMBtn);
-		Thread.sleep(1000);
 	}
 
 	// Click Back Button to move to AdminTile
@@ -280,99 +284,6 @@ public class UserManagementPage extends BaseClass {
 		return new MainHubPage();
 	}
 
-	// Create First User of the System
-	public LoginPage FirstUserCreation(String NewUN, String NewUID, String NewPW, String NewCPW, String Title,
-			String Phone, String email) throws InterruptedException {
-		ClickNewUser();
-		enterNewUserName(NewUN);
-		enterNewUserID(NewUID);
-		enterNewUserPW(NewPW);
-		enterNewUserConfPW(NewCPW);
-		enterNewUserTitle(Title);
-		enterNewUserPhone(Phone);
-		enterNewUserEmail(email);
-		ClickNewUserSaveButton();
-
-		return new LoginPage();
-	}
-
-	// Create a New Admin User
-	public void CreateAdminUser(String UID, String PW, String NewUN, String NewUID, String NewPW, String Title,
-			String Phone, String email) throws InterruptedException {
-		ClickNewUser();
-		enterNewUserName(NewUN);
-		enterNewUserID(NewUID);
-		enterNewUserPW(NewPW);
-		enterNewUserConfPW(NewPW);
-		enterNewUserTitle(Title);
-		ClickUserTypeDropDown();
-		SelectAdministrator();
-		enterNewUserPhone(Phone);
-		enterNewUserEmail(email);
-		ClickNewUserSaveButton();
-
-		UserLoginPopup(UID, PW);
-
-		WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
-		if (IsElementVisibleStatus(SaveAlertmsg)) {
-			String NewUsertext = SaveAlertmsg.getText();
-			if (NewUsertext.contains(NewUN)) {
-				System.out.println("New Admin User: " + NewUN + " is created successfuly");
-			}
-		}
-	}
-
-	// Create a New Supervisor User
-	public void CreateSupervisorUser(String UID, String PW, String NewUN, String NewUID, String NewPW, String Title,
-			String Phone, String email) throws InterruptedException {
-		ClickNewUser();
-		enterNewUserName(NewUN);
-		enterNewUserID(NewUID);
-		enterNewUserPW(NewPW);
-		enterNewUserConfPW(NewPW);
-		enterNewUserTitle(Title);
-		ClickUserTypeDropDown();
-		SelectSupervisor();
-		enterNewUserPhone(Phone);
-		enterNewUserEmail(email);
-		ClickNewUserSaveButton();
-
-		UserLoginPopup(UID, PW);
-
-		/*WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
-		if (IsElementVisibleStatus(SaveAlertmsg)) {
-			String NewUsertext = SaveAlertmsg.getText();
-			if (NewUsertext.contains(NewUN)) {
-				System.out.println("New Supervisor User " + NewUN + " is created successfuly");
-			}
-		}*/
-	}
-
-	// Create a New Operator User
-	public void CreateOperatorUser(String UID, String PW, String NewUN, String NewUID, String NewPW, String Title,
-			String Phone, String email) throws InterruptedException {
-		ClickNewUser();
-		enterNewUserName(NewUN);
-		enterNewUserID(NewUID);
-		enterNewUserPW(NewPW);
-		enterNewUserConfPW(NewPW);
-		enterNewUserTitle(Title);
-		ClickUserTypeDropDown();
-		SelectOperator();
-		enterNewUserPhone(Phone);
-		enterNewUserEmail(email);
-		ClickNewUserSaveButton();
-
-		UserLoginPopup(UID, PW);
-
-		/*WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
-		if (IsElementVisibleStatus(SaveAlertmsg)) {
-			String NewUsertext = SaveAlertmsg.getText();
-			if (NewUsertext.contains(NewUN)) {
-				System.out.println("New Operator User " + NewUN + " is created successfuly");
-			}
-		}*/
-	}
 
 	// Select/Click any User in the UserList Panel
 	public void clickAnyUserinUserList(String UN) throws InterruptedException {
@@ -396,32 +307,33 @@ public class UserManagementPage extends BaseClass {
 	}
 
 	// Click On All Checked boxes to customized the privileges
-	public void Click_AllCheckBox() throws InterruptedException {
+	public void Click_AllCheckBox() throws InterruptedException, AWTException {
 		clickOn(AdminPriv);
 		clickOn(CreaeteEditAssetPriv);
 		clickOn(CreaeteEditSetupPriv);
 		clickOn(CreaeteEditEquipPriv);
-		clickOn(CreateReports);
-		clickOn(CreatePassFailTemplate);
+		clickOn(CreateReports);	
 		clickOn(RunQualification);
 		clickOn(DeleteAssets);
 		clickOn(DeleteSetup);
 		clickOn(DeleteEquipment);
 		clickOn(DeleteStudyFiles);
-		clickOn(EditPassFailTemplate);
 		clickOn(RunCalibration);
 		clickOn(CopyFilesReports);
 		clickOn(ArchiveData);
 		clickOn(ManualSync);
 		clickOn(CameraAccess);
+		ClkscrollBar_down();
+		clickOn(CreatePassFailTemplate);
+		clickOn(EditPassFailTemplate);
 		clickOn(DeletePassFailTemplate);
-		ClkAuditTrail();
+		clickOn(AuditTrail);
 		// Thread.sleep(1000);
 	}
 	
 //Scroll down and click on AuditTrail
 	
-	public void ClkAuditTrail() throws InterruptedException {
+	public void ClkAuditTrail() throws InterruptedException, AWTException {
 		
 		WebElement scrollbar = driver.findElementByAccessibilityId("VerticalSmallIncrease");
 		clickOn(scrollbar);
@@ -487,61 +399,26 @@ public class UserManagementPage extends BaseClass {
 		return checkboxSelectStatus(UMCalPriv);
 	}
 
-	// User Management Creation with Mandatory fields
-	public void UMCreation_MandatoryFields(String UName, String UID, String Pwd, String Cpwd, String Titl, String Utype)
-			throws InterruptedException {
-		enterNewUserName(UName);
-		enterNewUserID(UID);
-		enterNewUserPW(Pwd);
-		enterNewUserConfPW(Cpwd);
-		enterNewUserTitle(Titl);
-		select_UserType(Utype);
-		ClickNewUserSaveButton();
-	}
-
-	// Checking Admin Privileges Without saving the data
-	public void UMPrivilages(String UName, String UID, String Pwd, String Cpwd, String Titl, String Utype)
-			throws InterruptedException {
-		enterNewUserName(UName);
-		enterNewUserID(UID);
-		enterNewUserPW(Pwd);
-		enterNewUserConfPW(Cpwd);
-		enterNewUserTitle(Titl);
-		select_UserType(Utype);
-	}
-
-	// User Management Creation with Non Mandatory fields
-	public void UMCreation_NonmandatoryFields(String UName, String UID, String Pwd, String Cpwd, String Titl,
-			String Utype, String phno, String Emil) throws InterruptedException {
-		enterNewUserName(UName);
-		enterNewUserID(UID);
-		enterNewUserPW(Pwd);
-		enterNewUserConfPW(Cpwd);
-		enterNewUserTitle(Titl);
-		select_UserType(Utype);
-		enterNewUserPhone(phno);
-		enterNewUserEmail(Emil);
-		ClickNewUserSaveButton();
-	}
-
-	// Checking save button is Disable before entering password field in
-	// UserManagement Creation screen
-	public void UM_SaveBtnVerification(String UName, String UID, String pwd, String Cpwd, String Titl, String Utype)
-			throws InterruptedException {
-		enterNewUserName(UName);
-		enterNewUserID(UID);
-		enterNewUserPW(pwd);
-		enterNewUserConfPW(Cpwd);
-		enterNewUserTitle(Titl);
-		select_UserType(Utype);
-		ClickNewUserSaveButton();
-
-	}
-
 	// Fetch the Save Alert message
 	public String AlertMsg() {
 		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(Msg);
+	}
+	
+	// Is alert message visible
+	public boolean Is_alertvisible() throws InterruptedException {
+		WebElement alertMsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return IsElementVisibleStatus(alertMsg);
+	}
+	
+	// Close alert message if visible
+	public void click_Close_alertmsg() throws InterruptedException {
+		if (!IsElementVisibleStatus(driver.findElementByAccessibilityId("displayMessageTextBlock"))) {
+			System.out.println("Buttom Appbar Alert message not displayed");
+		} else {
+			WebElement alertMsg_CloseBtn = driver.findElementByAccessibilityId("btnDelete");
+			clickOn(alertMsg_CloseBtn);
+		}
 	}
 
 	// Login Popup presence
@@ -754,11 +631,11 @@ public class UserManagementPage extends BaseClass {
 		clickOn(Nobtn);
 	}
 	
-	// Deleted alert message visible
+	/*// Deleted alert message visible
 	public boolean Delete_alertvisible() throws InterruptedException {
 		WebElement Deletealert = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return IsElementVisibleStatus(Deletealert);
-	}
+	}*/
 
 	// Click on the Search box and enter valid user name
 	public void EnterdatainSearchBox(String entrUN) throws InterruptedException {
@@ -777,5 +654,153 @@ public class UserManagementPage extends BaseClass {
  	public void ClickCancelBtn() {
  		clickOn(CancelUMBtn);
  	}
+ 	
+	// Create First User of the System
+	public LoginPage FirstUserCreation(String NewUN, String NewUID, String NewPW, String NewCPW, String Title,
+			String Phone, String email) throws InterruptedException {
+		ClickNewUser();
+		enterNewUserName(NewUN);
+		enterNewUserID(NewUID);
+		enterNewUserPW(NewPW);
+		enterNewUserConfPW(NewCPW);
+		enterNewUserTitle(Title);
+		enterNewUserPhone(Phone);
+		enterNewUserEmail(email);
+		ClickNewUserSaveButton();
+
+		return new LoginPage();
+	}
+
+	// Create a New Admin User
+	public void CreateAdminUser(String UID, String PW, String NewUN, String NewUID, String NewPW, String Title,
+			String Phone, String email) throws InterruptedException {
+		ClickNewUser();
+		enterNewUserName(NewUN);
+		enterNewUserID(NewUID);
+		enterNewUserPW(NewPW);
+		enterNewUserConfPW(NewPW);
+		enterNewUserTitle(Title);
+		ClickUserTypeDropDown();
+		SelectAdministrator();
+		enterNewUserPhone(Phone);
+		enterNewUserEmail(email);
+		ClickNewUserSaveButton();
+
+		UserLoginPopup(UID, PW);
+
+		/*WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		if (IsElementVisibleStatus(SaveAlertmsg)) {
+			String NewUsertext = SaveAlertmsg.getText();
+			if (NewUsertext.contains(NewUN)) {
+				System.out.println("New Admin User: " + NewUN + " is created successfuly");
+			}
+		}*/
+	}
+
+	// Create a New Supervisor User
+	public void CreateSupervisorUser(String UID, String PW, String NewUN, String NewUID, String NewPW, String Title,
+			String Phone, String email) throws InterruptedException {
+		ClickNewUser();
+		enterNewUserName(NewUN);
+		enterNewUserID(NewUID);
+		enterNewUserPW(NewPW);
+		enterNewUserConfPW(NewPW);
+		enterNewUserTitle(Title);
+		ClickUserTypeDropDown();
+		SelectSupervisor();
+		enterNewUserPhone(Phone);
+		enterNewUserEmail(email);
+		ClickNewUserSaveButton();
+
+		UserLoginPopup(UID, PW);
+
+		/*WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		if (IsElementVisibleStatus(SaveAlertmsg)) {
+			String NewUsertext = SaveAlertmsg.getText();
+			if (NewUsertext.contains(NewUN)) {
+				//System.out.println("New Supervisor User " + NewUN + " is created successfuly");
+			}
+		}*/
+	}
+
+	// Create a New Operator User
+	public void CreateOperatorUser(String UID, String PW, String NewUN, String NewUID, String NewPW, String Title,
+			String Phone, String email) throws InterruptedException {
+		ClickNewUser();
+		enterNewUserName(NewUN);
+		enterNewUserID(NewUID);
+		enterNewUserPW(NewPW);
+		enterNewUserConfPW(NewPW);
+		enterNewUserTitle(Title);
+		ClickUserTypeDropDown();
+		SelectOperator();
+		enterNewUserPhone(Phone);
+		enterNewUserEmail(email);
+		ClickNewUserSaveButton();
+
+		UserLoginPopup(UID, PW);
+
+		/*WebElement SaveAlertmsg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		if (IsElementVisibleStatus(SaveAlertmsg)) {
+			String NewUsertext = SaveAlertmsg.getText();
+			if (NewUsertext.contains(NewUN)) {
+				//System.out.println("New Operator User " + NewUN + " is created successfuly");
+			}
+		}*/
+	}
+
+ 	
+	// User Management Creation with Mandatory fields
+	public void UMCreation_MandatoryFields(String UName, String UID, String Pwd, String Cpwd, String Titl, String Utype)
+			throws InterruptedException {
+		enterNewUserName(UName);
+		enterNewUserID(UID);
+		enterNewUserPW(Pwd);
+		enterNewUserConfPW(Cpwd);
+		enterNewUserTitle(Titl);
+		select_UserType(Utype);
+		Thread.sleep(1000);
+		ClickNewUserSaveButton();
+	}
+
+	// Checking Admin Privileges Without saving the data
+	public void UMPrivilages(String UName, String UID, String Pwd, String Cpwd, String Titl, String Utype)
+			throws InterruptedException {
+		enterNewUserName(UName);
+		enterNewUserID(UID);
+		enterNewUserPW(Pwd);
+		enterNewUserConfPW(Cpwd);
+		enterNewUserTitle(Titl);
+		select_UserType(Utype);
+	}
+
+	// User Management Creation with Non Mandatory fields
+	public void UMCreation_NonmandatoryFields(String UName, String UID, String Pwd, String Cpwd, String Titl,
+			String Utype, String phno, String Emil) throws InterruptedException {
+		enterNewUserName(UName);
+		enterNewUserID(UID);
+		enterNewUserPW(Pwd);
+		enterNewUserConfPW(Cpwd);
+		enterNewUserTitle(Titl);
+		select_UserType(Utype);
+		enterNewUserPhone(phno);
+		enterNewUserEmail(Emil);
+		Thread.sleep(1000);
+		ClickNewUserSaveButton();
+	}
+
+	// Checking save button is Disable before entering password field in
+	// UserManagement Creation screen
+	public void UM_SaveBtnVerification(String UName, String UID, String pwd, String Cpwd, String Titl, String Utype)
+			throws InterruptedException {
+		enterNewUserName(UName);
+		enterNewUserID(UID);
+		enterNewUserPW(pwd);
+		enterNewUserConfPW(Cpwd);
+		enterNewUserTitle(Titl);
+		select_UserType(Utype);
+		ClickNewUserSaveButton();
+
+	}
 
 }

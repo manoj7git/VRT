@@ -59,6 +59,8 @@ public class setup_SensorConfigTest extends BaseClass{
 			extent.addSystemInfo("Lgr Version", "1.2.6");
 			extent.addSystemInfo("User Name", "Manoj");
 			extent.addSystemInfo("TestSuiteName", "AssetHubTest");
+			
+			/*
 		// Rename the User file (NgvUsers.uxx) if exists
 	renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 
@@ -100,7 +102,7 @@ public class setup_SensorConfigTest extends BaseClass{
 
 			AppClose();
 			Thread.sleep(1000);
-
+			*/
 		}
 
 		// After All the tests are conducted
@@ -157,6 +159,7 @@ public class setup_SensorConfigTest extends BaseClass{
 			driver.quit();
 		}
 		
+		/*
 	// Test Cases
 		// SET001
 		@Test(groups = {
@@ -306,7 +309,7 @@ public class setup_SensorConfigTest extends BaseClass{
 		sa.assertAll();
 	}
 
-	/*
+	
 	//SC008-Verify that by clicking on Add button will add the number of sensors on the left pane for Temperature as mentioned in the field
 	@Test(groups = {
 			"Regression" }, description = "Verify that all the sensors added on the left pane will have label names as sensor 1,snesor 2 and so on until they are configured")
@@ -1511,13 +1514,128 @@ public void SC050(Object... dataProvider) throws InterruptedException, ParseExce
 		sa.assertEquals(ActAlert,ExpAlert, "FAIL: Alert message should be displayed");
 		sa.assertAll();	
 }
-		*/
+		
 		
 	//SC065.2_Verify that validation message is displayed when selected one sensor type and assigning label name for another sensor type
 		
+		@Test(groups = {"Regression" }, description = "Verify that validation message is displayed when selected one sensor type and assigning label name for another sensor type")
+
+	    public void SC065_2() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SC065_2_Verify that validation message is displayed when selected one sensor type and assigning label name for another sensor type");
+		SoftAssert sa = new SoftAssert();
+		Setup_SensorConfigPage.Click_Addsensors_Expanderbtn();
+		Setup_SensorConfigPage.Enter_TemperatureCount_textField("5");
+		Setup_SensorConfigPage.Enter_HumidityCount_textField("4");
+		Setup_SensorConfigPage.Click_Temp_sensor();
+		Setup_SensorConfigPage.Click_Sensortype_Hmd();
+		Setup_SensorConfigPage.Enter_SensorLabel("test");
+		Setup_SensorConfigPage.Click_assignBtn();
+		String ActAlert = Setup_SensorConfigPage.Alertmsg_txt();
+		String ExpAlert = "Selected sensors and selected sensor type are different. Please choose same type..";
+		sa.assertEquals(ActAlert,ExpAlert, "FAIL: Alert message should be displayed");
+		sa.assertAll();	
+		}	
+	
+//SC066-Verify if the _Assign_ button is activated only when the Sensor Label and the Sensor Type text boxes inputs are provided.
 		
+		@Test(groups = {"Regression" }, description = "Verify if the _Assign_ button is activated only when the Sensor Label and the Sensor Type text boxes inputs are provided")
+
+	    public void SC065_2() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SC066-Verify if the _Assign_ button is activated only when the Sensor Label and the Sensor Type text boxes inputs are provided.");
+		SoftAssert sa = new SoftAssert();
+		Setup_SensorConfigPage.Click_Addsensors_Expanderbtn();
+		Setup_SensorConfigPage.Enter_TemperatureCount_textField("5");
+		Setup_SensorConfigPage.Click_Configurationsensors_Expanderbtn();
 		
+		sa.assertEquals( Setup_SensorConfigPage.IsAssign_Button_Enable(),false,"FAIL: Alert message should be displayed");
+		Setup_SensorConfigPage.Click_Sensortype_field();
+		Setup_SensorConfigPage.Click_Sensortype_temp();
+		Setup_SensorConfigPage.Enter_SensorLabel("ABC");
+		sa.assertEquals( Setup_SensorConfigPage.IsAssign_Button_Enable(),true,"FAIL: Alert message should be displayed");
+		sa.assertAll();		
+		}	
 		
+	*/	
+	// This script has some issues 
 		
+	//SC066_1-Verify that on-click of the Assign button will assign the sensor labels to the respective sensors on the left pane
+		@Test(groups = {"Regression" }, description = "Verify that on-click of the Assign button will assign the sensor labels to the respective sensors on the left pane")
+
+	    public void SC066_1() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("SC066_1-Verify that on-click of the Assign button will assign the sensor labels to the respective sensors on the left pane");
+		SoftAssert sa = new SoftAssert();
+		Setup_SensorConfigPage.Click_Addsensors_Expanderbtn();
+		Setup_SensorConfigPage.Enter_TemperatureCount_textField("5");	
 		
-}				
+		Setup_SensorConfigPage.Enter_HumidityCount_textField("5");
+		Setup_SensorConfigPage.Click_Temp_sensor();
+		Setup_SensorConfigPage.Enter_SensorLabel("test1");
+		Setup_SensorConfigPage.Click_assignBtn();
+		String ActsenTxt = Setup_SensorConfigPage.get_sensortext();
+		//System.out.println(ActsenTxt);
+		String ExpTxt = "test1";
+		sa.assertEquals( ActsenTxt,ExpTxt,"FAIL: text should be matched");
+		Setup_SensorConfigPage.Clickon_Humidity();
+		Setup_SensorConfigPage.Click_Hmd_sensor();
+		Setup_SensorConfigPage.Enter_SensorLabel("ABC");
+		Setup_SensorConfigPage.Click_assignBtn();
+		String ActHmdTxt1 = Setup_SensorConfigPage.get_sensortext();
+		//System.out.println(ActHmdTxt1);
+		String ExphmdTxt1 = "ABC";
+		sa.assertEquals( ActHmdTxt1,ExphmdTxt1,"FAIL: text should be matched");
+		
+		sa.assertAll();		
+		}
+
+	/*
+	
+		 
+ //SC067-Verify that when less number of sensors are configured than those mentioned in Max sensors field in Define setup scrfeen will display a validation message	
+		
+		@Test(groups = {"Regression" }, description = "Verify that when less number of sensors are configured than those mentioned in Max sensors field in Define setup scrfeen will display a validation message")
+
+	    public void SC067() throws InterruptedException, ParseException {
+		extentTest = extent.startTest("Verify that when less number of sensors are configured than those mentioned in Max sensors field in Define setup scrfeen will display a validation message");
+		SoftAssert sa = new SoftAssert();
+		Setup_SensorConfigPage.Click_Addsensors_Expanderbtn();
+		Setup_SensorConfigPage.Enter_TemperatureCount_textField("10");
+		Setup_SensorConfigPage.Click_Temp_sensor();
+		Setup_SensorConfigPage.Click_assignBtn();
+		Setup_SensorConfigPage.Click_GroupSensors_btn();
+		
+	    sa.assertEquals( Setup_SensorConfigPage.Is_lessnumberSenAlertBox_Visible(),true,"FAIL: text should be matched");	
+		sa.assertAll();	
+		}
+		
+//SC068-Verify that Description button is enabled only when atleast one sensor is configured
+		@Test(groups = {"Regression" }, description = "Verify that Description button is enabled only when atleast one sensor is configured")
+		public void SC068() throws InterruptedException, ParseException {
+			extentTest = extent.startTest("SC068-Verify that Description button is enabled only when atleast one sensor is configured");
+			SoftAssert sa = new SoftAssert();
+			Setup_SensorConfigPage.Click_Addsensors_Expanderbtn();
+			Setup_SensorConfigPage.Enter_TemperatureCount_textField("10");
+			Setup_SensorConfigPage.Click_Temp_sensor();
+			Setup_SensorConfigPage.Click_assignBtn();
+			
+			sa.assertEquals(Setup_SensorConfigPage.IsDescription_Button_Enable(),true,"FAIL: Should be enabled");
+			
+			sa.assertAll();
+}
+
+   //SC069-Verify that on-click of the Description button will display the Sensor Description screen
+		@Test(groups = {"Regression" }, description = "Verify that on-click of the Description button will display the Sensor Description screen")
+		public void SC069() throws InterruptedException, ParseException {
+			extentTest = extent.startTest("SC069-Verify that on-click of the Description button will display the Sensor Description screen");
+			SoftAssert sa = new SoftAssert();
+			Setup_SensorConfigPage.Click_Addsensors_Expanderbtn();
+			Setup_SensorConfigPage.Enter_TemperatureCount_textField("10");
+			Setup_SensorConfigPage.Click_Temp_sensor();
+			Setup_SensorConfigPage.Click_assignBtn();
+			
+			sa.assertEquals(Setup_SensorConfigPage.IsDescription_Button_Enable(),true,"FAIL: Should be enabled");
+			
+			sa.assertAll();
+           }
+           */
+        
+}

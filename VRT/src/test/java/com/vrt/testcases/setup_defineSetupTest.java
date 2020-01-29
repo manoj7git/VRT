@@ -54,6 +54,7 @@ public class setup_defineSetupTest extends BaseClass{
 		extent.addSystemInfo("User Name", "Ruchika");
 		extent.addSystemInfo("TestSuiteName", "Setup_DefineSetupTest");
 
+		
 		// Rename the User file (NgvUsers.uxx) if exists		
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		// Rename the cache Asset file (Asset.txt) if exists
@@ -147,7 +148,7 @@ public class setup_defineSetupTest extends BaseClass{
 		driver.quit();
 	}
 	
-/*	
+	
 	// Test Cases
 	// 01-SET002
 	@Test(groups = {
@@ -389,26 +390,28 @@ public class setup_defineSetupTest extends BaseClass{
 	
 	
 	//SET008
-	@Test(groups = {"Sanity", "Regression" }, dataProvider="SET008", dataProviderClass=setupCreationUtility.class,
-					description = "SET008-Verify that max 3 characters are allowed in No of Max Sensors field")
-	public void SET008(Object ...dataProvider) throws InterruptedException, ParseException {
+	@Test(groups = {"Sanity", "Regression" }, 
+			description = "SET008-Verify that max 3 characters are allowed in No of Max Sensors field")
+	public void SET008() throws InterruptedException, ParseException {
 		extentTest = extent
 				.startTest("SET008-Verify that max 3 characters are allowed in No of Max Sensors field i.e. from 1 to 300");
 		SoftAssert sa = new SoftAssert();
 		
-		String SensorNumb = (String) dataProvider[0];	
-		System.out.println(SensorNumb);		
+		String SensorNumb1 = "301";					
 			
 		defineSetupPage.click_defineSetupPage_SensorCountField();
 		defineSetupPage.clear_defineSetupPage_SensorCount();
-		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb);
-		SensorConfigPage = defineSetupPage.click_defineSetupPage_nxtBtn();
+		defineSetupPage.enter_defineSetupPage_SensorCount(SensorNumb1);
+		defineSetupPage.click_defineSetupPage_LoadDescField();
+		String SnsrCount = defineSetupPage.get_Sensorcount_text();
+		System.out.println(SnsrCount);
 		
-		sa.assertEquals(SensorConfigPage.get_SensorConfigurationPage_text(), "Sensors Configuration", 
+		sa.assertEquals(SnsrCount.length(), 3, 
 				"FAIL:SET008 - Setup Sensor Count field should accept the data max 3 characters i.e from 1 to 300 ");		
 		sa.assertAll();
 
 	}
+	
 	
 	//SET009-Verify the valid inputs accepted in No. of Max Sensors field
 	@Test(groups = { "Sanity",
@@ -491,7 +494,7 @@ public class setup_defineSetupTest extends BaseClass{
 		sa.assertAll();
 	}
 	
-	*/
+	
 	//SET013
 	
 	@Test(groups = {"Sanity", "Regression" }, description = "Verify that Asset ID field is prepopulated and disabled,Grayed out in Define setup screen")
@@ -503,7 +506,7 @@ public class setup_defineSetupTest extends BaseClass{
 	    sa.assertAll();
 	}
 	
-/*	
+
 	//SET014
 		@Test(groups = {"Sanity", "Regression" }, description = "Verify that when edited the Asset ID in edit assets screen, it is reflected correctly in Define setup screen")
 		public void SET014() throws InterruptedException {
@@ -867,6 +870,6 @@ public class setup_defineSetupTest extends BaseClass{
 			sa.assertAll();
 		}
 		
-	*/	
+		
 	
 }

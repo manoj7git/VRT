@@ -3,8 +3,8 @@
 
 <suite name="AssetHubSuite" parallel="false">
 	<listeners>		
-		<listener class-name="com.vrt.Listners.ExtentReporterNG" />
-		<listener class-name="com.vrt.Listners.RetryTransformer" />
+		<listener class-name="com.vrt.Listners.ExtentReporterNG" ></listener>
+		<listener class-name="com.vrt.Listners.RetryTransformer" ></listener>
 	</listeners>
 
 	<test name="AssetHubRregressionTest">
@@ -15,9 +15,9 @@
 		</groups> -->
 
 		<classes>
-			<class name="com.vrt.testcases.assetCreationTest" />	
-			<class name="com.vrt.testcases.assetHubTest" />
-			<class name="com.vrt.testcases.assetHubAssetCreationTest" />
+			<class name="com.vrt.testcases.assetCreationTest" ></class>	
+			<class name="com.vrt.testcases.assetHubTest" ></class>
+			<class name="com.vrt.testcases.assetHubAssetCreationTest" ></class>
 			
 		</classes>
 	</test> <!-- AssetHubSanityTest -->

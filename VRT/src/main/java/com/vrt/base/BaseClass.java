@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -192,12 +193,12 @@ public class BaseClass {
 		HashMap<String, String> UserMap = new HashMap<String, String>();
 		
 		UserMap.put("adminFull", "1:Welcome1@AM");
-		UserMap.put("SysAdmin", "E3:Start@1AM");
+		
+	//User roles for prvivilage and customozed user privilages
+		UserMap.put("SysAdmin", "2:Start@1AM");
 		UserMap.put("SysSupervisor", "3:Welcome3@AM");
 		UserMap.put("SysOperator", "4:Welcome4@AM");	
-		UserMap.put("CustoAdmin", "C1:Start@2AM");
-		UserMap.put("CustoSup", "C2:Start@4AM");
-		UserMap.put("CustoOpe", "C3:Start@6AM");
+		
 		UserMap.put("TestAdmin", "2:Start@5AM");
 		UserMap.put("Dsbluser", "1D:Start@1AM");
 		UserMap.put("Newuser", "1N:Start@7AM");
@@ -247,6 +248,21 @@ public class BaseClass {
 		WebElement LgInPopupCancel = driver.findElementByName("Cancel");
 		clickOn(LgInPopupCancel);
 	}*/
+	
+	//Get the Sw version info from the About window on clicking About icon of the bottom apps bar
+		public String get_SWVersion_About_Text() throws InterruptedException {
+			Actions ac = new Actions(driver);
+			ac.contextClick().build().perform();
+			
+			WebElement bottomMenu_About_Icon = driver.findElementByAccessibilityId("AboutAppBarButton");
+			clickOn(bottomMenu_About_Icon);
+			Thread.sleep(500);
+			WebElement SWVersion_About_info = driver.findElementByAccessibilityId("SoftwareVersion");
+			
+			String[] SWVer = FetchText(SWVersion_About_info).split(":");
+			
+			return SWVer[1];
+		}
 	
 	
 }

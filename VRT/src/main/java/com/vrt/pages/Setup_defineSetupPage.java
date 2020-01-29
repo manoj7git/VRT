@@ -24,7 +24,7 @@ public class Setup_defineSetupPage extends BaseClass {
 		DefineSetupPageTitle = driver.findElementByAccessibilityId("SetupHeaderTextBlock");
 		DefineSetup_backBtn = driver.findElementByAccessibilityId("GoButton");
 		DefineSetup_SetupName_txtBx = driver.findElementByAccessibilityId("SetupNameTextBox");
-		DefineSetup_Sensordata_txtBx = driver.findElementByAccessibilityId("ContentElement");
+		DefineSetup_Sensordata_txtBx = driver.findElementByAccessibilityId("PART_TextBox");
 		DefineSetup_AssetID_txtBx = driver.findElementByAccessibilityId("VessalTextBox");
 		DefineSetup_SOP_txtBx = driver.findElementByAccessibilityId("SopProtocolTextBox");
 		DefineSetup_LoadDesc_txtBx = driver.findElementByAccessibilityId("LoadDescTextBox");
@@ -103,6 +103,10 @@ public class Setup_defineSetupPage extends BaseClass {
 		enterText(DefineSetup_SetupName_txtBx, setUpNm);
 	}
 	
+	public String get_setupName_txtData() {
+		return FetchText(DefineSetup_SetupName_txtBx);
+	}
+	
 	// Get Setup Name data
 	public String get_defineSetupPage_setupName() {
 		return FetchText(DefineSetup_SetupName_txtBx);
@@ -120,6 +124,8 @@ public class Setup_defineSetupPage extends BaseClass {
 	
 	// Enter Sensor count data
 	public void enter_defineSetupPage_SensorCount(String sensorCnt) {
+		click_defineSetupPage_SensorCountField();
+		clear_defineSetupPage_SensorCount();
 		enterText(DefineSetup_Sensordata_txtBx, sensorCnt);
 	}
 	
@@ -131,7 +137,7 @@ public class Setup_defineSetupPage extends BaseClass {
 	// Get the Asset ID text for the Asset ID test field
 	public String get_AssetID_text() {
 		return FetchText(DefineSetup_AssetID_txtBx);
-	};
+	}
 	
 	// Verify the Asset ID Field is enable or not 
 		public boolean AssetIDEnable() {
@@ -164,7 +170,14 @@ public class Setup_defineSetupPage extends BaseClass {
 	
 	// Enter SOP data
 	public void enter_defineSetupPage_SOP(String SOPdt) {
+		
+		click_defineSetupPage_SOPField();
+		clear_defineSetupPage_SOP();	
 		enterText(DefineSetup_SOP_txtBx, SOPdt);
+	}
+	
+	public String  Fetch_sop_text() {
+		return FetchText(DefineSetup_SOP_txtBx);
 	}
 	
 	// Check the presence of Load Description field in Define Setup page
@@ -184,8 +197,24 @@ public class Setup_defineSetupPage extends BaseClass {
 	
 	// Enter Load Description data
 	public void enter_defineSetupPage_LoadDesc(String LDdt) {
+		click_defineSetupPage_LoadDescField();
+		clear_defineSetupPage_LoadDesc();
 		enterText(DefineSetup_LoadDesc_txtBx, LDdt);
 	}
+	
+	//Fetch text from load description field
+	public String getLoadDesc_txt() {
+		return FetchText(DefineSetup_LoadDesc_txtBx);
+	}
+	
+	
+	//Fetch text from reducesensor alert window 
+	//""
+	public boolean Is_reducesensoralertbox_Visible() {
+		WebElement alert = driver.findElementByName("Defined number of sensors is less than the configured. It will reset the sensor configuration. Do you want to continue?");
+		return IsElementVisibleStatus(alert);
+	}
+
 	
 	// Check the presence of comments field in Define Setup page
 	public boolean visible_Comments_Field() {
@@ -204,6 +233,8 @@ public class Setup_defineSetupPage extends BaseClass {
 	
 	// Enter comments data
 	public void enter_defineSetupPage_comments(String Cmntdt) {
+		click_defineSetupPage_commentsField();
+		clear_defineSetupPage_comments();
 		enterText(DefineSetup_Cmnts_txtBx, Cmntdt);
 	}
 	
@@ -218,6 +249,10 @@ public class Setup_defineSetupPage extends BaseClass {
 		Thread.sleep(1000);
 		return new Setup_SensorConfigPage();
 	}
+	// Click the Next button in the Define Setup page for alert
+		public void Click_defineSetupPage_Alert() {
+			clickOn(SensorConfiguration_Btn);
+		}
 	
 	//Right click on the Asset Creation page to invoke the bottom apps bar
 		public void Rt_Click_AstCreation_Buttom_AppBar() {

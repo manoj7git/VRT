@@ -1,66 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="1" ignored="0" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="70687" started-at="2020-01-20T17:41:59 IST" finished-at="2020-01-20T17:43:10 IST">
+  <suite name="Default suite" duration-ms="211618" started-at="2020-01-28T23:43:28 IST" finished-at="2020-01-28T23:47:00 IST">
     <groups>
-      <group name="Sanity">
-        <method signature="UserManagementTest.ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN006" class="com.vrt.testcases.UserManagementTest"/>
-      </group> <!-- Sanity -->
       <group name="Regression">
-        <method signature="UserManagementTest.ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN006" class="com.vrt.testcases.UserManagementTest"/>
-        <method signature="UserManagementTest.ADMN031()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN031" class="com.vrt.testcases.UserManagementTest"/>
+        <method signature="customized_UserPrivilagesTest.CADMN4()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="CADMN4" class="com.vrt.testcases.customized_UserPrivilagesTest"/>
+        <method signature="customized_UserPrivilagesTest.CADMN5()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="CADMN5" class="com.vrt.testcases.customized_UserPrivilagesTest"/>
       </group> <!-- Regression -->
     </groups>
-    <test name="Default test" duration-ms="70687" started-at="2020-01-20T17:41:59 IST" finished-at="2020-01-20T17:43:10 IST">
-      <class name="com.vrt.testcases.UserManagementTest">
-        <test-method status="PASS" signature="UserCreationSetup()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="UserCreationSetup" is-config="true" duration-ms="41695" started-at="2020-01-20T17:41:59 IST" finished-at="2020-01-20T17:42:41 IST">
+    <test name="Default test" duration-ms="211618" started-at="2020-01-28T23:43:28 IST" finished-at="2020-01-28T23:47:00 IST">
+      <class name="com.vrt.testcases.customized_UserPrivilagesTest">
+        <test-method status="PASS" signature="UserCreationSetup()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="UserCreationSetup" is-config="true" duration-ms="160406" started-at="2020-01-28T23:43:28 IST" finished-at="2020-01-28T23:46:09 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- UserCreationSetup -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Setup" is-config="true" duration-ms="11275" started-at="2020-01-20T17:42:41 IST" finished-at="2020-01-20T17:42:52 IST">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="Setup" is-config="true" duration-ms="3034" started-at="2020-01-28T23:46:09 IST" finished-at="2020-01-28T23:46:12 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN006" duration-ms="50" started-at="2020-01-20T17:42:52 IST" description="ADMN006-Verify that new user button is enabled" finished-at="2020-01-20T17:42:52 IST">
+        <test-method status="PASS" signature="CADMN4()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="CADMN4" duration-ms="26699" started-at="2020-01-28T23:46:12 IST" description="Verify Administrator is unable to access the customized unchecked privilege-Edit Equipment" finished-at="2020-01-28T23:46:39 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ADMN006 -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Teardown" is-config="true" duration-ms="29" started-at="2020-01-20T17:42:52 IST" finished-at="2020-01-20T17:42:52 IST">
+        </test-method> <!-- CADMN4 -->
+        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="Teardown" is-config="true" duration-ms="54" started-at="2020-01-28T23:46:39 IST" finished-at="2020-01-28T23:46:39 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=ADMN006 status=SUCCESS method=UserManagementTest.ADMN006()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26] output={null}]]]>
+                <![CDATA[[TestResult name=CADMN4 status=SUCCESS method=customized_UserPrivilagesTest.CADMN4()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Setup" is-config="true" duration-ms="10392" started-at="2020-01-20T17:42:52 IST" finished-at="2020-01-20T17:43:02 IST">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="Setup" is-config="true" duration-ms="3020" started-at="2020-01-28T23:46:39 IST" finished-at="2020-01-28T23:46:42 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="ADMN031()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="ADMN031" duration-ms="6969" started-at="2020-01-20T17:43:02 IST" description="Verify Invalid validation for Photo field" finished-at="2020-01-20T17:43:09 IST">
+        <test-method status="FAIL" signature="CADMN5()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="CADMN5" duration-ms="17915" started-at="2020-01-28T23:46:42 IST" description="Verify Admin is unable to access the customized unchecked privilege-Delete Equipments" finished-at="2020-01-28T23:47:00 IST">
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'INAS-LP024', ip: '10.18.154.126', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: io.appium.java_client.windows.WindowsDriver
+Capabilities {app: Kaye.ValProbeRT_racmveb2qnw..., javascriptEnabled: true, ms:waitForAppLaunch: 10, platform: WINDOWS, platformName: WINDOWS}
+Session ID: D9FFDF23-866B-4BE3-A3B7-75BB143475E1
+*** Element info: {Using=accessibility id, value=EquipmentIDTextBox}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'INAS-LP024', ip: '10.18.154.126', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: io.appium.java_client.windows.WindowsDriver
+Capabilities {app: Kaye.ValProbeRT_racmveb2qnw..., javascriptEnabled: true, ms:waitForAppLaunch: 10, platform: WINDOWS, platformName: WINDOWS}
+Session ID: D9FFDF23-866B-4BE3-A3B7-75BB143475E1
+*** Element info: {Using=accessibility id, value=EquipmentIDTextBox}
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:239)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at io.appium.java_client.DefaultGenericMobileDriver.execute(DefaultGenericMobileDriver.java:42)
+at io.appium.java_client.AppiumDriver.execute(AppiumDriver.java:1)
+at io.appium.java_client.windows.WindowsDriver.execute(WindowsDriver.java:1)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at io.appium.java_client.DefaultGenericMobileDriver.findElement(DefaultGenericMobileDriver.java:62)
+at io.appium.java_client.AppiumDriver.findElement(AppiumDriver.java:1)
+at io.appium.java_client.windows.WindowsDriver.findElement(WindowsDriver.java:1)
+at io.appium.java_client.FindsByAccessibilityId.findElementByAccessibilityId(FindsByAccessibilityId.java:37)
+at com.vrt.pages.EquipmentPage.initElements(EquipmentPage.java:30)
+at com.vrt.pages.EquipmentPage.<init>(EquipmentPage.java:39)
+at com.vrt.pages.EquipmentHubPage.ClickAddButton(EquipmentHubPage.java:40)
+at com.vrt.testcases.customized_UserPrivilagesTest.CADMN5(customized_UserPrivilagesTest.java:296)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.ArrayList.forEach(ArrayList.java:1257)
+at org.testng.TestRunner.privateRun(TestRunner.java:770)
+at org.testng.TestRunner.run(TestRunner.java:591)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:402)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:396)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:355)
+at org.testng.SuiteRunner.run(SuiteRunner.java:304)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1180)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1102)
+at org.testng.TestNG.runSuites(TestNG.java:1032)
+at org.testng.TestNG.run(TestNG.java:1000)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ADMN031 -->
-        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="Teardown" is-config="true" duration-ms="24" started-at="2020-01-20T17:43:09 IST" finished-at="2020-01-20T17:43:09 IST">
+        </test-method> <!-- CADMN5 -->
+        <test-method status="PASS" signature="Teardown(org.testng.ITestResult)[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="Teardown" is-config="true" duration-ms="128" started-at="2020-01-28T23:47:00 IST" finished-at="2020-01-28T23:47:00 IST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=ADMN031 status=SUCCESS method=UserManagementTest.ADMN031()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26] output={null}]]]>
+                <![CDATA[[TestResult name=CADMN5 status=FAILURE method=customized_UserPrivilagesTest.CADMN5()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Teardown -->
-        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.UserManagementTest@4b553d26]" name="endReport" is-config="true" duration-ms="217" started-at="2020-01-20T17:43:09 IST" finished-at="2020-01-20T17:43:10 IST">
+        <test-method status="PASS" signature="endReport()[pri:0, instance:com.vrt.testcases.customized_UserPrivilagesTest@467aecef]" name="endReport" is-config="true" duration-ms="318" started-at="2020-01-28T23:47:00 IST" finished-at="2020-01-28T23:47:00 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->
-      </class> <!-- com.vrt.testcases.UserManagementTest -->
+      </class> <!-- com.vrt.testcases.customized_UserPrivilagesTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

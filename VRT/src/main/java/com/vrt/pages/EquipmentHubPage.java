@@ -19,55 +19,53 @@ import com.vrt.pages.EquipmentPage;
 import com.vrt.base.BaseClass;
 
 public class EquipmentHubPage extends BaseClass {
-	//IRTDHubPage IRTDHubPage;
+	// IRTDHubPage IRTDHubPage;
 	// EquipmentHubPage Element definition
 	WebElement AddButton = null;
 
 	private void initElements() {
 		AddButton = driver.findElementByAccessibilityId("AddEquipmentsButton");
 	}
-	
-	EquipmentHubPage()
-	{
+
+	EquipmentHubPage() {
 		super();
 		initElements();
 
 	}
-	
-	// Click AddButton 
-		public EquipmentPage ClickAddButton() throws InterruptedException {
-			clickOn(AddButton);
-			Thread.sleep(1000);
-			return new EquipmentPage();
-		}
-		
-		//IRTD
-				//Click on IRTD List box of Equipment page
-				public IRTDHubPage ClickonIRTDlistbox() {
-					WebElement irtdbox = driver.findElementByName("IRTD");
-					clickOn(irtdbox);
-					return new IRTDHubPage();
-				}
-				
-	// Click AddButton to get Alert message when supervisor does not have default privilege 
-				public void Alert_ClickAddBtn() throws InterruptedException {
-					clickOn(AddButton);
-					Thread.sleep(1000);
-				}
 
-				//Alert message for non default privilege  of supervisor
-				public String AlertMsg() {
-					WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
-					return FetchText(Msg);
-					}
-				
-				//Click on back button 
-				public MainHubPage ClickBackBtn() {
-				WebElement backBtn = driver.findElementByAccessibilityId("ArrowGlyph");	
-				clickOn(backBtn);
-				return new MainHubPage();
-				}
+	// Click AddButton
+	public EquipmentPage ClickAddButton() throws InterruptedException {
+		clickOn(AddButton);
+		Thread.sleep(1000);
+		return new EquipmentPage();
+	}
 
+	// IRTD
+	// Click on IRTD List box of Equipment page
+	public IRTDHubPage ClickonIRTDlistbox() {
+		WebElement irtdbox = driver.findElementByName("IRTD");
+		clickOn(irtdbox);
+		return new IRTDHubPage();
+	}
+
+	// Click AddButton to get Alert message when supervisor does not have default
+	// privilege
+	public void Alert_ClickAddBtn() throws InterruptedException {
+		clickOn(AddButton);
+		Thread.sleep(1000);
+	}
+
+	// Alert message for non default privilege of supervisor
+	public String AlertMsg() {
+		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return FetchText(Msg);
+	}
+
+	// Click on back button
+	public MainHubPage ClickBackBtn() {
+		WebElement backBtn = driver.findElementByAccessibilityId("ArrowGlyph");
+		clickOn(backBtn);
+		return new MainHubPage();
+	}
 
 }
-

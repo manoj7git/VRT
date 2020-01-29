@@ -40,11 +40,10 @@ import com.vrt.pages.assetCreationPage;
 import com.vrt.pages.assetDetailsPage;
 import com.vrt.pages.Setup_defineSetupPage;
 
-
-
 public class customized_UserPrivilagesTest extends BaseClass {
 	public ExtentReports extent;
 	public ExtentTest extentTest;
+	TestUtilities tu = new TestUtilities();
 
 // Initialization of the Pages
 	LoginPage LoginPage;
@@ -61,27 +60,29 @@ public class customized_UserPrivilagesTest extends BaseClass {
 	assetDetailsPage assetDetailsPage;
 	Setup_defineSetupPage Setup_defineSetupPage;
 
-	
-	//@BeforeTest
+	// @BeforeTest
 	@BeforeClass
 	public void UserCreationSetup() throws InterruptedException, IOException, AWTException {
 
-		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ExtentReport" + "_UserPrivilagesTest"+".html", true);
-		extent.addSystemInfo("BS Version", "0.6.19");
+		extent = new ExtentReports(
+				System.getProperty("user.dir") + "/test-output/ExtentReport" + "_CustomUserPrivilegesTest" + ".html",
+				true);
+		extent.addSystemInfo("BS Version", "0.6.32");
 		extent.addSystemInfo("Lgr Version", "1.2.9");
 		extent.addSystemInfo("Csript Version", "1.0.0.0");
 		extent.addSystemInfo("User Name", "Ruchika");
 		extent.addSystemInfo("TestSuiteName", "User Privilages Test");
 
 		// Rename the User file (NgvUsers.uxx) if exists
-	//	renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "VRTEquipments");
-        renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Equipment.txt");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		// Rename the cache Setup file (Asset.txt) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache\\ValProbeRT", "Setup.txt");
 		// Rename the VRT Setups folder (Asset) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "VRTSetups");	
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "VRTSetups");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
@@ -100,8 +101,8 @@ public class customized_UserPrivilagesTest extends BaseClass {
 
 		// ADMIN user creation
 		UserManagementPage.ClickNewUser();
-		UserManagementPage.CreateAdminUser(getUID("adminFull"), getPW("adminFull"), "Admintest1", getUID("SysAdmin"), "1Start@1AM", "AdminNew",
-				"123345678", "newAdmin@gmail.com");
+		UserManagementPage.CreateAdminUser(getUID("adminFull"), getPW("adminFull"), "Admintest1", getUID("SysAdmin"),
+				"1Start@1AM", "AdminNew", "123345678", "newAdmin@gmail.com");
 		UserManagementPage.clickAnyUserinUserList("Admintest1");
 		UserManagementPage.Click_AllCheckBox();
 		UserManagementPage.ClickNewUserSaveButton();
@@ -115,8 +116,8 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		// SUPERVISOR user creation
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.CreateSupervisorUser(getUID("adminFull"), getPW("adminFull"), "Suptest1", getUID("SysSupervisor"), "3Welcome3@AM", "SUpNew",
-				"123345678", "newSup@gmail.com");
+		UserManagementPage.CreateSupervisorUser(getUID("adminFull"), getPW("adminFull"), "Suptest1",
+				getUID("SysSupervisor"), "3Welcome3@AM", "SUpNew", "123345678", "newSup@gmail.com");
 		UserManagementPage.clickAnyUserinUserList("Suptest1");
 		UserManagementPage.Click_AllCheckBox();
 		UserManagementPage.ClickNewUserSaveButton();
@@ -124,14 +125,15 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 		LoginPage = MainHubPage.UserSignOut();
 		Thread.sleep(1000);
-		MainHubPage = LoginPage.ChangeNewPWwithoutPWCheckBox(getUID("SysSupervisor"), "3Welcome3@AM", getPW("SysSupervisor"));
+		MainHubPage = LoginPage.ChangeNewPWwithoutPWCheckBox(getUID("SysSupervisor"), "3Welcome3@AM",
+				getPW("SysSupervisor"));
 		LoginPage = MainHubPage.UserSignOut();
 
 		// OPERATOR User creation
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
-		UserManagementPage.CreateOperatorUser(getUID("adminFull"), getPW("adminFull"), "OPE1", getUID("SysOperator"), "4Welcome4@AM", "OperatorNew",
-				"12345678", "newOpe@gmail.com");
+		UserManagementPage.CreateOperatorUser(getUID("adminFull"), getPW("adminFull"), "OPE1", getUID("SysOperator"),
+				"4Welcome4@AM", "OperatorNew", "12345678", "newOpe@gmail.com");
 		UserManagementPage.clickAnyUserinUserList("OPE1");
 		UserManagementPage.Click_AllCheckBox();
 		UserManagementPage.ClickNewUserSaveButton();
@@ -139,15 +141,16 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		MainHubPage = UserManagementPage.ClickBackButn();
 		LoginPage = MainHubPage.UserSignOut();
 		Thread.sleep(1000);
-		MainHubPage = LoginPage.ChangeNewPWwithoutPWCheckBox(getUID("SysOperator"), "4Welcome4@AM", getPW("SysOperator"));
+		MainHubPage = LoginPage.ChangeNewPWwithoutPWCheckBox(getUID("SysOperator"), "4Welcome4@AM",
+				getPW("SysOperator"));
 
 		AppClose();
 		Thread.sleep(1000);
-	
+
 	}
 
 // After All the tests are conducted
-	//@AfterTest
+	// @AfterTest
 	@AfterClass
 	public void endReport() {
 		extent.flush();
@@ -160,8 +163,6 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		LoginPage = new LoginPage();
-		// MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
-		// UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 	}
 
 	@AfterMethod(alwaysRun = true)
@@ -182,8 +183,8 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		driver.quit();
 	}
 
-	
-//CADMN1
+	/*
+	//CADMN1
 	@Test(groups = { "Regression" }, description = "Verify the customized non defult privileges for Administrator")
 	public void CADMN1() throws Exception {
 		extentTest = extent.startTest("CADMN1-Verify the customized unchecked privileges for Administrator");
@@ -222,8 +223,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa1.assertAll();
 	}
 
-	
-// CADMN2
+	// CADMN2
 	@Test(groups = { "Regression" }, description = "Verify the customized default privileges for Administrator")
 	public void CADMN2() throws Exception {
 		extentTest = extent.startTest("CADMN2-Verify the customized privileges for Administrator");
@@ -235,11 +235,11 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertEquals(UserManagementPage.RunQualificationstatus(), true, "FAIL: CheckBox should be Checked");
 		sa.assertEquals(UserManagementPage.RunCalibrationstatus(), true, "FAIL: CheckBox should be Checked");
 		sa.assertEquals(UserManagementPage.PrivCreateEditSetupstatus(), true, "FAIL: CheckBox should be Checked");
-		
+
 		sa.assertAll();
 	}
 
-//CADMN3
+	//CADMN3
 	@Test(groups = {
 			"Regression" }, description = "Verify if Administrator is Unable to access the customized unchecked privilege-Create_Equipment")
 	public void CADMN3() throws InterruptedException, ParseException, IOException, AWTException {
@@ -254,8 +254,9 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User should not able to create Equipment");
 		s.assertAll();
 	}
+	*/
 
-//CADMN4
+	//CADMN4
 	@Test(groups = {
 			"Regression" }, description = "Verify Administrator is unable to access the customized unchecked privilege-Edit Equipment")
 	public void CADMN4() throws InterruptedException, ParseException, IOException, AWTException {
@@ -265,7 +266,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		EquipmentPage = EquipmentHubPage.ClickAddButton();
-		EquipmentPage.EqipCreation_MandatoryFields("903A", "1203", "IRTD");
+		EquipmentPage.EqipCreation_MandatoryFields("IRTD", "CADMN4", "1203");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 		EquipmentHubPage = EquipmentPage.ClickBackBtn();
 		MainHubPage = EquipmentHubPage.ClickBackBtn();
@@ -273,18 +274,17 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
-		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("903A");
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("CADMN4");
 		IRTDDetailspage.EditIRTDEquip("Editing");
-		UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
+		//UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
 		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
-		String ActAlertMsg = EquipmentHubPage.AlertMsg();
+		String ActAlertMsg = tu.get_AlertMsg_text();
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User should not able to edit Equipment");
 		s.assertAll();
 	}
-
-//CADMN5
- //dependsOnMethods = "CADMN4",
-  
+	
+	
+	//CADMN5
 	@Test(groups = {
 			"Regression" }, description = "Verify Admin is unable to access the customized unchecked privilege-Delete Equipments")
 	public void CADMN5() throws InterruptedException, ParseException, IOException, AWTException {
@@ -293,17 +293,26 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		SoftAssert s = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
+		EquipmentPage = EquipmentHubPage.ClickAddButton();
+		EquipmentPage.EqipCreation_MandatoryFields("IRTD", "CADMN5", "1203");
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
+		EquipmentHubPage = EquipmentPage.ClickBackBtn();
+		MainHubPage = EquipmentHubPage.ClickBackBtn();
+		LoginPage = MainHubPage.UserSignOut();
+		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
+		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		IRTDHubPage = EquipmentHubPage.ClickonIRTDlistbox();
-		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("903A");
+		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("CADMN5");
 		IRTDDetailspage.clickDeleteEquipmentIcon();
 		IRTDDetailspage.ClickYesBtn();
 		UserLoginPopup(getUID("SysAdmin"), getPW("SysAdmin"));
 		String ExpAlrtMsg = "User do not have permission to perform this operation";
-		String ActAlertMsg = IRTDDetailspage.AlertMsg();
+		String ActAlertMsg = tu.get_AlertMsg_text();
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s.assertAll();
 	}
 
+	/*
 	// CADMN6
 	@Test(groups = {
 			"Regression" }, description = "Verify if Administrator is unable to access the customized unchecked privilege-Archive")
@@ -321,7 +330,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//CADMN7
+	//CADMN7
 	@Test(groups = {
 			"Regression" }, description = "Verify if Administrator is able to access the customized unchecked privilege-SyncIn")
 	public void CADMN7() throws InterruptedException, ParseException, IOException, AWTException {
@@ -355,7 +364,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//CADMN9
+	//CADMN9
 	@Test(groups = {
 			"Regression" }, description = "Verify if Administrator is able to access the customized unchecked privilege-Access Audit Trail")
 	public void CADMN9() throws InterruptedException, ParseException, IOException, AWTException {
@@ -363,8 +372,8 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"CADMN9-Verify if Administrator is able to access the customized unchecked privilege-Access Audit Trail");
 		SoftAssert s = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysAdmin"), getPW("SysAdmin"));
-        MainHubPage.Alert_AuditTitle();
-		
+		MainHubPage.Alert_AuditTitle();
+
 		String ActAlertMsg = MainHubPage.AlertMsg();
 		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User should not able to access Audit");
@@ -388,10 +397,10 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertEquals(ActMsg, ExpMsg, "FAIL: Data saved successfully Msg should be displaying");
 		s.assertAll();
 	}
-	
-//dependsOnMethods = "CADMN10",
-//CADMN11
-	@Test( groups = {
+
+	//dependsOnMethods = "CADMN10",
+	//CADMN11
+	@Test(groups = {
 			"Regression" }, description = "Verify Administrator is able to access the Customized chcked privilege-Edit Asset")
 	public void CADMN11() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest(
@@ -405,10 +414,10 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"FAIL: Admin should be able to access the Customized privilege-Edit Asset");
 		s.assertAll();
 	}
-	
-//dependsOnMethods = "CADMN10",
+
+	//dependsOnMethods = "CADMN10",
 	// CADMN12
-	@Test( groups = {
+	@Test(groups = {
 			"Regression" }, description = "Verify if Administrator is unable to access the Customized unchecked privilege-Camera Access in edit asset")
 	public void CADMN12() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest(
@@ -425,10 +434,10 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"FAIL:Administrator should be unable to access the Customized privilege-Camera Access");
 		s.assertAll();
 	}
-	
-//dependsOnMethods = "CADMN10",
-//CADMN13
-	@Test( groups = {
+
+	//dependsOnMethods = "CADMN10",
+	//CADMN13
+	@Test(groups = {
 			"Regression" }, description = "Verify Administrator is able to access the customized privilege-Create Setups")
 	public void CADMN13() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
@@ -441,10 +450,10 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertEquals(Setup_defineSetupPage.defineSetupPage_state(), true, "FAIL: setup page should be displayed");
 		s.assertAll();
 	}
-	
-//dependsOnMethods = "CADMN10",
-//CADMN14 
-	@Test( groups = {
+
+	//dependsOnMethods = "CADMN10",
+	//CADMN14 
+	@Test(groups = {
 			"Regression" }, description = "Verify if Administrator is unable to access the Customized non default privilege-Delete Assets")
 	public void CADMN14() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest(
@@ -462,7 +471,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//CADMN15
+	//CADMN15
 	@Test(groups = { "Regression" }, description = "Verify the Customized checked privileges  for Supervisor User")
 	public void CADMN15() throws Exception {
 		extentTest = extent.startTest("CADMN15-Verify the Customized default privileges  for Supervisor User");
@@ -474,7 +483,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertEquals(UserManagementPage.Adminstatus(), true, "FAIL:Adminstatus checkbox should be Checked");
 		sa.assertEquals(UserManagementPage.CreateAndEditEquipmentstatus(), true,
 				"FAIL:CreateAndEditEquipmentstatus CheckBox should  be Checked");
-		
+
 		sa.assertEquals(UserManagementPage.DeleteAssetsstatus(), true,
 				"FAIL:DeleteAssetsstatus checkbox should  be Checked");
 		sa.assertEquals(UserManagementPage.DeleteSetupstatus(), true,
@@ -483,7 +492,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"FAIL:DeleteEquipmentstatus checkbox should  be Checked");
 		sa.assertEquals(UserManagementPage.DeleteStudyFilesReportsstatus(), true,
 				"FAIL:DeleteStudyFilesReportsstatus checkbox should  be Checked");
-		
+
 		sa.assertEquals(UserManagementPage.CopyFilesReportsstatus(), true,
 				"FAIL:CopyFilesReportsstatus checkbox should be Checked");
 		sa.assertEquals(UserManagementPage.Archivedatastatus(), true,
@@ -491,7 +500,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN16	
+	//CADMN16	
 	@Test(groups = { "Regression" }, description = "Verify the Customized Non-default privileges  for Supervisor User")
 	public void CADMN16() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("CADMN16-Verify Customized Non-default privileges for Supervisor User");
@@ -506,26 +515,27 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"FAIL:CreaeteEditSetupstatus should not Checked");
 		sa.assertEquals(UserManagementPage.CreateReportsstatus(), false,
 				"FAIL :CreateReportsstatus should not Checked");
-		
+
 		sa.assertEquals(UserManagementPage.RunQualificationstatus(), false,
 				"FAIL: RunQualificationstatus should not Checked");
 		sa.assertEquals(UserManagementPage.RunCalibrationstatus(), false,
 				"FAIL: RunCalibrationstatus should not Checked");
 		sa.assertEquals(UserManagementPage.ManualSyncstatus(), false, "FAIL: ManualSyncstatus should not Checked");
 		sa.assertEquals(UserManagementPage.CameraAccessstatus(), false, "FAIL:CameraAccessstatus should not Checked");
-		
+
 		UserManagementPage.ClkscrollBar_down();
 		sa.assertEquals(UserManagementPage.CreatePassFailtemplatestatus(), false,
-	"FAIL: CreatePassFailtemplatestatus checkbox should not be Checked");
+				"FAIL: CreatePassFailtemplatestatus checkbox should not be Checked");
 		sa.assertEquals(UserManagementPage.EditPassFailtemplatestatus(), false,
-				"FAIL: EditPassFailtemplatestatus checkbox should not  be Checked");	
+				"FAIL: EditPassFailtemplatestatus checkbox should not  be Checked");
 		sa.assertEquals(UserManagementPage.Audittrailstatus(), false,
 				"FAIL: Audittrailstatus CheckBox should not be Checked");
 		sa.assertEquals(UserManagementPage.Deletepassfailtemplatestatus(), false,
 				"FAIL: Deletepassfailtemplatestatus checkbox should not be Checked");
 		sa.assertAll();
 	}
-//CADMN17
+
+	//CADMN17
 	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is Unable to access the customized  privilege-Create Assets")
 	public void CADMN17() throws InterruptedException, ParseException, IOException, AWTException {
@@ -540,10 +550,10 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Alert message Not Matched");
 		s.assertAll();
 	}
-	
-//dependsOnMethods = "CADMN10",
-//CADMN18	
-	@Test( groups = {
+
+	//dependsOnMethods = "CADMN10",
+	//CADMN18	
+	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is unable to access the customized privilege-Edit Asset")
 	public void CADMN18() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
@@ -560,7 +570,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//	CADMN19
+	//	CADMN19
 	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is able to access the customized default privilege-Delete Asset")
 	public void CADMN19() throws InterruptedException, ParseException, IOException, AWTException {
@@ -584,7 +594,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//	CADMN20
+	//	CADMN20
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is unable to access the customized unchecked privilege-Camera Access")
 	public void CADMN20() throws InterruptedException, ParseException, IOException, AWTException {
@@ -603,7 +613,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//CADMN21 
+	//CADMN21 
 	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is able to access the customized non-default privilege-Create Equipment")
 	public void CADMN21() throws InterruptedException, ParseException, IOException, AWTException {
@@ -613,18 +623,17 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		EquipmentPage = EquipmentHubPage.ClickAddButton();
-		EquipmentPage.EqipCreation_MandatoryFields("318","IRTD", "605A");
+		EquipmentPage.EqipCreation_MandatoryFields("IRTD", "318", "605A");
 		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
 		String ExpAlrtMsg = "Data saved successfully";
 		String ActAlertMsg = EquipmentPage.AlertMsg();
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Equipment should be created successfully");
 		s.assertAll();
 	}
-	
 
-//CADMN22
-	//dependsOnMethods = "CADMN21"
-	@Test( groups = {
+	//CADMN22
+	// dependsOnMethods = "CADMN21"
+	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is able to access the customized non-default privilege-Edit Equipment")
 	public void CADMN22() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest(
@@ -636,15 +645,14 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		IRTDDetailspage = IRTDHubPage.Click_IrtdSerialNo("318");
 		IRTDDetailspage.EditIRTDEquip("Editing");
 		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
-		String ExpAlrtMsg = "Equipment \"316A\" Updated successfully.";
+		String ExpAlrtMsg = "Equipment \"318\" Updated successfully.";
 		String ActAlertMsg = EquipmentHubPage.AlertMsg();
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Saved Successfully message should be displayed");
 		s.assertAll();
 	}
-	
 
 	// CADMN23
-	//dependsOnMethods = "CADMN21", 
+	// dependsOnMethods = "CADMN21",
 	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is able to access the customized non-default privilege-Delete Equipments")
 	public void CADMN23() throws InterruptedException, ParseException, IOException, AWTException {
@@ -677,7 +685,6 @@ public class customized_UserPrivilagesTest extends BaseClass {
 	}
 
 	// CADMN24
-
 	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is able to access the customized non-default privilege-Manual sync In")
 	public void CADMN24() throws InterruptedException, ParseException, IOException, AWTException {
@@ -694,8 +701,8 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"FAIL: Operator is able to access the non-default privilege-Manual sync In");
 		s.assertAll();
 	}
+	
 	// CADMN25
-
 	@Test(groups = {
 			"Regression" }, description = "Verify Supervisor is able to access the customized non-default privilege-Manual sync Out")
 	public void CADMN25() throws InterruptedException, ParseException, IOException, AWTException {
@@ -713,8 +720,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//CADMN26
-
+	//CADMN26
 	@Test(groups = {
 			"Regression" }, description = "Verify if Supervisor is unable to access the customized Non-default privilege-Access Audit Trail")
 	public void CADMN26() throws InterruptedException, ParseException, IOException, AWTException {
@@ -722,19 +728,18 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"CADMN26-Verify if Supervisor is able to access the customized Non-default privilege-Access Audit Trail");
 		SoftAssert s = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysSupervisor"), getPW("SysSupervisor"));
-        
+
 		MainHubPage.Alert_AuditTitle();
-		
+
 		String ActAlertMsg = MainHubPage.AlertMsg();
 		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
-		
+
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User should not able to access for Audit Trail");
 		s.assertAll();
 
 	}
 
-//CADMN27
-
+	//CADMN27	
 	@Test(groups = { "Regression" }, description = "Verify customized checked privileges  for Operator User")
 	public void CADMN27() throws Exception {
 		extentTest = extent.startTest("CADMN27-Verify customized checked privileges  for Operator User");
@@ -765,7 +770,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN28
+	//CADMN28
 	@Test(groups = { "Regression" }, description = "Verify customized unchecked privileges for Operator User")
 	public void CADMN28() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest("CADMN28-Verify customized unchecked privileges for Operator User");
@@ -789,7 +794,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN29
+	//CADMN29
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is able to access the customized checked privileges-Admin")
 	public void CADMN29() throws Exception {
@@ -803,7 +808,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN30
+	//CADMN30
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is able to access the customized checked privileges-Create Equipment")
 	public void CADMN30() throws InterruptedException, ParseException, IOException, AWTException {
@@ -813,17 +818,17 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
 		EquipmentHubPage = MainHubPage.ClickEquipmentTile();
 		EquipmentPage = EquipmentHubPage.ClickAddButton();
-		EquipmentPage.EqipCreation_MandatoryFields("600", "IRTD","100A");
+		EquipmentPage.EqipCreation_MandatoryFields("IRTD", "600", "100A");
 		UserLoginPopup(getUID("SysSupervisor"), getPW("SysSupervisor"));
 		String ExpAlrtMsg = "Data saved successfully";
 		String ActAlertMsg = EquipmentPage.AlertMsg();
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: Equipment should be created successfully");
 		s.assertAll();
 	}
-	
-//dependsOnMethods = "CADMN30",
-//CADMN31
-	@Test( groups = {
+
+	//dependsOnMethods = "CADMN30",
+	//CADMN31
+	@Test(groups = {
 			"Regression" }, description = "Verify Operator is able to access the customized checked privilege-Edit Equipment")
 	public void CADMN31() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent
@@ -841,10 +846,9 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//dependsOnMethods = "CADMN30",
-// CADMN32
-
-	@Test( groups = {
+	//dependsOnMethods = "CADMN30",
+	// CADMN32
+	@Test(groups = {
 			"Regression" }, description = "Verify Operator is able to access the customized checked privilege-Delete Equipments")
 	public void CADMN32() throws InterruptedException, ParseException, IOException, AWTException {
 		extentTest = extent.startTest(
@@ -862,7 +866,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN33	
+	//CADMN33	
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is unable to access the customized unchecked-Create Asset")
 	public void CADMN33() throws InterruptedException, ParseException, IOException, AWTException {
@@ -879,8 +883,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN34
-
+	//CADMN34
 	@Test(groups = {
 			"Regression" }, description = "Verify if Operator is unable to access the customized Unchecked privilege-Edit Assets")
 	public void CADMN34() throws InterruptedException, ParseException, IOException, AWTException {
@@ -906,10 +909,9 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"FAIL: Operator should be unable to access the customized unchecked privilege-Edit Assets");
 		sa.assertAll();
 	}
-	
-//dependsOnMethods = "CADMN34", 
-//CADMN35
 
+	//dependsOnMethods = "CADMN34", 
+	//CADMN35
 	@Test(groups = {
 			"Regression" }, description = "Verify if Operator is able to access the customized checked privilege-Delete Assets")
 	public void CADMN35() throws InterruptedException, ParseException, IOException, AWTException {
@@ -926,8 +928,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN36
-
+	//CADMN36
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is able to access the customized checked privilege -Archive")
 	public void CADMN36() throws InterruptedException, ParseException, IOException, AWTException {
@@ -942,7 +943,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		sa.assertAll();
 	}
 
-//CADMN37
+	//CADMN37
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is able to access the customized checked privilege-SyncIn")
 	public void CADMN37() throws InterruptedException, ParseException, IOException, AWTException {
@@ -957,7 +958,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//CADMN38
+	//CADMN38
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is able to access the customized checked privilege-SyncOut")
 	public void CADMN38() throws InterruptedException, ParseException, IOException, AWTException {
@@ -972,8 +973,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-// CADMN39
-
+	// CADMN39
 	@Test(groups = {
 			"Regression" }, description = "Verify Operator is unable to access the customized unchecked privilege-Camera Access")
 	public void CADMN39() throws InterruptedException, IOException, AWTException {
@@ -992,7 +992,7 @@ public class customized_UserPrivilagesTest extends BaseClass {
 		s.assertAll();
 	}
 
-//CADMN40
+	//CADMN40
 	@Test(groups = {
 			"Regression" }, description = "Verify operator  is unable to access the customized unchecked privilege-Access Audit Trail")
 	public void CADMN40() throws InterruptedException, IOException, AWTException {
@@ -1000,15 +1000,14 @@ public class customized_UserPrivilagesTest extends BaseClass {
 				"CADMN40-Verify operator is unable to access the customized unchecked privilege-Access Audit Trail");
 		SoftAssert s = new SoftAssert();
 		MainHubPage = LoginPage.Login(getUID("SysOperator"), getPW("SysOperator"));
-		
+
 		MainHubPage.Alert_AuditTitle();
-		
+
 		String ActAlertMsg = MainHubPage.AlertMsg();
 		String ExpAlrtMsg = "User does not have sufficient privileges to perform this operation";
-		
+
 		s.assertEquals(ActAlertMsg, ExpAlrtMsg, "FAIL: User should not able to access for Audit Trail");
 		s.assertAll();
 	}
-
-
+*/
 }

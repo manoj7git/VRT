@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AsseTDetailsTestSuite" parallel="false">
+	<listeners>		
+		<listener class-name="com.vrt.Listners.ExtentReporterNG" ></listener>
+		<listener class-name="com.vrt.Listners.RetryTransformer" ></listener>
+	</listeners>
 	<test thread-count="5" name="assetDetailsSanityTest">
 <!-- 		<groups>
 			<run>
@@ -9,7 +13,7 @@
 		</groups> -->
 
 		<classes>
-			<class name="com.vrt.testcases.assetDetailsTest" />
+			<class name="com.vrt.testcases.assetDetailsTest" ></class>
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

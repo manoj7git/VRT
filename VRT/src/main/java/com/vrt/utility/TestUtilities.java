@@ -162,7 +162,7 @@ public class TestUtilities extends BaseClass {
 		File source = ts.getScreenshotAs(OutputType.FILE);
 		// after execution, you could see a folder "FailedTestsScreenshots"
 		// under src folder
-		String destination = System.getProperty("user.dir") + "/FailedTestsScreenshots/" + screenshotName + dateName
+		String destination = System.getProperty("user.dir") + "/FailedTestsScreenshots/" + screenshotName +"_"+ dateName
 				+ ".png";
 		File finalDestination = new File(destination);
 		FileUtils.copyFile(source, finalDestination);
@@ -175,7 +175,7 @@ public class TestUtilities extends BaseClass {
 		File source = ts.getScreenshotAs(OutputType.FILE);
 		// after execution, you could see a folder "FailedTestsScreenshots"
 		// under src folder
-		String destination = System.getProperty("user.dir") + "/PassTCScreenshots/" + screenshotName + dateName
+		String destination = System.getProperty("user.dir") + "/PassTCScreenshots/" + screenshotName +"_"+ dateName
 				+ ".png";
 		File finalDestination = new File(destination);
 		FileUtils.copyFile(source, finalDestination);
@@ -248,6 +248,21 @@ public class TestUtilities extends BaseClass {
 	  }
 	 
 	  
+	// Close alert message if visible
+	public void click_Close_alertmsg() throws InterruptedException {
+		if (!IsElementVisibleStatus(driver.findElementByAccessibilityId("displayMessageTextBlock"))) {
+			System.out.println("Buttom Appbar Alert message not displayed");
+		} else {
+			WebElement alertMsg_CloseBtn = driver.findElementByAccessibilityId("btnDelete");
+			clickOn(alertMsg_CloseBtn);
+		}
+	}
+	
+	//Fetch the alert message data in the bottom app bar
+	public String get_AlertMsg_text() {
+		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
+		return FetchText(Msg);
+	}
 	
 
 }

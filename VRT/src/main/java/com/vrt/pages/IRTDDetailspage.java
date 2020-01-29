@@ -22,9 +22,7 @@ public class IRTDDetailspage extends BaseClass {
 
 	// EquipmentHubPage Element definition
 	WebElement IRTDHeader = null;
-	WebElement DeleteBtn = null;
-	WebElement DeletePopupWindow = null;
-	WebElement YesBtn = null;
+	WebElement DeleteBtn = null;		
 	WebElement EntrAssertname = null;
 	WebElement ClkSaveBtn = null;
 
@@ -53,14 +51,18 @@ public class IRTDDetailspage extends BaseClass {
 
 	// Delete Pop up Window is presence...
 	public boolean IRTD_DeletePopupWindow() {
-		DeletePopupWindow = driver.findElementByAccessibilityId("Popup Window");
+		WebElement DeletePopupWindow = driver.findElementByAccessibilityId("Popup Window");
 		return IsElementVisibleStatus(DeletePopupWindow);
 	}
 
 	// clickYesBtn
 	public void ClickYesBtn() {
-		YesBtn = driver.findElementByAccessibilityId("Button1");
-		clickOn(YesBtn);
+		if (!IRTD_DeletePopupWindow()) {
+			System.out.println("IRTD delete popup didnt display");
+		} else {
+			WebElement YesBtn = driver.findElementByAccessibilityId("Button1");
+			clickOn(YesBtn);
+		}
 	}
 
 	// Edit Asset Name
@@ -84,8 +86,9 @@ public class IRTDDetailspage extends BaseClass {
 	}
 
 	//Fetch the alert message when Supervisor not have the privilege to edit the equipments
-	public String AlertMsg() {
+	/*public String AlertMsg() {
 		WebElement Msg = driver.findElementByAccessibilityId("displayMessageTextBlock");
 		return FetchText(Msg);
-	}
+	}*/
+	
 }
