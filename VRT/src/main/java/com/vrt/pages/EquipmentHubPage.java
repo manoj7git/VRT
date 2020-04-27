@@ -27,14 +27,14 @@ public class EquipmentHubPage extends BaseClass {
 		AddButton = driver.findElementByAccessibilityId("AddEquipmentsButton");
 	}
 
-	EquipmentHubPage() {
+	EquipmentHubPage() throws IOException {
 		super();
 		initElements();
 
 	}
 
 	// Click AddButton
-	public EquipmentPage ClickAddButton() throws InterruptedException {
+	public EquipmentPage ClickAddButton() throws InterruptedException, IOException {
 		clickOn(AddButton);
 		Thread.sleep(1000);
 		return new EquipmentPage();
@@ -42,7 +42,7 @@ public class EquipmentHubPage extends BaseClass {
 
 	// IRTD
 	// Click on IRTD List box of Equipment page
-	public IRTDHubPage ClickonIRTDlistbox() {
+	public IRTDHubPage ClickonIRTDlistbox() throws IOException {
 		WebElement irtdbox = driver.findElementByName("IRTD");
 		clickOn(irtdbox);
 		return new IRTDHubPage();
@@ -62,10 +62,16 @@ public class EquipmentHubPage extends BaseClass {
 	}
 
 	// Click on back button
-	public MainHubPage ClickBackBtn() {
+	public MainHubPage ClickBackBtn() throws IOException {
 		WebElement backBtn = driver.findElementByAccessibilityId("ArrowGlyph");
 		clickOn(backBtn);
 		return new MainHubPage();
 	}
+	//click Initiate Verification Tab
+		public void  ClickInitiateVerification() throws IOException {
+			WebElement InitiateVerificationTab = driver.findElementByAccessibilityId("SaveButton1");
+			clickOn(InitiateVerificationTab);
+		}
+			
 
 }

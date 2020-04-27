@@ -1,5 +1,6 @@
 package com.vrt.pages;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,7 +19,6 @@ public class Setup_SensorConfigPage extends BaseClass {
 	private WebElement DefineSetup_btn = null;
 	private WebElement AddExpanderImage_btn = null;
 	private WebElement GroupSensors_btn = null;
-	
 
 	private void initializeEelements() {
 		SensorConfigPageTitle = driver.findElementByName("Sensors Configuration");
@@ -28,13 +28,28 @@ public class Setup_SensorConfigPage extends BaseClass {
 		DefineSetup_btn = driver.findElementByName("Define Setup");
 		GroupSensors_btn = driver.findElementByAccessibilityId("NextButton");
 		AddExpanderImage_btn = driver.findElementByAccessibilityId("ExpanderImage");
-	
+
 	}
 
-	Setup_SensorConfigPage() {
+	Setup_SensorConfigPage() throws IOException {
 		super();
 		initializeEelements();
 	}
+	
+	// Release memory
+	public void resetWebElements() {
+		SensorConfigPageTitle = null;
+		SensorConfigPageHeaderTxt = null;
+		AddSensors_btn = null;
+		ConfigureSensors_btn = null;
+		DefineSetup_btn = null;
+		GroupSensors_btn = null;
+		AddExpanderImage_btn = null;	
+	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Sensor Config Page methods
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// Check the presence of Sensor Configuration page
 	public boolean sensorConfigPage_state() {
@@ -70,26 +85,32 @@ public class Setup_SensorConfigPage extends BaseClass {
 	public void Click_GroupSensors_btn() {
 		clickOn(GroupSensors_btn);
 	}
+
+	// click GroupSensors_btn to navigate Group Sensors page click YES (less number
+	// of sensor config)
+	public Setup_GroupSensorsPage Click_nextbtn() throws IOException {
+		clickOn(GroupSensors_btn);
+		return new Setup_GroupSensorsPage();
+	}
 	
-	
-	// click GroupSensors_btn to navigate Group Sensors page click YES (less number of sensor config)
-	
-	public GroupSensorspage Click_nextbtn_GroupSensors() {
+	// click GroupSensors_btn to navigate Group Sensors page click YES (less number
+	// of sensor config)
+	public Setup_GroupSensorsPage Click_nextbtn_withAlert() throws IOException {
 		clickOn(GroupSensors_btn);
 		WebElement Yesbtn = driver.findElementByName("Yes");
 		clickOn(Yesbtn);
-		return new GroupSensorspage();
+		return new Setup_GroupSensorsPage();
 	}
-	
-	//Fetch the alert text message for the less number of sensor configure
-	
-	public boolean Is_lessnumberSenAlertBox_Visible()
-	{
-		clickOn(GroupSensors_btn);	
-		 WebElement alert_text = driver.findElementByName("Less number of sensors are configured than the defined/added number of sensors. Is this Intentional ?");
-		 return IsElementVisibleStatus(alert_text);
+
+	// Fetch the alert text message for the less number of sensor configure
+
+	public boolean Is_lessnumberSenAlertBox_Visible() {
+		clickOn(GroupSensors_btn);
+		WebElement alert_text = driver.findElementByName(
+				"Less number of sensors are configured than the defined/added number of sensors. Is this Intentional ?");
+		return IsElementVisibleStatus(alert_text);
 	}
-	
+
 // Get the Sensor Configuration page title text
 	public String get_SensorConfigurationPage_titletext() {
 		return FetchText(SensorConfigPageHeaderTxt);
@@ -141,7 +162,7 @@ public class Setup_SensorConfigPage extends BaseClass {
 	}
 
 	// Click on back btn
-	public Setup_defineSetupPage DefineSetup_back_btn() {
+	public Setup_defineSetupPage DefineSetup_back_btn() throws IOException {
 		clickOn(DefineSetup_btn);
 		return new Setup_defineSetupPage();
 	}
@@ -164,7 +185,7 @@ public class Setup_SensorConfigPage extends BaseClass {
 		return FetchText(TextFields.get(2));
 	}
 
-	// Click Temperature data
+	// Enter Temperature count to add Temp sensors
 	public void Enter_TemperatureCount_textField(String TempCount) {
 		List<WebElement> TextFields = driver.findElementsByClassName("TextBox");
 		// System.out.println(TextFields.size());
@@ -175,7 +196,6 @@ public class Setup_SensorConfigPage extends BaseClass {
 
 		WebElement AddBtn_Field = driver.findElementByAccessibilityId("SelectButton");
 		clickOn(AddBtn_Field);
-
 	}
 
 	// Enter Humidity count data
@@ -228,7 +248,7 @@ public class Setup_SensorConfigPage extends BaseClass {
 	public String[] SensorCount() {
 		List<WebElement> sensorList = driver.findElementByName("ValProbe RT")
 				.findElements(By.className("GridViewItem"));
-		System.out.println("Total sensors created: " + sensorList.size());
+		//System.out.println("Total sensors created: " + sensorList.size());
 		String[] a = null;
 		return a;
 
@@ -243,11 +263,11 @@ public class Setup_SensorConfigPage extends BaseClass {
 		for (int i = 0; i < sensorList.size(); i++) {
 			// System.out.println("Sensor type : " + AssetList.get(i).getText());
 			List<WebElement> SensorTileInfoList = sensorList.get(i).findElements(By.className("TextBlock"));
-			 System.out.println(" Sensor tile count: " + SensorTileInfoList.size());
+			//System.out.println(" Sensor tile count: " + SensorTileInfoList.size());
 
-			// Fetch all the contents of the  tile
+			// Fetch all the contents of the tile
 			for (int j = 0; j < SensorTileInfoList.size(); j++) {
-				System.out.println("SensorTileInfo: " + SensorTileInfoList.get(j).getText());
+				//System.out.println("SensorTileInfo: " + SensorTileInfoList.get(j).getText());
 			}
 		}
 
@@ -259,83 +279,84 @@ public class Setup_SensorConfigPage extends BaseClass {
 		WebElement Vertical_ScrollBar = driver.findElementByAccessibilityId("VerticalScrollBar");
 		return IsElementVisibleStatus(Vertical_ScrollBar);
 	}
-	
+
 	// Click on Temperature filter
-		public void Clickon_Temperature() {
-			WebElement btn_Temperature = driver.findElementByAccessibilityId("btnTemperature");
-			clickOn(btn_Temperature);
-		}
-		
-	//Is Temperature filters sensors label visible
+	public void Clickon_Temperature() {
+		WebElement btn_Temperature = driver.findElementByAccessibilityId("btnTemperature");
+		clickOn(btn_Temperature);
+	}
+
+	// Is Temperature filters sensors label visible
 	public boolean Temperature_filters() {
 		WebElement btn_Temperature = driver.findElementByAccessibilityId("btnTemperature");
 		clickOn(btn_Temperature);
 		WebElement label_Temperature = driver.findElementByName("Temperature");
 		return IsElementVisibleStatus(label_Temperature);
 	}
-	
-	//click sensors from Temperature filter
+
+	// click sensors from Temperature filter
 	public void Click_Temp_sensor() {
-		//WebElement temp_senr = driver.findElementByName("Sensor 1");
+		// WebElement temp_senr = driver.findElementByName("Sensor 1");
 		List<WebElement> Tmpsenr = driver.findElementsByClassName("GridViewItem");
-		Tmpsenr.get(0).click();	
+		Tmpsenr.get(0).click();
 	}
-	
-	//Get sensor text
+
+	// Get sensor text
 	public String get_sensortext() {
-		List<WebElement> senrList = driver.findElementByName("VRT.DataObjects.DataContracts.VRTSensors").findElements(By.className("TextBlock"));
+		List<WebElement> senrList = driver.findElementByName("VRT.DataObjects.DataContracts.VRTSensors")
+				.findElements(By.className("TextBlock"));
 		return FetchText(senrList.get(0));
 	}
-	
-	//click 2nd sensor from Temperature filter
-		public void Click_Temp_sensor2() {
-			//WebElement temp_senr = driver.findElementByName("Sensor 1");
-			List<WebElement> Tmpsenr = driver.findElementsByClassName("GridViewItem");
-			Tmpsenr.get(1).click();	
-		}
-		
-	
-	
-	//click Multiple sensors from Temperature filter
-		public void Click_Temp_sensor_Multi() {
-			//WebElement temp_senr = driver.findElementByName("Sensor 1");
-			List<WebElement> Tmpsenr = driver.findElementsByClassName("GridViewItem");
-			Tmpsenr.get(0).click();
-			Tmpsenr.get(1).click();
-			Tmpsenr.get(2).click();
-			
-		}
-	
-	//Click on Humidity filters
-		public void Clickon_Humidity() {
-			WebElement btn_Humidity = driver.findElementByAccessibilityId("btnHumidity");
-			clickOn(btn_Humidity);
-		}
-		//click sensors from Humidity filter
-		public void Click_Hmd_sensor() {
-			//WebElement temp_senr = driver.findElementByName("Sensor 1");
-			List<WebElement> Hmdsenr = driver.findElementsByClassName("GridViewItem");
-			Hmdsenr.get(0).click();
-			
-		}
-		
-		//click Multiple sensors from Humidity filter
-				public void Click_Hmd_sensor_Multi() {
-					//WebElement temp_senr = driver.findElementByName("Sensor 1");
-					List<WebElement> Hmdsenr = driver.findElementsByClassName("GridViewItem");
-					Hmdsenr.get(0).click();
-					Hmdsenr.get(1).click();
-					Hmdsenr.get(2).click();
-					
-				}	
-	/*//Fetch humidity sensor text
-				public String get_Hmd_sensortext() {
-					List<WebElement> Hmdsenr = driver.findElementByName("VRT.DataObjects.DataContracts.VRTSensors").findElements(By.className("TextBlock"));
-					//List<WebElement> Hmdsenr = driver.findElementsByClassName("TextBlock");
-					Hmdsenr.get(0).click();
-					return FetchText(Hmdsenr.get(0));
-				}*/
-				
+
+	// click 2nd sensor from Temperature filter
+	public void Click_Temp_sensor2() {
+		// WebElement temp_senr = driver.findElementByName("Sensor 1");
+		List<WebElement> Tmpsenr = driver.findElementsByClassName("GridViewItem");
+		Tmpsenr.get(1).click();
+	}
+
+	// click Multiple sensors from Temperature filter
+	public void Click_Temp_sensor_Multi() {
+		// WebElement temp_senr = driver.findElementByName("Sensor 1");
+		List<WebElement> Tmpsenr = driver.findElementsByClassName("GridViewItem");
+		Tmpsenr.get(0).click();
+		Tmpsenr.get(1).click();
+		Tmpsenr.get(2).click();
+
+	}
+
+	// Click on Humidity filters
+	public void Clickon_Humidity() {
+		WebElement btn_Humidity = driver.findElementByAccessibilityId("btnHumidity");
+		clickOn(btn_Humidity);
+	}
+
+	// click sensors from Humidity filter
+	public void Click_Hmd_sensor() {
+		// WebElement temp_senr = driver.findElementByName("Sensor 1");
+		List<WebElement> Hmdsenr = driver.findElementsByClassName("GridViewItem");
+		Hmdsenr.get(0).click();
+
+	}
+
+	// click Multiple sensors from Humidity filter
+	public void Click_Hmd_sensor_Multi() {
+		// WebElement temp_senr = driver.findElementByName("Sensor 1");
+		List<WebElement> Hmdsenr = driver.findElementsByClassName("GridViewItem");
+		Hmdsenr.get(0).click();
+		Hmdsenr.get(1).click();
+		Hmdsenr.get(2).click();
+
+	}
+	/*
+	 * //Fetch humidity sensor text public String get_Hmd_sensortext() {
+	 * List<WebElement> Hmdsenr =
+	 * driver.findElementByName("VRT.DataObjects.DataContracts.VRTSensors").
+	 * findElements(By.className("TextBlock")); //List<WebElement> Hmdsenr =
+	 * driver.findElementsByClassName("TextBlock"); Hmdsenr.get(0).click(); return
+	 * FetchText(Hmdsenr.get(0)); }
+	 */
+
 	// Is Humidity filters sensors label visible
 	public boolean Humidity_filters() {
 		WebElement btn_Humidity = driver.findElementByAccessibilityId("btnHumidity");
@@ -343,32 +364,32 @@ public class Setup_SensorConfigPage extends BaseClass {
 		WebElement label_Humidity = driver.findElementByName("Humidity");
 		return IsElementVisibleStatus(label_Humidity);
 	}
-	
-	
-	// Click on Pressure 
+
+	// Click on Pressure
 
 	public void Click_Pressure() {
 		WebElement btn_Pressure = driver.findElementByAccessibilityId("btnPressure");
 		clickOn(btn_Pressure);
 	}
-	// Click on Pressure filters 
+
+	// Click on Pressure filters
 	public void Click_Prsr_sensor() {
 		List<WebElement> Prsrsenr = driver.findElementsByClassName("GridViewItem");
 		Prsrsenr.get(0).click();
-		
+
 	}
-	
-	
-	//click Multiple sensors from Pressure filter
-			public void Click_Psr_sensor_Multi() {
-				//WebElement temp_senr = driver.findElementByName("Sensor 1");
-				List<WebElement> Hmdsenr = driver.findElementsByClassName("GridViewItem");
-				Hmdsenr.get(0).click();
-				Hmdsenr.get(1).click();
-				Hmdsenr.get(2).click();
-				
-			}
-	//Is Pressure filters sensors label visible
+
+	// click Multiple sensors from Pressure filter
+	public void Click_Psr_sensor_Multi() {
+		// WebElement temp_senr = driver.findElementByName("Sensor 1");
+		List<WebElement> Hmdsenr = driver.findElementsByClassName("GridViewItem");
+		Hmdsenr.get(0).click();
+		Hmdsenr.get(1).click();
+		Hmdsenr.get(2).click();
+
+	}
+
+	// Is Pressure filters sensors label visible
 	public boolean Pressure_filters() {
 		WebElement btn_Pressure = driver.findElementByAccessibilityId("btnPressure");
 		clickOn(btn_Pressure);
@@ -389,22 +410,127 @@ public class Setup_SensorConfigPage extends BaseClass {
 		return IsElementVisibleStatus(Sensortype_state);
 	}
 
-	// Is from field visible
-	public boolean IsFromfieldvisible() {
-		WebElement FromField_state = driver.findElementByName("From");
-		return IsElementVisibleStatus(FromField_state);
+	// Is SensorType field Enable
+	public boolean IsSensortype_Enable() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		return IsElementEnabledStatus(Sensortype_field);
 	}
 
-	// Is To field visible
-	public boolean IsTofieldvisible() {
-		WebElement FromField_state = driver.findElementByName("To");
-		return IsElementVisibleStatus(FromField_state);
+	// Fetch the sensor type text
+	public String get_Sensortype_text() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		return FetchText(Sensortype_field);
+	}
+
+	// Click on sensor type field
+	public void Click_Sensortype_field() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		clickOn(Sensortype_field);
+	}
+
+	// Click on temp from sensortype
+	public void select_Sensortype_temp() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		clickOn(Sensortype_field);
+		WebElement tempInlist = driver.findElementByName("Temperature     (°C)");
+		clickOn(tempInlist);
+	}
+
+	// Is Temp visible under sensor type drop down list
+	public boolean IsTemperature_visible_Drpdwnlist() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		clickOn(Sensortype_field);
+		WebElement tempInlist = driver.findElementByName("Temperature     (°C)");
+		return IsElementVisibleStatus(tempInlist);
+	}
+
+	// Click on Humidity from sensor type
+	public void select_Sensortype_Hmd() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		clickOn(Sensortype_field);
+		WebElement HmdInlist = driver.findElementByName("Humidity     (%RH)");
+		clickOn(HmdInlist);
+	}
+
+	// Is Humidity visible under sensor type drop down list
+	public boolean IsHumidity_visible_Drpdwnlist() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		clickOn(Sensortype_field);
+		WebElement HmdInlist = driver.findElementByName("Humidity     (%RH)");
+		return IsElementVisibleStatus(HmdInlist);
+	}
+
+	// Is Pressure visible under sensor type drop down list
+	public boolean IsPressure_visible_Drpdwnlist() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		clickOn(Sensortype_field);
+		WebElement PrsrInlist = driver.findElementByName("Pressure      (Bar)");
+		return IsElementVisibleStatus(PrsrInlist);
+	}
+	
+	// Select on Pressure from sensor type
+	public void select_Sensortype_Pr() {
+		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
+		clickOn(Sensortype_field);
+		WebElement HmdInlist = driver.findElementByName("Pressure      (Bar)");
+		clickOn(HmdInlist);
 	}
 
 	// Is SensorLabel visible
 	public boolean IsSensorLabelvisible() {
 		WebElement SensorLabel_state = driver.findElementByName("Sensor Label");
 		return IsElementVisibleStatus(SensorLabel_state);
+	}
+	
+	// Is from field label visible
+	public boolean IsFromfieldvisible() {
+		WebElement FromField_state = driver.findElementByName("From");
+		return IsElementVisibleStatus(FromField_state);
+	}
+
+	// Is To field label visible
+	public boolean IsTofieldvisible() {
+		WebElement FromField_state = driver.findElementByName("To");
+		return IsElementVisibleStatus(FromField_state);
+	}
+	
+	// Is from field Enable
+	public boolean IsFromfield_Enable() {
+		WebElement FromField_state = driver.findElementByAccessibilityId("txtFrom");
+		return IsElementEnabledStatus(FromField_state);
+	}
+
+	// Is To field Enable
+	public boolean IsTofield_Enable() {
+		WebElement ToField_state = driver.findElementByAccessibilityId("txtTo");
+		return IsElementEnabledStatus(ToField_state);
+	}
+
+	// Fetch the From field text
+	public String get_Fromfield_text() {
+		WebElement Fromtxt_field = driver.findElementByAccessibilityId("txtFrom");
+		return FetchText(Fromtxt_field);
+	}
+	
+	// Enter From Count
+	public void Enter_Num_From(String Num) {
+		WebElement From_field = driver.findElementByAccessibilityId("txtFrom");
+		clickOn(From_field);
+		enterText(From_field, Num);
+	}
+
+	// Fetch the From field text
+	public String get_Tofield_text() {
+		WebElement Totxt_field = driver.findElementByAccessibilityId("txtTo");
+		return FetchText(Totxt_field);
+	}
+	
+	// Enter To Count
+	public void Enter_Num_To(String Num) {
+		WebElement To_field = driver.findElementByAccessibilityId("txtTo");
+		clickOn(To_field);
+		ClearText(To_field);
+		enterText(To_field, Num);
 	}
 
 	// Is AutoNumber visible
@@ -425,24 +551,6 @@ public class Setup_SensorConfigPage extends BaseClass {
 		return IsElementVisibleStatus(DescriptionButton_state);
 	}
 
-	// Is SensorType field Enable
-	public boolean IsSensortype_Enable() {
-		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-		return IsElementEnabledStatus(Sensortype_field);
-	}
-
-	// Is from field Enable
-	public boolean IsFromfield_Enable() {
-		WebElement FromField_state = driver.findElementByAccessibilityId("txtFrom");
-		return IsElementEnabledStatus(FromField_state);
-	}
-
-	// Is To field Enable
-	public boolean IsTofield_Enable() {
-		WebElement ToField_state = driver.findElementByAccessibilityId("txtTo");
-		return IsElementEnabledStatus(ToField_state);
-	}
-
 	// Is SensorLabel field Enable
 	public boolean IsSensorLabel_Enable() {
 		WebElement SensorLabel_state = driver.findElementByAccessibilityId("SensorLabelTextBox");
@@ -460,8 +568,8 @@ public class Setup_SensorConfigPage extends BaseClass {
 		WebElement AssignButton_state = driver.findElementByAccessibilityId("AssignButton");
 		return IsElementEnabledStatus(AssignButton_state);
 	}
-	
-	//click on assign button
+
+	// click on assign button
 	public void Click_assignBtn() throws InterruptedException {
 		WebElement AssignButton_clk = driver.findElementByAccessibilityId("AssignButton");
 		clickOn(AssignButton_clk);
@@ -473,131 +581,56 @@ public class Setup_SensorConfigPage extends BaseClass {
 		WebElement DescriptionButton_state = driver.findElementByAccessibilityId("DescriptionButton");
 		return IsElementEnabledStatus(DescriptionButton_state);
 	}
-	
-	
-  // Fetch the sensor type text
-	public String get_Sensortype_text() {
-		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-		return FetchText(Sensortype_field);
-	}
-	
-  //Click on sensor type field	
-	public void Click_Sensortype_field() {
-		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-		clickOn(Sensortype_field);
-	}
-	
-	//Click on temp from sensortype
-	public void Click_Sensortype_temp() {
-		WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-		clickOn(Sensortype_field);
-		WebElement tempInlist = driver.findElementByName("Temperature     (°C)");
-		clickOn(tempInlist);
-	}
-	
-	//Click on Humidity from sensor type
-		public void Click_Sensortype_Hmd() {
-			WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-			clickOn(Sensortype_field);
-			WebElement HmdInlist = driver.findElementByName("Humidity     (%RH)");
-			clickOn(HmdInlist);
-		}	
-	
-	 
-	// Is Temp visible under sensor type drop down list
-	
-		public boolean IsTemperature_visible_Drpdwnlist() {
-			WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-			clickOn(Sensortype_field);
-			WebElement tempInlist = driver.findElementByName("Temperature     (°C)");
-			return IsElementVisibleStatus(tempInlist);
-		}
-	// Is Temp visible under sensor type drop down list
-		
-			public boolean IsPressure_visible_Drpdwnlist() {
-				WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-				clickOn(Sensortype_field);
-				WebElement PrsrInlist = driver.findElementByName("Pressure      (Bar)");
-				return IsElementVisibleStatus(PrsrInlist);
-			}
-			
-	// Is Temp visible under sensor type drop down list
-			
-				public boolean IsHumidity_visible_Drpdwnlist() {
-					WebElement Sensortype_field = driver.findElementByAccessibilityId("SensorTypeSimComboBox");
-					clickOn(Sensortype_field);
-					WebElement HmdInlist = driver.findElementByName("Humidity     (%RH)");
-					return IsElementVisibleStatus(HmdInlist);
-				}
-				
-	// Fetch the From field text
-				public String get_Fromfield_text() {
-					WebElement Fromtxt_field = driver.findElementByAccessibilityId("txtFrom");
-					return FetchText(Fromtxt_field);
-				}
-				
-	// Fetch the From field text
-				public String get_Tofield_text() {
-					WebElement Totxt_field = driver.findElementByAccessibilityId("txtTo");
-					return FetchText(Totxt_field);
-				}			
-				
-	//Enter From Count			
-		public void Enter_Num_From(String Num) {
-			WebElement From_field = driver.findElementByAccessibilityId("txtFrom");
-			clickOn(From_field);
-			enterText(From_field, Num);
-			
-		}
-	//Enter To Count			
-				public void Enter_Num_To(String Num) {
-					WebElement To_field = driver.findElementByAccessibilityId("txtTo");
-					clickOn(To_field);
-					ClearText(To_field);
-					enterText(To_field, Num);
-					
-				}
-								
-// Is Assign Button field Enable
-				public boolean IsAssignButton_Enable() {
-					WebElement AssignButton_field = driver.findElementByAccessibilityId("AssignButton");
-					return IsElementEnabledStatus(AssignButton_field);
-				}
-				
-				
-				
-	// Fetch the SensorLabel_field text
-				public String get_SensorLabel_text() {
-					WebElement SensorLabel_field = driver.findElementByAccessibilityId("SensorLabelTextBox");
-					return FetchText(SensorLabel_field);
-				}		
-				
-	// Enter data into the SensorLabel field 
-							public void Enter_SensorLabel(String data) {
-								WebElement SensorLabel_field = driver.findElementByAccessibilityId("SensorLabelTextBox");
-								ClearText(SensorLabel_field);
-								clickOn(SensorLabel_field);
-								enterText(SensorLabel_field, data);
-							}	
-							
-	//Fetch the SensorLabel_Number text box
-			public String get_SensorLabel_Num_text() {
-			WebElement SensorLabelNum_field = driver.findElementByAccessibilityId("SensorLabelNumberTextBox");
-			return FetchText(SensorLabelNum_field);
-							}	
-			
-	//Enter data into the SensorLabel field 
-			public void Enter__Num_SensorLabel(String data) {
-				WebElement SensorLabelNum_field = driver.findElementByAccessibilityId("SensorLabelNumberTextBox");
-				ClearText(SensorLabelNum_field);
-				clickOn(SensorLabelNum_field);
-				enterText(SensorLabelNum_field, data);
-			}
 
-	 //verify the checkbox is checked in
-				public boolean  Is_Autonumber_checkedIn() {
-					WebElement Autonumber_CheckBox = driver.findElementByAccessibilityId("SensorLabelAutoNumberCheckBox");
-					return checkboxSelectStatus(Autonumber_CheckBox);
-				}
-													
+
+
+
+
+// Is Assign Button field Enable
+	public boolean IsAssignButton_Enable() {
+		WebElement AssignButton_field = driver.findElementByAccessibilityId("AssignButton");
+		return IsElementEnabledStatus(AssignButton_field);
+	}
+
+	// Fetch the SensorLabel_field text
+	public String get_SensorLabel_text() {
+		WebElement SensorLabel_field = driver.findElementByAccessibilityId("SensorLabelTextBox");
+		return FetchText(SensorLabel_field);
+	}
+
+	// Enter data into the SensorLabel field
+	public void Enter_SensorLabel(String data) {
+		WebElement SensorLabel_field = driver.findElementByAccessibilityId("SensorLabelTextBox");
+		ClearText(SensorLabel_field);
+		clickOn(SensorLabel_field);
+		enterText(SensorLabel_field, data);
+	}
+
+	// Fetch the SensorLabel_Number text box
+	public String get_SensorLabel_Num_text() {
+		WebElement SensorLabelNum_field = driver.findElementByAccessibilityId("SensorLabelNumberTextBox");
+		return FetchText(SensorLabelNum_field);
+	}
+
+	// Enter data into the SensorLabel field
+	public void Enter__Num_SensorLabel(String data) {
+		WebElement SensorLabelNum_field = driver.findElementByAccessibilityId("SensorLabelNumberTextBox");
+		ClearText(SensorLabelNum_field);
+		clickOn(SensorLabelNum_field);
+		enterText(SensorLabelNum_field, data);
+	}
+
+	// verify the checkbox is checked in
+	public boolean Is_Autonumber_checkedIn() {
+		WebElement Autonumber_CheckBox = driver.findElementByAccessibilityId("SensorLabelAutoNumberCheckBox");
+		return checkboxSelectStatus(Autonumber_CheckBox);
+	}
+
+	// Click on Description Button
+	public Setup_SensorDescriptionPage Click_DescriptionButton() throws IOException {
+		WebElement Description_Button = driver.findElementByAccessibilityId("DescriptionButton");
+		clickOn(Description_Button);
+		return new Setup_SensorDescriptionPage();
+	}
+
 }

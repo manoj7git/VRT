@@ -42,8 +42,14 @@ public class assetDetailsTest extends BaseClass {
 	// Refer TestUtilities Class for Data provider methods
 	// Refer Test data folder>AssetNameTestData.xlsx sheet for test data i/p
 
+	public assetDetailsTest() throws IOException {
+		super();
+	}
+
+
 	public ExtentReports extent;
 	public ExtentTest extentTest;
+	 TestUtilities tu = new TestUtilities();
 
 	// Initialization of the Pages
 	LoginPage LoginPage;
@@ -55,14 +61,17 @@ public class assetDetailsTest extends BaseClass {
 	Setup_defineSetupPage defineSetupPage;
 
 	// Before All the tests are conducted
-	@BeforeTest
-	public void AssetCreationSetup() throws InterruptedException, IOException {
+	//@BeforeTest
+	@BeforeClass
+	public void PreSetup() throws InterruptedException, IOException, ParseException {
 
-		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ExtentReport.html", true);
-		extent.addSystemInfo("BS Version", "0.6.18");
-		extent.addSystemInfo("Lgr Version", "1.2.9");
-		extent.addSystemInfo("User Name", "Manoj");
-		extent.addSystemInfo("TestSuiteName", "AssetetailsTest");
+		extent = new ExtentReports(System.getProperty("user.dir") + "/test-output/ER_"+"_AssetDetailsTest"+".html", true);
+		extent.addSystemInfo("TestSuiteName", "AssetDetailsTest");
+		extent.addSystemInfo("BS Version", prop.getProperty("BS_Version"));
+		extent.addSystemInfo("Lgr Version", prop.getProperty("Lgr_Version"));
+		extent.addSystemInfo("ScriptVersion", prop.getProperty("ScriptVersion"));
+		extent.addSystemInfo("User Name", prop.getProperty("User_Name1"));
+		System.out.println("assetDetailsTest in Progress..");
 
 		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
@@ -72,7 +81,7 @@ public class assetDetailsTest extends BaseClass {
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		extent.addSystemInfo("VRT Version", LoginPage.get_SWVersion_About_Text());
 		// Method to Create Very 1st User with All privilege
@@ -95,8 +104,9 @@ public class assetDetailsTest extends BaseClass {
 		// Method to Create 1st Asset 
 		assetHubPage=MainHubPage.ClickAssetTile();
 		assetCreationPage = assetHubPage.ClickAddAssetBtn();
-		//assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
-				//"cu", "5", "Weeks", "1st Asset Creation");
+		String crntDate = tu.get_CurrentDate_inCertainFormat("MM/dd/YYYY");
+		assetCreationPage.assetCreationWithAllFieldEntry("Asset01", "01", "HeatBath", "AAS", "Hyderabad", "VRT-RF", "2",
+				"cu", crntDate, "5", "Weeks", "1st Asset Creation");
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull"));
 
 		AppClose();
@@ -105,19 +115,21 @@ public class assetDetailsTest extends BaseClass {
 	}
 
 	// After All the tests are conducted	
-	@AfterTest
+	//@AfterTest
+	@AfterClass
 	public void endReport_releaseMomory() {
 		extent.flush();
 		extent.close();
 		assetHubPage.resetWebElements();
 		// System.out.println("Reset Webelement memory released");
+		System.out.println("assetDetails Test  Completed.");
 	}
 
 	// Before Method(Test) method
 	@BeforeMethod(alwaysRun = true)
-	public void Setup() throws InterruptedException {
+	public void Setup() throws InterruptedException, IOException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();		
@@ -169,7 +181,7 @@ public class assetDetailsTest extends BaseClass {
 		sa.assertAll();
 	}
 
-	
+	/*
 	// 02-ASST017
 	@Test(groups = { "Sanity", "Regression" }, description = "ASST017-Verify if Edit Icon is present"
 			+ " at the right top corner of assets detail page and opens the Edit asset - asset details "
@@ -399,7 +411,7 @@ public class assetDetailsTest extends BaseClass {
 				"FAIL: TC-ASST034 - Copy asset window appears even if only Asset present");
 		sa.assertAll();
 	}
-	
+	*/
 	
 	
 	

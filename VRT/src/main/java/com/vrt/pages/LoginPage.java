@@ -5,6 +5,8 @@
 
 package com.vrt.pages;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -13,6 +15,11 @@ import com.vrt.base.BaseClass;
 //import io.qameta.allure.Step;
 
 public class LoginPage extends BaseClass {
+
+	public LoginPage() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	//Main Login Page Element definition	
 	WebElement ProductName = driver.findElementByName("ValProbe RT System");
@@ -112,7 +119,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	// click login button to navigate to MainHubPage
-	public MainHubPage ClickonLoginBtn() throws InterruptedException {
+	public MainHubPage ClickonLoginBtn() throws InterruptedException, IOException {
 		clickOn(MainLoginBtn);
 		Thread.sleep(1000);
 		return new MainHubPage();
@@ -147,7 +154,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	//Click New PW Save Btn...")
-	public MainHubPage ClickNewPWSaveBtn() throws InterruptedException 
+	public MainHubPage ClickNewPWSaveBtn() throws InterruptedException, IOException 
 	{
 		WebElement MainLoginNewPWSaveBtn = driver.findElementByName("OK");
 		clickOn(MainLoginNewPWSaveBtn);
@@ -169,7 +176,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	//ChangeNewPW Operation...")
-	public MainHubPage ChangeNewPW(String UID, String PW, String NPW) throws InterruptedException 
+	public MainHubPage ChangeNewPW(String UID, String PW, String NPW) throws InterruptedException, IOException 
 	{
 		EnterUserID(UID);
 		EnterUserPW(PW);
@@ -185,7 +192,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	//ChangeNewPWwithoutPWCheckBox Operation...")
-	public MainHubPage ChangeNewPWwithoutPWCheckBox(String UID, String PW, String NPW) throws InterruptedException 
+	public MainHubPage ChangeNewPWwithoutPWCheckBox(String UID, String PW, String NPW) throws InterruptedException, IOException 
 	{
 		EnterUserID(UID);
 		EnterUserPW(PW);
@@ -201,7 +208,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 //Login method for User OTHER THAN Kaye/411...")
-	public MainHubPage Login(String UID, String PW) throws InterruptedException 
+	public MainHubPage Login(String UID, String PW) throws InterruptedException, IOException 
 	{		
 		EnterUserID(UID);
 		EnterUserPW(PW);
@@ -231,7 +238,7 @@ public class LoginPage extends BaseClass {
 	
 	
 	//Login method using Kaye/411")
-	public UserManagementPage DefaultLogin() throws InterruptedException 
+	public UserManagementPage DefaultLogin() throws InterruptedException, IOException 
 	{	
 		MainLoginUID.click();
 		MainLoginUID.click();
@@ -251,7 +258,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	//EnterNewPWtext operation...")
-	public MainHubPage EnterNewPWtext(String NPW) throws InterruptedException 
+	public MainHubPage EnterNewPWtext(String NPW) throws InterruptedException, IOException 
 	{		
 		enterNewPW(NPW);
 		enterConfNewPW(NPW);		
@@ -312,8 +319,10 @@ public class LoginPage extends BaseClass {
 	
 	//Get the Sw version info from the About window on clicking About icon of the bottom apps bar
 	public String get_SWVersion_About_Text() throws InterruptedException {
+		clickOn(ProductName);
 		Actions ac = new Actions(driver);
 		ac.contextClick().build().perform();
+		//ac.contextClick().build().perform();
 		
 		WebElement bottomMenu_About_Icon = driver.findElementByAccessibilityId("AboutAppBarButton");
 		clickOn(bottomMenu_About_Icon);
@@ -321,7 +330,8 @@ public class LoginPage extends BaseClass {
 		WebElement SWVersion_About_info = driver.findElementByAccessibilityId("SoftwareVersion");
 		
 		String[] SWVer = FetchText(SWVersion_About_info).split(":");
-		
+		clickOn(ProductName);
+		clickOn(ProductName);
 		return SWVer[1];
 	}
 	

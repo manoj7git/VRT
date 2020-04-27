@@ -5,6 +5,8 @@
 
 package com.vrt.pages;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,6 +14,10 @@ import com.vrt.base.BaseClass;
 
 public class MainHubPage extends BaseClass {
 
+	public MainHubPage() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	// Main Hub Page Element definition
 	WebElement MainUILoggedinUserTitle = driver.findElementByAccessibilityId("UserDesignationTextBlock");
 	WebElement MainUILoggedinUserName = driver.findElementByAccessibilityId("UserNameTextBlock");
@@ -47,26 +53,26 @@ public class MainHubPage extends BaseClass {
 	}
 
 	// Sign out Operation
-	public LoginPage UserSignOut() throws InterruptedException {
+	public LoginPage UserSignOut() throws InterruptedException, IOException {
 		clickOn(MainUILoggedinUserName);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		WebElement MainUISignOut = driver.findElementByName("Sign out");
 		clickOn(MainUISignOut);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new LoginPage();
 	}
 
 	// Click the Admin Tile
-	public UserManagementPage ClickAdminTile_UMpage() throws InterruptedException {
+	public UserManagementPage ClickAdminTile_UMpage() throws InterruptedException, IOException {
 		clickOn(MainUIAdminTile);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new UserManagementPage();
 	}
 
 	// Click the Admin Tile when SuperVisor does not have default access privilege
 	public void ClickAdminTile() throws InterruptedException {
 		clickOn(MainUIAdminTile);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 	}
 
 	// Fetch the alert message when Supervisor is unable to access Archive data
@@ -76,9 +82,9 @@ public class MainHubPage extends BaseClass {
 	}
 
 	// Click the Asset Tile
-	public assetHubPage ClickAssetTile() throws InterruptedException {
+	public assetHubPage ClickAssetTile() throws InterruptedException, IOException {
 		clickOn(MainUIAssetTile);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new assetHubPage();
 	}
 
@@ -90,28 +96,28 @@ public class MainHubPage extends BaseClass {
 	}
 
 	// Click the Equipment Tile
-	public EquipmentHubPage ClickEquipmentTile() throws InterruptedException {
+	public EquipmentHubPage ClickEquipmentTile() throws InterruptedException, IOException {
 		clickOn(MainUIEquipmentTitle);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new EquipmentHubPage();
 	}
 
 	// Click the Equipment Tile
-	public FileManagementPage ClickFileManagementTitle() throws InterruptedException {
+	public FileManagementPage ClickFileManagementTitle() throws InterruptedException, IOException {
 		clickOn(FileManagementTitle);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new FileManagementPage();
 	}
 
 	// Click the Audit Title
-	public AuditPage ClickAuditTitle() throws InterruptedException {
+	public AuditPage ClickAuditTitle() throws InterruptedException, IOException {
 		clickOn(AuditTitle);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new AuditPage();
 	}
 	// Click the Audit Title
 		public void Alert_AuditTitle() throws InterruptedException {
 			clickOn(AuditTitle);
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
 }

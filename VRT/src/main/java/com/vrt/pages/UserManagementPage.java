@@ -22,6 +22,11 @@ import org.openqa.selenium.JavascriptExecutor;
 
 public class UserManagementPage extends BaseClass {
 
+	public UserManagementPage() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	// UserManagement Page Element definition
 	WebElement UMHeaderText = driver.findElementByName("User Management");
 	WebElement PreferencesHeaderText = driver.findElementByAccessibilityId("PreferencesButton");
@@ -180,7 +185,12 @@ public class UserManagementPage extends BaseClass {
 		ClearText(PWUMField);
 		enterText(PWUMField, NewPW);
 	}
-
+	
+//fetch PW text
+	public String get_PWField_text() {
+		return FetchText(PWUMField);
+	}
+	
 	// Enter ConfirmPW text
 	public void enterNewUserConfPW(String NewCPW) {
 		ClearText(ConPWUMField);
@@ -278,7 +288,7 @@ public class UserManagementPage extends BaseClass {
 	}
 
 	// Click Back Button to move to AdminTile
-	public MainHubPage ClickBackButn() {
+	public MainHubPage ClickBackButn() throws IOException {
 		WebElement BackUMBtn = driver.findElementByAccessibilityId("BackButton");
 		clickOn(BackUMBtn);
 		return new MainHubPage();
@@ -454,29 +464,6 @@ public class UserManagementPage extends BaseClass {
 		return IsElementVisibleStatus(IsCameraOn);
 	}
 
-	// Upload images methods
-	public void upload_UserImage(String filename) throws AWTException, IOException, InterruptedException {
-
-		// switch to the file upload window
-		WebElement alert = driver.switchTo().activeElement();
-		Thread.sleep(1000);
-
-		// enter the filename
-		String filepath = System.getProperty("user.dir") + "\\TestData\\" + filename;
-		// System.out.println(filepath);
-
-		alert.sendKeys(filepath);
-		Thread.sleep(1000);
-
-		// hit enter
-		Robot r = new Robot();
-		r.keyPress(KeyEvent.VK_ENTER);
-		r.keyRelease(KeyEvent.VK_ENTER);
-
-		// switch back
-		driver.switchTo().activeElement();
-	}
-
 	// DisableUserCheckBox
 
 	// check/select Disable User CheckBox
@@ -485,7 +472,7 @@ public class UserManagementPage extends BaseClass {
 	}
 
 	// public boolean CreaeteEditAssetPrivstatus() {
-	public boolean IsDisableUserCheckBox_Disable() {
+	public boolean IsDisableUserCheckBox_state() {
 		return IsElementEnabledStatus(DisableCheckbox);
 	}
 
@@ -645,8 +632,8 @@ public class UserManagementPage extends BaseClass {
 	}
 
 	// User1
-	public boolean IsSearchNamevisible() throws InterruptedException {
-		WebElement srchname = driver.findElementByName("User1");
+	public boolean IsSearchNamevisible(String UN) throws InterruptedException {
+		WebElement srchname = driver.findElementByName(UN);
 		return IsElementVisibleStatus(srchname);
 	}
 	
@@ -657,7 +644,7 @@ public class UserManagementPage extends BaseClass {
  	
 	// Create First User of the System
 	public LoginPage FirstUserCreation(String NewUN, String NewUID, String NewPW, String NewCPW, String Title,
-			String Phone, String email) throws InterruptedException {
+			String Phone, String email) throws InterruptedException, IOException {
 		ClickNewUser();
 		enterNewUserName(NewUN);
 		enterNewUserID(NewUID);
@@ -772,6 +759,7 @@ public class UserManagementPage extends BaseClass {
 		enterNewUserConfPW(Cpwd);
 		enterNewUserTitle(Titl);
 		select_UserType(Utype);
+		Thread.sleep(1000);
 	}
 
 	// User Management Creation with Non Mandatory fields
@@ -802,5 +790,13 @@ public class UserManagementPage extends BaseClass {
 		ClickNewUserSaveButton();
 
 	}
+	
+	//Click on PoliciesHeaderText
+	public PoliciesPage Click_Policy() throws IOException
+	{
+		clickOn(PoliciesHeaderText);
+		return new PoliciesPage();
+	}
+
 
 }

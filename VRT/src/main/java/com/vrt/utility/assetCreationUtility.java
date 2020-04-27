@@ -3,6 +3,7 @@ package com.vrt.utility;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.InvalidPropertiesFormatException;
 
 import org.apache.poi.ss.usermodel.Sheet;
@@ -13,17 +14,22 @@ import org.testng.annotations.DataProvider;
 import com.vrt.base.BaseClass;
 
 public class assetCreationUtility extends BaseClass{
-	
-	// Read TestData from the Excel sheet
-	public static String TestData_sheetPath = System.getProperty("user.dir") + "/TestData/" + "AssetNameTestData.xlsx";
 
+	public assetCreationUtility() throws IOException {
+		super();
+	}
+
+	// Read TestData from the Excel sheet
+	public static String TestData_sheetPath = System.getProperty("user.dir") + "/src/test/resources/TestData/" + "AssetNameTestData.xlsx";
+	
 	static Workbook book;
 	static Sheet sheet;
+	
 
 	// Read TestData from the Excel sheet
 	public static Object[][] getTestData(String sheetName) {
 		FileInputStream fis = null;
-		try {
+		try {			
 			fis = new FileInputStream(TestData_sheetPath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -280,9 +286,16 @@ public class assetCreationUtility extends BaseClass{
 		return data;
 	}
 	
-	@DataProvider(name = "ASSTHB012")
-	public static Object[][] ASSTHB012() {
-		String sheetName = "ASSTHB012";
+	@DataProvider(name = "ASSTHB012a")
+	public static Object[][] ASSTHB012a() {
+		String sheetName = "ASSTHB012a";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "ASSTHB012b")
+	public static Object[][] ASSTHB012b() {
+		String sheetName = "ASSTHB012b";
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}

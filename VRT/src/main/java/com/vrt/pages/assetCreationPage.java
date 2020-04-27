@@ -13,27 +13,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
-import org.apache.commons.io.FileUtils;
+//import javax.imageio.ImageIO;
+//
+//import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TakesScreenshot;
+//import org.openqa.selenium.OutputType;
+//import org.openqa.selenium.Point;
+//import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.vrt.base.BaseClass;
 import com.vrt.utility.TestUtilities;
 
-
 public class assetCreationPage extends BaseClass{
 	
+	public assetCreationPage() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	// Asset Details Page Element definition
 	WebElement CreateAssetPageTitle = driver.findElementByAccessibilityId("pageTitle");
 	WebElement AssetNameTxtBox = driver.findElementByAccessibilityId("NameTextBox");
 	WebElement AssetIDTxtBox = driver.findElementByAccessibilityId("EqidTextBox");	
-	List <WebElement> Combobx = driver.findElementsByAccessibilityId("EditableCombo");
+	List<WebElement> Combobx = driver.findElementsByAccessibilityId("EditableCombo");
+	//List <WebElement> Combobx = driver.findElementsByAccessibilityId("EditableCombo");
 	List <WebElement> AssetEditBox = driver.findElementsByAccessibilityId("EditableTextBox");
 	WebElement AssetModelTxtBox = driver.findElementByAccessibilityId("ModelTextBox");
 	WebElement AssetSizeTxtBox = driver.findElementByAccessibilityId("SizeTextBox");
@@ -386,19 +391,19 @@ public class assetCreationPage extends BaseClass{
 		
 		while (!expDate.equals(Yr)) {
 			click_AsstValidationDatePkr_Btn();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			ac.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_UP).sendKeys(Keys.RETURN).build().perform();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			Date = getAsstValidationDatetext();
 			expDate = Date.substring(Date.length()-4);
 			//System.out.println(expDate);
 		}
 	}
 	
-	public void selectAssetLastVldDate(String Day, String Month, String Year) throws InterruptedException {
-		selectAssetLastVldtDay(Day);
-		selectAssetLastVldt_Mnth(Month);
+	public void selectAssetLastVldDate(String Day, String Month, String Year) throws InterruptedException {		
 		selectAssetLastVldt_Yr(Year);
+		selectAssetLastVldt_Mnth(Month);
+		selectAssetLastVldtDay(Day);
 	}
 	
 	// Fetch list of raw Asset Frequency data as is viewed
@@ -407,7 +412,7 @@ public class assetCreationPage extends BaseClass{
 		List<WebElement> Combobxlist = driver.findElementsByClassName("ComboBoxItem");
 
 		String str[] = new String[Combobxlist.size()];
-		System.out.println(Combobxlist.size());
+		//System.out.println(Combobxlist.size());
 
 		for (int i = 0; i < Combobxlist.size(); i++) {
 			Actions ac = new Actions(driver);
@@ -450,7 +455,7 @@ public class assetCreationPage extends BaseClass{
 	//Select Asset Frequency Interval
 	public void selectAssetFreqIntrvl(String FI) throws InterruptedException {		
 		clickOn(AssetFrqIntrvlBtn);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		List<WebElement> Combobxlist = driver.findElementsByClassName("ComboBoxItem");
 		//System.out.println(Combobxlist.size());
 		Actions ac = new Actions(driver);
@@ -534,7 +539,7 @@ public class assetCreationPage extends BaseClass{
 	public void click_Img_Placeholder_Delete_Btn() throws InterruptedException {
 		WebElement AssetImgDeleteBtn = driver.findElementByAccessibilityId("RemoveButton");
 		clickOn(AssetImgDeleteBtn);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 	}
 	
 	public void capture_Camera_Img() throws InterruptedException {
@@ -570,7 +575,7 @@ public class assetCreationPage extends BaseClass{
 	//Click Save button
 	public void clickSaveBtn() throws InterruptedException {
 		clickOn(AssetSaveBtn);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 	}
 	
 	//Verify the Save Alert message displayed
@@ -594,49 +599,49 @@ public class assetCreationPage extends BaseClass{
 	//Click Clear button
 	public void clickClearBtn() throws InterruptedException {
 		clickOn(AssetClearBtn);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 	}
 	
 	//click Back button to move to assetHub Page in case new Asset is created
-	public assetHubPage clickBackBtn() throws InterruptedException {
+	public assetHubPage clickBackBtn() throws InterruptedException, IOException {
 		clickOn(AssetBackBtn);		
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new assetHubPage();
 	}
 	
 	//click Back button to move to assetDetails Page in case Asset is in edit mode
-	public assetDetailsPage click_BackBtn() throws InterruptedException {
+	public assetDetailsPage click_BackBtn() throws InterruptedException, IOException {
 		clickOn(AssetBackBtn);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new assetDetailsPage();
 	}
 	
 	//click Back button to get the Discard message
 	public void clickBkBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);		
-		Thread.sleep(1000);		
+		Thread.sleep(500);		
 	}
 	
 	//Discard alert message presence
 	public boolean discardAlert() throws InterruptedException {
 		clickOn(AssetBackBtn);		
-		Thread.sleep(1000);	
+		Thread.sleep(500);	
 		return IsElementVisibleStatus(driver.findElementByAccessibilityId("Popup Window"));		
 	}
 	
 	//Discard alert message- No option
 	public void discardAlertNoBtn() throws InterruptedException {
 		clickOn(AssetBackBtn);		
-		Thread.sleep(1000);	
+		Thread.sleep(500);	
 		if (IsElementVisibleStatus(driver.findElementByAccessibilityId("Popup Window"))) {
 			clickOn(driver.findElementByName("No"));
 		} 	
 	}
 	
 	//Move to AssetHub page by Discarding the changes made to Asset creationpage
-	public assetHubPage discardAlertYesBtn() throws InterruptedException {
+	public assetHubPage discardAlertYesBtn() throws InterruptedException, IOException {
 		clickOn(AssetBackBtn);		
-		Thread.sleep(1000);	
+		Thread.sleep(500);	
 		if (IsElementVisibleStatus(driver.findElementByAccessibilityId("Popup Window"))) {
 			clickOn(driver.findElementByName("Yes"));
 		} 			
@@ -664,19 +669,23 @@ public class assetCreationPage extends BaseClass{
 		//System.out.println(AstLstVldDate[0]);
 		//System.out.println(AstLstVldDate[2]);
 		
-		enterAssetName(AName);
-		enterAssetID(AID);
-		SelectAssetType(AType);
-		enterManufacturerName(AManufacturer);
-		enterLocation(ALocation);
-		enterModelName(AModel);
-		enterSize_Unit(ASize, AUnit);
-		selectAssetLastVldDate(AstLstVldDate[1], AstLstVldDate[0], AstLstVldDate[2]);
-		selectAssetFreq(AFreq);
-		selectAssetFreqIntrvl(AFreqInt);
-		enterAstDescription(ADesc);
-		
-		clickSaveBtn(); 
+		if (IsElementVisibleStatus(CreateAssetPageTitle)) {
+			enterAssetName(AName);
+			enterAssetID(AID);
+			SelectAssetType(AType);
+			enterManufacturerName(AManufacturer);
+			enterLocation(ALocation);
+			enterModelName(AModel);
+			enterSize_Unit(ASize, AUnit);
+			selectAssetLastVldDate(AstLstVldDate[1], AstLstVldDate[0], AstLstVldDate[2]);
+			selectAssetFreq(AFreq);
+			selectAssetFreqIntrvl(AFreqInt);
+			enterAstDescription(ADesc);
+			
+			clickSaveBtn();
+			
+		}
+ 
 	}
 	
 	//Asset Creation with Type
@@ -814,13 +823,13 @@ public class assetCreationPage extends BaseClass{
 	}
 	
 	//Click on the Home icon of the bottom apps bar to move to Main Hub page
-	public MainHubPage Click_Home_Icon_AppBar() throws InterruptedException {
+	public MainHubPage Click_Home_Icon_AppBar() throws InterruptedException, IOException {
 		Actions ac = new Actions(driver);
 		ac.contextClick().build().perform();
 		
 		WebElement bottomMenu_Home_Icon = driver.findElementByAccessibilityId("HomeAppBarButton");
 		clickOn(bottomMenu_Home_Icon);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		return new MainHubPage();
 	}
 	
@@ -831,7 +840,7 @@ public class assetCreationPage extends BaseClass{
 		
 		WebElement bottomMenu_AppHelp_Icon = driver.findElementByAccessibilityId("HelpAppBarButton");
 		clickOn(bottomMenu_AppHelp_Icon);
-		Thread.sleep(1000);
+		Thread.sleep(500);
 	}
 	
 	//Click on the WndsHelp icon of the bottom apps bar
@@ -841,7 +850,7 @@ public class assetCreationPage extends BaseClass{
 		
 		WebElement bottomMenu_WndsHelp_Icon = driver.findElementByAccessibilityId("WindowsHelpAppBarButton");
 		clickOn(bottomMenu_WndsHelp_Icon);
-		Thread.sleep(1000);		
+		Thread.sleep(500);		
 	}
 	
 	//Click on the About icon of the bottom apps bar to invoke the ABout window

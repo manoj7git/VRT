@@ -16,10 +16,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import com.vrt.pages.EquipmentPage;
+import com.vrt.pages.IRTDHubPage;
+import com.vrt.utility.TestUtilities;
 import com.vrt.base.BaseClass;
 
 public class IRTDDetailspage extends BaseClass {
 
+	IRTDHubPage IRTDHubPage;
+	TestUtilities tu = new TestUtilities();
 	// EquipmentHubPage Element definition
 	WebElement IRTDHeader = null;
 	WebElement DeleteBtn = null;		
@@ -33,7 +37,7 @@ public class IRTDDetailspage extends BaseClass {
 
 	}
 
-	IRTDDetailspage() {
+	IRTDDetailspage() throws IOException {
 		super();
 		initElements();
 
@@ -63,6 +67,15 @@ public class IRTDDetailspage extends BaseClass {
 			WebElement YesBtn = driver.findElementByAccessibilityId("Button1");
 			clickOn(YesBtn);
 		}
+	}
+	
+	// Navigate to IRTD Hub page after Deleting IRTD in IRTDDetails page
+	public IRTDHubPage delete_IRTD(String UID, String PW) throws InterruptedException, IOException {
+		clickDeleteEquipmentIcon();
+		WebElement YesBtn = driver.findElementByAccessibilityId("Button1");
+		clickOn(YesBtn);
+		UserLoginPopup(UID, PW);		
+		return new IRTDHubPage();
 	}
 
 	// Edit Asset Name

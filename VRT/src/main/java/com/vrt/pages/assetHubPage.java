@@ -46,7 +46,7 @@ public class assetHubPage extends BaseClass {
 	}
 
 	// Constructor for initializing the page elements
-	assetHubPage() {
+	assetHubPage() throws IOException {
 		super();
 		initElements();
 	}
@@ -132,7 +132,7 @@ public class assetHubPage extends BaseClass {
 	}
 
 	// Click the Add Asset Button
-	public assetCreationPage ClickAddAssetBtn() throws InterruptedException {
+	public assetCreationPage ClickAddAssetBtn() throws InterruptedException, IOException {
 
 		clickOn(AddAssetBtn);
 		Thread.sleep(1000);
@@ -140,7 +140,7 @@ public class assetHubPage extends BaseClass {
 	}
 
 	// Click the Back Button
-	public MainHubPage ClickBackBtn() throws InterruptedException {
+	public MainHubPage ClickBackBtn() throws InterruptedException, IOException {
 		clickOn(BackBtn);
 		Thread.sleep(1000);
 		return new MainHubPage();
@@ -194,7 +194,7 @@ public class assetHubPage extends BaseClass {
 	}
 
 	// Click/Select the target Asset tile in the Asset hub page
-	public assetDetailsPage click_assetTile(String AssetName) {
+	public assetDetailsPage click_assetTile(String AssetName) throws IOException {
 		List<WebElement> AssetList = driver.findElementByAccessibilityId("ItemGridView")
 				.findElements(By.className("GridViewItem"));
 		// System.out.println("Total Assets created: " + AssetList.size());
@@ -484,7 +484,7 @@ public class assetHubPage extends BaseClass {
 	}
 
 	// Click on ADD(+) icon
-	public assetCreationPage Click_AddAssetButton() {
+	public assetCreationPage Click_AddAssetButton() throws IOException {
 		clickOn(AddAssetBtn);		
 		return new assetCreationPage();
 	}
@@ -501,7 +501,7 @@ public class assetHubPage extends BaseClass {
 
 	// click Back button to move to MainHub Page from Asset Hub page in case new
 	// Asset is created
-	public MainHubPage clickBackBtn() throws InterruptedException {
+	public MainHubPage clickBackBtn() throws InterruptedException, IOException {
 		clickOn(AssetHub_BackButton);
 		Thread.sleep(1000);
 		return new MainHubPage();

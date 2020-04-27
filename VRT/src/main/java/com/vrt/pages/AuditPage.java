@@ -30,7 +30,7 @@ public class AuditPage extends BaseClass {
 
 	}
 	
-	AuditPage()
+	AuditPage() throws IOException
 	{
 		super();
 		initElements();

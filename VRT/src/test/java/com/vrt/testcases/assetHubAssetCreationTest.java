@@ -38,6 +38,11 @@ public class assetHubAssetCreationTest extends BaseClass{
 	// Refer TestUtilities Class for Data provider methods
 	// Refer Test data folder>AssetNameTestData.xlsx sheet for test data i/p
 
+	public assetHubAssetCreationTest() throws IOException {
+		super();
+	}
+
+
 	public ExtentReports extent;
 	public ExtentTest extentTest;
 	
@@ -49,32 +54,35 @@ public class assetHubAssetCreationTest extends BaseClass{
 	assetCreationPage assetCreationPage;
 	assetDetailsPage assetDetailsPage;
 	
+	TestUtilities tu = new TestUtilities();
 
 	//Before All the tests are conducted
 	//@BeforeTest
 	@BeforeClass
-	public void AssetCreationSetup() throws InterruptedException, IOException {
+	public void PreSetup() throws InterruptedException, IOException {
 		
-		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/assetHubAssetCreationTest.html",true);
-		extent.addSystemInfo("BS Version", "0.6.32");
-		extent.addSystemInfo("Lgr Version", "1.3.14");
-		extent.addSystemInfo("User Name", "Manoj");
-		extent.addSystemInfo("TestSuiteName", "AssetHubTest");
-
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ER_"+"MultipleAssetCreationTest.html",true);
+		extent.addSystemInfo("TestSuiteName", "MultipleAssetCreationTest");
+		extent.addSystemInfo("BS Version", prop.getProperty("BS_Version"));
+		extent.addSystemInfo("Lgr Version", prop.getProperty("Lgr_Version"));
+		extent.addSystemInfo("ScriptVersion", prop.getProperty("ScriptVersion"));
+		extent.addSystemInfo("User Name", prop.getProperty("User_Name1"));
+		System.out.println("assetHubAssetCreation Test in Progress..");
+		
 		//Rename the User file (NgvUsers.uxx) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");		
-		//Rename the cache Asset file (Asset.txt) if exists
-		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");		
-		//Rename the Asset folder (Asset) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux"); 
+		// Rename the cache Asset file (Asset.txt) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt"); 
+		// Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 
-		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");		
-		Thread.sleep(1000);
+		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		//Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		extent.addSystemInfo("VRT Version", LoginPage.get_SWVersion_About_Text());
 		UserManagementPage = LoginPage.DefaultLogin();
-		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"), getPW("adminFull"), "FullAdmin",
-				"12345678", "abc@gmail.com");
+		LoginPage = UserManagementPage.FirstUserCreation("User1", getUID("adminFull"), getPW("adminFull"),
+				getPW("adminFull"), "FullAdmin", "12345678", "abc@gmail.com");
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		UserManagementPage = MainHubPage.ClickAdminTile_UMpage();
 		UserManagementPage.clickAnyUserinUserList("User1");
@@ -90,6 +98,7 @@ public class assetHubAssetCreationTest extends BaseClass{
 
 		AppClose();
 		Thread.sleep(1000);
+		 
 	}
 
 	//After All the tests are conducted
@@ -100,13 +109,14 @@ public class assetHubAssetCreationTest extends BaseClass{
 		extent.close();
 		assetHubPage.resetWebElements();
 		//System.out.println("Reset Webelement memory released");
+		System.out.println("assetHubAssetCreationTest Test Completed.");
 	}
 	
 	//Before Method(Test) method
 	@BeforeMethod(alwaysRun=true)
-	public void Setup() throws InterruptedException {
+	public void Setup() throws InterruptedException, IOException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");			
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		LoginPage = new LoginPage();
 		MainHubPage = LoginPage.Login(getUID("adminFull"), getPW("adminFull"));
 		assetHubPage = MainHubPage.ClickAssetTile();
@@ -141,19 +151,19 @@ public class assetHubAssetCreationTest extends BaseClass{
 
 	
 	//Create 25 assets
-	@Test(dataProvider="ASSTHB012", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
+	@Test(dataProvider="ASSTHB012a", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
 			description = "Create 25 assets"
 			+ "categories model, size, manufacturer,Location and Type")
 	public void ASSTHB012a(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
-			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, String Description)
-					throws InterruptedException, ParseException {
+			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, String Description, String count)
+					throws InterruptedException, ParseException, IOException {
 		extentTest = extent.startTest("Create 25 assets");
 		
 		//Forcibly creating the Assets with Last Validated data as Current date
 		//irrespective of what data is provided in the Excel sheet. 
 		//Just to save time in the date selection picker thereby reducing the time for creating assets 
 		//for any random Lst Vldt Date
-		TestUtilities tu = new TestUtilities();
+		
 		String crntDate = tu.get_CurrentDate_inCertainFormat("MM/dd/YYYY");
 		
 		//Asset creation method
@@ -161,16 +171,15 @@ public class assetHubAssetCreationTest extends BaseClass{
 		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
 				crntDate, Frequency, FrequencyInterval, Description);		
 		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset		
-		
+		System.out.println("Asset COunt: "+count);
 	}
-	
 	
 	//ASSTHB012-Verify 25 assets are created with each categories model, size, manufacturer,Location and Type
 	@Test(groups = {"Sanity", "Regression"}, 
 			description = "ASSTHB012-Verify 25 assets are created with each "
 			+ "categories model, size, manufacturer,Location and Type")
-	public void ASSTHB012b()
-					throws InterruptedException {
+	public void ASSTHB012()
+					throws InterruptedException, IOException {
 		extentTest = extent.startTest("ASSTHB012-Verify 25 assets are created with each categories model, "
 				+ "size, manufacturer,Location and Type");
 		SoftAssert sa = new SoftAssert();
@@ -185,5 +194,52 @@ public class assetHubAssetCreationTest extends BaseClass{
 		sa.assertEquals(Total_AsstCount, 25, "FAIL: TC-ASSTHB012 -Incorrect Asset Count displayed or created");				
 		sa.assertAll();
 	}
+	
+	/*
+	//Create 150 assets
+	@Test(dataProvider="ASSTHB012b", dataProviderClass=assetCreationUtility.class, groups = {"Sanity", "Regression"}, 
+			description = "Create 150 assets"
+			+ "categories model, size, manufacturer,Location and Type")
+	public void ASSTHB012b(String Name, String ID, String Type, String Manufacturer, String Location, String Model,
+			String Size, String SizeUnit, String VldDT, String Frequency, String FrequencyInterval, String Description, String count)
+					throws InterruptedException, ParseException, IOException {
+		extentTest = extent.startTest("Create 150 assets");
+		
+		//Forcibly creating the Assets with Last Validated data as Current date
+		//irrespective of what data is provided in the Excel sheet. 
+		//Just to save time in the date selection picker thereby reducing the time for creating assets 
+		//for any random Lst Vldt Date
+		
+		String crntDate = tu.get_CurrentDate_inCertainFormat("MM/dd/YYYY");
+		
+		//Asset creation method
+		assetCreationPage = assetHubPage.ClickAddAssetBtn();		
+		assetCreationPage.assetCreationWithAllFieldEntry(Name, ID, Type, Manufacturer, Location, Model, Size, SizeUnit,
+				crntDate, Frequency, FrequencyInterval, Description);		
+		UserLoginPopup(getUID("adminFull"), getPW("adminFull")); //Enter User Credentials to Save Asset		
+		System.out.println("Asset COunt: "+count);
+	}
+	
+	//ASSTHB012c-Verify 150 assets are created with each categories model, size, manufacturer,Location and Type
+	@Test(groups = {"Sanity", "Regression"}, 
+			description = "ASSTHB012-Verify 25 assets are created with each "
+			+ "categories model, size, manufacturer,Location and Type")
+	public void ASSTHB012c()
+					throws InterruptedException, IOException {
+		extentTest = extent.startTest("ASSTHB012c-Verify 150 assets are created with each categories model, "
+				+ "size, manufacturer,Location and Type");
+		SoftAssert sa = new SoftAssert();
+		
+		//Fetch the Asset Count before creation 150 Assets
+		MainHubPage = assetHubPage.clickBackBtn();		
+		String AstCount = MainHubPage.AssetCountInAssetTileOfMainHubPage();
+		//System.out.println(AstCount_Default);
+		int Total_AsstCount = Integer.parseInt(AstCount);
+		System.out.println(Total_AsstCount);
+		
+		sa.assertEquals(Total_AsstCount, 150, "FAIL: TC-ASSTHB012c -Incorrect Asset Count displayed or created");				
+		sa.assertAll();
+	}
+	*/
 
 }

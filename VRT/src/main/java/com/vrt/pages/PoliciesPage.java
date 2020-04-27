@@ -6,6 +6,8 @@
 package com.vrt.pages;
 
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebElement;
 
 import com.vrt.base.BaseClass;
@@ -24,7 +26,7 @@ public class PoliciesPage extends BaseClass{
 	}
 	
 	//Constructor for initializing the page elements
-	PoliciesPage()
+	PoliciesPage() throws IOException
 	{
 		super();
 		initElements();

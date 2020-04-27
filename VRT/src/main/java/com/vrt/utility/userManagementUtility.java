@@ -14,8 +14,12 @@ import com.vrt.base.BaseClass;
 
 public class userManagementUtility extends BaseClass{
 	
+	public userManagementUtility() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	// Read TestData from the Excel sheet
-	public static String TestData_sheetPath = System.getProperty("user.dir") + "/TestData/" + "UserManagementTestData.xlsx";
+	public static String TestData_sheetPath = System.getProperty("user.dir") + "/src/test/resources/TestData/" + "UserManagementTestData.xlsx";
 
 	static Workbook book;
 	static Sheet sheet;
@@ -80,13 +84,42 @@ public class userManagementUtility extends BaseClass{
 		Object[][] data = getTestData(sheetName);
 		return data;
 	}
-
+	
 	@DataProvider(name = "tcADMN012")
 	public static Object[][] ADMN012() {
 		String sheetname = "tcADMN012";
 		Object[][] data = getTestData(sheetname);
 		return data;
 	}
+
+	@DataProvider(name = "tcADMN015")
+	public static Object[][] ADMN015() {
+		String sheetname = "tcADMN015";
+		Object[][] data = getTestData(sheetname);
+		return data;
+	}
+	
+	@DataProvider(name = "tcADMN016")
+	public static Object[][] ADMN016() {
+		String sheetname = "tcADMN016";
+		Object[][] data = getTestData(sheetname);
+		return data;
+	}
+	
+	@DataProvider(name = "tcADMN017")
+	public static Object[][] ADMN017() {
+		String sheetname = "tcADMN017";
+		Object[][] data = getTestData(sheetname);
+		return data;
+	}
+	
+	@DataProvider(name = "tcADMN018")
+	public static Object[][] ADMN018() {
+		String sheetname = "tcADMN018";
+		Object[][] data = getTestData(sheetname);
+		return data;
+	}
+	
 
 	@DataProvider(name = "tcADMN021")
 	public static Object[][] ADMN021() {
@@ -126,6 +159,12 @@ public class userManagementUtility extends BaseClass{
 		 Object[][] data = getTestData(sheetname);
 		 return data;
 	}
-
+	
+	@DataProvider(name="tcADMN131")
+	public static Object[][] ADMN131() {
+		String sheetname = "tcADMN131";
+		 Object[][] data = getTestData(sheetname);
+		 return data;
+	}
 }
 

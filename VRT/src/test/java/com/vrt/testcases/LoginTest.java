@@ -31,6 +31,12 @@ import com.vrt.utility.TestUtilities;
 
 public class LoginTest extends BaseClass{
 	
+	public LoginTest() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public ExtentReports extent;
 	public ExtentTest extentTest;
 	
@@ -41,8 +47,10 @@ public class LoginTest extends BaseClass{
 	//Before All the tests are conducted
 	@BeforeClass
 	//@BeforeTest
-	private void setUp() throws IOException, InterruptedException {
+	private void PreSetUp() throws IOException, InterruptedException {
 		
+		System.out.println("Login Test in Progress..");
+
 		// Rename the User file (NgvUsers.uxx) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
 		//Rename the cache Asset file (Asset.txt) if exists
@@ -50,17 +58,18 @@ public class LoginTest extends BaseClass{
 		//Rename the Asset folder (Asset) if exists
 		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
 		
-		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport"+"_LoginTest"+".html",true);
+		extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ER"+"_LoginTest"+".html",true);
+		extent.addSystemInfo("TestSuiteName", "LoginTest");
+		extent.addSystemInfo("BS Version", prop.getProperty("BS_Version"));
+		extent.addSystemInfo("Lgr Version", prop.getProperty("Lgr_Version"));
+		extent.addSystemInfo("ScriptVersion", prop.getProperty("ScriptVersion"));
+		extent.addSystemInfo("User Name", prop.getProperty("User_Name1"));
+		
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
-		Thread.sleep(1000);
 		MainLoginPage = new LoginPage();
 		extent.addSystemInfo("VRT Version", MainLoginPage.get_SWVersion_About_Text());
 		AppClose();
 		Thread.sleep(1000);
-		extent.addSystemInfo("BS Version", "0.6.32");
-		extent.addSystemInfo("Lgr Version", "1.3.4");
-		extent.addSystemInfo("User Name", "Manoj");
-		extent.addSystemInfo("TestSuiteName", "LoginTest");
 
 	}
 	
@@ -70,10 +79,11 @@ public class LoginTest extends BaseClass{
 	public void endReport(){
 		extent.flush();
 		extent.close();
+		System.out.println("Login Test Completed.");
 	}
 	
 	@BeforeMethod(alwaysRun=true)
-	public void Setup() throws InterruptedException {
+	public void Setup() throws InterruptedException, IOException {
 		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		Thread.sleep(1000);
 		MainLoginPage= new LoginPage();
@@ -106,6 +116,7 @@ public class LoginTest extends BaseClass{
 	
 	/********
 	Test Cases
+	 * @throws IOException 
 	*********/
 	
 	
@@ -113,7 +124,7 @@ public class LoginTest extends BaseClass{
 	//installation with default provided credentials
 	@Test(groups = {"Regression"}, description="LOGIN_001- Verify if user can log "
 			+ "into the Kaye Application after installation with default provided credentials")
-	public void LOGIN_001() throws InterruptedException {
+	public void LOGIN_001() throws InterruptedException, IOException {
 		extentTest = extent.startTest("LOGIN_001- Verify if user can log into the Kaye Application"
 				+ " after installation with default provided credentials");
 
@@ -126,7 +137,7 @@ public class LoginTest extends BaseClass{
 		sa.assertAll();
 	}
 	
-	
+	/*
 	//LOGIN_001b-Verify that Policies,Preferences screens are disabled for login with First installation
 	@Test(groups = {"Regression"}, description="LOGIN_001b-Verify that Policies,Preferences screens "
 			+ "are disabled for login with First installation")
@@ -340,18 +351,18 @@ public class LoginTest extends BaseClass{
 		sa.assertAll();
 		
 		
-/*		try {
-			MainLoginPage.ClickLoginBtn();
-			//MainLoginPage.ClickChangePWCheckbox();
-			if (!MainLoginPage.NewPWFieldPresence()) {
-				sa.assertEquals(MainLoginPage.NewPWFieldPresence(), false, "FAIL: New PW field is enabled/displayed to Change PW"
-						+ " even if the Change PW checkbox is unchecked");
-				sa.assertAll();
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+//		try {
+//			MainLoginPage.ClickLoginBtn();
+//			//MainLoginPage.ClickChangePWCheckbox();
+//			if (!MainLoginPage.NewPWFieldPresence()) {
+//				sa.assertEquals(MainLoginPage.NewPWFieldPresence(), false, "FAIL: New PW field is enabled/displayed to Change PW"
+//						+ " even if the Change PW checkbox is unchecked");
+//				sa.assertAll();
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	
 	}
 	
@@ -698,5 +709,5 @@ public class LoginTest extends BaseClass{
 		sa.assertEquals(MainLoginPage.UserBlocked_PopUp_Msg(), expAlertMsg, "FAIL: User is not Disabled");
 		sa.assertAll();
 	}
-	
+	*/
 }

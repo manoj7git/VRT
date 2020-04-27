@@ -6,15 +6,22 @@
 package com.vrt.base;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.poifs.property.DirectoryProperty;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -22,17 +29,42 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.vrt.utility.TestUtilities;
+
 import io.appium.java_client.windows.WindowsDriver;
 
 
 
-public class BaseClass {
+public class BaseClass {	
 	
+	//public static final String testDir = "C:\\rsrcoutput\\"; 
+	public static Properties prop;
 	//Declare the Windows Driver and make it Public/Static to be used throughout the classes
 	public static WindowsDriver driver;
 	public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<WebDriver>();
 
 
+	//Calling Constructor method
+	public BaseClass() throws IOException {
+		try {
+			prop = new Properties();
+			//Below Path will be used whle creating an Jar/exe file where the config file will be 
+			//placed present in the jar.exe path location.
+			//FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/config.properties");
+
+			//Below Path will be used while executing scripts from Eclipse IDE.
+			FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/config.properties");
+			prop.load(fis);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
 	// Launch App/Setup Configuration Function
 	//Initialize Windows Driver
 	public static void LaunchApp(String Url) throws InterruptedException {
@@ -44,7 +76,7 @@ public class BaseClass {
 	
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);			
 			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			tdriver.set(driver);
 
 		} catch (MalformedURLException e) {
@@ -192,9 +224,8 @@ public class BaseClass {
 	public static HashMap<String, String> getUIDCredentials() {
 		HashMap<String, String> UserMap = new HashMap<String, String>();
 		
-		UserMap.put("adminFull", "1:Welcome1@AM");
-		
-	//User roles for prvivilage and customozed user privilages
+		UserMap.put("adminFull", "1:Welcome1@AM");		
+		//User roles for privilege and customized privilege
 		UserMap.put("SysAdmin", "2:Start@1AM");
 		UserMap.put("SysSupervisor", "3:Welcome3@AM");
 		UserMap.put("SysOperator", "4:Welcome4@AM");	
@@ -202,7 +233,7 @@ public class BaseClass {
 		UserMap.put("TestAdmin", "2:Start@5AM");
 		UserMap.put("Dsbluser", "1D:Start@1AM");
 		UserMap.put("Newuser", "1N:Start@7AM");
-		UserMap.put("Delrprt", "5:Start@5AM");
+		//UserMap.put("Delrprt", "5:Start@5AM");
 		return UserMap;
 	}
 	
@@ -237,18 +268,6 @@ public class BaseClass {
 		}				
 	}
 	
-	/*//Login Popup presence 
-	public boolean UserLoginPopupVisible() throws InterruptedException {
-		WebElement LgInPopup = driver.findElementByName("Enter User Credentials");
-		return IsElementVisibleStatus(LgInPopup);
-	}
-	
-	//Close Login Popup 
-	public void UserLoginPopupClose() throws InterruptedException {
-		WebElement LgInPopupCancel = driver.findElementByName("Cancel");
-		clickOn(LgInPopupCancel);
-	}*/
-	
 	//Get the Sw version info from the About window on clicking About icon of the bottom apps bar
 		public String get_SWVersion_About_Text() throws InterruptedException {
 			Actions ac = new Actions(driver);
@@ -264,5 +283,25 @@ public class BaseClass {
 			return SWVer[1];
 		}
 	
+		
+		/*//Ref: https://stackoverflow.com/questions/14637107/runnable-jar-file-not-found-exception/14637240#14637240
+		public String getRsrcFile(String path, String fileName) throws Exception {
+			
+		    InputStream in = this.getClass().getResourceAsStream(path);
+		    new File(testDir).mkdirs();
+		    String newFilePath = testDir + fileName;
+		    FileOutputStream out = new FileOutputStream (newFilePath);
+		    byte[] buffer = new byte[1024];
+		    int len = in.read(buffer);
+		    while (len != -1) {
+		        out.write(buffer, 0, len);
+		        len = in.read(buffer);
+		    }
+		    out.close();
+		    return newFilePath;
+		    Runtime rt = Runtime.getRuntime();
+		    String command = adobePath + " " + pdfFilePath;
+		    rt.exec(command);
+		}*/
 	
 }

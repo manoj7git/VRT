@@ -9,8 +9,9 @@
 	<test thread-count="5" name="UMTestRegression">
 		<classes>
 			<class name="com.vrt.testcases.UserManagementTest"></class>
-			<class name="com.vrt.testcases.UserPrivilagesTest"></class>
-			<class name="com.vrt.testcases.customized_UserPrivilagesTest" ></class>			
+			<class name="com.vrt.testcases.UserPrivilegesTest"></class>
+			<class name="com.vrt.testcases.UM_customized_UserPrivilagesTest" ></class>	
+			<class name="com.vrt.testcases.UM_DeleteStudyAndReportAcessTest" ></class>			
 			
 		</classes>
 	</test> <!-- assetDetailsTestSanity -->

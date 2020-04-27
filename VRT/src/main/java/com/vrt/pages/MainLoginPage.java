@@ -5,6 +5,8 @@
 
 package com.vrt.pages;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,7 +18,8 @@ public class MainLoginPage extends BaseClass {
 	
 	//WindowsDriver driver = null;
 	//Initializing the WindowsDriver Page elements using Constructor;	
-	public MainLoginPage() {			
+	public MainLoginPage() throws IOException {
+		super();
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -47,7 +50,7 @@ public class MainLoginPage extends BaseClass {
 	
 	
 	//Login method
-	public MainHubPage Login(String UN, String PW) throws InterruptedException 
+	public MainHubPage Login(String UN, String PW) throws InterruptedException, IOException 
 	{		
 		MainLoginUID.clear();
 		MainLoginUID.sendKeys(UN);

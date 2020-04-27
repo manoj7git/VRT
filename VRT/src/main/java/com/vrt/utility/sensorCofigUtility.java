@@ -14,8 +14,13 @@ import com.vrt.base.BaseClass;
 
 public class sensorCofigUtility extends BaseClass{
 	
+	public sensorCofigUtility() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	// Read TestData from the Excel sheet
-	public static String TestData_sheetPath = System.getProperty("user.dir") + "/TestData/" + "SensorConfigTestdata.xlsx";
+	public static String TestData_sheetPath = System.getProperty("user.dir") + "/src/test/resources/TestData/" + "SensorConfigTestdata.xlsx";
 
 	static Workbook book;
 	static Sheet sheet;

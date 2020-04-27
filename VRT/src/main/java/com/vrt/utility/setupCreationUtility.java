@@ -14,8 +14,14 @@ import com.vrt.base.BaseClass;
 
 public class setupCreationUtility extends BaseClass{
 	
+	public setupCreationUtility() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	// Read TestData from the Excel sheet
-	public static String TestData_sheetPath = System.getProperty("user.dir") + "/TestData/" + "SetupTestData.xlsx";
+	public static String TestData_sheetPath = System.getProperty("user.dir") + "/src/test/resources/TestData/" + "SetupTestData.xlsx";
 
 	static Workbook book;
 	static Sheet sheet;
@@ -44,7 +50,7 @@ public class setupCreationUtility extends BaseClass{
 		for (int i = 0; i < sheet.getLastRowNum(); i++) {
 			for (int j = 0; j < sheet.getRow(0).getLastCellNum(); j++) {
 				data[i][j] = sheet.getRow(i + 1).getCell(j).toString();
-				// System.out.println(data[i][j]);
+				//System.out.println(data[i][j]);
 			}
 		}
 		return data;
@@ -55,6 +61,20 @@ public class setupCreationUtility extends BaseClass{
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//SETUP Creation module related Test Data reference
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@DataProvider(name = "SetupCreation")
+	public static Object[][] SetupCreation() {
+		String sheetName = "SetupCreation";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
+	@DataProvider(name = "SetupCreation_1")
+	public static Object[][] SetupCreation_1() {
+		String sheetName = "SetupCreation_1";
+		Object[][] data = getTestData(sheetName);
+		return data;
+	}
+	
 	@DataProvider(name = "SET003")
 	public static Object[][] SET003() {
 		String sheetName = "SET003";
