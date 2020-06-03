@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [UMRegressionSuite]">
+  <listeners>
+    <listener class-name="com.vrt.Listners.ExtentReporterNG"/>
+    <listener class-name="com.vrt.Listners.RetryTransformer"/>
+  </listeners>
+  <test thread-count="5" name="UMTestRegression(failed)">
+    <classes>
+      <class name="com.vrt.testcases.UserManagementTest">
+        <methods>
+          <include name="ADMN036A"/>
+          <include name="ADMN018"/>
+          <include name="ADMN016"/>
+          <include name="ADMN034B"/>
+          <include name="ADMN017"/>
+          <include name="ADMN032A"/>
+          <include name="ADMN043A"/>
+          <include name="ADMN036"/>
+          <include name="ADMN036B"/>
+          <include name="ADMN015"/>
+          <include name="ADMN034A"/>
+          <include name="ADMN042A"/>
+          <include name="ADMN042B"/>
+          <include name="PreSetup"/>
+          <include name="Setup"/>
+          <include name="ADMN012" invocation-numbers="8 8 8 8"/>
+          <include name="ADMN035"/>
+          <include name="endReport"/>
+          <include name="ADMN043"/>
+          <include name="ADMN131"/>
+          <include name="ADMN042"/>
+          <include name="Teardown"/>
+        </methods>
+      </class> <!-- com.vrt.testcases.UserManagementTest -->
+      <class name="com.vrt.testcases.UM_customized_UserPrivilagesTest">
+        <methods>
+          <include name="PreSetup"/>
+          <include name="CADMN37"/>
+          <include name="Teardown"/>
+          <include name="Setup"/>
+          <include name="endReport"/>
+        </methods>
+      </class> <!-- com.vrt.testcases.UM_customized_UserPrivilagesTest -->
+      <class name="com.vrt.testcases.UserPrivilegesTest">
+        <methods>
+          <include name="Teardown"/>
+          <include name="PreSetup"/>
+          <include name="ADMN072"/>
+          <include name="endReport"/>
+          <include name="Setup"/>
+        </methods>
+      </class> <!-- com.vrt.testcases.UserPrivilegesTest -->
+      <class name="com.vrt.testcases.UM_DeleteStudyAndReportAcessTest">
+        <methods>
+          <include name="ADMN081C"/>
+          <include name="ADMN081E"/>
+          <include name="Setup"/>
+          <include name="ADMN056"/>
+          <include name="ADMN063"/>
+          <include name="ADMN120"/>
+          <include name="ADMN051"/>
+          <include name="Teardown"/>
+          <include name="ADMN103A"/>
+          <include name="ADMN103C"/>
+          <include name="ADMN103E"/>
+          <include name="endReport"/>
+          <include name="ADMN079"/>
+          <include name="ADMN103B"/>
+          <include name="ADMN065B"/>
+          <include name="ADMN103D"/>
+          <include name="ADMN065A"/>
+          <include name="PreSetup"/>
+          <include name="ADMN065C"/>
+          <include name="ADMN081B"/>
+          <include name="ADMN065E"/>
+          <include name="ADMN081D"/>
+          <include name="ADMN081A"/>
+        </methods>
+      </class> <!-- com.vrt.testcases.UM_DeleteStudyAndReportAcessTest -->
+    </classes>
+  </test> <!-- UMTestRegression(failed) -->
+</suite> <!-- Failed suite [UMRegressionSuite] -->

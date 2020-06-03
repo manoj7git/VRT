@@ -76,15 +76,15 @@ public class UserManagementTest extends BaseClass {
 		System.out.println("UserManagementTest in Progress..");
 
 		
-		// Rename the User file (NgvUsers.uxx) if exists
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "VRTEquipments");
-		//renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Equipment.txt");
+		//Rename the User file (NgvUsers.uxx) if exists
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\AppData", "NgvUsers.uux");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "Assets");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Asset.txt");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles", "VRTEquipments");
+		renameFile("C:\\Program Files (x86)\\Kaye\\Kaye AVS Service\\DataFiles\\Cache", "Equipment.txt");
 
 		
-		/*LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
+		LaunchApp("Kaye.ValProbeRT_racmveb2qnwa8!App");
 		LoginPage = new LoginPage();
 		extent.addSystemInfo("VRT Version", LoginPage.get_SWVersion_About_Text());
 		UserManagementPage = LoginPage.DefaultLogin();
@@ -103,7 +103,7 @@ public class UserManagementTest extends BaseClass {
 
 		AppClose();
 		Thread.sleep(500);
-		*/
+		
 	}
 
 	// After All the tests are conducted
@@ -156,7 +156,7 @@ public class UserManagementTest extends BaseClass {
 
 	// ADMN001 to ADMN005 covered in login class
 
-	/*
+	
 	// ADMN006
 	@Test(groups = { "Sanity", "Regression" }, description = "ADMN006-Verify that new user button is enabled")
 	public void ADMN006() throws Exception {
@@ -860,7 +860,7 @@ public class UserManagementTest extends BaseClass {
 		extentTest = extent.startTest("ADMN032-Verify the Disable User Account check Box validations");
 		SoftAssert sa = new SoftAssert();
 		UserManagementPage.ClickNewUser();
-		sa.assertEquals(UserManagementPage.IsDisableUserCheckBox_Disable(), false,
+		sa.assertEquals(UserManagementPage.IsDisableUserCheckBox_state(), false,
 				"FAIL: Check Box should be in disable state For new user");
 		sa.assertAll();
 	}
@@ -913,7 +913,7 @@ public class UserManagementTest extends BaseClass {
 				"Fail: user is able to disable his own account");
 		sa.assertAll();
 	}
-	*/
+	
 	
 	// ADMN034
 	@Test(groups = {
@@ -996,7 +996,7 @@ public class UserManagementTest extends BaseClass {
 		sa.assertAll();
 	}
 
-	/*
+	
 	//ADMN035-Verify the functionality when disabled user credentials are given in authentication window of Equipment-Verification screen
 	// ADMN035
 	@Test(groups = {
@@ -1264,7 +1264,7 @@ public class UserManagementTest extends BaseClass {
 		EquipmentPage.BaseStation_EqipCreation_MandatoryFields("Base Station", "ADMN069A", "20A", "ADMN069A");
 		UserLoginPopup(getUID("Newuser"), getPW("Newuser"));
 		String ExptedAlert = "Please login the system at least once";
-		String ActAlert = EquipmentPage.AlertMsg();
+		String ActAlert = tu.get_AlertMsg_text();
 		SoftAssert s = new SoftAssert();
 		s.assertEquals(ActAlert, ExptedAlert, "FAIL: Alert message should be displayed");
 		s.assertAll();
@@ -1576,6 +1576,6 @@ public class UserManagementTest extends BaseClass {
 
 		sa.assertAll();
 	}
-	*/
+	
 }
 
